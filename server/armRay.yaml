@@ -1,0 +1,463 @@
+# Example YAML to get you started quickly.
+# Be aware that YAML has indentation based scoping.
+# Code completion support is available so start typing for available options.
+swagger: '2.0'
+
+# document metadata
+info:
+  version: "0.0.1"
+  title: ArmRay API
+  description: Definition of ArmRay backend API
+#This will contain the hostname
+#host: armray.com
+schemes:
+  - http
+  #once we have auth/certs going it should change to 
+  #- https
+# will be prefixed to all paths
+#placeholder in case we need this
+#basePath: /foo
+
+
+#I'm assumping we'll be returning json for all the calls
+produces:
+  - application/json
+  
+#and now the actual api paths
+paths:
+  # This is a path endpoint. Change it.
+  /Users:
+    # This is a HTTP operation
+    get:
+      # Describe this verb here. Note: you can use markdown
+      description: |
+        Gets `User` objects.
+        Optional query param of **size** determines
+        size of returned array
+      # This is array of GET operation parameters:
+      parameters:
+        # An example parameter that is in query and is required
+        -
+          name: size
+          in: query
+          description: Size of array
+          required: true
+          type: number
+          format: double
+      tags:
+        - Users
+      # Expected responses for this operation:
+      responses:
+        # Response code
+        200:
+          description: An array of users
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/User'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /User:
+    # This is a HTTP operation
+    post:
+      # Describe this verb here. Note: you can use markdown
+      description: |
+        Creates `User` objects.
+      # This is array of GET operation parameters:
+      #parameters:
+      #  # An example parameter that is in query and is required
+      #  -
+      #    name: size
+      #    in: query
+      #    description: Size of array
+      #    required: true
+      #    type: number
+      #    format: double
+      tags:
+        - User
+      # Expected responses for this operation:
+      responses:
+        # Response code
+        200:
+          description: An array of user ids
+          schema:
+            type: array
+            items:
+              type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  
+
+definitions:
+  User:
+    type: object
+    properties:
+      user_id:
+        type: string
+        description: Unique identifier representing a specific user
+      first_name:
+        type: string
+        description: User's first name.
+      last_name:
+        type: string
+        description: User's last name
+      is_creator:
+        type: boolean
+        description: Is user a project creator? #(not mutually exclusive with is_collaborator)
+      is_collaborator:
+        type: boolean
+        description: Is user a project collaborator? #(not mutually exclusive with is_creator)
+      profile_images:
+        type: array
+        items:
+          type: string
+        description: Array of file system paths to profile images
+      created_date:
+        type: string
+        format: date-time
+        description: datetime stamp of user creation
+      updated_date:
+        type: string
+        format: date-time
+        description: datetime stamp of user update
+      geolocation:
+        type: array
+        items:
+          type: number
+          format: double
+        description: Tuple representing latitude/longitude of user
+      city:
+        type: string
+        description: City of user location
+      state:
+        type: string
+        description: State of user location
+      #recent_collaborators:
+      #  type: array
+      #  items:
+      #    $ref: '#/definitions/User'
+      #  description: array of recent collaborators
+      recent_collaborators_id:
+        type: array
+        items:
+          type: string
+        description: array of user_ids of recent collaborators 
+      universities:
+        type: array
+        items:
+          type: string
+        description: array of universities the user has attended/worked with (clarification needed)
+      #projects:
+      #  type: array
+      #  items:
+      #    $ref: '#/definitions/Project'
+      #  description: array of user projects
+      project_ids:
+        type: array
+        items:
+          type: string
+        description: array of user projects
+      keywords:
+        type: array
+        items:
+          type: string
+        description: array of keywords associated with the user
+      #reviews:
+      #  type: array
+      #  items:
+      #    $ref: '#/definitions/Review'
+      #  description: array of reviews
+      review_ids:
+        type: array
+        items:
+          type: string
+        description: array of review ids
+      is_user_private: 
+        type: boolean
+        description:  is user profile public or private?
+  Users:
+    type: object
+    properties:
+      offset:
+        type: integer
+        format: int32
+        description: Position in pagination.
+      limit:
+        type: integer
+        format: int32
+        description: Number of items to retrieve (100 max).
+      count:
+        type: integer
+        format: int32
+        description: Total number of items available.
+      history:
+        type: array
+        items:
+          $ref: '#/definitions/User'
+  Project:
+    type: object
+    properties:
+      project_id:
+        type: string
+        description: Unique identifier representing a specific project
+      created_date:
+        type: string
+        format: date-time
+        description: datetime stamp of project creation
+      updated_date:
+        type: string
+        format: date-time
+        description: datetime stamp of project update
+      project_name:
+        type: string
+        description: Project's name
+      project_main_grant_type:
+        type: string
+        description: Project's grant type
+      project_description:
+        type: string
+        description: Description of project
+      #project_creator:
+      #  type: array
+      #  items:
+      #    $ref: '#/definitions/User'
+      #  description: array of project creators
+      project_creator_id:
+        type: array
+        items:
+          type: string
+        description: array of project creator ids
+      #project_collaborators:
+      #  type: array
+      #  items:
+      #    $ref: '#/definitions/User'
+      #  description: array of project collaborators
+      project_collaborators_id:
+        type: array
+        items:
+          type: string
+        description: array of project collaborator ids
+      project_keywords:
+        type: array
+        items:
+          type: string
+        description: array of project keywords
+      project_urls:
+        type: array
+        items:
+          type: string
+        description: array of project URLs
+      grant_id:
+        type: string
+        description: Grant ID 
+      university:
+        type: string
+        description: Name of university hosting research
+      grant_facilitator:
+        type: string
+        description: Name of individual fascilitating grant funding
+      project_file:
+        type: array
+        items:
+          type: string
+        description: files for grant
+      reviews:
+        type: array
+        items: 
+          type: string
+        description: reviews
+      posts:
+        type: array 
+        items:
+          type: string
+        description: posts related to project
+      is_project_private:
+        type: boolean
+        description: is project private?
+  Projects:
+    type: object
+    properties:
+      offset:
+        type: integer
+        format: int32
+        description: Position in pagination.
+      limit:
+        type: integer
+        format: int32
+        description: Number of items to retrieve (100 max).
+      count:
+        type: integer
+        format: int32
+        description: Total number of items available.
+      history:
+        type: array
+        items:
+          $ref: '#/definitions/Project'
+  Post:
+    type: object
+    properties:
+      post_id: 
+        type: string
+        description: id of post
+      created_date:
+        type: string
+        format: date-time
+        description: datetime stamp of post creation
+      updated_date:
+        type: string
+        format: date-time
+        description: datetime stamp of post update
+      post_title: 
+        type: string
+        description: title of post
+      post_text:
+        type: string
+        description: text of post
+      post_keywords:
+        type: array
+        items:
+          type: string
+        description: keywords for post
+      post_author:
+        $ref: '#/definitions/User'
+        description: author of post
+      post_author_id:
+        type: string
+        description: id of author of post
+      post_tags:
+        type: array
+        items:
+          $ref: '#/definitions/User'
+        description: tagged users
+      post_tags_id:
+        type: array
+        items:
+          type: string
+        description: tagged user ids
+      is_post_private:
+        type: boolean
+        description: is post private?
+  Posts:
+    type: object
+    properties:
+      offset:
+        type: integer
+        format: int32
+        description: Position in pagination.
+      limit:
+        type: integer
+        format: int32
+        description: Number of items to retrieve (100 max).
+      count:
+        type: integer
+        format: int32
+        description: Total number of items available.
+      history:
+        type: array
+        items:
+          $ref: '#/definitions/Post'
+  Grant:
+    type: object
+    properties:
+      grant_id: 
+        type: string
+        description: id of grant
+      created_date:
+        type: string
+        format: date-time
+        description: datetime stamp of grant creation
+      updated_date:
+        type: string
+        format: date-time
+        description: datetime stamp of grant update
+      grant_url:
+        type: array
+        items:
+          type: string
+        description: URL of grants
+      grant_description:
+        type: string
+        description: Grant description
+      grant_amount:
+        type: number
+        format: double
+        description: Amount of grant
+  Grants:
+    type: object
+    properties:
+      offset:
+        type: integer
+        format: int32
+        description: Position in pagination.
+      limit:
+        type: integer
+        format: int32
+        description: Number of items to retrieve (100 max).
+      count:
+        type: integer
+        format: int32
+        description: Total number of items available.
+      history:
+        type: array
+        items:
+          $ref: '#/definitions/Grant'
+  Review:
+    type: object 
+    properties:
+      review_id:
+        type: string
+        description: id of review
+      created_date:
+        type: string
+        format: date-time
+        description: datetime stamp of review creation
+      updated_date:
+        type: string
+        format: date-time
+        description: datetime stamp of review update
+      review_body:
+        type: string
+        description: text body of review
+      reviewer:
+        $ref: '#/definitions/User'
+        description: reviewer user
+      reviewer_id:
+        type: string
+        description: reviewer user id
+      rating: 
+        type: integer
+        format: int32
+        description: rating, must be 1-5
+  Reviews:
+    type: object
+    properties:
+      offset:
+        type: integer
+        format: int32
+        description: Position in pagination.
+      limit:
+        type: integer
+        format: int32
+        description: Number of items to retrieve (100 max).
+      count:
+        type: integer
+        format: int32
+        description: Total number of items available.
+      history:
+        type: array
+        items:
+          $ref: '#/definitions/Review'
+  Error:
+    type: object
+    properties:
+      code:
+        type: integer
+        format: int32
+      message:
+        type: string
+      fields:
+        type: string
