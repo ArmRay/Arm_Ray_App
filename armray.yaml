@@ -1,0 +1,902 @@
+# Example YAML to get you started quickly.
+# Be aware that YAML has indentation based scoping.
+# Code completion support is available so start typing for available options.
+swagger: '2.0'
+
+# document metadata
+info:
+  version: "0.0.1"
+  title: ArmRay API
+  description: Definition of ArmRay backend API
+#This will contain the hostname
+#host: armray.com
+schemes:
+  - http
+  #once we have auth/certs going it should change to 
+  #- https
+# will be prefixed to all paths
+#placeholder in case we need this
+#basePath: /foo
+
+
+#I'm assumping we'll be returning json for all the calls
+produces:
+  - application/json
+  
+#and now the actual api paths
+paths:
+  ##/users routes
+  # This is a path endpoint. Change it.
+  /users:
+    # This is a HTTP operation
+    get:
+      # Describe this verb here. Note: you can use markdown
+      description: |
+        Gets `user` objects.
+        Required query param of **size** determines
+        max number of results per page, and **page** determines
+        which page in the pagination we are. Remaining params optional.
+      operationId: getusers
+      produces:
+        - application/json
+      consumes:
+        - application/json
+      # This is array of GET operation parameters:
+      parameters:
+        -
+          name: size
+          in: formData
+          description: Max size of array to return
+          required: true
+          type: number
+          format: int32
+        -
+          name: page
+          in: formData
+          description: Location in pagination 
+          required: true
+          type: number
+          format: int32
+        -
+          name: first_name
+          in: formData
+          description: first name of user
+          required: false
+          type: string
+        -
+          name: last_name
+          in: formData
+          description: last name of user
+          required: false
+          type: string
+        -
+          name: is_collaborator
+          in: formData
+          description: is user a collaborator?
+          required: false
+          type: boolean
+        -
+          name: is_creator
+          in: formData
+          description: is user a creator?
+          required: false
+          type: boolean
+        -
+          name: city
+          in: formData
+          description: city location of user
+          required: false
+          type: string
+        -
+          name: state
+          in: formData
+          description: state location of user
+          required: false
+          type: string
+        -
+          name: university
+          in: formData
+          description: university a user is associated with
+          required: false
+          type: string
+        -
+          name: project_id
+          in: formData
+          description: project_id the user is associated with
+          required: false
+          type: string
+        -
+          name: keywords
+          in: formData
+          description: keyword
+          required: false
+          type: array
+          items:
+            type: string
+          collectionFormat: csv
+      tags:
+        - users
+      # Expected responses for this operation:
+      responses:
+        # Response code
+        200:
+          description: An array of users
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/user'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/error'
+            
+  /users/{university_id}:
+    get:
+      description: |
+        Retrieve `user` objects at a particular location
+      operationId: getusersByUniversityId
+      produces:
+        - application/json
+      parameters:
+        -
+          name: university_id
+          in: path
+          description: ID of 'user' to fetch
+          required: true
+          type: string
+        -
+          name: max
+          in: formData
+          description: max num of 'user' to fetch
+          required: true
+          type: number
+          format: int32
+        -
+          name: page
+          in: formData
+          description: page in pagination
+          required: true
+          type: number
+          format: int32         
+      responses:
+        '200':
+          description: users response
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/user'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/error'          
+  /user:
+    post:
+      description: |
+        Creates `user` objects. `University` and `project` are optional (user may not yet have affiliations)
+        `Keywords` also optional. All other fields required.
+      operationId: createuser
+      produces:
+        - application/json
+      consumes:
+        - application/json
+        
+      # This is array of GET operation parameters:
+      parameters:
+        # An example parameter that is in query and is required
+        -
+          name: first_name
+          in: formData
+          description: first name of `user`
+          required: true
+          type: string
+        -
+          name: last_name
+          in: formData
+          description: last name of `user`
+          required: true
+          type: string
+        -
+          name: is_collaborator
+          in: formData
+          description: is `user` a collaborator?
+          required: true
+          type: boolean
+        -
+          name: is_creator
+          in: formData
+          description: is `user` a creator?
+          required: true
+          type: boolean
+        -
+          name: city
+          in: formData
+          description: city location of `user`
+          required: true
+          type: string
+        -
+          name: state
+          in: formData
+          description: state location of `user`
+          required: true
+          type: string
+        -
+          name: university
+          in: formData
+          description: university a `user` is associated with
+          required: false
+          type: string
+        -
+          name: project_id
+          in: formData
+          description: project_id the `user` is associated with
+          required: false
+          type: string
+        -
+          name: keywords
+          in: formData
+          description: keyword
+          required: false
+          type: array
+          items:
+            type: string
+          collectionFormat: csv
+      tags:
+        - user
+      # Expected responses for this operation:
+      responses:
+        # Response code
+        200:
+          description: The `id` of the created user
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/error'
+            
+  ##/user routes      
+  /user/{id}:
+    put:
+      description: |
+        Updates a `user` object. All fields other than `id` optional.
+      operationId: updateuser
+      produces:
+        - application/json
+      consumes:
+        - application/json
+      parameters:
+        -
+          name: id
+          in: path
+          description: ID of `user` to fetch
+          required: true
+          type: string
+        -
+          name: first_name
+          in: formData
+          description: first name of `user`
+          required: false
+          type: string
+        -
+          name: last_name
+          in: formData
+          description: last name of `user`
+          required: false
+          type: string
+        -
+          name: is_collaborator
+          in: formData
+          description: is `user` a collaborator?
+          required: false
+          type: boolean
+        -
+          name: is_creator
+          in: formData
+          description: is `user` a creator?
+          required: false
+          type: boolean
+        -
+          name: city
+          in: formData
+          description: city location of `user`
+          required: false
+          type: string
+        -
+          name: state
+          in: formData
+          description: state location of `user`
+          required: false
+          type: string
+        -
+          name: university
+          in: formData
+          description: university a `user` is associated with
+          required: false
+          type: string
+        -
+          name: project_id
+          in: formData
+          description: project_id the `user` is associated with
+          required: false
+          type: string
+        -
+          name: keywords
+          in: formData
+          description: keyword
+          required: false
+          type: array
+          items:
+            type: string
+          collectionFormat: csv
+      tags:
+        - user
+      # Expected responses for this operation:
+      responses:
+        # Response code
+        200:
+          description: The `id` of the updatee `user`
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/error'
+    delete:
+      description: |
+        Delete a 'user' by their id.
+      operationId: deleteuserById
+      produces:
+        - application/json
+      parameters:
+        -
+          name: id
+          in: path
+          description: the `id` of the `user` to delete
+          required: true
+          type: string
+      responses:
+        '200':
+          description: The `id` of the deleted `user`
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/error'
+    get:
+      description: |
+        Retrieve a 'user' by their id.
+      operationId: getuserById
+      produces:
+        - application/json
+      parameters:
+        -
+          name: id
+          in: path
+          description: the `id` of the `user` to delete
+          required: true
+          type: string
+      responses:
+        '200':
+          description: The `id` of the deleted `user`
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/error'            
+  /user/{id}/project/{project_id}:
+    get:
+      description: |
+        Retrieve a 'project' associated with a `user`.
+      operationId: getuserprojectById
+      produces:
+        - application/json
+      parameters:
+        -
+          name: id
+          in: path
+          description: The `id` of the `user` to retrieve
+          required: true
+          type: string
+        -
+          name: project_id
+          in: path
+          description: The `project_id` of the `project` to retrieve
+          required: true
+          type: string
+      responses:
+        '200':
+          description: The `project` associated with the `user`
+          schema:
+            $ref: '#/definitions/project' 
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/error' 
+    post:
+      description: |
+        Add a 'project' to a `user`.
+      operationId: settuserprojectById
+      produces:
+        - application/json
+      parameters:
+        -
+          name: id
+          in: path
+          description: The `id` of the `user` to retrieve
+          required: true
+          type: string
+        -
+          name: project_id
+          in: path
+          description: The `project_id` of the `project` to retrieve
+          required: true
+          type: string
+      responses:
+        '200':
+          description: The `project_id` associated with the `project`
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/error'
+    delete:
+      description: |
+        Remove a 'project' fromo a `user`.
+      operationId: deleteuserprojectById
+      produces:
+        - application/json
+      parameters:
+        -
+          name: id
+          in: path
+          description: The `id` of the `user` to retrieve
+          required: true
+          type: string
+        -
+          name: project_id
+          in: path
+          description: The `project_id` of the `project` to retrieve
+          required: true
+          type: string
+      responses:
+        '200':
+          description: The `project_id` associated with the `project`
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/error'            
+      #not going to add a PUT to modify it a project, that should be done directly on the project paths
+      #redundant paths are bad
+      
+definitions:
+  user:
+    type: object
+    properties:
+      user_id:
+        type: string
+        description: Unique identifier representing a specific user
+      first_name:
+        type: string
+        description: user's first name.
+      last_name:
+        type: string
+        description: user's last name
+      is_creator:
+        type: boolean
+        description: Is user a project creator? #(not mutually exclusive with is_collaborator)
+      is_collaborator:
+        type: boolean
+        description: Is user a project collaborator? #(not mutually exclusive with is_creator)
+      profile_images:
+        type: array
+        items:
+          type: string
+        description: Array of file system paths to profile images
+      created_date:
+        type: string
+        format: date-time
+        description: datetime stamp of user creation
+      updated_date:
+        type: string
+        format: date-time
+        description: datetime stamp of user update
+      geolocation:
+        type: array
+        items:
+          type: number
+          format: double
+        description: Tuple representing latitude/longitude of user
+      city:
+        type: string
+        description: City of user location
+      state:
+        type: string
+        description: State of user location
+      #recent_collaborators:
+      #  type: array
+      #  items:
+      #    $ref: '#/definitions/user'
+      #  description: array of recent collaborators
+      recent_collaborators_id:
+        type: array
+        items:
+          type: string
+        description: array of user_ids of recent collaborators 
+      universities:
+        type: array
+        items:
+          type: string
+        description: array of universities the user has attended/worked with (clarification needed)
+      #projects:
+      #  type: array
+      #  items:
+      #    $ref: '#/definitions/project'
+      #  description: array of user projects
+      project_ids:
+        type: array
+        items:
+          type: string
+        description: array of user projects
+      keywords:
+        type: array
+        items:
+          type: string
+        description: array of keywords associated with the user
+      #reviews:
+      #  type: array
+      #  items:
+      #    $ref: '#/definitions/review'
+      #  description: array of reviews
+      review_ids:
+        type: array
+        items:
+          type: string
+        description: array of review ids
+      is_user_private: 
+        type: boolean
+        description:  is user profile public or private?
+  users:
+    type: object
+    properties:
+      offset:
+        type: integer
+        format: int32
+        description: Position in pagination.
+      limit:
+        type: integer
+        format: int32
+        description: Number of items to retrieve (100 max).
+      count:
+        type: integer
+        format: int32
+        description: Total number of items available.
+      history:
+        type: array
+        items:
+          $ref: '#/definitions/user'
+  project:
+    type: object
+    properties:
+      project_id:
+        type: string
+        description: Unique identifier representing a specific project
+      created_date:
+        type: string
+        format: date-time
+        description: datetime stamp of project creation
+      updated_date:
+        type: string
+        format: date-time
+        description: datetime stamp of project update
+      project_name:
+        type: string
+        description: project's name
+      project_main_grant_type:
+        type: string
+        description: project's grant type
+      project_description:
+        type: string
+        description: Description of project
+      #project_creator:
+      #  type: array
+      #  items:
+      #    $ref: '#/definitions/user'
+      #  description: array of project creators
+      project_creator_id:
+        type: array
+        items:
+          type: string
+        description: array of project creator ids
+      #project_collaborators:
+      #  type: array
+      #  items:
+      #    $ref: '#/definitions/user'
+      #  description: array of project collaborators
+      project_collaborators_id:
+        type: array
+        items:
+          type: string
+        description: array of project collaborator ids
+      project_keywords:
+        type: array
+        items:
+          type: string
+        description: array of project keywords
+      project_urls:
+        type: array
+        items:
+          type: string
+        description: array of project URLs
+      grant_id:
+        type: string
+        description: grant ID 
+      university:
+        type: string
+        description: Name of university hosting research
+      grant_facilitator:
+        type: string
+        description: Name of individual fascilitating grant funding
+      project_file:
+        type: array
+        items:
+          type: string
+        description: files for grant
+      reviews:
+        type: array
+        items: 
+          type: string
+        description: reviews
+      posts:
+        type: array 
+        items:
+          type: string
+        description: posts related to project
+      is_project_private:
+        type: boolean
+        description: is project private?
+  projects:
+    type: object
+    properties:
+      offset:
+        type: integer
+        format: int32
+        description: Position in pagination.
+      limit:
+        type: integer
+        format: int32
+        description: Number of items to retrieve (100 max).
+      count:
+        type: integer
+        format: int32
+        description: Total number of items available.
+      history:
+        type: array
+        items:
+          $ref: '#/definitions/project'
+  post:
+    type: object
+    properties:
+      post_id: 
+        type: string
+        description: id of post
+      created_date:
+        type: string
+        format: date-time
+        description: datetime stamp of post creation
+      updated_date:
+        type: string
+        format: date-time
+        description: datetime stamp of post update
+      post_title: 
+        type: string
+        description: title of post
+      post_text:
+        type: string
+        description: text of post
+      post_keywords:
+        type: array
+        items:
+          type: string
+        description: keywords for post
+      post_author:
+        $ref: '#/definitions/user'
+        description: author of post
+      post_author_id:
+        type: string
+        description: id of author of post
+      post_tags:
+        type: array
+        items:
+          $ref: '#/definitions/user'
+        description: tagged users
+      post_tags_id:
+        type: array
+        items:
+          type: string
+        description: tagged user ids
+      is_post_private:
+        type: boolean
+        description: is post private?
+  posts:
+    type: object
+    properties:
+      offset:
+        type: integer
+        format: int32
+        description: Position in pagination.
+      limit:
+        type: integer
+        format: int32
+        description: Number of items to retrieve (100 max).
+      count:
+        type: integer
+        format: int32
+        description: Total number of items available.
+      history:
+        type: array
+        items:
+          $ref: '#/definitions/post'
+  grant:
+    type: object
+    properties:
+      grant_id: 
+        type: string
+        description: id of grant
+      created_date:
+        type: string
+        format: date-time
+        description: datetime stamp of grant creation
+      updated_date:
+        type: string
+        format: date-time
+        description: datetime stamp of grant update
+      grant_url:
+        type: array
+        items:
+          type: string
+        description: URL of grants
+      grant_description:
+        type: string
+        description: grant description
+      grant_amount:
+        type: number
+        format: double
+        description: Amount of grant
+  grants:
+    type: object
+    properties:
+      offset:
+        type: integer
+        format: int32
+        description: Position in pagination.
+      limit:
+        type: integer
+        format: int32
+        description: Number of items to retrieve (100 max).
+      count:
+        type: integer
+        format: int32
+        description: Total number of items available.
+      history:
+        type: array
+        items:
+          $ref: '#/definitions/grant'
+  review:
+    type: object 
+    properties:
+      review_id:
+        type: string
+        description: id of review
+      created_date:
+        type: string
+        format: date-time
+        description: datetime stamp of review creation
+      updated_date:
+        type: string
+        format: date-time
+        description: datetime stamp of review update
+      review_body:
+        type: string
+        description: text body of review
+      reviewer:
+        $ref: '#/definitions/user'
+        description: reviewer user
+      reviewer_id:
+        type: string
+        description: reviewer user id
+      rating: 
+        type: integer
+        format: int32
+        description: rating, must be 1-5
+  reviews:
+    type: object
+    properties:
+      offset:
+        type: integer
+        format: int32
+        description: Position in pagination.
+      limit:
+        type: integer
+        format: int32
+        description: Number of items to retrieve (100 max).
+      count:
+        type: integer
+        format: int32
+        description: Total number of items available.
+      history:
+        type: array
+        items:
+          $ref: '#/definitions/review'
+ #so for skills
+ #basically we want to associate those with the user
+ #BUT
+ #we want to be able to get a master list of skills too and order them popularity
+ #so group them and sort by count maybe? kinda like stackoverflow seems to to with tags?
+  skill:
+    type: object 
+    properties:
+      review_id:
+        type: string
+        description: id of skill
+      created_date:
+        type: string
+        format: date-time
+        description: datetime stamp of skill creation
+      updated_date:
+        type: string
+        format: date-time
+        description: datetime stamp of skill update
+      review_body:
+        type: string
+        description: text body of skill
+      #endorsements:
+      #  type: array
+      #  items:
+      #    $ref: '#/definitions/user'
+      #  description: users who have endorsed the user for this skill
+      endorsements_id:
+        type: array
+        items:
+          type: string
+        description: ids of users who have endorsed the user for this skill
+      reviewer_id:
+        type: string
+        description: reviewer user id
+      rating: 
+        type: integer
+        format: int32
+        description: rating, must be 1-5
+  skills:
+    type: object
+    properties:
+      offset:
+        type: integer
+        format: int32
+        description: Position in pagination.
+      limit:
+        type: integer
+        format: int32
+        description: Number of items to retrieve (100 max).
+      count:
+        type: integer
+        format: int32
+        description: Total number of items available.
+      history:
+        type: array
+        items:
+          $ref: '#/definitions/skill'
+  error:
+    type: object
+    properties:
+      code:
+        type: integer
+        format: int32
+      message:
+        type: string
+      fields:
+        type: string

@@ -1,0 +1,1097 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "0.0.1",
+        "title": "ArmRay API",
+        "description": "Definition of ArmRay backend API"
+    },
+    "schemes": [
+        "http"
+    ],
+    "basePath": "/armray/api/0.1/rest/",
+    "produces": [
+        "application/json"
+    ],
+    "paths": {
+        "/Users": {
+            "get": {
+                "description": "Gets `User` objects.\nRequired query param of **size** determines\nmax number of results per page, and **page** determines\nwhich page in the pagination we are. Remaining params optional.\n",
+                "operationId": "getUsers",
+                "produces": [
+                    "application/json"
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "size",
+                        "in": "formData",
+                        "description": "Max size of array to return",
+                        "required": true,
+                        "type": "number",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "page",
+                        "in": "formData",
+                        "description": "Location in pagination",
+                        "required": true,
+                        "type": "number",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "first_name",
+                        "in": "formData",
+                        "description": "first name of user",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "last_name",
+                        "in": "formData",
+                        "description": "last name of user",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "is_collaborator",
+                        "in": "formData",
+                        "description": "is user a collaborator?",
+                        "required": false,
+                        "type": "boolean"
+                    },
+                    {
+                        "name": "is_creator",
+                        "in": "formData",
+                        "description": "is user a creator?",
+                        "required": false,
+                        "type": "boolean"
+                    },
+                    {
+                        "name": "city",
+                        "in": "formData",
+                        "description": "city location of user",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "state",
+                        "in": "formData",
+                        "description": "state location of user",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "university",
+                        "in": "formData",
+                        "description": "university a user is associated with",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "project_id",
+                        "in": "formData",
+                        "description": "project_id the user is associated with",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "keywords",
+                        "in": "formData",
+                        "description": "keyword",
+                        "required": false,
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "collectionFormat": "csv"
+                    }
+                ],
+                "tags": [
+                    "Users"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "An array of users",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/User"
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/Users/{university_id}": {
+            "get": {
+                "description": "Retrieve `User` objects at a particular location\n",
+                "operationId": "getUsersByUniversityId",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "university_id",
+                        "in": "path",
+                        "description": "ID of 'User' to fetch",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "max",
+                        "in": "formData",
+                        "description": "max num of 'User' to fetch",
+                        "required": true,
+                        "type": "number",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "page",
+                        "in": "formData",
+                        "description": "page in pagination",
+                        "required": true,
+                        "type": "number",
+                        "format": "int32"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "users response",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/User"
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/User": {
+            "post": {
+                "description": "Creates `User` objects. `University` and `Project` are optional (user may not yet have affiliations)\n`Keywords` also optional. All other fields required.\n",
+                "operationId": "createUser",
+                "produces": [
+                    "application/json"
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "first_name",
+                        "in": "formData",
+                        "description": "first name of `User`",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "last_name",
+                        "in": "formData",
+                        "description": "last name of `User`",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "is_collaborator",
+                        "in": "formData",
+                        "description": "is `User` a collaborator?",
+                        "required": true,
+                        "type": "boolean"
+                    },
+                    {
+                        "name": "is_creator",
+                        "in": "formData",
+                        "description": "is `User` a creator?",
+                        "required": true,
+                        "type": "boolean"
+                    },
+                    {
+                        "name": "city",
+                        "in": "formData",
+                        "description": "city location of `User`",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "state",
+                        "in": "formData",
+                        "description": "state location of `User`",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "university",
+                        "in": "formData",
+                        "description": "university a `User` is associated with",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "project_id",
+                        "in": "formData",
+                        "description": "project_id the `User` is associated with",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "keywords",
+                        "in": "formData",
+                        "description": "keyword",
+                        "required": false,
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "collectionFormat": "csv"
+                    }
+                ],
+                "tags": [
+                    "User"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The `id` of the created user",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/User/{id}": {
+            "put": {
+                "description": "Updates a `User` object. All fields other than `id` optional.\n",
+                "operationId": "updateUser",
+                "produces": [
+                    "application/json"
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of `User` to fetch",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "first_name",
+                        "in": "formData",
+                        "description": "first name of `User`",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "last_name",
+                        "in": "formData",
+                        "description": "last name of `User`",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "is_collaborator",
+                        "in": "formData",
+                        "description": "is `User` a collaborator?",
+                        "required": false,
+                        "type": "boolean"
+                    },
+                    {
+                        "name": "is_creator",
+                        "in": "formData",
+                        "description": "is `User` a creator?",
+                        "required": false,
+                        "type": "boolean"
+                    },
+                    {
+                        "name": "city",
+                        "in": "formData",
+                        "description": "city location of `User`",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "state",
+                        "in": "formData",
+                        "description": "state location of `User`",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "university",
+                        "in": "formData",
+                        "description": "university a `User` is associated with",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "project_id",
+                        "in": "formData",
+                        "description": "project_id the `User` is associated with",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "keywords",
+                        "in": "formData",
+                        "description": "keyword",
+                        "required": false,
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "collectionFormat": "csv"
+                    }
+                ],
+                "tags": [
+                    "User"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The `id` of the updatee `User`",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "description": "Delete a 'User' by their id.\n",
+                "operationId": "deleteUserById",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "the `id` of the `User` to delete",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The `id` of the deleted `User`",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            },
+            "get": {
+                "description": "Retrieve a 'User' by their id.\n",
+                "operationId": "getUserById",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "the `id` of the `User` to delete",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The `id` of the deleted `User`",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/User/{id}/project/{project_id}": {
+            "get": {
+                "description": "Retrieve a 'Project' associated with a `User`.\n",
+                "operationId": "getUserProjectById",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The `id` of the `User` to retrieve",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "project_id",
+                        "in": "path",
+                        "description": "The `project_id` of the `Project` to retrieve",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The `Project` associated with the `User`",
+                        "schema": {
+                            "$ref": "#/definitions/Project"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "description": "Add a 'Project' to a `User`.\n",
+                "operationId": "settUserProjectById",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The `id` of the `User` to retrieve",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "project_id",
+                        "in": "path",
+                        "description": "The `project_id` of the `Project` to retrieve",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The `project_id` associated with the `Project`",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "description": "Remove a 'Project' fromo a `User`.\n",
+                "operationId": "deleteUserProjectById",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The `id` of the `User` to retrieve",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "project_id",
+                        "in": "path",
+                        "description": "The `project_id` of the `Project` to retrieve",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The `project_id` associated with the `Project`",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "User": {
+            "type": "object",
+            "properties": {
+                "user_id": {
+                    "type": "string",
+                    "description": "Unique identifier representing a specific user"
+                },
+                "first_name": {
+                    "type": "string",
+                    "description": "User's first name."
+                },
+                "last_name": {
+                    "type": "string",
+                    "description": "User's last name"
+                },
+                "is_creator": {
+                    "type": "boolean",
+                    "description": "Is user a project creator?"
+                },
+                "is_collaborator": {
+                    "type": "boolean",
+                    "description": "Is user a project collaborator?"
+                },
+                "profile_images": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "Array of file system paths to profile images"
+                },
+                "created_date": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "datetime stamp of user creation"
+                },
+                "updated_date": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "datetime stamp of user update"
+                },
+                "geolocation": {
+                    "type": "array",
+                    "items": {
+                        "type": "number",
+                        "format": "double"
+                    },
+                    "description": "Tuple representing latitude/longitude of user"
+                },
+                "city": {
+                    "type": "string",
+                    "description": "City of user location"
+                },
+                "state": {
+                    "type": "string",
+                    "description": "State of user location"
+                },
+                "recent_collaborators_id": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "array of user_ids of recent collaborators"
+                },
+                "universities": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "array of universities the user has attended/worked with (clarification needed)"
+                },
+                "project_ids": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "array of user projects"
+                },
+                "keywords": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "array of keywords associated with the user"
+                },
+                "review_ids": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "array of review ids"
+                },
+                "is_user_private": {
+                    "type": "boolean",
+                    "description": "is user profile public or private?"
+                }
+            }
+        },
+        "Users": {
+            "type": "object",
+            "properties": {
+                "offset": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "Position in pagination."
+                },
+                "limit": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "Number of items to retrieve (100 max)."
+                },
+                "count": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "Total number of items available."
+                },
+                "history": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/User"
+                    }
+                }
+            }
+        },
+        "Project": {
+            "type": "object",
+            "properties": {
+                "project_id": {
+                    "type": "string",
+                    "description": "Unique identifier representing a specific project"
+                },
+                "created_date": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "datetime stamp of project creation"
+                },
+                "updated_date": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "datetime stamp of project update"
+                },
+                "project_name": {
+                    "type": "string",
+                    "description": "Project's name"
+                },
+                "project_main_grant_type": {
+                    "type": "string",
+                    "description": "Project's grant type"
+                },
+                "project_description": {
+                    "type": "string",
+                    "description": "Description of project"
+                },
+                "project_creator_id": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "array of project creator ids"
+                },
+                "project_collaborators_id": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "array of project collaborator ids"
+                },
+                "project_keywords": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "array of project keywords"
+                },
+                "project_urls": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "array of project URLs"
+                },
+                "grant_id": {
+                    "type": "string",
+                    "description": "Grant ID"
+                },
+                "university": {
+                    "type": "string",
+                    "description": "Name of university hosting research"
+                },
+                "grant_facilitator": {
+                    "type": "string",
+                    "description": "Name of individual fascilitating grant funding"
+                },
+                "project_file": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "files for grant"
+                },
+                "reviews": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "reviews"
+                },
+                "posts": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "posts related to project"
+                },
+                "is_project_private": {
+                    "type": "boolean",
+                    "description": "is project private?"
+                }
+            }
+        },
+        "Projects": {
+            "type": "object",
+            "properties": {
+                "offset": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "Position in pagination."
+                },
+                "limit": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "Number of items to retrieve (100 max)."
+                },
+                "count": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "Total number of items available."
+                },
+                "history": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Project"
+                    }
+                }
+            }
+        },
+        "Post": {
+            "type": "object",
+            "properties": {
+                "post_id": {
+                    "type": "string",
+                    "description": "id of post"
+                },
+                "created_date": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "datetime stamp of post creation"
+                },
+                "updated_date": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "datetime stamp of post update"
+                },
+                "post_title": {
+                    "type": "string",
+                    "description": "title of post"
+                },
+                "post_text": {
+                    "type": "string",
+                    "description": "text of post"
+                },
+                "post_keywords": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "keywords for post"
+                },
+                "post_author": {
+                    "$ref": "#/definitions/User",
+                    "description": "author of post"
+                },
+                "post_author_id": {
+                    "type": "string",
+                    "description": "id of author of post"
+                },
+                "post_tags": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/User"
+                    },
+                    "description": "tagged users"
+                },
+                "post_tags_id": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "tagged user ids"
+                },
+                "is_post_private": {
+                    "type": "boolean",
+                    "description": "is post private?"
+                }
+            }
+        },
+        "Posts": {
+            "type": "object",
+            "properties": {
+                "offset": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "Position in pagination."
+                },
+                "limit": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "Number of items to retrieve (100 max)."
+                },
+                "count": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "Total number of items available."
+                },
+                "history": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Post"
+                    }
+                }
+            }
+        },
+        "Grant": {
+            "type": "object",
+            "properties": {
+                "grant_id": {
+                    "type": "string",
+                    "description": "id of grant"
+                },
+                "created_date": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "datetime stamp of grant creation"
+                },
+                "updated_date": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "datetime stamp of grant update"
+                },
+                "grant_url": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "URL of grants"
+                },
+                "grant_description": {
+                    "type": "string",
+                    "description": "Grant description"
+                },
+                "grant_amount": {
+                    "type": "number",
+                    "format": "double",
+                    "description": "Amount of grant"
+                }
+            }
+        },
+        "Grants": {
+            "type": "object",
+            "properties": {
+                "offset": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "Position in pagination."
+                },
+                "limit": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "Number of items to retrieve (100 max)."
+                },
+                "count": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "Total number of items available."
+                },
+                "history": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Grant"
+                    }
+                }
+            }
+        },
+        "Review": {
+            "type": "object",
+            "properties": {
+                "review_id": {
+                    "type": "string",
+                    "description": "id of review"
+                },
+                "created_date": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "datetime stamp of review creation"
+                },
+                "updated_date": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "datetime stamp of review update"
+                },
+                "review_body": {
+                    "type": "string",
+                    "description": "text body of review"
+                },
+                "reviewer": {
+                    "$ref": "#/definitions/User",
+                    "description": "reviewer user"
+                },
+                "reviewer_id": {
+                    "type": "string",
+                    "description": "reviewer user id"
+                },
+                "rating": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "rating, must be 1-5"
+                }
+            }
+        },
+        "Reviews": {
+            "type": "object",
+            "properties": {
+                "offset": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "Position in pagination."
+                },
+                "limit": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "Number of items to retrieve (100 max)."
+                },
+                "count": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "Total number of items available."
+                },
+                "history": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Review"
+                    }
+                }
+            }
+        },
+        "Skill": {
+            "type": "object",
+            "properties": {
+                "review_id": {
+                    "type": "string",
+                    "description": "id of skill"
+                },
+                "created_date": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "datetime stamp of skill creation"
+                },
+                "updated_date": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "datetime stamp of skill update"
+                },
+                "review_body": {
+                    "type": "string",
+                    "description": "text body of skill"
+                },
+                "endorsements_id": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "ids of users who have endorsed the user for this skill"
+                },
+                "reviewer_id": {
+                    "type": "string",
+                    "description": "reviewer user id"
+                },
+                "rating": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "rating, must be 1-5"
+                }
+            }
+        },
+        "Skills": {
+            "type": "object",
+            "properties": {
+                "offset": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "Position in pagination."
+                },
+                "limit": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "Number of items to retrieve (100 max)."
+                },
+                "count": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "Total number of items available."
+                },
+                "history": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Skill"
+                    }
+                }
+            }
+        },
+        "Error": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "message": {
+                    "type": "string"
+                },
+                "fields": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}
