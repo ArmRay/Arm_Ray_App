@@ -8,7 +8,7 @@
     "schemes": [
         "http"
     ],
-    "basePath": "/armray/api/0.1/rest/",
+    "basePath": "/armray/api/0.1/rest",
     "produces": [
         "application/json"
     ],

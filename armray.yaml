@@ -16,8 +16,7 @@ schemes:
   #- https
 # will be prefixed to all paths
 #placeholder in case we need this
-#basePath: /foo
-
+basePath: /armray/api/0.1/rest
 
 #I'm assumping we'll be returning json for all the calls
 produces:
@@ -25,18 +24,18 @@ produces:
   
 #and now the actual api paths
 paths:
-  ##/users routes
+  ##/Users routes
   # This is a path endpoint. Change it.
-  /users:
+  /Users:
     # This is a HTTP operation
     get:
       # Describe this verb here. Note: you can use markdown
       description: |
-        Gets `user` objects.
+        Gets `User` objects.
         Required query param of **size** determines
         max number of results per page, and **page** determines
         which page in the pagination we are. Remaining params optional.
-      operationId: getusers
+      operationId: getUsers
       produces:
         - application/json
       consumes:
@@ -115,7 +114,7 @@ paths:
             type: string
           collectionFormat: csv
       tags:
-        - users
+        - Users
       # Expected responses for this operation:
       responses:
         # Response code
@@ -124,30 +123,30 @@ paths:
           schema:
             type: array
             items:
-              $ref: '#/definitions/user'
+              $ref: '#/definitions/User'
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/error'
+            $ref: '#/definitions/Error'
             
-  /users/{university_id}:
+  /Users/{university_id}:
     get:
       description: |
-        Retrieve `user` objects at a particular location
-      operationId: getusersByUniversityId
+        Retrieve `User` objects at a particular location
+      operationId: getUsersByUniversityId
       produces:
         - application/json
       parameters:
         -
           name: university_id
           in: path
-          description: ID of 'user' to fetch
+          description: ID of 'User' to fetch
           required: true
           type: string
         -
           name: max
           in: formData
-          description: max num of 'user' to fetch
+          description: max num of 'User' to fetch
           required: true
           type: number
           format: int32
@@ -164,17 +163,17 @@ paths:
           schema:
             type: array
             items:
-              $ref: '#/definitions/user'
+              $ref: '#/definitions/User'
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/error'          
-  /user:
+            $ref: '#/definitions/Error'          
+  /User:
     post:
       description: |
-        Creates `user` objects. `University` and `project` are optional (user may not yet have affiliations)
+        Creates `User` objects. `University` and `Project` are optional (user may not yet have affiliations)
         `Keywords` also optional. All other fields required.
-      operationId: createuser
+      operationId: createUser
       produces:
         - application/json
       consumes:
@@ -186,49 +185,49 @@ paths:
         -
           name: first_name
           in: formData
-          description: first name of `user`
+          description: first name of `User`
           required: true
           type: string
         -
           name: last_name
           in: formData
-          description: last name of `user`
+          description: last name of `User`
           required: true
           type: string
         -
           name: is_collaborator
           in: formData
-          description: is `user` a collaborator?
+          description: is `User` a collaborator?
           required: true
           type: boolean
         -
           name: is_creator
           in: formData
-          description: is `user` a creator?
+          description: is `User` a creator?
           required: true
           type: boolean
         -
           name: city
           in: formData
-          description: city location of `user`
+          description: city location of `User`
           required: true
           type: string
         -
           name: state
           in: formData
-          description: state location of `user`
+          description: state location of `User`
           required: true
           type: string
         -
           name: university
           in: formData
-          description: university a `user` is associated with
+          description: university a `User` is associated with
           required: false
           type: string
         -
           name: project_id
           in: formData
-          description: project_id the `user` is associated with
+          description: project_id the `User` is associated with
           required: false
           type: string
         -
@@ -241,7 +240,7 @@ paths:
             type: string
           collectionFormat: csv
       tags:
-        - user
+        - User
       # Expected responses for this operation:
       responses:
         # Response code
@@ -252,14 +251,14 @@ paths:
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/error'
+            $ref: '#/definitions/Error'
             
-  ##/user routes      
-  /user/{id}:
+  ##/User routes      
+  /User/{id}:
     put:
       description: |
-        Updates a `user` object. All fields other than `id` optional.
-      operationId: updateuser
+        Updates a `User` object. All fields other than `id` optional.
+      operationId: updateUser
       produces:
         - application/json
       consumes:
@@ -268,55 +267,55 @@ paths:
         -
           name: id
           in: path
-          description: ID of `user` to fetch
+          description: ID of `User` to fetch
           required: true
           type: string
         -
           name: first_name
           in: formData
-          description: first name of `user`
+          description: first name of `User`
           required: false
           type: string
         -
           name: last_name
           in: formData
-          description: last name of `user`
+          description: last name of `User`
           required: false
           type: string
         -
           name: is_collaborator
           in: formData
-          description: is `user` a collaborator?
+          description: is `User` a collaborator?
           required: false
           type: boolean
         -
           name: is_creator
           in: formData
-          description: is `user` a creator?
+          description: is `User` a creator?
           required: false
           type: boolean
         -
           name: city
           in: formData
-          description: city location of `user`
+          description: city location of `User`
           required: false
           type: string
         -
           name: state
           in: formData
-          description: state location of `user`
+          description: state location of `User`
           required: false
           type: string
         -
           name: university
           in: formData
-          description: university a `user` is associated with
+          description: university a `User` is associated with
           required: false
           type: string
         -
           name: project_id
           in: formData
-          description: project_id the `user` is associated with
+          description: project_id the `User` is associated with
           required: false
           type: string
         -
@@ -329,152 +328,152 @@ paths:
             type: string
           collectionFormat: csv
       tags:
-        - user
+        - User
       # Expected responses for this operation:
       responses:
         # Response code
         200:
-          description: The `id` of the updatee `user`
+          description: The `id` of the updatee `User`
           schema:
             type: string
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/error'
+            $ref: '#/definitions/Error'
     delete:
       description: |
-        Delete a 'user' by their id.
-      operationId: deleteuserById
+        Delete a 'User' by their id.
+      operationId: deleteUserById
       produces:
         - application/json
       parameters:
         -
           name: id
           in: path
-          description: the `id` of the `user` to delete
+          description: the `id` of the `User` to delete
           required: true
           type: string
       responses:
         '200':
-          description: The `id` of the deleted `user`
+          description: The `id` of the deleted `User`
           schema:
             type: string
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/error'
+            $ref: '#/definitions/Error'
     get:
       description: |
-        Retrieve a 'user' by their id.
-      operationId: getuserById
+        Retrieve a 'User' by their id.
+      operationId: getUserById
       produces:
         - application/json
       parameters:
         -
           name: id
           in: path
-          description: the `id` of the `user` to delete
+          description: the `id` of the `User` to delete
           required: true
           type: string
       responses:
         '200':
-          description: The `id` of the deleted `user`
+          description: The `id` of the deleted `User`
           schema:
             type: string
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/error'            
-  /user/{id}/project/{project_id}:
+            $ref: '#/definitions/Error'            
+  /User/{id}/project/{project_id}:
     get:
       description: |
-        Retrieve a 'project' associated with a `user`.
-      operationId: getuserprojectById
+        Retrieve a 'Project' associated with a `User`.
+      operationId: getUserProjectById
       produces:
         - application/json
       parameters:
         -
           name: id
           in: path
-          description: The `id` of the `user` to retrieve
+          description: The `id` of the `User` to retrieve
           required: true
           type: string
         -
           name: project_id
           in: path
-          description: The `project_id` of the `project` to retrieve
+          description: The `project_id` of the `Project` to retrieve
           required: true
           type: string
       responses:
         '200':
-          description: The `project` associated with the `user`
+          description: The `Project` associated with the `User`
           schema:
-            $ref: '#/definitions/project' 
+            $ref: '#/definitions/Project' 
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/error' 
+            $ref: '#/definitions/Error' 
     post:
       description: |
-        Add a 'project' to a `user`.
-      operationId: settuserprojectById
+        Add a 'Project' to a `User`.
+      operationId: settUserProjectById
       produces:
         - application/json
       parameters:
         -
           name: id
           in: path
-          description: The `id` of the `user` to retrieve
+          description: The `id` of the `User` to retrieve
           required: true
           type: string
         -
           name: project_id
           in: path
-          description: The `project_id` of the `project` to retrieve
+          description: The `project_id` of the `Project` to retrieve
           required: true
           type: string
       responses:
         '200':
-          description: The `project_id` associated with the `project`
+          description: The `project_id` associated with the `Project`
           schema:
             type: string
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/error'
+            $ref: '#/definitions/Error'
     delete:
       description: |
-        Remove a 'project' fromo a `user`.
-      operationId: deleteuserprojectById
+        Remove a 'Project' fromo a `User`.
+      operationId: deleteUserProjectById
       produces:
         - application/json
       parameters:
         -
           name: id
           in: path
-          description: The `id` of the `user` to retrieve
+          description: The `id` of the `User` to retrieve
           required: true
           type: string
         -
           name: project_id
           in: path
-          description: The `project_id` of the `project` to retrieve
+          description: The `project_id` of the `Project` to retrieve
           required: true
           type: string
       responses:
         '200':
-          description: The `project_id` associated with the `project`
+          description: The `project_id` associated with the `Project`
           schema:
             type: string
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/error'            
-      #not going to add a PUT to modify it a project, that should be done directly on the project paths
+            $ref: '#/definitions/Error'            
+      #not going to add a PUT to modify it a project, that should be done directly on the Project paths
       #redundant paths are bad
       
 definitions:
-  user:
+  User:
     type: object
     properties:
       user_id:
@@ -482,10 +481,10 @@ definitions:
         description: Unique identifier representing a specific user
       first_name:
         type: string
-        description: user's first name.
+        description: User's first name.
       last_name:
         type: string
-        description: user's last name
+        description: User's last name
       is_creator:
         type: boolean
         description: Is user a project creator? #(not mutually exclusive with is_collaborator)
@@ -520,7 +519,7 @@ definitions:
       #recent_collaborators:
       #  type: array
       #  items:
-      #    $ref: '#/definitions/user'
+      #    $ref: '#/definitions/User'
       #  description: array of recent collaborators
       recent_collaborators_id:
         type: array
@@ -535,7 +534,7 @@ definitions:
       #projects:
       #  type: array
       #  items:
-      #    $ref: '#/definitions/project'
+      #    $ref: '#/definitions/Project'
       #  description: array of user projects
       project_ids:
         type: array
@@ -550,7 +549,7 @@ definitions:
       #reviews:
       #  type: array
       #  items:
-      #    $ref: '#/definitions/review'
+      #    $ref: '#/definitions/Review'
       #  description: array of reviews
       review_ids:
         type: array
@@ -560,7 +559,7 @@ definitions:
       is_user_private: 
         type: boolean
         description:  is user profile public or private?
-  users:
+  Users:
     type: object
     properties:
       offset:
@@ -578,8 +577,8 @@ definitions:
       history:
         type: array
         items:
-          $ref: '#/definitions/user'
-  project:
+          $ref: '#/definitions/User'
+  Project:
     type: object
     properties:
       project_id:
@@ -595,17 +594,17 @@ definitions:
         description: datetime stamp of project update
       project_name:
         type: string
-        description: project's name
+        description: Project's name
       project_main_grant_type:
         type: string
-        description: project's grant type
+        description: Project's grant type
       project_description:
         type: string
         description: Description of project
       #project_creator:
       #  type: array
       #  items:
-      #    $ref: '#/definitions/user'
+      #    $ref: '#/definitions/User'
       #  description: array of project creators
       project_creator_id:
         type: array
@@ -615,7 +614,7 @@ definitions:
       #project_collaborators:
       #  type: array
       #  items:
-      #    $ref: '#/definitions/user'
+      #    $ref: '#/definitions/User'
       #  description: array of project collaborators
       project_collaborators_id:
         type: array
@@ -634,7 +633,7 @@ definitions:
         description: array of project URLs
       grant_id:
         type: string
-        description: grant ID 
+        description: Grant ID 
       university:
         type: string
         description: Name of university hosting research
@@ -659,7 +658,7 @@ definitions:
       is_project_private:
         type: boolean
         description: is project private?
-  projects:
+  Projects:
     type: object
     properties:
       offset:
@@ -677,8 +676,8 @@ definitions:
       history:
         type: array
         items:
-          $ref: '#/definitions/project'
-  post:
+          $ref: '#/definitions/Project'
+  Post:
     type: object
     properties:
       post_id: 
@@ -704,7 +703,7 @@ definitions:
           type: string
         description: keywords for post
       post_author:
-        $ref: '#/definitions/user'
+        $ref: '#/definitions/User'
         description: author of post
       post_author_id:
         type: string
@@ -712,7 +711,7 @@ definitions:
       post_tags:
         type: array
         items:
-          $ref: '#/definitions/user'
+          $ref: '#/definitions/User'
         description: tagged users
       post_tags_id:
         type: array
@@ -722,7 +721,7 @@ definitions:
       is_post_private:
         type: boolean
         description: is post private?
-  posts:
+  Posts:
     type: object
     properties:
       offset:
@@ -740,8 +739,8 @@ definitions:
       history:
         type: array
         items:
-          $ref: '#/definitions/post'
-  grant:
+          $ref: '#/definitions/Post'
+  Grant:
     type: object
     properties:
       grant_id: 
@@ -762,12 +761,12 @@ definitions:
         description: URL of grants
       grant_description:
         type: string
-        description: grant description
+        description: Grant description
       grant_amount:
         type: number
         format: double
         description: Amount of grant
-  grants:
+  Grants:
     type: object
     properties:
       offset:
@@ -785,8 +784,8 @@ definitions:
       history:
         type: array
         items:
-          $ref: '#/definitions/grant'
-  review:
+          $ref: '#/definitions/Grant'
+  Review:
     type: object 
     properties:
       review_id:
@@ -804,7 +803,7 @@ definitions:
         type: string
         description: text body of review
       reviewer:
-        $ref: '#/definitions/user'
+        $ref: '#/definitions/User'
         description: reviewer user
       reviewer_id:
         type: string
@@ -813,7 +812,7 @@ definitions:
         type: integer
         format: int32
         description: rating, must be 1-5
-  reviews:
+  Reviews:
     type: object
     properties:
       offset:
@@ -831,13 +830,13 @@ definitions:
       history:
         type: array
         items:
-          $ref: '#/definitions/review'
+          $ref: '#/definitions/Review'
  #so for skills
  #basically we want to associate those with the user
  #BUT
  #we want to be able to get a master list of skills too and order them popularity
  #so group them and sort by count maybe? kinda like stackoverflow seems to to with tags?
-  skill:
+  Skill:
     type: object 
     properties:
       review_id:
@@ -857,7 +856,7 @@ definitions:
       #endorsements:
       #  type: array
       #  items:
-      #    $ref: '#/definitions/user'
+      #    $ref: '#/definitions/User'
       #  description: users who have endorsed the user for this skill
       endorsements_id:
         type: array
@@ -871,7 +870,7 @@ definitions:
         type: integer
         format: int32
         description: rating, must be 1-5
-  skills:
+  Skills:
     type: object
     properties:
       offset:
@@ -889,8 +888,8 @@ definitions:
       history:
         type: array
         items:
-          $ref: '#/definitions/skill'
-  error:
+          $ref: '#/definitions/Skill'
+  Error:
     type: object
     properties:
       code:
