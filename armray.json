@@ -12,6 +12,9 @@
     "produces": [
         "application/json"
     ],
+    "consumes": [
+        "application/json"
+    ],
     "paths": {
         "/Users": {
             "get": {
@@ -83,16 +86,34 @@
                         "type": "string"
                     },
                     {
-                        "name": "university",
+                        "name": "university_ids",
                         "in": "formData",
-                        "description": "university a user is associated with",
+                        "description": "universities a user is associated with",
                         "required": false,
-                        "type": "string"
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "collectionFormat": "csv"
                     },
                     {
                         "name": "project_id",
                         "in": "formData",
                         "description": "project_id the user is associated with",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "created_date",
+                        "in": "formData",
+                        "description": "date the user was created",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "modified_date",
+                        "in": "formData",
+                        "description": "date the user was modified",
                         "required": false,
                         "type": "string"
                     },
@@ -130,9 +151,9 @@
                 }
             }
         },
-        "/Users/{university_id}": {
+        "/Users/uni/{university_id}": {
             "get": {
-                "description": "Retrieve `User` objects at a particular location\n",
+                "description": "Retrieve `User` objects at a particular `University`\n",
                 "operationId": "getUsersByUniversityId",
                 "produces": [
                     "application/json"
@@ -160,6 +181,247 @@
                         "required": true,
                         "type": "number",
                         "format": "int32"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "users response",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/User"
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/Users/projects/{project_id}": {
+            "get": {
+                "description": "Retrieve `User` objects on a particular `Project`\n",
+                "operationId": "getUsersByProjectId",
+                "produces": [
+                    "application/json"
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "project_id",
+                        "in": "path",
+                        "description": "ID of 'Project' to fetch",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "max",
+                        "in": "formData",
+                        "description": "max num of 'User' to fetch",
+                        "required": true,
+                        "type": "number",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "page",
+                        "in": "formData",
+                        "description": "page in pagination",
+                        "required": true,
+                        "type": "number",
+                        "format": "int32"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "users response",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/User"
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/Users/created/{created_date}": {
+            "get": {
+                "description": "Retrieve `User` objects created on or after the given date\n",
+                "operationId": "getUsersByCreatedDate",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "created_date",
+                        "in": "path",
+                        "description": "Date that `User` object was created",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "users response",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/User"
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/Users/created": {
+            "get": {
+                "description": "Retrieve `User` objects created on or after the given date2\n",
+                "operationId": "getUsersByCreatedDateForm",
+                "produces": [
+                    "application/json"
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "created_date",
+                        "in": "formData",
+                        "description": "Date that `User` object was created",
+                        "required": true,
+                        "type": "string",
+                        "format": "date-time"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "users response",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/User"
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/Users/modified/{modified_date}": {
+            "get": {
+                "description": "Retrieve `User` objects created on or after the given date\n",
+                "operationId": "getUsersByModifiedDate",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "modified_date",
+                        "in": "path",
+                        "description": "Date that `User` object was modified",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "users response",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/User"
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/Users/modified_date": {
+            "get": {
+                "description": "Retrieve `User` objects created on or after the given date\n",
+                "operationId": "getUsersByModifiedDateForm",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "modified_date",
+                        "in": "formData",
+                        "description": "Date that `User` object was modified",
+                        "required": true,
+                        "type": "string",
+                        "format": "date-time"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "users response",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/User"
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/Users/keys": {
+            "get": {
+                "description": "Retrieve `User` objects based on keywords\n",
+                "operationId": "getUsersByKeywords",
+                "produces": [
+                    "application/json"
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "keywords",
+                        "in": "formData",
+                        "description": "Keywords when searching for user",
+                        "required": true,
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "collectionFormat": "csv"
                     }
                 ],
                 "responses": {
@@ -235,11 +497,15 @@
                         "type": "string"
                     },
                     {
-                        "name": "university",
+                        "name": "university_ids",
                         "in": "formData",
                         "description": "university a `User` is associated with",
                         "required": false,
-                        "type": "string"
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "collectionFormat": "csv"
                     },
                     {
                         "name": "project_id",
@@ -444,6 +710,181 @@
                 }
             }
         },
+        "/User/{id}/uni/{university_id}": {
+            "get": {
+                "description": "Retrieve a 'University' associated with a `User`.\n",
+                "operationId": "getUserUniversityById",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The `id` of the `User` to retrieve",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "university_id",
+                        "in": "path",
+                        "description": "The `university_id` of the `University` to retrieve",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The `University` associated with the `User`",
+                        "schema": {
+                            "$ref": "#/definitions/University"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "description": "Add a 'University' to a `User`.\n",
+                "operationId": "settUserUniversityById",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The `id` of the `User` to retrieve",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "university_id",
+                        "in": "path",
+                        "description": "The `university_id` of the `Project` to retrieve",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The `university_id` associated with the `Project`",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "description": "Remove a 'University' fromo a `User`.\n",
+                "operationId": "deleteUserUniversityById",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The `id` of the `User` to retrieve",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "university_id",
+                        "in": "path",
+                        "description": "The `university_id` of the `Project` to retrieve",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The `project_id` associated with the `Project`",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/User/{id}/project": {
+            "get": {
+                "description": "Retrieve all 'Project' associated with a `User`.\n",
+                "operationId": "getAllUserProjectById",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The `id` of the `User` to retrieve",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The `Project` associated with the `User`",
+                        "schema": {
+                            "$ref": "#/definitions/Project"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "description": "Remove all 'Project' ojects from a `User`.\n",
+                "operationId": "deleteAllUserProjectById",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The `id` of the `User` to retrieve",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The `user_id` associated with the `User`",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
         "/User/{id}/project/{project_id}": {
             "get": {
                 "description": "Retrieve a 'Project' associated with a `User`.\n",
@@ -520,7 +961,7 @@
                 }
             },
             "delete": {
-                "description": "Remove a 'Project' fromo a `User`.\n",
+                "description": "Remove a 'Project' from a `User`.\n",
                 "operationId": "deleteUserProjectById",
                 "produces": [
                     "application/json"
@@ -546,6 +987,4531 @@
                         "description": "The `project_id` associated with the `Project`",
                         "schema": {
                             "type": "string"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/User/{id}/review": {
+            "get": {
+                "description": "Retrieve all 'Review' associated with a `User`.\n",
+                "operationId": "getAllUserReviewById",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The `id` of the `User` to retrieve",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "An array of reviews",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Review"
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "description": "Remove all 'Review' ojects from a `User`.\n",
+                "operationId": "deleteAllUserReviewById",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The `id` of the `User` to retrieve",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The `user_id` associated with the `User`",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/User/{id}/review/{review_id}": {
+            "get": {
+                "description": "Retrieve a 'Review' associated with a `User`.\n",
+                "operationId": "getUserReviewById",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The `id` of the `User` to retrieve",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "review_id",
+                        "in": "path",
+                        "description": "The `review_id` of the `Project` to retrieve",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The `Review` associated with the `User`",
+                        "schema": {
+                            "$ref": "#/definitions/Review"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "description": "Add a 'Review' to a `User`.\n",
+                "operationId": "setUserReviewById",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The `id` of the `User` to retrieve",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "review_id",
+                        "in": "path",
+                        "description": "The `review_id` of the `Review` to retrieve",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The `review_id` associated with the `Project`",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "description": "Remove a 'Review' from a `User`.\n",
+                "operationId": "deleteUserReviewById",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The `id` of the `User` to retrieve",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "review_id",
+                        "in": "path",
+                        "description": "The `review_id` of the `Review` to retrieve",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The `review_id` associated with the `Review`",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/User/{id}/images": {
+            "get": {
+                "description": "Retrieve all images associated with a `User`.\n",
+                "operationId": "getAllUserImages",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The `id` of the `User` to retrieve",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The image url associated with the `User`",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "description": "Add images to a `User`.\n",
+                "operationId": "setUserImages",
+                "produces": [
+                    "application/json"
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The `id` of the `User` to retrieve",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "images",
+                        "in": "formData",
+                        "description": "The paths of the images",
+                        "required": true,
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "collectionFormat": "csv"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The user_id associated with the `User`",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "description": "Remove an image, or multiple images, from a `User`.\n",
+                "operationId": "deleteImagesFromUserById",
+                "produces": [
+                    "application/json"
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The `id` of the `User` to retrieve",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "images",
+                        "in": "formData",
+                        "description": "The paths of the images",
+                        "required": true,
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "collectionFormat": "csv"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The `user_id` associated with the `User`",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/User/{id}/keys": {
+            "get": {
+                "description": "Retrieve all keywords associated with a `User`.\n",
+                "operationId": "getAllUserKeywords",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The `id` of the `User` to retrieve",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "An array of keywords",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "description": "Add keywords to a `User`.\n",
+                "operationId": "setUserKeywords",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The `id` of the `User` to retrieve",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "keywords",
+                        "in": "formData",
+                        "description": "The keywords",
+                        "required": true,
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "collectionFormat": "csv"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The user_id associated with the `User`",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "description": "Delete keywords from a user\n",
+                "operationId": "deleteKeywordsFromUserById",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The `id` of the `User` to retrieve",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The `user_id` associated with the `User`",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/User/{id}/keys/{keyword}": {
+            "post": {
+                "description": "Add a keyword to a `User`.\n",
+                "operationId": "setUserKeyword",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The `id` of the `User` to retrieve",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "keyword",
+                        "in": "path",
+                        "description": "The keyword",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The user_id associated with the `User`",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "description": "Delete keyword from a user\n",
+                "operationId": "deleteKeywordFromUserById",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The `id` of the `User` to retrieve",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "keyword",
+                        "in": "path",
+                        "description": "The keyword",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The `user_id` associated with the `User`",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/User/{id}/first_name": {
+            "get": {
+                "description": "Retrieve first name associated with a `User`.\n",
+                "operationId": "getFirstNameById",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The `id` of the `User` to retrieve",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "An array of keywords",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "description": "Delete first_name from a user\n",
+                "operationId": "deleteUserFirstName",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The `id` of the `User` to retrieve",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The `user_id` associated with the `User`",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/User/{id}/first_name/{first_name}": {
+            "post": {
+                "description": "Add first name to a `User`.\n",
+                "operationId": "addUserFirstName",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The `id` of the `User` to retrieve",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "first_name",
+                        "in": "path",
+                        "description": "The keywords",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The user_id associated with the `User`",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "description": "Modify first name of a `User`.\n",
+                "operationId": "modifyUserFirstName",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The `id` of the `User` to retrieve",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "first_name",
+                        "in": "path",
+                        "description": "The keywords",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The user_id associated with the `User`",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/User/{id}/last_name": {
+            "get": {
+                "description": "Retrieve first name associated with a `User`.\n",
+                "operationId": "getLastNameById",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The `id` of the `User` to retrieve",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "An array of keywords",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "description": "Delete last_name from a user\n",
+                "operationId": "deleteUserLastName",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The `id` of the `User` to retrieve",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The `user_id` associated with the `User`",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/User/{id}/last_name/{last_name}": {
+            "post": {
+                "description": "Add last name to a `User`.\n",
+                "operationId": "addUserLastName",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The `id` of the `User` to retrieve",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "last_name",
+                        "in": "path",
+                        "description": "The keywords",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The user_id associated with the `User`",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "description": "Modify last name of a `User`.\n",
+                "operationId": "modifyUserLastName",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The `id` of the `User` to retrieve",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "last_name",
+                        "in": "path",
+                        "description": "The keywords",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The user_id associated with the `User`",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/User/{id}/collaborator": {
+            "get": {
+                "description": "Retrieve if `User` is a collaborator.\n",
+                "operationId": "isCollaboratorById",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The `id` of the `User` to retrieve",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "An array of keywords",
+                        "schema": {
+                            "type": "boolean"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "description": "set if `User` is a collaborator.\n",
+                "operationId": "setIsUserCollaboratorById",
+                "produces": [
+                    "application/json"
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The `id` of the `User` to retrieve",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "isCollaborator",
+                        "in": "formData",
+                        "description": "Is user a collaborator?",
+                        "required": true,
+                        "type": "boolean"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The `user_id` associated with the `User`",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "description": "set if `User` is a collaborator.\n",
+                "operationId": "setIsUserCollaboratorByIdPut",
+                "produces": [
+                    "application/json"
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The `id` of the `User` to retrieve",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "isCollaborator",
+                        "in": "formData",
+                        "description": "Is user a collaborator?",
+                        "required": true,
+                        "type": "boolean"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The `user_id` associated with the `User`",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/User/{id}/creator": {
+            "get": {
+                "description": "Retrieve if `User` is a creator.\n",
+                "operationId": "isCreatorById",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The `id` of the `User` to retrieve",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "An array of keywords",
+                        "schema": {
+                            "type": "boolean"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "description": "set if `User` is a creator.\n",
+                "operationId": "setIsUserCreatorById",
+                "produces": [
+                    "application/json"
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The `id` of the `User` to retrieve",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "isCreator",
+                        "in": "formData",
+                        "description": "Is user a creator?",
+                        "required": true,
+                        "type": "boolean"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The `user_id` associated with the `User`",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "description": "set if `User` is a creator.\n",
+                "operationId": "setIsUserCreatorByIdPut",
+                "produces": [
+                    "application/json"
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The `id` of the `User` to retrieve",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "isCollaborator",
+                        "in": "formData",
+                        "description": "Is user a creator?",
+                        "required": true,
+                        "type": "boolean"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The `user_id` associated with the `User`",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/User/{id}/city": {
+            "get": {
+                "description": "Retrieve city associated with a `User`.\n",
+                "operationId": "getCityNameById",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The `id` of the `User` to retrieve",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The city",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "description": "Delete city from a user\n",
+                "operationId": "deleteUserCity",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The `id` of the `User` to retrieve",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The `user_id` associated with the `User`",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/User/{id}/city/{city}": {
+            "post": {
+                "description": "Add city to a `User`.\n",
+                "operationId": "addUserCity",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The `id` of the `User` to retrieve",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "city",
+                        "in": "path",
+                        "description": "The city",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The user_id associated with the `User`",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "description": "Modify city of a `User`.\n",
+                "operationId": "modifyUserCity",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The `id` of the `User` to retrieve",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "city",
+                        "in": "path",
+                        "description": "The city",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The user_id associated with the `User`",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/User/{id}/state": {
+            "get": {
+                "description": "Retrieve state associated with a `User`.\n",
+                "operationId": "getStateById",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The `id` of the `User` to retrieve",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The state",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "description": "Delete state from a user\n",
+                "operationId": "deleteUserState",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The `id` of the `User` to retrieve",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The `user_id` associated with the `User`",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/User/{id}/state/{state}": {
+            "post": {
+                "description": "Add state to a `User`.\n",
+                "operationId": "addUserState",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The `id` of the `User` to retrieve",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "state",
+                        "in": "path",
+                        "description": "The state",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The user_id associated with the `User`",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "description": "Modify state of a `User`.\n",
+                "operationId": "modifyUserState",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The `id` of the `User` to retrieve",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "state",
+                        "in": "path",
+                        "description": "The state",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The user_id associated with the `User`",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/User/{id}/created": {
+            "get": {
+                "description": "Retrieve creation date of a `User`.\n",
+                "operationId": "getCreatedDateById",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The `id` of the `User` to retrieve",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The date",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/User/{id}/modified": {
+            "get": {
+                "description": "Retrieve modified date of a `User`.\n",
+                "operationId": "getModifiedDateById",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The `id` of the `User` to retrieve",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The date",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/Projects": {
+            "get": {
+                "description": "Gets `Project` objects.\nRequired query param of **size** determines\nmax number of results per page, and **page** determines\nwhich page in the pagination we are. Remaining params optional.\n",
+                "operationId": "getProjects",
+                "produces": [
+                    "application/json"
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "size",
+                        "in": "formData",
+                        "description": "Max size of array to return",
+                        "required": true,
+                        "type": "number",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "page",
+                        "in": "formData",
+                        "description": "Location in pagination",
+                        "required": true,
+                        "type": "number",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "project_id",
+                        "in": "formData",
+                        "required": false,
+                        "type": "string",
+                        "description": "Unique identifier representing a specific project"
+                    },
+                    {
+                        "name": "created_date",
+                        "in": "formData",
+                        "required": false,
+                        "type": "string",
+                        "format": "date-time",
+                        "description": "datetime stamp of project creation"
+                    },
+                    {
+                        "name": "updated_date",
+                        "in": "formData",
+                        "required": false,
+                        "type": "string",
+                        "format": "date-time",
+                        "description": "datetime stamp of project update"
+                    },
+                    {
+                        "name": "project_name",
+                        "in": "formData",
+                        "required": false,
+                        "type": "string",
+                        "description": "Project's name"
+                    },
+                    {
+                        "name": "project_main_grant_type",
+                        "in": "formData",
+                        "required": false,
+                        "type": "string",
+                        "description": "Project's grant type"
+                    },
+                    {
+                        "name": "project_description",
+                        "in": "formData",
+                        "required": false,
+                        "type": "string",
+                        "description": "Description of project"
+                    },
+                    {
+                        "name": "project_creator_id",
+                        "in": "formData",
+                        "required": false,
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "array of project creator ids"
+                    },
+                    {
+                        "name": "project_collaborators_id",
+                        "in": "formData",
+                        "required": false,
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "array of project collaborator ids"
+                    },
+                    {
+                        "name": "project_keywords",
+                        "in": "formData",
+                        "required": false,
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "array of project keywords"
+                    },
+                    {
+                        "name": "project_urls",
+                        "in": "formData",
+                        "required": false,
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "array of project URLs"
+                    },
+                    {
+                        "name": "grant_id",
+                        "in": "formData",
+                        "required": false,
+                        "type": "string",
+                        "description": "Grant ID"
+                    },
+                    {
+                        "name": "university_id",
+                        "in": "formData",
+                        "required": false,
+                        "type": "string",
+                        "description": "ID of university hosting research"
+                    },
+                    {
+                        "name": "grant_facilitator",
+                        "in": "formData",
+                        "required": false,
+                        "type": "string",
+                        "description": "Name of individual fascilitating grant funding"
+                    },
+                    {
+                        "name": "project_file",
+                        "in": "formData",
+                        "required": false,
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "files for grant"
+                    },
+                    {
+                        "name": "reviews",
+                        "in": "formData",
+                        "required": false,
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "reviews"
+                    },
+                    {
+                        "name": "posts",
+                        "in": "formData",
+                        "required": false,
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "posts related to project"
+                    },
+                    {
+                        "name": "is_project_private",
+                        "in": "formData",
+                        "required": false,
+                        "type": "boolean",
+                        "description": "is project private?"
+                    }
+                ],
+                "tags": [
+                    "Projects"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "An array of projects",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Project"
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/Projects/uni/{university_id}": {
+            "get": {
+                "description": "Retrieve `Project` objects at a particular `University`\n",
+                "operationId": "getProjectsByUniversityId",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "university_id",
+                        "in": "path",
+                        "description": "ID of 'User' to fetch",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "users response",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/User"
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/Projects/creator/{user_id}": {
+            "get": {
+                "description": "Retrieve `Project` objects by a particular creator `User`\n",
+                "operationId": "getProjectsByCreatorId",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "user_id",
+                        "in": "path",
+                        "description": "ID of 'User' to fetch",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "projects response",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Project"
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/Projects/collaborator/{user_id}": {
+            "get": {
+                "description": "Retrieve `Project` objects by a particular collaborator `User`\n",
+                "operationId": "getProjectsByCollaboratorId",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "user_id",
+                        "in": "path",
+                        "description": "ID of 'User' to fetch",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "projects response",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Project"
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/Projects/grant/{grant_id}": {
+            "get": {
+                "description": "Retrieve `Project` objects associated with a particular `Grant`\n",
+                "operationId": "getProjectsByGrantId",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "grant_id",
+                        "in": "path",
+                        "description": "ID of 'User' to fetch",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "projects response",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Project"
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/Projects/created_date": {
+            "get": {
+                "description": "Retrieve `Project` objects created on or later than given date\n",
+                "operationId": "getProjectsByCreatedDateForm",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "created_date",
+                        "in": "formData",
+                        "description": "date of creation",
+                        "required": true,
+                        "type": "string",
+                        "format": "date-time-time"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "projects response",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Project"
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/Projects/created_date/{created_date}": {
+            "get": {
+                "description": "Retrieve `Project` objects created on or later than given date\n",
+                "operationId": "getProjectsByCreatedDate",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "created_date",
+                        "in": "path",
+                        "description": "date of creation",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "projects response",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Project"
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/Projects/modified_date": {
+            "get": {
+                "description": "Retrieve `Project` objects modified on or later than given date\n",
+                "operationId": "getProjectsByModifiedDateForm",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "modified_date",
+                        "in": "formData",
+                        "description": "date modified",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "projects response",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Project"
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/Projects/modified_date/{modified_date}": {
+            "get": {
+                "description": "Retrieve `Project` objects modified on or later than given date\n",
+                "operationId": "getProjectsByModifiedDate",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "modified_date",
+                        "in": "path",
+                        "description": "date modified",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "projects response",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Project"
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/Project": {
+            "post": {
+                "description": "Creates `Project` objects. **project_name**, **project_description**,\n**project_creator_id**, and **is_project_private** are required,\nall others optional.\n",
+                "operationId": "createProject",
+                "produces": [
+                    "application/json"
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "project_name",
+                        "in": "formData",
+                        "required": true,
+                        "type": "string",
+                        "description": "Project's name"
+                    },
+                    {
+                        "name": "project_main_grant_type",
+                        "in": "formData",
+                        "required": false,
+                        "type": "string",
+                        "description": "Project's grant type"
+                    },
+                    {
+                        "name": "project_description",
+                        "in": "formData",
+                        "required": true,
+                        "type": "string",
+                        "description": "Description of project"
+                    },
+                    {
+                        "name": "project_creator_id",
+                        "in": "formData",
+                        "required": true,
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "array of project creator ids"
+                    },
+                    {
+                        "name": "project_collaborators_id",
+                        "in": "formData",
+                        "required": false,
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "array of project collaborator ids"
+                    },
+                    {
+                        "name": "project_keywords",
+                        "in": "formData",
+                        "required": false,
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "array of project keywords"
+                    },
+                    {
+                        "name": "project_urls",
+                        "in": "formData",
+                        "required": false,
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "array of project URLs"
+                    },
+                    {
+                        "name": "grant_id",
+                        "in": "formData",
+                        "required": false,
+                        "type": "string",
+                        "description": "Grant ID"
+                    },
+                    {
+                        "name": "university_id",
+                        "in": "formData",
+                        "required": false,
+                        "type": "string",
+                        "description": "ID of university hosting research"
+                    },
+                    {
+                        "name": "grant_facilitator",
+                        "in": "formData",
+                        "required": false,
+                        "type": "string",
+                        "description": "Name of individual fascilitating grant funding"
+                    },
+                    {
+                        "name": "project_file",
+                        "in": "formData",
+                        "required": false,
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "files for grant"
+                    },
+                    {
+                        "name": "reviews",
+                        "in": "formData",
+                        "required": false,
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "reviews"
+                    },
+                    {
+                        "name": "posts",
+                        "in": "formData",
+                        "required": false,
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "posts related to project"
+                    },
+                    {
+                        "name": "is_project_private",
+                        "in": "formData",
+                        "required": true,
+                        "type": "boolean",
+                        "description": "is project private?"
+                    }
+                ],
+                "tags": [
+                    "User"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The `id` of the created user",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/Project/{id}": {
+            "put": {
+                "description": "Updates a `Project` object. All fields other than `id` optional.\n",
+                "operationId": "updateProject",
+                "produces": [
+                    "application/json"
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "project id"
+                    },
+                    {
+                        "name": "project_name",
+                        "in": "formData",
+                        "required": false,
+                        "type": "string",
+                        "description": "Project's name"
+                    },
+                    {
+                        "name": "project_main_grant_type",
+                        "in": "formData",
+                        "required": false,
+                        "type": "string",
+                        "description": "Project's grant type"
+                    },
+                    {
+                        "name": "project_description",
+                        "in": "formData",
+                        "required": false,
+                        "type": "string",
+                        "description": "Description of project"
+                    },
+                    {
+                        "name": "project_creator_id",
+                        "in": "formData",
+                        "required": false,
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "array of project creator ids"
+                    },
+                    {
+                        "name": "project_collaborators_id",
+                        "in": "formData",
+                        "required": false,
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "array of project collaborator ids"
+                    },
+                    {
+                        "name": "project_keywords",
+                        "in": "formData",
+                        "required": false,
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "array of project keywords"
+                    },
+                    {
+                        "name": "project_urls",
+                        "in": "formData",
+                        "required": false,
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "array of project URLs"
+                    },
+                    {
+                        "name": "grant_id",
+                        "in": "formData",
+                        "required": false,
+                        "type": "string",
+                        "description": "Grant ID"
+                    },
+                    {
+                        "name": "university_id",
+                        "in": "formData",
+                        "required": false,
+                        "type": "string",
+                        "description": "ID of university hosting research"
+                    },
+                    {
+                        "name": "grant_facilitator",
+                        "in": "formData",
+                        "required": false,
+                        "type": "string",
+                        "description": "Name of individual fascilitating grant funding"
+                    },
+                    {
+                        "name": "project_file",
+                        "in": "formData",
+                        "required": false,
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "files for grant"
+                    },
+                    {
+                        "name": "reviews",
+                        "in": "formData",
+                        "required": false,
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "reviews"
+                    },
+                    {
+                        "name": "posts",
+                        "in": "formData",
+                        "required": false,
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "posts related to project"
+                    },
+                    {
+                        "name": "is_project_private",
+                        "in": "formData",
+                        "required": false,
+                        "type": "boolean",
+                        "description": "is project private?"
+                    }
+                ],
+                "tags": [
+                    "User"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The `id` of the updatee `Project`",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "description": "Delete a 'Project' by their id.\n",
+                "operationId": "deleteProjectById",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "the `id` of the `Project` to delete",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The `id` of the deleted `Project`",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            },
+            "get": {
+                "description": "Retrieve a 'Project' by their id.\n",
+                "operationId": "getProjectById",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "the `id` of the `Project` to delete",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The `id` of the deleted `Project`",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/Project/{id}/creators": {
+            "get": {
+                "description": "Get creators of a `Project`.\n",
+                "operationId": "getAllProjectCreators",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The `id` of the `Project` to retrieve",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The `creators` associated with the `Project`",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "description": "Set creators of a `Project`.\n",
+                "operationId": "setAllProjectCreators",
+                "produces": [
+                    "application/json"
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The `id` of the `Project` to retrieve",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "creators",
+                        "in": "formData",
+                        "description": "The `ids` of the creators",
+                        "required": true,
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "collectionFormat": "csv"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The `id` associated with the `Project`",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "description": "Add to creators of a `Project`.\n",
+                "operationId": "addProjectCreators",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The `id` of the `Project` to retrieve",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "creators",
+                        "in": "formData",
+                        "description": "The `ids` of the creators",
+                        "required": true,
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "collectionFormat": "csv"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The `id` associated with the `Project`",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "description": "Remove all 'project_creators' from a `Project`.\n",
+                "operationId": "deleteProjectCreators",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The `id` of the `Project` to retrieve",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The `project_id` associated with the `Project`",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/Project/{id}/creators/{user_id}": {
+            "post": {
+                "description": "Set creator of a `Project`.\n",
+                "operationId": "setProjectCreator",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The `id` of the `Project` to retrieve",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "user_id",
+                        "in": "path",
+                        "description": "The `id` of the creator",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The `id` associated with the `Project`",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "description": "Add to creators of a `Project`.\n",
+                "operationId": "addProjectCreator",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The `id` of the `Project` to retrieve",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "user_id",
+                        "in": "path",
+                        "description": "The `ids` of the creators",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The `id` associated with the `Project`",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "description": "Remove a 'project_creator' from a `Project`.\n",
+                "operationId": "deleteProjectCreator",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The `id` of the `Project` to retrieve",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "user_id",
+                        "in": "path",
+                        "description": "The `ids` of the creators",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The `project_id` associated with the `Project`",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/Project/{id}/collaborators": {
+            "get": {
+                "description": "Get collaborators of a `Project`.\n",
+                "operationId": "getAllProjectCollaborators",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The `id` of the `Project` to retrieve",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The `collaborators` associated with the `Project`",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "description": "Set creators of a `Project`.\n",
+                "operationId": "setAllProjectCollaborators",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The `id` of the `Project` to retrieve",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "collaborators",
+                        "in": "formData",
+                        "description": "The `ids` of the ollaborators",
+                        "required": true,
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "collectionFormat": "csv"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The `id` associated with the `Project`",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "description": "Add to collaborators of a `Project`.\n",
+                "operationId": "addProjectCollaborators",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The `id` of the `Project` to retrieve",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "collaborators",
+                        "in": "formData",
+                        "description": "The `ids` of the collaborators",
+                        "required": true,
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "collectionFormat": "csv"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The `id` associated with the `Project`",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "description": "Remove all 'project_collaborators' from a `Project`.\n",
+                "operationId": "deleteProjectCollaborators",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The `id` of the `Project` to retrieve",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The `project_id` associated with the `Project`",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/Project/{id}/collaborators/{user_id}": {
+            "post": {
+                "description": "Set collaborators of a `Project`.\n",
+                "operationId": "setProjectCollaborators",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The `id` of the `Project` to retrieve",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "user_id",
+                        "in": "path",
+                        "description": "The `id` of the collaborator",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The `id` associated with the `Project`",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "description": "Add to collaborator of a `Project`.\n",
+                "operationId": "addProjectCollaborator",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The `id` of the `Project` to retrieve",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "user_id",
+                        "in": "path",
+                        "description": "The `ids` of the collaborator",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The `id` associated with the `Project`",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "description": "Remove a 'project_collaborator' from a `Project`.\n",
+                "operationId": "deleteProjectCollaborator",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The `id` of the `Project` to retrieve",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "user_id",
+                        "in": "path",
+                        "description": "The `ids` of the collaborator",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The `project_id` associated with the `Project`",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/Project/{id}/urls": {
+            "get": {
+                "description": "Get urls of a `Project`.\n",
+                "operationId": "getAllProjectUrls",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The `id` of the `Project` to retrieve",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The `urls` associated with the `Project`",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "description": "Set urls of a `Project`.\n",
+                "operationId": "setAllProjectUrls",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The `id` of the `Project` to retrieve",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "urls",
+                        "in": "formData",
+                        "description": "The `urls` of the project",
+                        "required": true,
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "collectionFormat": "csv"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The `id` associated with the `Project`",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "description": "Add to urls of a `Project`.\n",
+                "operationId": "addProjectUrls",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The `id` of the `Project` to retrieve",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "urls",
+                        "in": "formData",
+                        "description": "The `urls` of the `Project``",
+                        "required": true,
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "collectionFormat": "csv"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The `id` associated with the `Project`",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "description": "Remove all 'urls' from a `Project`.\n",
+                "operationId": "deleteProjectUrls",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The `id` of the `Project` to retrieve",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The `id` associated with the `Project`",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/Project/{id}/keys": {
+            "get": {
+                "description": "Get keywords of a `Project`.\n",
+                "operationId": "getAllProjectKeywords",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The `id` of the `Project` to retrieve",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The `keywords` associated with the `Project`",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "description": "Set keywords of a `Project`.\n",
+                "operationId": "setAllProjectKeywords",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The `id` of the `Project` to retrieve",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "keywords",
+                        "in": "formData",
+                        "description": "The `keywords` of the `Project``",
+                        "required": true,
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "collectionFormat": "csv"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The `id` associated with the `Project`",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "description": "Add to keywords of a `Project`.\n",
+                "operationId": "addProjectKeywords",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The `id` of the `Project` to retrieve",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "keywords",
+                        "in": "formData",
+                        "description": "The `ids` of the collaborators",
+                        "required": true,
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "collectionFormat": "csv"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The `id` associated with the `Project`",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "description": "Remove all 'keywords' from a `Project`.\n",
+                "operationId": "deleteProjectKeywords",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The `id` of the `Project` to retrieve",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The `project_id` associated with the `Project`",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/Project/{id}/keys/{keyword}": {
+            "post": {
+                "description": "Set keyword of a `Project`.\n",
+                "operationId": "setProjectKeyword",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The `id` of the `Project` to retrieve",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "keyword",
+                        "in": "path",
+                        "description": "The `keyword`",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The `id` associated with the `Project`",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "description": "Add to keyword of a `Project`.\n",
+                "operationId": "addProjectKeyword",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The `id` of the `Project` to retrieve",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "keyword",
+                        "in": "path",
+                        "description": "The keyword",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The `id` associated with the `Project`",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "description": "Remove a 'keyword' from a `Project`.\n",
+                "operationId": "deleteProjectKeyword",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The `id` of the `Project` to retrieve",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "keyword",
+                        "in": "path",
+                        "description": "The keyword",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The `project_id` associated with the `Project`",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/Project/{id}/files": {
+            "get": {
+                "description": "Get files of a `Project`.\n",
+                "operationId": "getAllProjectFiles",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The `id` of the `Project` to retrieve",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The `files` associated with the `Project`",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "description": "Set files of a `Project`.\n",
+                "operationId": "setAllProjectFiles",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The `id` of the `Project` to retrieve",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "files",
+                        "in": "formData",
+                        "description": "The `files` of the project",
+                        "required": true,
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "collectionFormat": "csv"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The `id` associated with the `Project`",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "description": "Add to files of a `Project`.\n",
+                "operationId": "addProjectFiles",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The `id` of the `Project` to retrieve",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "urls",
+                        "in": "formData",
+                        "description": "The `files` of the `Project``",
+                        "required": true,
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "collectionFormat": "csv"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The `id` associated with the `Project`",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "description": "Remove all 'files' from a `Project`.\n",
+                "operationId": "deleteProjectFiles",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The `id` of the `Project` to retrieve",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The `id` associated with the `Project`",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/Project/{id}/reviews": {
+            "get": {
+                "description": "Get reviews of a `Project`.\n",
+                "operationId": "getAllProjectReviews",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The `id` of the `Project` to retrieve",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The `reviews` associated with the `Project`",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Review"
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "description": "Set reviews of a `Project`.\n",
+                "operationId": "setAllProjectReviews",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The `id` of the `Project` to retrieve",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "reviews",
+                        "in": "formData",
+                        "description": "The `ids` of the reviews",
+                        "required": true,
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "collectionFormat": "csv"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The `id` associated with the `Project`",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "description": "Add to reviews of a `Project`.\n",
+                "operationId": "addProjectReviews",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The `id` of the `Project` to retrieve",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "reviews",
+                        "in": "formData",
+                        "description": "The `ids` of the reviews",
+                        "required": true,
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "collectionFormat": "csv"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The `id` associated with the `Project`",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "description": "Remove all 'reviews' from a `Project`.\n",
+                "operationId": "deleteProjectReviews",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The `id` of the `Project` to retrieve",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The `project_id` associated with the `Project`",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/Project/{id}/reviews/{review_id}": {
+            "get": {
+                "description": "Get reviews of a `Project`.\n",
+                "operationId": "getProjectReview",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The `id` of the `Project` to retrieve",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "review_id",
+                        "in": "path",
+                        "description": "The `id` of the review",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The review",
+                        "schema": {
+                            "$ref": "#/definitions/Review"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "description": "Add review to a `Project`.\n",
+                "operationId": "addProjectReview",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The `id` of the `Project` to retrieve",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "review_id",
+                        "in": "path",
+                        "description": "The `id` of the review",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The `project_id` associated with the `Project`",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "description": "Remove a 'review' from a `Project`.\n",
+                "operationId": "deleteProjectReview",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The `id` of the `Project` to retrieve",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "review_id",
+                        "in": "path",
+                        "description": "The `ids` of the review",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The `project_id` associated with the `Project`",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/Project/{id}/posts": {
+            "get": {
+                "description": "Get posts of a `Project`.\n",
+                "operationId": "getAllProjectPosts",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The `id` of the `Project` to retrieve",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The `reviews` associated with the `Project`",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Post"
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "description": "Set posts of a `Project`.\n",
+                "operationId": "setAllProjectPosts",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The `id` of the `Project` to retrieve",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "posts",
+                        "in": "formData",
+                        "description": "The `ids` of the posts",
+                        "required": true,
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "collectionFormat": "csv"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The `id` associated with the `Project`",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "description": "Add to posts of a `Project`.\n",
+                "operationId": "addProjectPosts",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The `id` of the `Project` to retrieve",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "reviews",
+                        "in": "formData",
+                        "description": "The `ids` of the posts",
+                        "required": true,
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "collectionFormat": "csv"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The `id` associated with the `Project`",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "description": "Remove all 'posts' from a `Project`.\n",
+                "operationId": "deleteProjectPosts",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The `id` of the `Project` to retrieve",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The `project_id` associated with the `Project`",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/Project/{id}/posts/{post_id}": {
+            "get": {
+                "description": "Get reviews of a `Project`.\n",
+                "operationId": "getProjectPost",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The `id` of the `Project` to retrieve",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "post_id",
+                        "in": "path",
+                        "description": "The `id` of the post",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The post",
+                        "schema": {
+                            "$ref": "#/definitions/Post"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "description": "Add post to a `Project`.\n",
+                "operationId": "addProjectPost",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The `id` of the `Project` to retrieve",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "post_id",
+                        "in": "path",
+                        "description": "The `id` of the post",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The `project_id` associated with the `Project`",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "description": "Remove a 'post' from a `Project`.\n",
+                "operationId": "deleteProjectPost",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The `id` of the `Project` to retrieve",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "post_id",
+                        "in": "path",
+                        "description": "The `ids` of the post",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The `project_id` associated with the `Project`",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/Project/{id}/project_name": {
+            "get": {
+                "description": "Retrieve project_name associated with a `Project`.\n",
+                "operationId": "getProjectNameById",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The `id` of the `Project` to retrieve",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The project_name",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "description": "Delete project_name from a project\n",
+                "operationId": "deleteUserProjectName",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The `id` of the `Project` to retrieve",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The `project_name` associated with the `Project`",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/Project/{id}/name/{project_name}": {
+            "post": {
+                "description": "Add project_name to a `Project`.\n",
+                "operationId": "addProjectName",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The `id` of the `Project` to retrieve",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "project_name",
+                        "in": "path",
+                        "description": "The project_name",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The id associated with the `Project`",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "description": "Modify project_name of a `Project`.\n",
+                "operationId": "modifyProjectName",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The `id` of the `Project` to retrieve",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "project_name",
+                        "in": "path",
+                        "description": "The project_name",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The id associated with the `Project`",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/Project/{id}/grant_type": {
+            "get": {
+                "description": "Retrieve project_main_grant_type associated with a `Project`.\n",
+                "operationId": "getProjectGrantTypeById",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The `id` of the `Project` to retrieve",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The project_main_grant_type",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "description": "Delete project_main_grant_type from a project\n",
+                "operationId": "deleteProjectGrantType",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The `id` of the `Project` to retrieve",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The `project_main_grant_type` associated with the `Project`",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/Project/{id}/grant_type/{project_main_grant_type}": {
+            "post": {
+                "description": "Add project_name to a `Project`.\n",
+                "operationId": "setProjectGrantType",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The `id` of the `Project` to retrieve",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "project_main_grant_type",
+                        "in": "path",
+                        "description": "The project_main_grant_type",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The id associated with the `Project`",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "description": "Modify project_name of a `Project`.\n",
+                "operationId": "modifyProjectGrantType",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The `id` of the `Project` to retrieve",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "project_main_grant_type",
+                        "in": "path",
+                        "description": "The project_main_grant_type",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The id associated with the `Project`",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/Project/{id}/description": {
+            "get": {
+                "description": "Retrieve project_description associated with a `Project`.\n",
+                "operationId": "getProjectDescriptionById",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The `id` of the `Project` to retrieve",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The project_description",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "description": "Delete project_description from a project\n",
+                "operationId": "deleteProjectDescription",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The `id` of the `Project` to retrieve",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The `project_description` associated with the `Project`",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/Project/{id}/description/{project_description}": {
+            "post": {
+                "description": "Add project_description to a `Project`.\n",
+                "operationId": "setProjectDescription",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The `id` of the `Project` to retrieve",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "project_description",
+                        "in": "path",
+                        "description": "The project_description",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The id associated with the `Project`",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "description": "Modify project_description of a `Project`.\n",
+                "operationId": "modifyProjectDescription",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The `id` of the `Project` to retrieve",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "project_description",
+                        "in": "path",
+                        "description": "The project_description",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The id associated with the `Project`",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/Project/{id}/grant": {
+            "get": {
+                "description": "Retrieve grant associated with a `Project`.\n",
+                "operationId": "getProjectGrantById",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The `id` of the `Project` to retrieve",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The grant",
+                        "schema": {
+                            "$ref": "#/definitions/Grant"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "description": "Delete grant from a project\n",
+                "operationId": "deleteProjectGrant",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The `id` of the `Project` to retrieve",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The `grant` associated with the `Project`",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/Project/{id}/grant/{grant_id}": {
+            "post": {
+                "description": "Add grant to a `Project`.\n",
+                "operationId": "setProjectGrant",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The `id` of the `Project` to retrieve",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "grant_id",
+                        "in": "path",
+                        "description": "The grant_id",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The id associated with the `Project`",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "description": "Modify grant of a `Project`.\n",
+                "operationId": "modifyProjectGrant",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The `id` of the `Project` to retrieve",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "grant_id",
+                        "in": "path",
+                        "description": "The grant_id",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The id associated with the `Project`",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/Project/{id}/uni": {
+            "get": {
+                "description": "Retrieve universities associated with a `Project`.\n",
+                "operationId": "getUniversitiesById",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The `id` of the `Project` to retrieve",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The grant",
+                        "schema": {
+                            "$ref": "#/definitions/University"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "description": "Delete all universities from a project\n",
+                "operationId": "deleteProjecUniversities",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The `id` of the `Project` to retrieve",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The `id` associated with the `Project`",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/Project/{id}/uni/{university_id}": {
+            "post": {
+                "description": "Set university_id to a `Project`.\n",
+                "operationId": "setProjectUniversity",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The `id` of the `Project` to retrieve",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "university_id",
+                        "in": "path",
+                        "description": "The university_id",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The id associated with the `Project`",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "description": "Modify university_id of a `Project`.\n",
+                "operationId": "modifyProjectUniversity",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The `id` of the `Project` to retrieve",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "university_id",
+                        "in": "path",
+                        "description": "The university_id",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The id associated with the `Project`",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/Project/{id}/private": {
+            "get": {
+                "description": "Retrieve is_private from a  `Project`.\n",
+                "operationId": "isProjectPrivate",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The `id` of the `Project` to retrieve",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The boolean",
+                        "schema": {
+                            "type": "boolean"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "description": "Set is_private from a  `Project`.\n",
+                "operationId": "setIsProjectPrivate",
+                "produces": [
+                    "application/json"
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The `id` of the `Project` to retrieve",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "is_private",
+                        "in": "formData",
+                        "description": "is project private?",
+                        "required": true,
+                        "type": "boolean"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The boolean",
+                        "schema": {
+                            "type": "boolean"
                         }
                     },
                     "default": {
@@ -622,12 +5588,12 @@
                     },
                     "description": "array of user_ids of recent collaborators"
                 },
-                "universities": {
+                "university_ids": {
                     "type": "array",
                     "items": {
                         "type": "string"
                     },
-                    "description": "array of universities the user has attended/worked with (clarification needed)"
+                    "description": "array of universities the user is associated with"
                 },
                 "project_ids": {
                     "type": "array",
@@ -743,9 +5709,9 @@
                     "type": "string",
                     "description": "Grant ID"
                 },
-                "university": {
+                "university_id": {
                     "type": "string",
-                    "description": "Name of university hosting research"
+                    "description": "ID of university hosting research"
                 },
                 "grant_facilitator": {
                     "type": "string",
@@ -1030,7 +5996,7 @@
                     "format": "date-time",
                     "description": "datetime stamp of skill update"
                 },
-                "review_body": {
+                "description": {
                     "type": "string",
                     "description": "text body of skill"
                 },
@@ -1040,15 +6006,6 @@
                         "type": "string"
                     },
                     "description": "ids of users who have endorsed the user for this skill"
-                },
-                "reviewer_id": {
-                    "type": "string",
-                    "description": "reviewer user id"
-                },
-                "rating": {
-                    "type": "integer",
-                    "format": "int32",
-                    "description": "rating, must be 1-5"
                 }
             }
         },
@@ -1074,6 +6031,85 @@
                     "type": "array",
                     "items": {
                         "$ref": "#/definitions/Skill"
+                    }
+                }
+            }
+        },
+        "University": {
+            "type": "object",
+            "properties": {
+                "uni_id": {
+                    "type": "string",
+                    "description": "id of `University`"
+                },
+                "created_date": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "datetime stamp of `University` creation"
+                },
+                "updated_date": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "datetime stamp of `University` update"
+                },
+                "university_name": {
+                    "type": "string",
+                    "description": "text body of `University`"
+                },
+                "profile_images": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "Array of file system paths to profile images"
+                },
+                "geolocation": {
+                    "type": "array",
+                    "items": {
+                        "type": "number",
+                        "format": "double"
+                    },
+                    "description": "Tuple representing latitude/longitude of user"
+                },
+                "city": {
+                    "type": "string",
+                    "description": "City of `University` location"
+                },
+                "state": {
+                    "type": "string",
+                    "description": "State of `University` location"
+                },
+                "project_ids": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "ids of `Project`s based at this `University`"
+                }
+            }
+        },
+        "Universities": {
+            "type": "object",
+            "properties": {
+                "offset": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "Position in pagination."
+                },
+                "limit": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "Number of items to retrieve (100 max)."
+                },
+                "count": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "Total number of items available."
+                },
+                "history": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/University"
                     }
                 }
             }

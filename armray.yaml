@@ -21,6 +21,8 @@ basePath: /armray/api/0.1/rest
 #I'm assumping we'll be returning json for all the calls
 produces:
   - application/json
+consumes:
+  - application/json
 #####
 ##So do we want endpoints for every property on an object? i.e. for project, should urls, leywords, creators, collabs, univ, etc., all have their own endpoints?
 ####
@@ -187,7 +189,7 @@ paths:
           required: false
           type: string
         -
-          name: created_date
+          name: modified_date
           in: formData
           description: date the user was modified
           required: false
@@ -217,50 +219,52 @@ paths:
           schema:
             $ref: '#/definitions/Error'
   /Users/uni/{university_id}:
-    get:
-      description: |
-        Retrieve `User` objects at a particular `University`
-      operationId: getUsersByUniversityId
-      produces:
-        - application/json
-      parameters:
-        -
-          name: university_id
-          in: path
-          description: ID of 'User' to fetch
-          required: true
-          type: string
-        -
-          name: max
-          in: formData
-          description: max num of 'User' to fetch
-          required: true
-          type: number
-          format: int32
-        -
-          name: page
-          in: formData
-          description: page in pagination
-          required: true
-          type: number
-          format: int32
-      responses:
-        '200':
-          description: users response
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/User'
-        default:
-          description: Unexpected error
-          schema:
-            $ref: '#/definitions/Error'
+      get:
+        description: |
+          Retrieve `User` objects at a particular `University`
+        operationId: getUsersByUniversityId
+        produces:
+          - application/json
+        parameters:
+          -
+            name: university_id
+            in: path
+            description: ID of 'User' to fetch
+            required: true
+            type: string
+          -
+            name: max
+            in: formData
+            description: max num of 'User' to fetch
+            required: true
+            type: number
+            format: int32
+          -
+            name: page
+            in: formData
+            description: page in pagination
+            required: true
+            type: number
+            format: int32
+        responses:
+          '200':
+            description: users response
+            schema:
+              type: array
+              items:
+                $ref: '#/definitions/User'
+          default:
+            description: Unexpected error
+            schema:
+              $ref: '#/definitions/Error'  
   /Users/projects/{project_id}:
     get:
       description: |
         Retrieve `User` objects on a particular `Project`
       operationId: getUsersByProjectId
       produces:
+        - application/json
+      consumes:
         - application/json
       parameters:
         -
@@ -295,55 +299,58 @@ paths:
           schema:
             $ref: '#/definitions/Error'
   /Users/created/{created_date}:
-    get:
-      description: |
-        Retrieve `User` objects created on or after the given date
-      operationId: getUsersByCreatedDate
-      produces:
-        - application/json
-      parameters:
-        -
-          name: created_date
-          in: url
-          description: Date that `User` object was created
-          required: true
-          type: string
-      responses:
-        '200':
-          description: users response
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/User'
-        default:
-          description: Unexpected error
-          schema:
-            $ref: '#/definitions/Error'
+      get:
+        description: |
+          Retrieve `User` objects created on or after the given date
+        operationId: getUsersByCreatedDate
+        produces:
+          - application/json
+        parameters:
+          -
+            name: created_date
+            in: path
+            description: Date that `User` object was created
+            required: true
+            type: string
+        responses:
+          '200':
+            description: users response
+            schema:
+              type: array
+              items:
+                $ref: '#/definitions/User'
+          default:
+            description: Unexpected error
+            schema:
+              $ref: '#/definitions/Error'            
   /Users/created:
-    get:
-      description: |
-        Retrieve `User` objects created on or after the given date
-      operationId: getUsersByCreatedDateForm
-      produces:
-        - application/json
-      parameters:
-        -
-          name: created_date
-          in: formData
-          description: Date that `User` object was created
-          required: true
-          type: date-time
-      responses:
-        '200':
-          description: users response
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/User'
-        default:
-          description: Unexpected error
-          schema:
-            $ref: '#/definitions/Error'
+      get:
+        description: |
+          Retrieve `User` objects created on or after the given date2
+        operationId: getUsersByCreatedDateForm
+        produces:
+          - application/json
+        consumes:
+          - application/json
+        parameters:
+          -
+            name: created_date
+            in: formData
+            description: Date that `User` object was created
+            required: true
+            type: string
+            format: date-time
+        responses:
+          '200':
+            description: users response
+            schema:
+              type: array
+              items:
+                $ref: '#/definitions/User'
+          default:
+            description: Unexpected error
+            schema:
+              $ref: '#/definitions/Error'
   /Users/modified/{modified_date}:
     get:
       description: |
@@ -354,7 +361,7 @@ paths:
       parameters:
         -
           name: modified_date
-          in: url
+          in: path
           description: Date that `User` object was modified
           required: true
           type: string
@@ -382,7 +389,8 @@ paths:
           in: formData
           description: Date that `User` object was modified
           required: true
-          type: date-time
+          type: string
+          format: date-time
       responses:
         '200':
           description: users response
@@ -393,13 +401,15 @@ paths:
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/Error'
+            $ref: '#/definitions/Error'              
   /Users/keys:
     get:
       description: |
         Retrieve `User` objects based on keywords
       operationId: getUsersByKeywords
       produces:
+        - application/json
+      consumes:
         - application/json
       parameters:
         -
@@ -422,7 +432,7 @@ paths:
           description: Unexpected error
           schema:
             $ref: '#/definitions/Error'
-##/User routes
+  ##/User routes
   /User:
     post:
       description: |
@@ -433,7 +443,7 @@ paths:
         - application/json
       consumes:
         - application/json
-
+  
       # This is array of GET operation parameters:
       parameters:
         # An example parameter that is in query and is required
@@ -639,7 +649,7 @@ paths:
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/Error'
+            $ref: '#/definitions/Error'            
   /User/{id}/uni/{university_id}:
     get:
       description: |
@@ -726,7 +736,8 @@ paths:
           schema:
             $ref: '#/definitions/Error'
       #not going to add a PUT to modify a project, that should be done directly on the Project paths
-      #redundant paths are bad
+      #redundant paths are bad            
+
   /User/{id}/project:
     get:
       description: |
@@ -831,7 +842,7 @@ paths:
             $ref: '#/definitions/Error'
     delete:
       description: |
-        Remove a 'Project' fromo a `User`.
+        Remove a 'Project' from a `User`.
       operationId: deleteUserProjectById
       produces:
         - application/json
@@ -872,7 +883,7 @@ paths:
           required: true
           type: string
       responses:
-        200:
+        '200':
           description: An array of reviews
           schema:
             type: array
@@ -963,7 +974,7 @@ paths:
             $ref: '#/definitions/Error'
     delete:
       description: |
-        Remove a 'Review' fromo a `User`.
+        Remove a 'Review' from a `User`.
       operationId: deleteUserReviewById
       produces:
         - application/json
@@ -1018,6 +1029,8 @@ paths:
         Add images to a `User`.
       operationId: setUserImages
       produces:
+        - application/json
+      consumes:
         - application/json
       parameters:
         -
@@ -1092,12 +1105,12 @@ paths:
           required: true
           type: string
       responses:
-      200:
-        description: An array of keywords
-        schema:
-          type: array
-          items:
-            type: string
+        '200':
+          description: An array of keywords
+          schema:
+            type: array
+            items:
+              type: string
         default:
           description: Unexpected error
           schema:
@@ -1228,12 +1241,12 @@ paths:
           required: true
           type: string
       responses:
-      200:
-        description: An array of keywords
-        schema:
-          type: array
-          items:
-            type: string
+        '200':
+          description: An array of keywords
+          schema:
+            type: array
+            items:
+              type: string
         default:
           description: Unexpected error
           schema:
@@ -1332,12 +1345,12 @@ paths:
           required: true
           type: string
       responses:
-      200:
-        description: An array of keywords
-        schema:
-          type: array
-          items:
-            type: string
+        '200':
+          description: An array of keywords
+          schema:
+            type: array
+            items:
+              type: string
         default:
           description: Unexpected error
           schema:
@@ -1368,7 +1381,7 @@ paths:
     post:
       description: |
         Add last name to a `User`.
-      operationId: addUserFirstName
+      operationId: addUserLastName
       produces:
         - application/json
       parameters:
@@ -1396,7 +1409,7 @@ paths:
     put:
       description: |
         Modify last name of a `User`.
-      operationId: modifyUserFirstName
+      operationId: modifyUserLastName
       produces:
         - application/json
       parameters:
@@ -1436,10 +1449,10 @@ paths:
           required: true
           type: string
       responses:
-      200:
-        description: An array of keywords
-        schema:
-          type: boolean
+        '200':
+          description: An array of keywords
+          schema:
+            type: boolean
         default:
           description: Unexpected error
           schema:
@@ -1519,10 +1532,10 @@ paths:
           required: true
           type: string
       responses:
-      200:
-        description: An array of keywords
-        schema:
-          type: boolean
+        '200':
+          description: An array of keywords
+          schema:
+            type: boolean
         default:
           description: Unexpected error
           schema:
@@ -1602,10 +1615,10 @@ paths:
           required: true
           type: string
       responses:
-      200:
-        description: The city
-        schema:
-          type: string
+        '200':
+          description: The city
+          schema:
+            type: string
         default:
           description: Unexpected error
           schema:
@@ -1704,10 +1717,10 @@ paths:
           required: true
           type: string
       responses:
-      200:
-        description: The state
-        schema:
-          type: string
+        '200':
+          description: The state
+          schema:
+            type: string
         default:
           description: Unexpected error
           schema:
@@ -1806,10 +1819,10 @@ paths:
           required: true
           type: string
       responses:
-      200:
-        description: The date
-        schema:
-          type: string
+        '200':
+          description: The date
+          schema:
+            type: string
         default:
           description: Unexpected error
           schema:
@@ -1829,23 +1842,23 @@ paths:
           required: true
           type: string
       responses:
-      200:
-        description: The date
-        schema:
-          type: string
+        '200':
+          description: The date
+          schema:
+            type: string
         default:
           description: Unexpected error
           schema:
             $ref: '#/definitions/Error'
-
-
-
+  
+  
+  
       #not going to add a PUT to modify a project, that should be done directly on the Project paths
       #redundant paths are bad
       ######################################
       ###############Projects###############
       ######################################
-
+  
       #Projects searches, basically
       #/Projects
             #/Projects/creator/{user_id}
@@ -1862,7 +1875,7 @@ paths:
             #get use formdata ?
             #/Projects/modified
             #get use formdata
-
+  
             #/Project
             # get, put, post, delete
             #/Project/{id}
@@ -1874,15 +1887,15 @@ paths:
             # get put
             #/Project/{id}/creator/{user_id}
             # get put
-
+  
             #/Project/{id}/urls
             # get put, url needs to be in formbody or in url query I guess?
-
+  
             #/Project/collaborators/
             # get put post delete
             #/Project/collaborators/{user_id}
             # get put post delete
-
+  
             #keywords
             #/Project/{id}/keys
             # get put post delete, either formBody or urlQuery
@@ -1894,12 +1907,12 @@ paths:
             #reviews
             #/Project/{id}/reviews/{review_id}
             # get put post delete
-
+  
             #posts
             #/Project/{id}/posts/{post_id}
             # get put post delete
-
-
+  
+  
             #other fields
             #/Project/{id}/project_name
             # get put
@@ -1913,9 +1926,9 @@ paths:
             # get put post delete
             #/Project/{id}/private
             # get put
-
-
-
+  
+  
+  
       ######################################
       ################Posts#################
       ######################################
@@ -1939,9 +1952,9 @@ paths:
       #get delete
       #/Post/{id}/private
       #get put
-
+  
       #searches
-
+  
       #/Posts/author/{user_id}
       #get
       #/Posts/tags/{user_id}
@@ -1950,13 +1963,13 @@ paths:
       #get
       #/Posts/keys
       #get (multiple keywords, either formData or url query)
-
+  
       #/Posts/created
       #get, use formdata so we can just pass json I think
       #Posts/modified
       #get, use formdata so we can just pass json I think
-
-
+  
+  
   /Projects:
     # This is a HTTP operation
     get:
@@ -1966,7 +1979,7 @@ paths:
         Required query param of **size** determines
         max number of results per page, and **page** determines
         which page in the pagination we are. Remaining params optional.
-      operationId: getUsers
+      operationId: getProjects
       produces:
         - application/json
       consumes:
@@ -2110,7 +2123,7 @@ paths:
       # Expected responses for this operation:
       responses:
         # Response code
-        200:
+        '200':
           description: An array of projects
           schema:
             type: array
@@ -2120,9 +2133,10 @@ paths:
           description: Unexpected error
           schema:
             $ref: '#/definitions/Error'
-
-
-
+  
+  
+  
+  
       ######################################
       ##############Definitions#############
       ######################################
@@ -2258,7 +2272,7 @@ paths:
     get:
       description: |
         Retrieve `Project` objects created on or later than given date
-      operationId: getProjectsByCreatedDate
+      operationId: getProjectsByCreatedDateForm
       produces:
         - application/json
       parameters:
@@ -2267,7 +2281,8 @@ paths:
           in: formData
           description: date of creation
           required: true
-          type: date-time
+          type: string
+          format: date-time-time
       responses:
         '200':
           description: projects response
@@ -2308,7 +2323,7 @@ paths:
     get:
       description: |
         Retrieve `Project` objects modified on or later than given date
-      operationId: getProjectsByModifiedDate
+      operationId: getProjectsByModifiedDateForm
       produces:
         - application/json
       parameters:
@@ -2368,7 +2383,7 @@ paths:
               #get use formdata ?
               #/Projects/modified
               #get use formdata
-
+  
   /Project:
     post:
       description: |
@@ -2484,7 +2499,7 @@ paths:
       # Expected responses for this operation:
       responses:
         # Response code
-        200:
+        '200':
           description: The `id` of the created user
           schema:
             type: string
@@ -2613,7 +2628,7 @@ paths:
       # Expected responses for this operation:
       responses:
         # Response code
-        200:
+        '200':
           description: The `id` of the updatee `Project`
           schema:
             type: string
@@ -2696,6 +2711,8 @@ paths:
       operationId: setAllProjectCreators
       produces:
         - application/json
+      consumes:
+        - application/json
       parameters:
         -
           name: id
@@ -2712,6 +2729,15 @@ paths:
           items:
             type: string
           collectionFormat: csv
+      responses:
+        '200':
+          description: The `id` associated with the `Project`
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
     put:
       description: |
         Add to creators of a `Project`.
@@ -2745,7 +2771,7 @@ paths:
             $ref: '#/definitions/Error'
     delete:
       description: |
-        Remove all 'project_creators' fromo a `Project`.
+        Remove all 'project_creators' from a `Project`.
       operationId: deleteProjectCreators
       produces:
         - application/json
@@ -2785,6 +2811,15 @@ paths:
           description: The `id` of the creator
           required: true
           type: string
+      responses:
+        '200':
+          description: The `id` associated with the `Project`
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
     put:
       description: |
         Add to creators of a `Project`.
@@ -2815,7 +2850,7 @@ paths:
             $ref: '#/definitions/Error'
     delete:
       description: |
-        Remove a 'project_creator' fromo a `Project`.
+        Remove a 'project_creator' from a `Project`.
       operationId: deleteProjectCreator
       produces:
         - application/json
@@ -2930,7 +2965,7 @@ paths:
             $ref: '#/definitions/Error'
     delete:
       description: |
-        Remove all 'project_collaborators' fromo a `Project`.
+        Remove all 'project_collaborators' from a `Project`.
       operationId: deleteProjectCollaborators
       produces:
         - application/json
@@ -2970,6 +3005,15 @@ paths:
           description: The `id` of the collaborator
           required: true
           type: string
+      responses:
+        '200':
+          description: The `id` associated with the `Project`
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
     put:
       description: |
         Add to collaborator of a `Project`.
@@ -3000,7 +3044,7 @@ paths:
             $ref: '#/definitions/Error'
     delete:
       description: |
-        Remove a 'project_collaborator' fromo a `Project`.
+        Remove a 'project_collaborator' from a `Project`.
       operationId: deleteProjectCollaborator
       produces:
         - application/json
@@ -3115,7 +3159,7 @@ paths:
             $ref: '#/definitions/Error'
     delete:
       description: |
-        Remove all 'urls' fromo a `Project`.
+        Remove all 'urls' from a `Project`.
       operationId: deleteProjectUrls
       produces:
         - application/json
@@ -3224,7 +3268,7 @@ paths:
             $ref: '#/definitions/Error'
     delete:
       description: |
-        Remove all 'keywords' fromo a `Project`.
+        Remove all 'keywords' from a `Project`.
       operationId: deleteProjectKeywords
       produces:
         - application/json
@@ -3418,7 +3462,7 @@ paths:
             $ref: '#/definitions/Error'
     delete:
       description: |
-        Remove all 'files' fromo a `Project`.
+        Remove all 'files' from a `Project`.
       operationId: deleteProjectFiles
       produces:
         - application/json
@@ -3527,7 +3571,7 @@ paths:
             $ref: '#/definitions/Error'
     delete:
       description: |
-        Remove all 'reviews' fromo a `Project`.
+        Remove all 'reviews' from a `Project`.
       operationId: deleteProjectReviews
       produces:
         - application/json
@@ -3606,7 +3650,7 @@ paths:
             $ref: '#/definitions/Error'
     delete:
       description: |
-        Remove a 'review' fromo a `Project`.
+        Remove a 'review' from a `Project`.
       operationId: deleteProjectReview
       produces:
         - application/json
@@ -3721,7 +3765,7 @@ paths:
             $ref: '#/definitions/Error'
     delete:
       description: |
-        Remove all 'posts' fromo a `Project`.
+        Remove all 'posts' from a `Project`.
       operationId: deleteProjectPosts
       produces:
         - application/json
@@ -3800,8 +3844,8 @@ paths:
             $ref: '#/definitions/Error'
     delete:
       description: |
-        Remove a 'review' fromo a `Project`.
-      operationId: deleteProjectReview
+        Remove a 'post' from a `Project`.
+      operationId: deleteProjectPost
       produces:
         - application/json
       parameters:
@@ -3826,7 +3870,6 @@ paths:
           description: Unexpected error
           schema:
             $ref: '#/definitions/Error'
-
   /Project/{id}/project_name:
     get:
       description: |
@@ -3842,10 +3885,10 @@ paths:
           required: true
           type: string
       responses:
-      200:
-        description: The project_name
-        schema:
-          type: string
+        '200':
+          description: The project_name
+          schema:
+            type: string
         default:
           description: Unexpected error
           schema:
@@ -3929,7 +3972,6 @@ paths:
           description: Unexpected error
           schema:
             $ref: '#/definitions/Error'
-
   /Project/{id}/grant_type:
     get:
       description: |
@@ -3945,10 +3987,10 @@ paths:
           required: true
           type: string
       responses:
-      200:
-        description: The project_main_grant_type
-        schema:
-          type: string
+        '200':
+          description: The project_main_grant_type
+          schema:
+            type: string
         default:
           description: Unexpected error
           schema:
@@ -4032,7 +4074,6 @@ paths:
           description: Unexpected error
           schema:
             $ref: '#/definitions/Error'
-
   /Project/{id}/description:
     get:
       description: |
@@ -4048,10 +4089,10 @@ paths:
           required: true
           type: string
       responses:
-      200:
-        description: The project_description
-        schema:
-          type: string
+        '200':
+          description: The project_description
+          schema:
+            type: string
         default:
           description: Unexpected error
           schema:
@@ -4135,7 +4176,6 @@ paths:
           description: Unexpected error
           schema:
             $ref: '#/definitions/Error'
-
   /Project/{id}/grant:
     get:
       description: |
@@ -4151,10 +4191,10 @@ paths:
           required: true
           type: string
       responses:
-      200:
-        description: The grant
-        schema:
-          $ref: '#/definitions/Grant'
+        '200':
+          description: The grant
+          schema:
+            $ref: '#/definitions/Grant'
         default:
           description: Unexpected error
           schema:
@@ -4238,7 +4278,6 @@ paths:
           description: Unexpected error
           schema:
             $ref: '#/definitions/Error'
-
   /Project/{id}/uni:
     get:
       description: |
@@ -4254,10 +4293,10 @@ paths:
           required: true
           type: string
       responses:
-      200:
-        description: The grant
-        schema:
-          $ref: '#/definitions/University'
+        '200':
+          description: The grant
+          schema:
+            $ref: '#/definitions/University'
         default:
           description: Unexpected error
           schema:
@@ -4341,7 +4380,6 @@ paths:
           description: Unexpected error
           schema:
             $ref: '#/definitions/Error'
-
   /Project/{id}/private:
     get:
       description: |
@@ -4357,9 +4395,10 @@ paths:
           required: true
           type: string
       responses:
-      200:
-        description: The boolean
-        type: boolean
+        '200':
+          description: The boolean
+          schema:
+            type: boolean
         default:
           description: Unexpected error
           schema:
@@ -4369,6 +4408,8 @@ paths:
         Set is_private from a  `Project`.
       operationId: setIsProjectPrivate
       produces:
+        - application/json
+      consumes:
         - application/json
       parameters:
         -
@@ -4384,151 +4425,14 @@ paths:
           required: true
           type: boolean
       responses:
-      200:
-        description: The boolean
-        type: boolean
+        '200':
+          description: The boolean
+          schema:
+            type: boolean
         default:
           description: Unexpected error
           schema:
             $ref: '#/definitions/Error'
-
-
-
-
-
-
-      ######################################
-      ################Grants################
-      ######################################
-
-      #/Grant
-      #get put post delete
-      #/Grant/{id}
-      #get put delete
-      #/Grant/{id}/description
-      #get put
-      #/Grant/{id}/amount
-      #get put
-      #/Grant/{id}/created
-      #get
-      #/Grant/{id}/modified
-      #get
-      #/Grant/{id}/url
-      #get put
-
-      #/Grants/created
-      #get
-      #/Grants/modified
-      #get
-      #/Grants/amount
-      #get
-      #/Grants/keys
-      #get
-
-
-
-      ######################################
-      ###############Reviews################
-      ######################################
-
-      #/Review
-      #get put post delete
-      #/Review/{id}
-      #get put delete
-      #/Review/{id}/body
-      #get put
-      #/Review/{id}/reviewer
-      #get put
-      #/Review/{id}/rating
-      #get put
-      #/Review/{id}/modified
-      #get
-      #/Review/{id}/url
-      #get put
-
-      #/Reviews/created
-      #get
-      #/Reviews/modified
-      #get
-      #/Reviews/rating
-      #get
-      #/Reviews/reviewer/{id}
-      #get
-      #/Reviews/keys
-      #get
-
-
-      ######################################
-      ################Skills################
-      ######################################
-
-      #/Skill
-      #get put post delete
-      #/Skill/{id}
-      #get put delete
-      #/Skill/{id}/body
-      #get put
-      #/Skill/{id}/endorsements/
-      #get put post delete
-      #/Skill/{id}/endorsements/{user_id}
-      #put post delete (get serves no purpose here since this is literally just a list of people who say yup he can do this)
-      #/Skill/{id}/modified
-      #get
-      #/Skill/{id}/url
-      #get put
-
-      #/Skills/created
-      #get
-      #/Skills/modified
-      #get
-      #/Skills/endorsements/{id}
-      #get
-      #/Skills/keys
-      #get      #keyword search
-
-      ######################################
-      #############Universities#############
-      ######################################
-      #/University
-      #get put post delete
-      #/University/{id}
-      #get put delete
-      #/University/{id}/projects
-      #get post put delete
-      #/University/{id}/projects/{project_id}
-      #get post put delete
-      #/University/{id}/geolocation
-      #get put
-
-      #/University/{id}/endorsements/
-      #get put post delete
-      #/University/{id}/endorsements/{user_id}
-      #put post delete (get serves no purpose here since this is literally just a list of people who say yup he can do this)
-      #/University/{id}/created
-      #get
-      #/University/{id}/modified
-      #get
-      #/University/{id}/url
-      #get put
-
-      #/University/{id}/url
-      #get put post delete
-
-      #/University/{id}/users/
-      #get (get associated users, this will actuall be a query of user objects)
-
-      #/University/{id}/grants/
-      #get (get associated grants, this will actuall be a query of grant objects)
-
-      #/Universities/created
-      #get
-      #/Universities/modified
-      #get
-      #/Universities/endorsements/{id}
-      #get
-      #/Universities/keys
-      #get      #keyword search
-
 
 definitions:
   User:
