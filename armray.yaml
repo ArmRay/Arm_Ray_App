@@ -6925,114 +6925,6 @@ paths:
           description: Unexpected error
           schema:
             $ref: '#/definitions/Error'    
-
-
-
-
-
-
-
-        ######################################
-        ###############Reviews################
-        ######################################
-
-        #/Review
-        #get put post delete
-        #/Review/{id}
-        #get put delete
-        #/Review/{id}/body
-        #get put
-        #/Review/{id}/reviewer
-        #get put
-        #/Review/{id}/rating
-        #get put
-        #/Review/{id}/modified
-        #get
-        #/Review/{id}/url
-        #get put
-
-        #/Reviews/created
-        #get
-        #/Reviews/modified
-        #get
-        #/Reviews/rating
-        #get
-        #/Reviews/reviewer/{id}
-        #get
-        #/Reviews/keys
-        #get
-
-
-        ######################################
-        ################Skills################
-        ######################################
-
-        #/Skill
-        #get put post delete
-        #/Skill/{id}
-        #get put delete
-        #/Skill/{id}/body
-        #get put
-        #/Skill/{id}/endorsements/
-        #get put post delete
-        #/Skill/{id}/endorsements/{user_id}
-        #put post delete (get serves no purpose here since this is literally just a list of people who say yup he can do this)
-        #/Skill/{id}/modified
-        #get
-        #/Skill/{id}/url
-        #get put
-
-        #/Skills/created
-        #get
-        #/Skills/modified
-        #get
-        #/Skills/endorsements/{id}
-        #get
-        #/Skills/keys
-        #get      #keyword search
-
-        ######################################
-        #############Universities#############
-        ######################################
-        #/University
-        #get put post delete
-        #/University/{id}
-        #get put delete
-        #/University/{id}/projects
-        #get post put delete
-        #/University/{id}/projects/{project_id}
-        #get post put delete
-        #/University/{id}/geolocation
-        #get put
-
-        #/University/{id}/endorsements/
-        #get put post delete
-        #/University/{id}/endorsements/{user_id}
-        #put post delete (get serves no purpose here since this is literally just a list of people who say yup he can do this)
-        #/University/{id}/created
-        #get
-        #/University/{id}/modified
-        #get
-        #/University/{id}/url
-        #get put
-
-        #/University/{id}/url
-        #get put post delete
-
-        #/University/{id}/users/
-        #get (get associated users, this will actuall be a query of user objects)
-
-        #/University/{id}/grants/
-        #get (get associated grants, this will actuall be a query of grant objects)
-
-        #/Universities/created
-        #get
-        #/Universities/modified
-        #get
-        #/Universities/endorsements/{id}
-        #get
-        #/Universities/keys
-        #get      #keyword search            
   /Grants/amount:
     get:
       tags:
@@ -7172,7 +7064,6 @@ paths:
           description: Unexpected error
           schema:
             $ref: '#/definitions/Error'    
-  
   /Grant/{id}:
     get:
       tags:
@@ -7777,7 +7668,1356 @@ paths:
           description: Unexpected error
           schema:
             $ref: '#/definitions/Error'   
-  
+  /Grant/{id}/keys:
+    get:
+      tags:
+          - Grant
+      description: |
+        Retrieves `Grant` keywords
+      operationId: getGrantKeywords
+      produces:
+        -	application/json
+      parameters:
+      -
+        name: id
+        in: path
+        required: true
+        type: string
+        description: The `Grant` keywords
+      responses:
+        # Response code
+        '200':
+          description: The `Grant` keywords
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'           
+    put:
+      tags:
+          - Grant
+      description: |
+        Modify `Grant` keywords
+      operationId: addGrantKeywords
+      produces:
+        -	application/json
+      parameters:
+      -
+        name: id
+        in: path
+        required: true
+        type: string
+        description: The `Grant` name
+      -
+        name: keywords
+        in: formData
+        required: true
+        type: array
+        items: 
+          type: string
+        description: the `Grant` keywords
+      responses:
+        # Response code
+        '200':
+          description: The `Grant` id
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'                
+    post:
+      tags:
+          - Grant
+      description: |
+        Set `Grant` keywords
+      operationId: setGrantKeywords
+      produces:
+        -	application/json
+      parameters:
+      -
+        name: id
+        in: path
+        required: true
+        type: string
+        description: The `Grant` name
+      -
+        name: keywords
+        in: formData
+        required: true
+        type: array
+        items: 
+          type: string
+        description: the `Grant` keywords
+      responses:
+        # Response code
+        '200':
+          description: The `Grant` id
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'   
+    delete:
+      tags:
+          - Grant
+      description: |
+        Clear `Grant` keywords
+      operationId: clearGrantKeywords
+      produces:
+        -	application/json
+      parameters:
+      -
+        name: id
+        in: path
+        required: true
+        type: string
+        description: The `Grant` id
+      responses:
+        # Response code
+        '200':
+          description: The `Grant` id
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'   
+  /Grant/{id}/keys/{keyword}:
+    get:
+      tags:
+          - Grant
+      description: |
+        Retrieves if `Grant` amount is equal to param
+      operationId: isGrantHaveKeyword
+      produces:
+        -	application/json
+      consumes:
+        -	application/json
+      parameters:
+      -
+        name: id
+        in: path
+        required: true
+        type: string
+        description: The `Grant` name
+      -
+        name: keyword
+        in: path
+        required: true
+        type: string
+        description: The `Grant` keyword
+      responses:
+        # Response code
+        '200':
+          description: The `Grant` id
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'           
+    put:
+      tags:
+          - Grant
+      description: |
+        Add `Grant` keyword
+      operationId: addGrantKeyword
+      produces:
+        -	application/json
+      parameters:
+      -
+        name: id
+        in: path
+        required: true
+        type: string
+        description: The `Grant` name
+      -
+        name: keyword
+        in: path
+        required: true
+        type: string
+        description: the `Grant` keyword
+      responses:
+        # Response code
+        '200':
+          description: The `Grant` id
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'                
+    post:
+      tags:
+          - Grant
+      description: |
+        Set `Grant` keyword
+      operationId: setGrantKeywordPath
+      produces:
+        -	application/json
+      parameters:
+      -
+        name: id
+        in: path
+        required: true
+        type: string
+        description: The `Grant` name
+      -
+        name: keyword
+        in: path
+        required: true
+        type: string
+        description: the `Grant` keyword
+      responses:
+        # Response code
+        '200':
+          description: The `Grant` id
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'   
+    delete:
+      tags:
+          - Grant
+      description: |
+        Set `Grant` keyword
+      operationId: deleteGrantKeyword
+      produces:
+        -	application/json
+      parameters:
+      -
+        name: id
+        in: path
+        required: true
+        type: string
+        description: The `Grant` name
+      -
+        name: keyword
+        in: path
+        required: true
+        type: string
+        description: the `Grant` keyword
+      responses:
+        # Response code
+        '200':
+          description: The `Grant` id
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'   
+
+
+        ######################################
+        ###############Reviews################
+        ######################################
+
+        #/Review
+        #get put post delete
+        #/Review/{id}
+        #get put delete
+        #/Review/{id}/body
+        #get put
+        #/Review/{id}/reviewer
+        #get put
+        #/Review/{id}/rating
+        #get put
+        #/Review/{id}/modified
+        #get
+        #/Review/{id}/url
+        #get put
+
+        #/Reviews/created
+        #get
+        #/Reviews/modified
+        #get
+        #/Reviews/rating
+        #get
+        #/Reviews/reviewer/{id}
+        #get
+        #/Reviews/keys (? should we do keywords here?)
+        #get
+
+
+  /Reviews:
+    get:
+      tags:
+        - Review
+      description: |
+        Gets `Review` objects.
+        Required query param of **size** determines
+        max number of results per page, and **page** determines
+        which page in the pagination we are. Remaining params optional.
+      operationId: getReviewss
+      produces:
+        - application/json
+      consumes:
+        - application/json
+      parameters:
+        -
+          name: size
+          in: formData
+          description: Max size of array to return
+          required: true
+          type: number
+          format: int32
+        -
+          name: page
+          in: formData
+          description: Location in pagination
+          required: true
+          type: number
+          format: int32
+        -
+          name: review_id
+          in: formData
+          required: false
+          type: string
+          description: Unique identifier representing a specific `Review`
+        -
+          name: created_date
+          in: formData
+          required: false
+          type: string
+          format: date-time
+          description: datetime stamp of `Review` creation
+        -
+          name: updated_date
+          in: formData
+          required: false
+          type: string
+          format: date-time
+          description: datetime stamp of `Review` update
+        -
+          name: reviewer_id
+          in: formData
+          required: false
+          type: string
+          description: id of `User` reviewer
+        -
+          name: review_body
+          in: formData
+          required: false
+          type: string
+          description: body of `Review`
+        -
+          name: rating
+          in: formData
+          required: false
+          type: number
+          format: int32
+          description: Integer rating of review (1-5)
+      responses:
+        # Response code
+        '200':
+          description: An array of `Review` objects
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Review'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /Reviews/created_date:
+    get:
+      tags:
+        - Review
+      description: |
+        Retrieve `Grant` objects created on or later than given date
+      operationId: getReviewsByCreatedDateForm
+      produces:
+        - application/json
+      consumes:
+        - application/json
+      parameters:
+        -
+          name: created_date
+          in: formData
+          description: date of creation
+          required: true
+          type: string
+          format: date-time
+      responses:
+        '200':
+          description: Array of `Reviews` objects
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Review'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /Reviews/created_date/{created_date}:
+    get:
+      tags:
+        - Reviews
+      description: |
+        Retrieve `Reviews` objects created on or later than given date
+      operationId: getReviewsByCreatedDate
+      produces:
+        - application/json
+      parameters:
+        -
+          name: created_date
+          in: path
+          description: date of creation
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Array of `Grant` objects
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Grant'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /Reviews/modified_date:
+    get:
+      tags:
+        - Review
+      description: |
+        Retrieve `Review` objects modified on or later than given date
+      operationId: getReviewssByModifiedDateForm
+      produces:
+        - application/json
+      consumes:
+        - application/json
+      parameters:
+        -
+          name: modified_date
+          in: formData
+          description: date of modification
+          required: true
+          type: string
+          format: date-time
+      responses:
+        '200':
+          description: Array of `Review` objects
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Review'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /Reviews/modified_date/{modified_date}:
+    get:
+      tags:
+        - Review
+      description: |
+        Retrieve `Review` objects created on or later than given date
+      operationId: getReviewsByModifiedDate
+      produces:
+        - application/json
+      parameters:
+        -
+          name: modified_date
+          in: path
+          description: date of creation
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Array of `Reviews` objects
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Review'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'      
+  /Reviews/reviewer/{user_id}:
+    get:
+      tags:
+        - Review
+      description: |
+        Retrieve `Review` objects with specified reviewer
+      operationId: getReviewsByReviewer
+      produces:
+        - application/json
+      parameters:
+        -
+          name: user_id
+          in: path
+          description: id of `User` reviewer
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Array of `Reviews` objects
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Review'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'      
+  /Reviews/rating:
+    get:
+      tags:
+        - Review
+      description: |
+        Retrieve `Review` objects with a rating in the given range
+      operationId: getReviewsByRating
+      produces:
+        - application/json
+      consumes:
+        - application/json        
+      parameters:
+        -
+          name: min
+          in: formData
+          description: Minimum rating (>= 1)
+          required: true
+          type: number
+          format: int32
+        -
+          name: max
+          in: formData
+          description: Maximum rating (<= 5)
+          required: true
+          type: number
+          format: int32
+      responses:
+        '200':
+          description: Array of `Reviews` objects
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Review'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /Reviews/rating/min/{rating}:
+    get:
+      tags:
+        - Review
+      description: |
+        Retrieve `Review` objects with a rating greater than or equal to **rating**
+      operationId: getReviewsByMinRating
+      produces:
+        - application/json
+      consumes:
+        - application/json        
+      parameters:
+        -
+          name: rating
+          in: path
+          description: Minimum rating (1 <= rating <= 5)
+          required: true
+          type: number
+          format: int32
+      responses:
+        '200':
+          description: Array of `Reviews` objects
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Review'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+
+      ######################################
+      ##############Definitions#############
+      ######################################
+
+
+
+
+
+
+
+        ######################################
+        ################Skills################
+        ######################################
+
+        #/Skill
+        #get put post delete
+        #/Skill/{id}
+        #get put delete
+        #/Skill/{id}/body
+        #get put
+        #/Skill/{id}/endorsements/
+        #get put post delete
+        #/Skill/{id}/endorsements/{user_id}
+        #put post delete (get serves no purpose here since this is literally just a list of people who say yup he can do this)
+        #/Skill/{id}/modified
+        #get
+        #/Skill/{id}/url
+        #get put
+
+        #/Skills/created
+        #get
+        #/Skills/modified
+        #get
+        #/Skills/endorsements/{id}
+        #get
+        #/Skills/keys
+        #get      #keyword search
+
+        ######################################
+        #############Universities#############
+        ######################################
+        #/University
+        #get put post delete
+        #/University/{id}
+        #get put delete
+        #/University/{id}/projects
+        #get post put delete
+        #/University/{id}/projects/{project_id}
+        #get post put delete
+        #/University/{id}/geolocation
+        #get put
+
+        #/University/{id}/endorsements/
+        #get put post delete
+        #/University/{id}/endorsements/{user_id}
+        #put post delete (get serves no purpose here since this is literally just a list of people who say yup he can do this)
+        #/University/{id}/created
+        #get
+        #/University/{id}/modified
+        #get
+        #/University/{id}/url
+        #get put
+
+        #/University/{id}/url
+        #get put post delete
+
+        #/University/{id}/users/
+        #get (get associated users, this will actuall be a query of user objects)
+
+        #/University/{id}/grants/
+        #get (get associated grants, this will actuall be a query of grant objects)
+
+        #/Universities/created
+        #get
+        #/Universities/modified
+        #get
+        #/Universities/endorsements/{id}
+        #get
+        #/Universities/keys
+        #get      #keyword search            
+
+  /Review/{id}:
+    get:
+      tags:
+          - Grant
+      description: |
+        Retrieves `Review` objects by **id**.
+      operationId: getReviewById
+      produces:
+        -	application/json
+      parameters:
+      -
+        name: id
+        in: path
+        required: true
+        type: string
+        description: The `Review` name
+      responses:
+        # Response code
+        '200':
+          description: The `Review`
+          schema:
+            $ref: '#/definitions/Review'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    put:
+      tags:
+        - Review
+      description: |
+        Updates `Review` objects. **id** is required,
+        all others optional.
+      operationId: updateReviewById
+      produces:
+        -	application/json
+      consumes:
+        -	application/json
+      parameters:
+      -
+        name: id
+        in: path
+        required: true
+        type: string
+        description: The `Post` name
+      -
+        name: review_body
+        in: formData
+        required: false
+        type: string
+        description: body of `Review`
+      -
+        name: reviewer_id
+        in: formData
+        required: false
+        type: string
+        description: User who wrote `Review`
+      -
+        name: rating
+        in: formData
+        required: false
+        type: number
+        format: int32
+        description: Rating (1 <= rating <= 5)
+      responses:
+        # Response code
+        '200':
+          description: A `Review` object
+          schema:
+            $ref: '#/definitions/Review'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    delete:
+      tags:
+        - Review
+      description: |
+        Deletes `Review` objects by **id**.
+      operationId: deleteReviewById
+      produces:
+        -	application/json
+      parameters:
+      - name: id
+        in: path
+        required: true
+        type: string
+        description: The `Review` name
+      responses:
+        # Response code
+        '200':
+          description: The `Review` id
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      #should only modify users using the user/{id} route to make sure we don't
+      # accidentally nike the wrong thing   
+  /Review/{id}/body:
+    get:
+      tags:
+        - Review
+      description: |
+        Sets body of review
+      operationId: getReviewBodyById
+      produces:
+        -	application/json
+      parameters:
+      -
+        name: id
+        in: path
+        required: true
+        type: string
+        description: The `Review` id
+      responses:
+        # Response code
+        '200':
+          description: The `Review` body
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    put:
+      tags:
+        - Review
+      description: |
+        Updates `Review` body. 
+      operationId: updateReviewBodyById
+      produces:
+        -	application/json
+      consumes:
+        -	application/json
+      parameters:
+      -
+        name: id
+        in: path
+        required: true
+        type: string
+        description: The `Review` name
+      -
+        name: body
+        in: formData
+        required: true
+        type: string
+      responses:
+        # Response code
+        '200':
+          description: A `Review` id
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    post:
+      tags:
+        - Review
+      description: |
+        Set `Review` body. 
+      operationId: setReviewBodyById
+      produces:
+        -	application/json
+      consumes:
+        -	application/json
+      parameters:
+      -
+        name: id
+        in: path
+        required: true
+        type: string
+        description: The `Review` name
+      -
+        name: body
+        in: formData
+        required: true
+        type: string
+      responses:
+        # Response code
+        '200':
+          description: A `Review` id
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'            
+    delete:
+      tags:
+        - Review
+      description: |
+        Deletes `Review` body
+      operationId: deleteReviewBodyById
+      produces:
+        -	application/json
+      parameters:
+      - name: id
+        in: path
+        required: true
+        type: string
+        description: The `Review` name
+      responses:
+        # Response code
+        '200':
+          description: The `Review` id
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      #should only modify users using the user/{id} route to make sure we don't
+      # accidentally nike the wrong thing   
+  /Review/{id}/reviewer:
+    get:
+      tags:
+          - Grant
+      description: |
+        Gets reviewer of review
+      operationId: getReviewReviewerById
+      produces:
+        -	application/json
+      parameters:
+      -
+        name: id
+        in: path
+        required: true
+        type: string
+        description: The `Review` id
+      responses:
+        # Response code
+        '200':
+          description: The `Review` reviewer user id
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    delete:
+      tags:
+        - Review
+      description: |
+        Deletes `Review` reviewer
+      operationId: deleteReviewReviewer
+      produces:
+        -	application/json
+      parameters:
+      - name: id
+        in: path
+        required: true
+        type: string
+        description: The `Review` id
+      responses:
+        # Response code
+        '200':
+          description: The `Review` id
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      #should only modify users using the user/{id} route to make sure we don't
+      # accidentally nike the wrong thing   
+  /Review/{id}/reviewer/{user_id}:
+    get:
+      tags:
+          - Grant
+      description: |
+        Is user the reviewer?
+      operationId: isUserReviewReviewer
+      produces:
+        -	application/json
+      parameters:
+      -
+        name: id
+        in: path
+        required: true
+        type: string
+        description: The `Review` id
+      -
+        name: user_id
+        in: path
+        required: true
+        type: string
+        description: The `Review` id
+      responses:
+        # Response code
+        '200':
+          description: The boolean
+          schema:
+            type: boolean
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    put:
+      tags:
+        - Review
+      description: |
+        Updates `Review` reviewer. 
+      operationId: updateReviewReviewerById
+      produces:
+        -	application/json
+      consumes:
+        -	application/json
+      parameters:
+      -
+        name: id
+        in: path
+        required: true
+        type: string
+        description: The `Review` name
+      -
+        name: user_id
+        in: path
+        required: true
+        type: string
+      responses:
+        # Response code
+        '200':
+          description: A `Review` id
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    post:
+      tags:
+        - Review
+      description: |
+        Set `Review` reviewer. 
+      operationId: setReviewReviewerById
+      produces:
+        -	application/json
+      consumes:
+        -	application/json
+      parameters:
+      -
+        name: id
+        in: path
+        required: true
+        type: string
+        description: The `Review` name
+      -
+        name: user_id
+        in: path
+        required: true
+        type: string
+      responses:
+        # Response code
+        '200':
+          description: A `Review` id
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'        
+    delete:
+      tags:
+        - Review
+      description: |
+        Deletes `Review` reviewer
+      operationId: deleteReviewReviewerById
+      produces:
+        -	application/json
+      parameters:
+      - name: id
+        in: path
+        required: true
+        type: string
+        description: The `Review` id
+      -
+        name: user_id
+        in: path
+        required: true
+        type: string
+        description: The `Review` reviewer id
+      responses:
+        # Response code
+        '200':
+          description: The `Review` id
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /Review/{id}/rating:
+    get:
+      tags:
+          - Grant
+      description: |
+        Gets rating of review
+      operationId: getReviewRatingById
+      produces:
+        -	application/json
+      parameters:
+      -
+        name: id
+        in: path
+        required: true
+        type: string
+        description: The `Review` id
+      responses:
+        # Response code
+        '200':
+          description: The `Review` rating
+          schema:
+            type: number
+            format: int32
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    delete:
+      tags:
+        - Review
+      description: |
+        Deletes `Review` rating
+      operationId: deleteReviewRating
+      produces:
+        -	application/json
+      parameters:
+      - name: id
+        in: path
+        required: true
+        type: string
+        description: The `Review` id
+      responses:
+        # Response code
+        '200':
+          description: The `Review` id
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      #should only modify users using the user/{id} route to make sure we don't
+      # accidentally nike the wrong thing               
+  /Review/{id}/rating/{rating}:
+    get:
+      tags:
+        - Grant
+      description: |
+        Is rating equal to what we pass in
+      operationId: isReviewRating
+      produces:
+        -	application/json
+      parameters:
+      -
+        name: id
+        in: path
+        required: true
+        type: string
+        description: The `Review` id
+      -
+        name: rating
+        in: path
+        required: true
+        type: string
+        description: The `Review` rating
+      responses:
+        # Response code
+        '200':
+          description: The boolean
+          schema:
+            type: boolean
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    put:
+      tags:
+        - Review
+      description: |
+        Updates `Review` rating
+      operationId: updateReviewRating
+      produces:
+        -	application/json
+      parameters:
+      - name: id
+        in: path
+        required: true
+        type: string
+        description: The `Review` id
+      -
+        name: rating
+        in: path
+        required: true
+        type: string
+        description: The `Review` rating        
+      responses:
+        # Response code
+        '200':
+          description: The `Review` id
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    post:
+      tags:
+        - Review
+      description: |
+        Sets `Review` rating
+      operationId: setReviewRating
+      produces:
+        -	application/json
+      parameters:
+      - 
+        name: id
+        in: path
+        required: true
+        type: string
+        description: The `Review` id
+      -
+        name: rating
+        in: path
+        required: true
+        type: string
+        description: The `Review` rating        
+      responses:
+        # Response code
+        '200':
+          description: The `Review` id
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error' 
+  /Review/{id}/url:
+    get:
+      tags:
+          - Grant
+      description: |
+        Gets url of review
+      operationId: getReviewUrlById
+      produces:
+        -	application/json
+      parameters:
+      -
+        name: id
+        in: path
+        required: true
+        type: string
+        description: The `Review` id
+      responses:
+        # Response code
+        '200':
+          description: The `Review` url
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    delete:
+      tags:
+        - Review
+      description: |
+        Deletes `Review` url
+      operationId: deleteReviewUrl
+      produces:
+        -	application/json
+      parameters:
+      - name: id
+        in: path
+        required: true
+        type: string
+        description: The `Review` id
+      responses:
+        # Response code
+        '200':
+          description: The `Review` id
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    put:
+      tags:
+        - Review
+      description: |
+        Updates `Review` url
+      operationId: updateReviewUrl
+      produces:
+        -	application/json
+      parameters:
+      - name: id
+        in: path
+        required: true
+        type: string
+        description: The `Review` id
+      - name: url
+        in: formData
+        required: true
+        type: string
+        description: The `Review` url
+      responses:
+        # Response code
+        '200':
+          description: The `Review` id
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'              
+    post:
+      tags:
+        - Review
+      description: |
+        Sets `Review` url
+      operationId: setReviewUrl
+      produces:
+        -	application/json
+      parameters:
+      - name: id
+        in: path
+        required: true
+        type: string
+        description: The `Review` id
+      - name: url
+        in: formData
+        required: true
+        type: string
+        description: The `Review` url
+      responses:
+        # Response code
+        '200':
+          description: The `Review` id
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'                          
+      #should only modify users using the user/{id} route to make sure we don't
+      # accidentally nike the wrong thing                          
+  /Review/{id}/created:
+    get:
+      tags:
+        - Review
+      description: |
+        Gets review created date
+      operationId: getReviewCreatedDateById
+      produces:
+        -	application/json
+      parameters:
+      -
+        name: id
+        in: path
+        required: true
+        type: string
+        description: The `Review` id
+      responses:
+        # Response code
+        '200':
+          description: The `Review` create date
+          schema:
+            type: string
+            format: date-time
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /Review/{id}/updated:
+    get:
+      tags:
+        - Review
+      description: |
+        Gets review updated date
+      operationId: getReviewUpdatedDateById
+      produces:
+        -	application/json
+      parameters:
+      -
+        name: id
+        in: path
+        required: true
+        type: string
+        description: The `Review` id
+      responses:
+        # Response code
+        '200':
+          description: The `Review` update date
+          schema:
+            type: string
+            format: date-time
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'            
 
 definitions:
   User:
@@ -8056,6 +9296,11 @@ definitions:
         items:
           type: string
         description: URL of grants
+      grant_keywords:
+        type: array
+        items:
+          type: string
+        description: grant keywords
       grant_description:
         type: string
         description: Grant description
