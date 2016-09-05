@@ -5128,7 +5128,6 @@ paths:
     put:
       tags:
         - Project
-        - University
       description: |
         Set is_private from a  `Project`.
       operationId: setIsProjectPrivate
@@ -8058,7 +8057,7 @@ paths:
   /Reviews/created_date/{created_date}:
     get:
       tags:
-        - Reviews
+        - Review
       description: |
         Retrieve `Reviews` objects created on or later than given date
       operationId: getReviewsByCreatedDate
@@ -8143,6 +8142,7 @@ paths:
     get:
       tags:
         - Review
+        - User
       description: |
         Retrieve `Review` objects with specified reviewer
       operationId: getReviewsByReviewer
@@ -8318,7 +8318,7 @@ paths:
   /Review/{id}:
     get:
       tags:
-          - Grant
+          - Review
       description: |
         Retrieves `Review` objects by **id**.
       operationId: getReviewById
@@ -8533,7 +8533,8 @@ paths:
   /Review/{id}/reviewer:
     get:
       tags:
-          - Grant
+          - Review
+          - User
       description: |
         Gets reviewer of review
       operationId: getReviewReviewerById
@@ -8559,6 +8560,7 @@ paths:
     delete:
       tags:
         - Review
+        - User
       description: |
         Deletes `Review` reviewer
       operationId: deleteReviewReviewer
@@ -8585,7 +8587,8 @@ paths:
   /Review/{id}/reviewer/{user_id}:
     get:
       tags:
-          - Grant
+        - Review
+        - User
       description: |
         Is user the reviewer?
       operationId: isUserReviewReviewer
@@ -8617,6 +8620,7 @@ paths:
     put:
       tags:
         - Review
+        - User
       description: |
         Updates `Review` reviewer. 
       operationId: updateReviewReviewerById
@@ -8649,6 +8653,7 @@ paths:
     post:
       tags:
         - Review
+        - User
       description: |
         Set `Review` reviewer. 
       operationId: setReviewReviewerById
@@ -8681,6 +8686,7 @@ paths:
     delete:
       tags:
         - Review
+        - User
       description: |
         Deletes `Review` reviewer
       operationId: deleteReviewReviewerById
@@ -8711,7 +8717,7 @@ paths:
   /Review/{id}/rating:
     get:
       tags:
-          - Grant
+          - Review
       description: |
         Gets rating of review
       operationId: getReviewRatingById
@@ -8764,7 +8770,7 @@ paths:
   /Review/{id}/rating/{rating}:
     get:
       tags:
-        - Grant
+        - Review
       description: |
         Is rating equal to what we pass in
       operationId: isReviewRating
@@ -8857,7 +8863,7 @@ paths:
   /Review/{id}/url:
     get:
       tags:
-          - Grant
+          - Review
       description: |
         Gets url of review
       operationId: getReviewUrlById

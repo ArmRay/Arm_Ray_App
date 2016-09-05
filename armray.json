@@ -6458,8 +6458,7 @@
             },
             "put": {
                 "tags": [
-                    "Project",
-                    "University"
+                    "Project"
                 ],
                 "description": "Set is_private from a  `Project`.\n",
                 "operationId": "setIsProjectPrivate",
@@ -10117,7 +10116,7 @@
         "/Reviews/created_date/{created_date}": {
             "get": {
                 "tags": [
-                    "Reviews"
+                    "Review"
                 ],
                 "description": "Retrieve `Reviews` objects created on or later than given date\n",
                 "operationId": "getReviewsByCreatedDate",
@@ -10235,7 +10234,8 @@
         "/Reviews/reviewer/{user_id}": {
             "get": {
                 "tags": [
-                    "Review"
+                    "Review",
+                    "User"
                 ],
                 "description": "Retrieve `Review` objects with specified reviewer\n",
                 "operationId": "getReviewsByReviewer",
@@ -10365,7 +10365,7 @@
         "/Review/{id}": {
             "get": {
                 "tags": [
-                    "Grant"
+                    "Review"
                 ],
                 "description": "Retrieves `Review` objects by **id**.\n",
                 "operationId": "getReviewById",
@@ -10643,7 +10643,8 @@
         "/Review/{id}/reviewer": {
             "get": {
                 "tags": [
-                    "Grant"
+                    "Review",
+                    "User"
                 ],
                 "description": "Gets reviewer of review\n",
                 "operationId": "getReviewReviewerById",
@@ -10676,7 +10677,8 @@
             },
             "delete": {
                 "tags": [
-                    "Review"
+                    "Review",
+                    "User"
                 ],
                 "description": "Deletes `Review` reviewer\n",
                 "operationId": "deleteReviewReviewer",
@@ -10711,7 +10713,8 @@
         "/Review/{id}/reviewer/{user_id}": {
             "get": {
                 "tags": [
-                    "Grant"
+                    "Review",
+                    "User"
                 ],
                 "description": "Is user the reviewer?\n",
                 "operationId": "isUserReviewReviewer",
@@ -10751,7 +10754,8 @@
             },
             "put": {
                 "tags": [
-                    "Review"
+                    "Review",
+                    "User"
                 ],
                 "description": "Updates `Review` reviewer. \n",
                 "operationId": "updateReviewReviewerById",
@@ -10793,7 +10797,8 @@
             },
             "post": {
                 "tags": [
-                    "Review"
+                    "Review",
+                    "User"
                 ],
                 "description": "Set `Review` reviewer. \n",
                 "operationId": "setReviewReviewerById",
@@ -10835,7 +10840,8 @@
             },
             "delete": {
                 "tags": [
-                    "Review"
+                    "Review",
+                    "User"
                 ],
                 "description": "Deletes `Review` reviewer\n",
                 "operationId": "deleteReviewReviewerById",
@@ -10877,7 +10883,7 @@
         "/Review/{id}/rating": {
             "get": {
                 "tags": [
-                    "Grant"
+                    "Review"
                 ],
                 "description": "Gets rating of review\n",
                 "operationId": "getReviewRatingById",
@@ -10946,7 +10952,7 @@
         "/Review/{id}/rating/{rating}": {
             "get": {
                 "tags": [
-                    "Grant"
+                    "Review"
                 ],
                 "description": "Is rating equal to what we pass in\n",
                 "operationId": "isReviewRating",
@@ -11068,7 +11074,7 @@
         "/Review/{id}/url": {
             "get": {
                 "tags": [
-                    "Grant"
+                    "Review"
                 ],
                 "description": "Gets url of review\n",
                 "operationId": "getReviewUrlById",
