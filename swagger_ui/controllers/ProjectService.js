@@ -1,23 +1,5 @@
 'use strict';
 
-exports.addPostTagsByIdPost = function(args, res, next) {
-  /**
-   * parameters expected in the args:
-  * id (String)
-  * user_id (String)
-  **/
-    var examples = {};
-  examples['application/json'] = "aeiou";
-  if(Object.keys(examples).length > 0) {
-    res.setHeader('Content-Type', 'application/json');
-    res.end(JSON.stringify(examples[Object.keys(examples)[0]] || {}, null, 2));
-  }
-  else {
-    res.end();
-  }
-  
-}
-
 exports.addProjectCollaborator = function(args, res, next) {
   /**
    * parameters expected in the args:
@@ -90,11 +72,11 @@ exports.addProjectCreators = function(args, res, next) {
   
 }
 
-exports.addUserCity = function(args, res, next) {
+exports.addProjectFiles = function(args, res, next) {
   /**
    * parameters expected in the args:
   * id (String)
-  * city (String)
+  * urls (List)
   **/
     var examples = {};
   examples['application/json'] = "aeiou";
@@ -108,11 +90,11 @@ exports.addUserCity = function(args, res, next) {
   
 }
 
-exports.addUserFirstName = function(args, res, next) {
+exports.addProjectKeyword = function(args, res, next) {
   /**
    * parameters expected in the args:
   * id (String)
-  * first_name (String)
+  * keyword (String)
   **/
     var examples = {};
   examples['application/json'] = "aeiou";
@@ -126,54 +108,149 @@ exports.addUserFirstName = function(args, res, next) {
   
 }
 
-exports.addUserLastName = function(args, res, next) {
+exports.addProjectKeywords = function(args, res, next) {
   /**
    * parameters expected in the args:
   * id (String)
-  * last_name (String)
-  **/
-    var examples = {};
-  examples['application/json'] = "aeiou";
-  if(Object.keys(examples).length > 0) {
-    res.setHeader('Content-Type', 'application/json');
-    res.end(JSON.stringify(examples[Object.keys(examples)[0]] || {}, null, 2));
-  }
-  else {
-    res.end();
-  }
-  
-}
-
-exports.addUserState = function(args, res, next) {
-  /**
-   * parameters expected in the args:
-  * id (String)
-  * state (String)
-  **/
-    var examples = {};
-  examples['application/json'] = "aeiou";
-  if(Object.keys(examples).length > 0) {
-    res.setHeader('Content-Type', 'application/json');
-    res.end(JSON.stringify(examples[Object.keys(examples)[0]] || {}, null, 2));
-  }
-  else {
-    res.end();
-  }
-  
-}
-
-exports.createUser = function(args, res, next) {
-  /**
-   * parameters expected in the args:
-  * first_name (String)
-  * last_name (String)
-  * is_collaborator (Boolean)
-  * is_creator (Boolean)
-  * city (String)
-  * state (String)
-  * university_ids (List)
-  * project_id (String)
   * keywords (List)
+  **/
+    var examples = {};
+  examples['application/json'] = "aeiou";
+  if(Object.keys(examples).length > 0) {
+    res.setHeader('Content-Type', 'application/json');
+    res.end(JSON.stringify(examples[Object.keys(examples)[0]] || {}, null, 2));
+  }
+  else {
+    res.end();
+  }
+  
+}
+
+exports.addProjectName = function(args, res, next) {
+  /**
+   * parameters expected in the args:
+  * id (String)
+  * project_name (String)
+  **/
+    var examples = {};
+  examples['application/json'] = "aeiou";
+  if(Object.keys(examples).length > 0) {
+    res.setHeader('Content-Type', 'application/json');
+    res.end(JSON.stringify(examples[Object.keys(examples)[0]] || {}, null, 2));
+  }
+  else {
+    res.end();
+  }
+  
+}
+
+exports.addProjectPost = function(args, res, next) {
+  /**
+   * parameters expected in the args:
+  * id (String)
+  * post_id (String)
+  **/
+    var examples = {};
+  examples['application/json'] = "aeiou";
+  if(Object.keys(examples).length > 0) {
+    res.setHeader('Content-Type', 'application/json');
+    res.end(JSON.stringify(examples[Object.keys(examples)[0]] || {}, null, 2));
+  }
+  else {
+    res.end();
+  }
+  
+}
+
+exports.addProjectPosts = function(args, res, next) {
+  /**
+   * parameters expected in the args:
+  * id (String)
+  * reviews (List)
+  **/
+    var examples = {};
+  examples['application/json'] = "aeiou";
+  if(Object.keys(examples).length > 0) {
+    res.setHeader('Content-Type', 'application/json');
+    res.end(JSON.stringify(examples[Object.keys(examples)[0]] || {}, null, 2));
+  }
+  else {
+    res.end();
+  }
+  
+}
+
+exports.addProjectReview = function(args, res, next) {
+  /**
+   * parameters expected in the args:
+  * id (String)
+  * review_id (String)
+  **/
+    var examples = {};
+  examples['application/json'] = "aeiou";
+  if(Object.keys(examples).length > 0) {
+    res.setHeader('Content-Type', 'application/json');
+    res.end(JSON.stringify(examples[Object.keys(examples)[0]] || {}, null, 2));
+  }
+  else {
+    res.end();
+  }
+  
+}
+
+exports.addProjectReviews = function(args, res, next) {
+  /**
+   * parameters expected in the args:
+  * id (String)
+  * reviews (List)
+  **/
+    var examples = {};
+  examples['application/json'] = "aeiou";
+  if(Object.keys(examples).length > 0) {
+    res.setHeader('Content-Type', 'application/json');
+    res.end(JSON.stringify(examples[Object.keys(examples)[0]] || {}, null, 2));
+  }
+  else {
+    res.end();
+  }
+  
+}
+
+exports.addProjectUrls = function(args, res, next) {
+  /**
+   * parameters expected in the args:
+  * id (String)
+  * urls (List)
+  **/
+    var examples = {};
+  examples['application/json'] = "aeiou";
+  if(Object.keys(examples).length > 0) {
+    res.setHeader('Content-Type', 'application/json');
+    res.end(JSON.stringify(examples[Object.keys(examples)[0]] || {}, null, 2));
+  }
+  else {
+    res.end();
+  }
+  
+}
+
+exports.createProject = function(args, res, next) {
+  /**
+   * parameters expected in the args:
+  * project_name (String)
+  * project_description (String)
+  * project_creator_id (List)
+  * is_project_private (Boolean)
+  * project_main_grant_type (String)
+  * project_collaborators_id (List)
+  * project_keywords (List)
+  * project_urls (List)
+  * grant_id (String)
+  * university_id (String)
+  * grant_facilitator (String)
+  * project_file (List)
+  * reviews (List)
+  * posts (List)
   **/
     var examples = {};
   examples['application/json'] = "aeiou";
@@ -204,7 +281,7 @@ exports.deleteAllUserProjectById = function(args, res, next) {
   
 }
 
-exports.deleteAllUserReviewById = function(args, res, next) {
+exports.deleteProjecUniversities = function(args, res, next) {
   /**
    * parameters expected in the args:
   * id (String)
@@ -221,64 +298,10 @@ exports.deleteAllUserReviewById = function(args, res, next) {
   
 }
 
-exports.deleteImagesFromUserById = function(args, res, next) {
+exports.deleteProjectById = function(args, res, next) {
   /**
    * parameters expected in the args:
   * id (String)
-  * images (List)
-  **/
-    var examples = {};
-  examples['application/json'] = "aeiou";
-  if(Object.keys(examples).length > 0) {
-    res.setHeader('Content-Type', 'application/json');
-    res.end(JSON.stringify(examples[Object.keys(examples)[0]] || {}, null, 2));
-  }
-  else {
-    res.end();
-  }
-  
-}
-
-exports.deleteKeywordFromUserById = function(args, res, next) {
-  /**
-   * parameters expected in the args:
-  * id (String)
-  * keyword (String)
-  **/
-    var examples = {};
-  examples['application/json'] = "aeiou";
-  if(Object.keys(examples).length > 0) {
-    res.setHeader('Content-Type', 'application/json');
-    res.end(JSON.stringify(examples[Object.keys(examples)[0]] || {}, null, 2));
-  }
-  else {
-    res.end();
-  }
-  
-}
-
-exports.deleteKeywordsFromUserById = function(args, res, next) {
-  /**
-   * parameters expected in the args:
-  * id (String)
-  **/
-    var examples = {};
-  examples['application/json'] = "aeiou";
-  if(Object.keys(examples).length > 0) {
-    res.setHeader('Content-Type', 'application/json');
-    res.end(JSON.stringify(examples[Object.keys(examples)[0]] || {}, null, 2));
-  }
-  else {
-    res.end();
-  }
-  
-}
-
-exports.deletePostTagsById = function(args, res, next) {
-  /**
-   * parameters expected in the args:
-  * id (String)
-  * user_id (String)
   **/
     var examples = {};
   examples['application/json'] = "aeiou";
@@ -362,7 +385,7 @@ exports.deleteProjectCreators = function(args, res, next) {
   
 }
 
-exports.deleteReviewReviewer = function(args, res, next) {
+exports.deleteProjectDescription = function(args, res, next) {
   /**
    * parameters expected in the args:
   * id (String)
@@ -379,25 +402,7 @@ exports.deleteReviewReviewer = function(args, res, next) {
   
 }
 
-exports.deleteReviewReviewerById = function(args, res, next) {
-  /**
-   * parameters expected in the args:
-  * id (String)
-  * user_id (String)
-  **/
-    var examples = {};
-  examples['application/json'] = "aeiou";
-  if(Object.keys(examples).length > 0) {
-    res.setHeader('Content-Type', 'application/json');
-    res.end(JSON.stringify(examples[Object.keys(examples)[0]] || {}, null, 2));
-  }
-  else {
-    res.end();
-  }
-  
-}
-
-exports.deleteUserById = function(args, res, next) {
+exports.deleteProjectFiles = function(args, res, next) {
   /**
    * parameters expected in the args:
   * id (String)
@@ -414,7 +419,7 @@ exports.deleteUserById = function(args, res, next) {
   
 }
 
-exports.deleteUserCity = function(args, res, next) {
+exports.deleteProjectGrant = function(args, res, next) {
   /**
    * parameters expected in the args:
   * id (String)
@@ -431,7 +436,7 @@ exports.deleteUserCity = function(args, res, next) {
   
 }
 
-exports.deleteUserFirstName = function(args, res, next) {
+exports.deleteProjectGrantType = function(args, res, next) {
   /**
    * parameters expected in the args:
   * id (String)
@@ -448,7 +453,112 @@ exports.deleteUserFirstName = function(args, res, next) {
   
 }
 
-exports.deleteUserLastName = function(args, res, next) {
+exports.deleteProjectKeyword = function(args, res, next) {
+  /**
+   * parameters expected in the args:
+  * id (String)
+  * keyword (String)
+  **/
+    var examples = {};
+  examples['application/json'] = "aeiou";
+  if(Object.keys(examples).length > 0) {
+    res.setHeader('Content-Type', 'application/json');
+    res.end(JSON.stringify(examples[Object.keys(examples)[0]] || {}, null, 2));
+  }
+  else {
+    res.end();
+  }
+  
+}
+
+exports.deleteProjectKeywords = function(args, res, next) {
+  /**
+   * parameters expected in the args:
+  * id (String)
+  **/
+    var examples = {};
+  examples['application/json'] = "aeiou";
+  if(Object.keys(examples).length > 0) {
+    res.setHeader('Content-Type', 'application/json');
+    res.end(JSON.stringify(examples[Object.keys(examples)[0]] || {}, null, 2));
+  }
+  else {
+    res.end();
+  }
+  
+}
+
+exports.deleteProjectPost = function(args, res, next) {
+  /**
+   * parameters expected in the args:
+  * id (String)
+  * post_id (String)
+  **/
+    var examples = {};
+  examples['application/json'] = "aeiou";
+  if(Object.keys(examples).length > 0) {
+    res.setHeader('Content-Type', 'application/json');
+    res.end(JSON.stringify(examples[Object.keys(examples)[0]] || {}, null, 2));
+  }
+  else {
+    res.end();
+  }
+  
+}
+
+exports.deleteProjectPosts = function(args, res, next) {
+  /**
+   * parameters expected in the args:
+  * id (String)
+  **/
+    var examples = {};
+  examples['application/json'] = "aeiou";
+  if(Object.keys(examples).length > 0) {
+    res.setHeader('Content-Type', 'application/json');
+    res.end(JSON.stringify(examples[Object.keys(examples)[0]] || {}, null, 2));
+  }
+  else {
+    res.end();
+  }
+  
+}
+
+exports.deleteProjectReview = function(args, res, next) {
+  /**
+   * parameters expected in the args:
+  * id (String)
+  * review_id (String)
+  **/
+    var examples = {};
+  examples['application/json'] = "aeiou";
+  if(Object.keys(examples).length > 0) {
+    res.setHeader('Content-Type', 'application/json');
+    res.end(JSON.stringify(examples[Object.keys(examples)[0]] || {}, null, 2));
+  }
+  else {
+    res.end();
+  }
+  
+}
+
+exports.deleteProjectReviews = function(args, res, next) {
+  /**
+   * parameters expected in the args:
+  * id (String)
+  **/
+    var examples = {};
+  examples['application/json'] = "aeiou";
+  if(Object.keys(examples).length > 0) {
+    res.setHeader('Content-Type', 'application/json');
+    res.end(JSON.stringify(examples[Object.keys(examples)[0]] || {}, null, 2));
+  }
+  else {
+    res.end();
+  }
+  
+}
+
+exports.deleteProjectUrls = function(args, res, next) {
   /**
    * parameters expected in the args:
   * id (String)
@@ -483,46 +593,10 @@ exports.deleteUserProjectById = function(args, res, next) {
   
 }
 
-exports.deleteUserReviewById = function(args, res, next) {
+exports.deleteUserProjectName = function(args, res, next) {
   /**
    * parameters expected in the args:
   * id (String)
-  * review_id (String)
-  **/
-    var examples = {};
-  examples['application/json'] = "aeiou";
-  if(Object.keys(examples).length > 0) {
-    res.setHeader('Content-Type', 'application/json');
-    res.end(JSON.stringify(examples[Object.keys(examples)[0]] || {}, null, 2));
-  }
-  else {
-    res.end();
-  }
-  
-}
-
-exports.deleteUserState = function(args, res, next) {
-  /**
-   * parameters expected in the args:
-  * id (String)
-  **/
-    var examples = {};
-  examples['application/json'] = "aeiou";
-  if(Object.keys(examples).length > 0) {
-    res.setHeader('Content-Type', 'application/json');
-    res.end(JSON.stringify(examples[Object.keys(examples)[0]] || {}, null, 2));
-  }
-  else {
-    res.end();
-  }
-  
-}
-
-exports.deleteUserUniversityById = function(args, res, next) {
-  /**
-   * parameters expected in the args:
-  * id (String)
-  * university_id (String)
   **/
     var examples = {};
   examples['application/json'] = "aeiou";
@@ -570,13 +644,13 @@ exports.getAllProjectCreators = function(args, res, next) {
   
 }
 
-exports.getAllUserImages = function(args, res, next) {
+exports.getAllProjectFiles = function(args, res, next) {
   /**
    * parameters expected in the args:
   * id (String)
   **/
     var examples = {};
-  examples['application/json'] = "aeiou";
+  examples['application/json'] = [ "aeiou" ];
   if(Object.keys(examples).length > 0) {
     res.setHeader('Content-Type', 'application/json');
     res.end(JSON.stringify(examples[Object.keys(examples)[0]] || {}, null, 2));
@@ -587,7 +661,114 @@ exports.getAllUserImages = function(args, res, next) {
   
 }
 
-exports.getAllUserKeywords = function(args, res, next) {
+exports.getAllProjectKeywords = function(args, res, next) {
+  /**
+   * parameters expected in the args:
+  * id (String)
+  **/
+    var examples = {};
+  examples['application/json'] = [ "aeiou" ];
+  if(Object.keys(examples).length > 0) {
+    res.setHeader('Content-Type', 'application/json');
+    res.end(JSON.stringify(examples[Object.keys(examples)[0]] || {}, null, 2));
+  }
+  else {
+    res.end();
+  }
+  
+}
+
+exports.getAllProjectPosts = function(args, res, next) {
+  /**
+   * parameters expected in the args:
+  * id (String)
+  **/
+    var examples = {};
+  examples['application/json'] = [ {
+  "post_title" : "aeiou",
+  "post_author" : {
+    "keywords" : [ "aeiou" ],
+    "city" : "aeiou",
+    "university_ids" : [ "aeiou" ],
+    "profile_images" : [ "aeiou" ],
+    "last_name" : "aeiou",
+    "is_creator" : true,
+    "project_ids" : [ "aeiou" ],
+    "review_ids" : [ "aeiou" ],
+    "is_collaborator" : true,
+    "is_user_private" : true,
+    "user_id" : "aeiou",
+    "created_date" : "2000-01-23T04:56:07.000+00:00",
+    "updated_date" : "2000-01-23T04:56:07.000+00:00",
+    "state" : "aeiou",
+    "first_name" : "aeiou",
+    "recent_collaborators_id" : [ "aeiou" ],
+    "geolocation" : [ 1.3579000000000001069366817318950779736042022705078125 ]
+  },
+  "post_id" : "aeiou",
+  "post_keywords" : [ "aeiou" ],
+  "post_tags_id" : [ "aeiou" ],
+  "post_tags" : [ "" ],
+  "created_date" : "2000-01-23T04:56:07.000+00:00",
+  "updated_date" : "2000-01-23T04:56:07.000+00:00",
+  "post_author_id" : "aeiou",
+  "is_post_private" : true,
+  "post_text" : "aeiou"
+} ];
+  if(Object.keys(examples).length > 0) {
+    res.setHeader('Content-Type', 'application/json');
+    res.end(JSON.stringify(examples[Object.keys(examples)[0]] || {}, null, 2));
+  }
+  else {
+    res.end();
+  }
+  
+}
+
+exports.getAllProjectReviews = function(args, res, next) {
+  /**
+   * parameters expected in the args:
+  * id (String)
+  **/
+    var examples = {};
+  examples['application/json'] = [ {
+  "review_id" : "aeiou",
+  "reviewer_id" : "aeiou",
+  "rating" : 123,
+  "created_date" : "2000-01-23T04:56:07.000+00:00",
+  "updated_date" : "2000-01-23T04:56:07.000+00:00",
+  "reviewer" : {
+    "keywords" : [ "aeiou" ],
+    "city" : "aeiou",
+    "university_ids" : [ "aeiou" ],
+    "profile_images" : [ "aeiou" ],
+    "last_name" : "aeiou",
+    "is_creator" : true,
+    "project_ids" : [ "aeiou" ],
+    "review_ids" : [ "aeiou" ],
+    "is_collaborator" : true,
+    "is_user_private" : true,
+    "user_id" : "aeiou",
+    "created_date" : "2000-01-23T04:56:07.000+00:00",
+    "updated_date" : "2000-01-23T04:56:07.000+00:00",
+    "state" : "aeiou",
+    "first_name" : "aeiou",
+    "recent_collaborators_id" : [ "aeiou" ],
+    "geolocation" : [ 1.3579000000000001069366817318950779736042022705078125 ]
+  },
+  "review_body" : "aeiou"
+} ];
+  if(Object.keys(examples).length > 0) {
+    res.setHeader('Content-Type', 'application/json');
+    res.end(JSON.stringify(examples[Object.keys(examples)[0]] || {}, null, 2));
+  }
+  else {
+    res.end();
+  }
+  
+}
+
+exports.getAllProjectUrls = function(args, res, next) {
   /**
    * parameters expected in the args:
   * id (String)
@@ -639,205 +820,141 @@ exports.getAllUserProjectById = function(args, res, next) {
   
 }
 
-exports.getAllUserReviewById = function(args, res, next) {
+exports.getProjectById = function(args, res, next) {
   /**
    * parameters expected in the args:
   * id (String)
+  **/
+    var examples = {};
+  examples['application/json'] = "aeiou";
+  if(Object.keys(examples).length > 0) {
+    res.setHeader('Content-Type', 'application/json');
+    res.end(JSON.stringify(examples[Object.keys(examples)[0]] || {}, null, 2));
+  }
+  else {
+    res.end();
+  }
+  
+}
+
+exports.getProjectDescriptionById = function(args, res, next) {
+  /**
+   * parameters expected in the args:
+  * id (String)
+  **/
+    var examples = {};
+  examples['application/json'] = "aeiou";
+  if(Object.keys(examples).length > 0) {
+    res.setHeader('Content-Type', 'application/json');
+    res.end(JSON.stringify(examples[Object.keys(examples)[0]] || {}, null, 2));
+  }
+  else {
+    res.end();
+  }
+  
+}
+
+exports.getProjectGrantById = function(args, res, next) {
+  /**
+   * parameters expected in the args:
+  * id (String)
+  **/
+    var examples = {};
+  examples['application/json'] = {
+  "grant_url" : [ "aeiou" ],
+  "grant_description" : "aeiou",
+  "grant_amount" : 1.3579000000000001069366817318950779736042022705078125,
+  "grant_id" : "aeiou",
+  "grant_keywords" : [ "aeiou" ],
+  "created_date" : "2000-01-23T04:56:07.000+00:00",
+  "updated_date" : "2000-01-23T04:56:07.000+00:00"
+};
+  if(Object.keys(examples).length > 0) {
+    res.setHeader('Content-Type', 'application/json');
+    res.end(JSON.stringify(examples[Object.keys(examples)[0]] || {}, null, 2));
+  }
+  else {
+    res.end();
+  }
+  
+}
+
+exports.getProjectGrantTypeById = function(args, res, next) {
+  /**
+   * parameters expected in the args:
+  * id (String)
+  **/
+    var examples = {};
+  examples['application/json'] = "aeiou";
+  if(Object.keys(examples).length > 0) {
+    res.setHeader('Content-Type', 'application/json');
+    res.end(JSON.stringify(examples[Object.keys(examples)[0]] || {}, null, 2));
+  }
+  else {
+    res.end();
+  }
+  
+}
+
+exports.getProjectNameById = function(args, res, next) {
+  /**
+   * parameters expected in the args:
+  * id (String)
+  **/
+    var examples = {};
+  examples['application/json'] = "aeiou";
+  if(Object.keys(examples).length > 0) {
+    res.setHeader('Content-Type', 'application/json');
+    res.end(JSON.stringify(examples[Object.keys(examples)[0]] || {}, null, 2));
+  }
+  else {
+    res.end();
+  }
+  
+}
+
+exports.getProjects = function(args, res, next) {
+  /**
+   * parameters expected in the args:
+  * size (BigDecimal)
+  * page (BigDecimal)
+  * project_id (String)
+  * created_date (Date)
+  * updated_date (Date)
+  * project_name (String)
+  * project_main_grant_type (String)
+  * project_description (String)
+  * project_creator_id (List)
+  * project_collaborators_id (List)
+  * project_keywords (List)
+  * project_urls (List)
+  * grant_id (String)
+  * university_id (String)
+  * grant_facilitator (String)
+  * project_file (List)
+  * reviews (List)
+  * posts (List)
+  * is_project_private (Boolean)
   **/
     var examples = {};
   examples['application/json'] = [ {
-  "review_id" : "aeiou",
-  "reviewer_id" : "aeiou",
-  "rating" : 123,
+  "project_collaborators_id" : [ "aeiou" ],
+  "project_keywords" : [ "aeiou" ],
+  "project_creator_id" : [ "aeiou" ],
+  "grant_facilitator" : "aeiou",
+  "project_urls" : [ "aeiou" ],
+  "project_name" : "aeiou",
+  "posts" : [ "aeiou" ],
+  "is_project_private" : true,
+  "project_description" : "aeiou",
+  "university_id" : "aeiou",
+  "reviews" : [ "aeiou" ],
+  "project_id" : "aeiou",
+  "grant_id" : "aeiou",
+  "project_file" : [ "aeiou" ],
   "created_date" : "2000-01-23T04:56:07.000+00:00",
   "updated_date" : "2000-01-23T04:56:07.000+00:00",
-  "reviewer" : {
-    "keywords" : [ "aeiou" ],
-    "city" : "aeiou",
-    "university_ids" : [ "aeiou" ],
-    "profile_images" : [ "aeiou" ],
-    "last_name" : "aeiou",
-    "is_creator" : true,
-    "project_ids" : [ "aeiou" ],
-    "review_ids" : [ "aeiou" ],
-    "is_collaborator" : true,
-    "is_user_private" : true,
-    "user_id" : "aeiou",
-    "created_date" : "2000-01-23T04:56:07.000+00:00",
-    "updated_date" : "2000-01-23T04:56:07.000+00:00",
-    "state" : "aeiou",
-    "first_name" : "aeiou",
-    "recent_collaborators_id" : [ "aeiou" ],
-    "geolocation" : [ 1.3579000000000001069366817318950779736042022705078125 ]
-  },
-  "review_body" : "aeiou"
-} ];
-  if(Object.keys(examples).length > 0) {
-    res.setHeader('Content-Type', 'application/json');
-    res.end(JSON.stringify(examples[Object.keys(examples)[0]] || {}, null, 2));
-  }
-  else {
-    res.end();
-  }
-  
-}
-
-exports.getCityNameById = function(args, res, next) {
-  /**
-   * parameters expected in the args:
-  * id (String)
-  **/
-    var examples = {};
-  examples['application/json'] = "aeiou";
-  if(Object.keys(examples).length > 0) {
-    res.setHeader('Content-Type', 'application/json');
-    res.end(JSON.stringify(examples[Object.keys(examples)[0]] || {}, null, 2));
-  }
-  else {
-    res.end();
-  }
-  
-}
-
-exports.getCreatedDateById = function(args, res, next) {
-  /**
-   * parameters expected in the args:
-  * id (String)
-  **/
-    var examples = {};
-  examples['application/json'] = "aeiou";
-  if(Object.keys(examples).length > 0) {
-    res.setHeader('Content-Type', 'application/json');
-    res.end(JSON.stringify(examples[Object.keys(examples)[0]] || {}, null, 2));
-  }
-  else {
-    res.end();
-  }
-  
-}
-
-exports.getFirstNameById = function(args, res, next) {
-  /**
-   * parameters expected in the args:
-  * id (String)
-  **/
-    var examples = {};
-  examples['application/json'] = [ "aeiou" ];
-  if(Object.keys(examples).length > 0) {
-    res.setHeader('Content-Type', 'application/json');
-    res.end(JSON.stringify(examples[Object.keys(examples)[0]] || {}, null, 2));
-  }
-  else {
-    res.end();
-  }
-  
-}
-
-exports.getIsUserTagOnProject = function(args, res, next) {
-  /**
-   * parameters expected in the args:
-  * id (String)
-  * user_id (String)
-  **/
-    var examples = {};
-  examples['application/json'] = true;
-  if(Object.keys(examples).length > 0) {
-    res.setHeader('Content-Type', 'application/json');
-    res.end(JSON.stringify(examples[Object.keys(examples)[0]] || {}, null, 2));
-  }
-  else {
-    res.end();
-  }
-  
-}
-
-exports.getLastNameById = function(args, res, next) {
-  /**
-   * parameters expected in the args:
-  * id (String)
-  **/
-    var examples = {};
-  examples['application/json'] = [ "aeiou" ];
-  if(Object.keys(examples).length > 0) {
-    res.setHeader('Content-Type', 'application/json');
-    res.end(JSON.stringify(examples[Object.keys(examples)[0]] || {}, null, 2));
-  }
-  else {
-    res.end();
-  }
-  
-}
-
-exports.getModifiedDateById = function(args, res, next) {
-  /**
-   * parameters expected in the args:
-  * id (String)
-  **/
-    var examples = {};
-  examples['application/json'] = "aeiou";
-  if(Object.keys(examples).length > 0) {
-    res.setHeader('Content-Type', 'application/json');
-    res.end(JSON.stringify(examples[Object.keys(examples)[0]] || {}, null, 2));
-  }
-  else {
-    res.end();
-  }
-  
-}
-
-exports.getPostAuthorById = function(args, res, next) {
-  /**
-   * parameters expected in the args:
-  * id (String)
-  **/
-    var examples = {};
-  examples['application/json'] = "aeiou";
-  if(Object.keys(examples).length > 0) {
-    res.setHeader('Content-Type', 'application/json');
-    res.end(JSON.stringify(examples[Object.keys(examples)[0]] || {}, null, 2));
-  }
-  else {
-    res.end();
-  }
-  
-}
-
-exports.getPostsByAuthorId = function(args, res, next) {
-  /**
-   * parameters expected in the args:
-  * user_id (String)
-  **/
-    var examples = {};
-  examples['application/json'] = [ {
-  "post_title" : "aeiou",
-  "post_author" : {
-    "keywords" : [ "aeiou" ],
-    "city" : "aeiou",
-    "university_ids" : [ "aeiou" ],
-    "profile_images" : [ "aeiou" ],
-    "last_name" : "aeiou",
-    "is_creator" : true,
-    "project_ids" : [ "aeiou" ],
-    "review_ids" : [ "aeiou" ],
-    "is_collaborator" : true,
-    "is_user_private" : true,
-    "user_id" : "aeiou",
-    "created_date" : "2000-01-23T04:56:07.000+00:00",
-    "updated_date" : "2000-01-23T04:56:07.000+00:00",
-    "state" : "aeiou",
-    "first_name" : "aeiou",
-    "recent_collaborators_id" : [ "aeiou" ],
-    "geolocation" : [ 1.3579000000000001069366817318950779736042022705078125 ]
-  },
-  "post_id" : "aeiou",
-  "post_keywords" : [ "aeiou" ],
-  "post_tags_id" : [ "aeiou" ],
-  "post_tags" : [ "" ],
-  "created_date" : "2000-01-23T04:56:07.000+00:00",
-  "updated_date" : "2000-01-23T04:56:07.000+00:00",
-  "post_author_id" : "aeiou",
-  "is_post_private" : true,
-  "post_text" : "aeiou"
+  "project_main_grant_type" : "aeiou"
 } ];
   if(Object.keys(examples).length > 0) {
     res.setHeader('Content-Type', 'application/json');
@@ -853,6 +970,76 @@ exports.getProjectsByCollaboratorId = function(args, res, next) {
   /**
    * parameters expected in the args:
   * user_id (String)
+  **/
+    var examples = {};
+  examples['application/json'] = [ {
+  "project_collaborators_id" : [ "aeiou" ],
+  "project_keywords" : [ "aeiou" ],
+  "project_creator_id" : [ "aeiou" ],
+  "grant_facilitator" : "aeiou",
+  "project_urls" : [ "aeiou" ],
+  "project_name" : "aeiou",
+  "posts" : [ "aeiou" ],
+  "is_project_private" : true,
+  "project_description" : "aeiou",
+  "university_id" : "aeiou",
+  "reviews" : [ "aeiou" ],
+  "project_id" : "aeiou",
+  "grant_id" : "aeiou",
+  "project_file" : [ "aeiou" ],
+  "created_date" : "2000-01-23T04:56:07.000+00:00",
+  "updated_date" : "2000-01-23T04:56:07.000+00:00",
+  "project_main_grant_type" : "aeiou"
+} ];
+  if(Object.keys(examples).length > 0) {
+    res.setHeader('Content-Type', 'application/json');
+    res.end(JSON.stringify(examples[Object.keys(examples)[0]] || {}, null, 2));
+  }
+  else {
+    res.end();
+  }
+  
+}
+
+exports.getProjectsByCreatedDate = function(args, res, next) {
+  /**
+   * parameters expected in the args:
+  * created_date (String)
+  **/
+    var examples = {};
+  examples['application/json'] = [ {
+  "project_collaborators_id" : [ "aeiou" ],
+  "project_keywords" : [ "aeiou" ],
+  "project_creator_id" : [ "aeiou" ],
+  "grant_facilitator" : "aeiou",
+  "project_urls" : [ "aeiou" ],
+  "project_name" : "aeiou",
+  "posts" : [ "aeiou" ],
+  "is_project_private" : true,
+  "project_description" : "aeiou",
+  "university_id" : "aeiou",
+  "reviews" : [ "aeiou" ],
+  "project_id" : "aeiou",
+  "grant_id" : "aeiou",
+  "project_file" : [ "aeiou" ],
+  "created_date" : "2000-01-23T04:56:07.000+00:00",
+  "updated_date" : "2000-01-23T04:56:07.000+00:00",
+  "project_main_grant_type" : "aeiou"
+} ];
+  if(Object.keys(examples).length > 0) {
+    res.setHeader('Content-Type', 'application/json');
+    res.end(JSON.stringify(examples[Object.keys(examples)[0]] || {}, null, 2));
+  }
+  else {
+    res.end();
+  }
+  
+}
+
+exports.getProjectsByCreatedDateForm = function(args, res, next) {
+  /**
+   * parameters expected in the args:
+  * created_date (String)
   **/
     var examples = {};
   examples['application/json'] = [ {
@@ -919,55 +1106,30 @@ exports.getProjectsByCreatorId = function(args, res, next) {
   
 }
 
-exports.getReviewReviewerById = function(args, res, next) {
+exports.getProjectsByGrantId = function(args, res, next) {
   /**
    * parameters expected in the args:
-  * id (String)
-  **/
-    var examples = {};
-  examples['application/json'] = "aeiou";
-  if(Object.keys(examples).length > 0) {
-    res.setHeader('Content-Type', 'application/json');
-    res.end(JSON.stringify(examples[Object.keys(examples)[0]] || {}, null, 2));
-  }
-  else {
-    res.end();
-  }
-  
-}
-
-exports.getReviewsByReviewer = function(args, res, next) {
-  /**
-   * parameters expected in the args:
-  * user_id (String)
+  * grant_id (String)
   **/
     var examples = {};
   examples['application/json'] = [ {
-  "review_id" : "aeiou",
-  "reviewer_id" : "aeiou",
-  "rating" : 123,
+  "project_collaborators_id" : [ "aeiou" ],
+  "project_keywords" : [ "aeiou" ],
+  "project_creator_id" : [ "aeiou" ],
+  "grant_facilitator" : "aeiou",
+  "project_urls" : [ "aeiou" ],
+  "project_name" : "aeiou",
+  "posts" : [ "aeiou" ],
+  "is_project_private" : true,
+  "project_description" : "aeiou",
+  "university_id" : "aeiou",
+  "reviews" : [ "aeiou" ],
+  "project_id" : "aeiou",
+  "grant_id" : "aeiou",
+  "project_file" : [ "aeiou" ],
   "created_date" : "2000-01-23T04:56:07.000+00:00",
   "updated_date" : "2000-01-23T04:56:07.000+00:00",
-  "reviewer" : {
-    "keywords" : [ "aeiou" ],
-    "city" : "aeiou",
-    "university_ids" : [ "aeiou" ],
-    "profile_images" : [ "aeiou" ],
-    "last_name" : "aeiou",
-    "is_creator" : true,
-    "project_ids" : [ "aeiou" ],
-    "review_ids" : [ "aeiou" ],
-    "is_collaborator" : true,
-    "is_user_private" : true,
-    "user_id" : "aeiou",
-    "created_date" : "2000-01-23T04:56:07.000+00:00",
-    "updated_date" : "2000-01-23T04:56:07.000+00:00",
-    "state" : "aeiou",
-    "first_name" : "aeiou",
-    "recent_collaborators_id" : [ "aeiou" ],
-    "geolocation" : [ 1.3579000000000001069366817318950779736042022705078125 ]
-  },
-  "review_body" : "aeiou"
+  "project_main_grant_type" : "aeiou"
 } ];
   if(Object.keys(examples).length > 0) {
     res.setHeader('Content-Type', 'application/json');
@@ -979,199 +1141,83 @@ exports.getReviewsByReviewer = function(args, res, next) {
   
 }
 
-exports.getStateById = function(args, res, next) {
-  /**
-   * parameters expected in the args:
-  * id (String)
-  **/
-    var examples = {};
-  examples['application/json'] = "aeiou";
-  if(Object.keys(examples).length > 0) {
-    res.setHeader('Content-Type', 'application/json');
-    res.end(JSON.stringify(examples[Object.keys(examples)[0]] || {}, null, 2));
-  }
-  else {
-    res.end();
-  }
-  
-}
-
-exports.getUserById = function(args, res, next) {
-  /**
-   * parameters expected in the args:
-  * id (String)
-  **/
-    var examples = {};
-  examples['application/json'] = "aeiou";
-  if(Object.keys(examples).length > 0) {
-    res.setHeader('Content-Type', 'application/json');
-    res.end(JSON.stringify(examples[Object.keys(examples)[0]] || {}, null, 2));
-  }
-  else {
-    res.end();
-  }
-  
-}
-
-exports.getUsers = function(args, res, next) {
-  /**
-   * parameters expected in the args:
-  * size (BigDecimal)
-  * page (BigDecimal)
-  * first_name (String)
-  * last_name (String)
-  * is_collaborator (Boolean)
-  * is_creator (Boolean)
-  * city (String)
-  * state (String)
-  * university_ids (List)
-  * project_id (String)
-  * created_date (String)
-  * modified_date (String)
-  * keywords (List)
-  **/
-    var examples = {};
-  examples['application/json'] = [ {
-  "keywords" : [ "aeiou" ],
-  "city" : "aeiou",
-  "university_ids" : [ "aeiou" ],
-  "profile_images" : [ "aeiou" ],
-  "last_name" : "aeiou",
-  "is_creator" : true,
-  "project_ids" : [ "aeiou" ],
-  "review_ids" : [ "aeiou" ],
-  "is_collaborator" : true,
-  "is_user_private" : true,
-  "user_id" : "aeiou",
-  "created_date" : "2000-01-23T04:56:07.000+00:00",
-  "updated_date" : "2000-01-23T04:56:07.000+00:00",
-  "state" : "aeiou",
-  "first_name" : "aeiou",
-  "recent_collaborators_id" : [ "aeiou" ],
-  "geolocation" : [ 1.3579000000000001069366817318950779736042022705078125 ]
-} ];
-  if(Object.keys(examples).length > 0) {
-    res.setHeader('Content-Type', 'application/json');
-    res.end(JSON.stringify(examples[Object.keys(examples)[0]] || {}, null, 2));
-  }
-  else {
-    res.end();
-  }
-  
-}
-
-exports.getUsersByCreatedDate = function(args, res, next) {
-  /**
-   * parameters expected in the args:
-  * created_date (String)
-  **/
-    var examples = {};
-  examples['application/json'] = [ {
-  "keywords" : [ "aeiou" ],
-  "city" : "aeiou",
-  "university_ids" : [ "aeiou" ],
-  "profile_images" : [ "aeiou" ],
-  "last_name" : "aeiou",
-  "is_creator" : true,
-  "project_ids" : [ "aeiou" ],
-  "review_ids" : [ "aeiou" ],
-  "is_collaborator" : true,
-  "is_user_private" : true,
-  "user_id" : "aeiou",
-  "created_date" : "2000-01-23T04:56:07.000+00:00",
-  "updated_date" : "2000-01-23T04:56:07.000+00:00",
-  "state" : "aeiou",
-  "first_name" : "aeiou",
-  "recent_collaborators_id" : [ "aeiou" ],
-  "geolocation" : [ 1.3579000000000001069366817318950779736042022705078125 ]
-} ];
-  if(Object.keys(examples).length > 0) {
-    res.setHeader('Content-Type', 'application/json');
-    res.end(JSON.stringify(examples[Object.keys(examples)[0]] || {}, null, 2));
-  }
-  else {
-    res.end();
-  }
-  
-}
-
-exports.getUsersByCreatedDateForm = function(args, res, next) {
-  /**
-   * parameters expected in the args:
-  * created_date (Date)
-  **/
-    var examples = {};
-  examples['application/json'] = [ {
-  "keywords" : [ "aeiou" ],
-  "city" : "aeiou",
-  "university_ids" : [ "aeiou" ],
-  "profile_images" : [ "aeiou" ],
-  "last_name" : "aeiou",
-  "is_creator" : true,
-  "project_ids" : [ "aeiou" ],
-  "review_ids" : [ "aeiou" ],
-  "is_collaborator" : true,
-  "is_user_private" : true,
-  "user_id" : "aeiou",
-  "created_date" : "2000-01-23T04:56:07.000+00:00",
-  "updated_date" : "2000-01-23T04:56:07.000+00:00",
-  "state" : "aeiou",
-  "first_name" : "aeiou",
-  "recent_collaborators_id" : [ "aeiou" ],
-  "geolocation" : [ 1.3579000000000001069366817318950779736042022705078125 ]
-} ];
-  if(Object.keys(examples).length > 0) {
-    res.setHeader('Content-Type', 'application/json');
-    res.end(JSON.stringify(examples[Object.keys(examples)[0]] || {}, null, 2));
-  }
-  else {
-    res.end();
-  }
-  
-}
-
-exports.getUsersByKeywords = function(args, res, next) {
-  /**
-   * parameters expected in the args:
-  * keywords (List)
-  **/
-    var examples = {};
-  examples['application/json'] = [ {
-  "keywords" : [ "aeiou" ],
-  "city" : "aeiou",
-  "university_ids" : [ "aeiou" ],
-  "profile_images" : [ "aeiou" ],
-  "last_name" : "aeiou",
-  "is_creator" : true,
-  "project_ids" : [ "aeiou" ],
-  "review_ids" : [ "aeiou" ],
-  "is_collaborator" : true,
-  "is_user_private" : true,
-  "user_id" : "aeiou",
-  "created_date" : "2000-01-23T04:56:07.000+00:00",
-  "updated_date" : "2000-01-23T04:56:07.000+00:00",
-  "state" : "aeiou",
-  "first_name" : "aeiou",
-  "recent_collaborators_id" : [ "aeiou" ],
-  "geolocation" : [ 1.3579000000000001069366817318950779736042022705078125 ]
-} ];
-  if(Object.keys(examples).length > 0) {
-    res.setHeader('Content-Type', 'application/json');
-    res.end(JSON.stringify(examples[Object.keys(examples)[0]] || {}, null, 2));
-  }
-  else {
-    res.end();
-  }
-  
-}
-
-exports.getUsersByModifiedDate = function(args, res, next) {
+exports.getProjectsByModifiedDate = function(args, res, next) {
   /**
    * parameters expected in the args:
   * modified_date (String)
   **/
     var examples = {};
   examples['application/json'] = [ {
+  "project_collaborators_id" : [ "aeiou" ],
+  "project_keywords" : [ "aeiou" ],
+  "project_creator_id" : [ "aeiou" ],
+  "grant_facilitator" : "aeiou",
+  "project_urls" : [ "aeiou" ],
+  "project_name" : "aeiou",
+  "posts" : [ "aeiou" ],
+  "is_project_private" : true,
+  "project_description" : "aeiou",
+  "university_id" : "aeiou",
+  "reviews" : [ "aeiou" ],
+  "project_id" : "aeiou",
+  "grant_id" : "aeiou",
+  "project_file" : [ "aeiou" ],
+  "created_date" : "2000-01-23T04:56:07.000+00:00",
+  "updated_date" : "2000-01-23T04:56:07.000+00:00",
+  "project_main_grant_type" : "aeiou"
+} ];
+  if(Object.keys(examples).length > 0) {
+    res.setHeader('Content-Type', 'application/json');
+    res.end(JSON.stringify(examples[Object.keys(examples)[0]] || {}, null, 2));
+  }
+  else {
+    res.end();
+  }
+  
+}
+
+exports.getProjectsByModifiedDateForm = function(args, res, next) {
+  /**
+   * parameters expected in the args:
+  * modified_date (String)
+  **/
+    var examples = {};
+  examples['application/json'] = [ {
+  "project_collaborators_id" : [ "aeiou" ],
+  "project_keywords" : [ "aeiou" ],
+  "project_creator_id" : [ "aeiou" ],
+  "grant_facilitator" : "aeiou",
+  "project_urls" : [ "aeiou" ],
+  "project_name" : "aeiou",
+  "posts" : [ "aeiou" ],
+  "is_project_private" : true,
+  "project_description" : "aeiou",
+  "university_id" : "aeiou",
+  "reviews" : [ "aeiou" ],
+  "project_id" : "aeiou",
+  "grant_id" : "aeiou",
+  "project_file" : [ "aeiou" ],
+  "created_date" : "2000-01-23T04:56:07.000+00:00",
+  "updated_date" : "2000-01-23T04:56:07.000+00:00",
+  "project_main_grant_type" : "aeiou"
+} ];
+  if(Object.keys(examples).length > 0) {
+    res.setHeader('Content-Type', 'application/json');
+    res.end(JSON.stringify(examples[Object.keys(examples)[0]] || {}, null, 2));
+  }
+  else {
+    res.end();
+  }
+  
+}
+
+exports.getProjectsByUniversityId = function(args, res, next) {
+  /**
+   * parameters expected in the args:
+  * university_id (String)
+  **/
+    var examples = {};
+  examples['application/json'] = [ {
   "keywords" : [ "aeiou" ],
   "city" : "aeiou",
   "university_ids" : [ "aeiou" ],
@@ -1200,31 +1246,23 @@ exports.getUsersByModifiedDate = function(args, res, next) {
   
 }
 
-exports.getUsersByModifiedDateForm = function(args, res, next) {
+exports.getUniversitiesById = function(args, res, next) {
   /**
    * parameters expected in the args:
-  * modified_date (Date)
+  * id (String)
   **/
     var examples = {};
-  examples['application/json'] = [ {
-  "keywords" : [ "aeiou" ],
+  examples['application/json'] = {
   "city" : "aeiou",
-  "university_ids" : [ "aeiou" ],
   "profile_images" : [ "aeiou" ],
-  "last_name" : "aeiou",
-  "is_creator" : true,
-  "project_ids" : [ "aeiou" ],
-  "review_ids" : [ "aeiou" ],
-  "is_collaborator" : true,
-  "is_user_private" : true,
-  "user_id" : "aeiou",
   "created_date" : "2000-01-23T04:56:07.000+00:00",
   "updated_date" : "2000-01-23T04:56:07.000+00:00",
+  "university_name" : "aeiou",
   "state" : "aeiou",
-  "first_name" : "aeiou",
-  "recent_collaborators_id" : [ "aeiou" ],
+  "uni_id" : "aeiou",
+  "project_ids" : [ "aeiou" ],
   "geolocation" : [ 1.3579000000000001069366817318950779736042022705078125 ]
-} ];
+};
   if(Object.keys(examples).length > 0) {
     res.setHeader('Content-Type', 'application/json');
     res.end(JSON.stringify(examples[Object.keys(examples)[0]] || {}, null, 2));
@@ -1272,33 +1310,14 @@ exports.getUsersByProjectId = function(args, res, next) {
   
 }
 
-exports.getUsersByUniversityId = function(args, res, next) {
+exports.isGrantOnProject = function(args, res, next) {
   /**
    * parameters expected in the args:
-  * university_id (String)
-  * max (BigDecimal)
-  * page (BigDecimal)
+  * id (String)
+  * grant_id (String)
   **/
     var examples = {};
-  examples['application/json'] = [ {
-  "keywords" : [ "aeiou" ],
-  "city" : "aeiou",
-  "university_ids" : [ "aeiou" ],
-  "profile_images" : [ "aeiou" ],
-  "last_name" : "aeiou",
-  "is_creator" : true,
-  "project_ids" : [ "aeiou" ],
-  "review_ids" : [ "aeiou" ],
-  "is_collaborator" : true,
-  "is_user_private" : true,
-  "user_id" : "aeiou",
-  "created_date" : "2000-01-23T04:56:07.000+00:00",
-  "updated_date" : "2000-01-23T04:56:07.000+00:00",
-  "state" : "aeiou",
-  "first_name" : "aeiou",
-  "recent_collaborators_id" : [ "aeiou" ],
-  "geolocation" : [ 1.3579000000000001069366817318950779736042022705078125 ]
-} ];
+  examples['application/json'] = true;
   if(Object.keys(examples).length > 0) {
     res.setHeader('Content-Type', 'application/json');
     res.end(JSON.stringify(examples[Object.keys(examples)[0]] || {}, null, 2));
@@ -1309,7 +1328,97 @@ exports.getUsersByUniversityId = function(args, res, next) {
   
 }
 
-exports.isCollaboratorById = function(args, res, next) {
+exports.isGrantTypeOnProject = function(args, res, next) {
+  /**
+   * parameters expected in the args:
+  * id (String)
+  * project_main_grant_type (String)
+  **/
+    var examples = {};
+  examples['application/json'] = true;
+  if(Object.keys(examples).length > 0) {
+    res.setHeader('Content-Type', 'application/json');
+    res.end(JSON.stringify(examples[Object.keys(examples)[0]] || {}, null, 2));
+  }
+  else {
+    res.end();
+  }
+  
+}
+
+exports.isKeywordOnProject = function(args, res, next) {
+  /**
+   * parameters expected in the args:
+  * id (String)
+  * keyword (String)
+  **/
+    var examples = {};
+  examples['application/json'] = true;
+  if(Object.keys(examples).length > 0) {
+    res.setHeader('Content-Type', 'application/json');
+    res.end(JSON.stringify(examples[Object.keys(examples)[0]] || {}, null, 2));
+  }
+  else {
+    res.end();
+  }
+  
+}
+
+exports.isNameOnProject = function(args, res, next) {
+  /**
+   * parameters expected in the args:
+  * id (String)
+  * project_name (String)
+  **/
+    var examples = {};
+  examples['application/json'] = true;
+  if(Object.keys(examples).length > 0) {
+    res.setHeader('Content-Type', 'application/json');
+    res.end(JSON.stringify(examples[Object.keys(examples)[0]] || {}, null, 2));
+  }
+  else {
+    res.end();
+  }
+  
+}
+
+exports.isPostOnProject = function(args, res, next) {
+  /**
+   * parameters expected in the args:
+  * id (String)
+  * post_id (String)
+  **/
+    var examples = {};
+  examples['application/json'] = true;
+  if(Object.keys(examples).length > 0) {
+    res.setHeader('Content-Type', 'application/json');
+    res.end(JSON.stringify(examples[Object.keys(examples)[0]] || {}, null, 2));
+  }
+  else {
+    res.end();
+  }
+  
+}
+
+exports.isProjectDescriptionOnProject = function(args, res, next) {
+  /**
+   * parameters expected in the args:
+  * id (String)
+  * project_description (String)
+  **/
+    var examples = {};
+  examples['application/json'] = true;
+  if(Object.keys(examples).length > 0) {
+    res.setHeader('Content-Type', 'application/json');
+    res.end(JSON.stringify(examples[Object.keys(examples)[0]] || {}, null, 2));
+  }
+  else {
+    res.end();
+  }
+  
+}
+
+exports.isProjectPrivate = function(args, res, next) {
   /**
    * parameters expected in the args:
   * id (String)
@@ -1326,24 +1435,7 @@ exports.isCollaboratorById = function(args, res, next) {
   
 }
 
-exports.isCreatorById = function(args, res, next) {
-  /**
-   * parameters expected in the args:
-  * id (String)
-  **/
-    var examples = {};
-  examples['application/json'] = true;
-  if(Object.keys(examples).length > 0) {
-    res.setHeader('Content-Type', 'application/json');
-    res.end(JSON.stringify(examples[Object.keys(examples)[0]] || {}, null, 2));
-  }
-  else {
-    res.end();
-  }
-  
-}
-
-exports.isReviewOnUserById = function(args, res, next) {
+exports.isReviewOnOProject = function(args, res, next) {
   /**
    * parameters expected in the args:
   * id (String)
@@ -1361,29 +1453,11 @@ exports.isReviewOnUserById = function(args, res, next) {
   
 }
 
-exports.isUniversityOnUser = function(args, res, next) {
+exports.isUniversityOnProject = function(args, res, next) {
   /**
    * parameters expected in the args:
   * id (String)
   * university_id (String)
-  **/
-    var examples = {};
-  examples['application/json'] = true;
-  if(Object.keys(examples).length > 0) {
-    res.setHeader('Content-Type', 'application/json');
-    res.end(JSON.stringify(examples[Object.keys(examples)[0]] || {}, null, 2));
-  }
-  else {
-    res.end();
-  }
-  
-}
-
-exports.isUserCity = function(args, res, next) {
-  /**
-   * parameters expected in the args:
-  * id (String)
-  * city (String)
   **/
     var examples = {};
   examples['application/json'] = true;
@@ -1451,60 +1525,6 @@ exports.isUserCreatorOnProject = function(args, res, next) {
   
 }
 
-exports.isUserFirstName = function(args, res, next) {
-  /**
-   * parameters expected in the args:
-  * id (String)
-  * first_name (String)
-  **/
-    var examples = {};
-  examples['application/json'] = true;
-  if(Object.keys(examples).length > 0) {
-    res.setHeader('Content-Type', 'application/json');
-    res.end(JSON.stringify(examples[Object.keys(examples)[0]] || {}, null, 2));
-  }
-  else {
-    res.end();
-  }
-  
-}
-
-exports.isUserHaveKeyword = function(args, res, next) {
-  /**
-   * parameters expected in the args:
-  * id (String)
-  * keyword (String)
-  **/
-    var examples = {};
-  examples['application/json'] = true;
-  if(Object.keys(examples).length > 0) {
-    res.setHeader('Content-Type', 'application/json');
-    res.end(JSON.stringify(examples[Object.keys(examples)[0]] || {}, null, 2));
-  }
-  else {
-    res.end();
-  }
-  
-}
-
-exports.isUserLastName = function(args, res, next) {
-  /**
-   * parameters expected in the args:
-  * id (String)
-  * last_name (String)
-  **/
-    var examples = {};
-  examples['application/json'] = true;
-  if(Object.keys(examples).length > 0) {
-    res.setHeader('Content-Type', 'application/json');
-    res.end(JSON.stringify(examples[Object.keys(examples)[0]] || {}, null, 2));
-  }
-  else {
-    res.end();
-  }
-  
-}
-
 exports.isUserOnProjectById = function(args, res, next) {
   /**
    * parameters expected in the args:
@@ -1523,47 +1543,11 @@ exports.isUserOnProjectById = function(args, res, next) {
   
 }
 
-exports.isUserReviewReviewer = function(args, res, next) {
+exports.modifyProjectDescription = function(args, res, next) {
   /**
    * parameters expected in the args:
   * id (String)
-  * user_id (String)
-  **/
-    var examples = {};
-  examples['application/json'] = true;
-  if(Object.keys(examples).length > 0) {
-    res.setHeader('Content-Type', 'application/json');
-    res.end(JSON.stringify(examples[Object.keys(examples)[0]] || {}, null, 2));
-  }
-  else {
-    res.end();
-  }
-  
-}
-
-exports.isUserState = function(args, res, next) {
-  /**
-   * parameters expected in the args:
-  * id (String)
-  * state (String)
-  **/
-    var examples = {};
-  examples['application/json'] = true;
-  if(Object.keys(examples).length > 0) {
-    res.setHeader('Content-Type', 'application/json');
-    res.end(JSON.stringify(examples[Object.keys(examples)[0]] || {}, null, 2));
-  }
-  else {
-    res.end();
-  }
-  
-}
-
-exports.modifyUserCity = function(args, res, next) {
-  /**
-   * parameters expected in the args:
-  * id (String)
-  * city (String)
+  * project_description (String)
   **/
     var examples = {};
   examples['application/json'] = "aeiou";
@@ -1577,11 +1561,11 @@ exports.modifyUserCity = function(args, res, next) {
   
 }
 
-exports.modifyUserFirstName = function(args, res, next) {
+exports.modifyProjectGrant = function(args, res, next) {
   /**
    * parameters expected in the args:
   * id (String)
-  * first_name (String)
+  * grant_id (String)
   **/
     var examples = {};
   examples['application/json'] = "aeiou";
@@ -1595,11 +1579,11 @@ exports.modifyUserFirstName = function(args, res, next) {
   
 }
 
-exports.modifyUserLastName = function(args, res, next) {
+exports.modifyProjectGrantType = function(args, res, next) {
   /**
    * parameters expected in the args:
   * id (String)
-  * last_name (String)
+  * project_main_grant_type (String)
   **/
     var examples = {};
   examples['application/json'] = "aeiou";
@@ -1613,11 +1597,29 @@ exports.modifyUserLastName = function(args, res, next) {
   
 }
 
-exports.modifyUserState = function(args, res, next) {
+exports.modifyProjectName = function(args, res, next) {
   /**
    * parameters expected in the args:
   * id (String)
-  * state (String)
+  * project_name (String)
+  **/
+    var examples = {};
+  examples['application/json'] = "aeiou";
+  if(Object.keys(examples).length > 0) {
+    res.setHeader('Content-Type', 'application/json');
+    res.end(JSON.stringify(examples[Object.keys(examples)[0]] || {}, null, 2));
+  }
+  else {
+    res.end();
+  }
+  
+}
+
+exports.modifyProjectUniversity = function(args, res, next) {
+  /**
+   * parameters expected in the args:
+  * id (String)
+  * university_id (String)
   **/
     var examples = {};
   examples['application/json'] = "aeiou";
@@ -1667,11 +1669,11 @@ exports.setAllProjectCreators = function(args, res, next) {
   
 }
 
-exports.setIsUserCollaboratorById = function(args, res, next) {
+exports.setAllProjectFiles = function(args, res, next) {
   /**
    * parameters expected in the args:
   * id (String)
-  * isCollaborator (Boolean)
+  * files (List)
   **/
     var examples = {};
   examples['application/json'] = "aeiou";
@@ -1685,11 +1687,11 @@ exports.setIsUserCollaboratorById = function(args, res, next) {
   
 }
 
-exports.setIsUserCollaboratorByIdPut = function(args, res, next) {
+exports.setAllProjectKeywords = function(args, res, next) {
   /**
    * parameters expected in the args:
   * id (String)
-  * isCollaborator (Boolean)
+  * keywords (List)
   **/
     var examples = {};
   examples['application/json'] = "aeiou";
@@ -1703,11 +1705,11 @@ exports.setIsUserCollaboratorByIdPut = function(args, res, next) {
   
 }
 
-exports.setIsUserCreatorById = function(args, res, next) {
+exports.setAllProjectPosts = function(args, res, next) {
   /**
    * parameters expected in the args:
   * id (String)
-  * isCreator (Boolean)
+  * posts (List)
   **/
     var examples = {};
   examples['application/json'] = "aeiou";
@@ -1721,14 +1723,50 @@ exports.setIsUserCreatorById = function(args, res, next) {
   
 }
 
-exports.setIsUserCreatorByIdPut = function(args, res, next) {
+exports.setAllProjectReviews = function(args, res, next) {
   /**
    * parameters expected in the args:
   * id (String)
-  * isCollaborator (Boolean)
+  * reviews (List)
   **/
     var examples = {};
   examples['application/json'] = "aeiou";
+  if(Object.keys(examples).length > 0) {
+    res.setHeader('Content-Type', 'application/json');
+    res.end(JSON.stringify(examples[Object.keys(examples)[0]] || {}, null, 2));
+  }
+  else {
+    res.end();
+  }
+  
+}
+
+exports.setAllProjectUrls = function(args, res, next) {
+  /**
+   * parameters expected in the args:
+  * id (String)
+  * urls (List)
+  **/
+    var examples = {};
+  examples['application/json'] = "aeiou";
+  if(Object.keys(examples).length > 0) {
+    res.setHeader('Content-Type', 'application/json');
+    res.end(JSON.stringify(examples[Object.keys(examples)[0]] || {}, null, 2));
+  }
+  else {
+    res.end();
+  }
+  
+}
+
+exports.setIsProjectPrivate = function(args, res, next) {
+  /**
+   * parameters expected in the args:
+  * id (String)
+  * is_private (Boolean)
+  **/
+    var examples = {};
+  examples['application/json'] = true;
   if(Object.keys(examples).length > 0) {
     res.setHeader('Content-Type', 'application/json');
     res.end(JSON.stringify(examples[Object.keys(examples)[0]] || {}, null, 2));
@@ -1775,11 +1813,11 @@ exports.setProjectCreator = function(args, res, next) {
   
 }
 
-exports.setReviewReviewerById = function(args, res, next) {
+exports.setProjectDescription = function(args, res, next) {
   /**
    * parameters expected in the args:
   * id (String)
-  * user_id (String)
+  * project_description (String)
   **/
     var examples = {};
   examples['application/json'] = "aeiou";
@@ -1793,11 +1831,11 @@ exports.setReviewReviewerById = function(args, res, next) {
   
 }
 
-exports.setUserImages = function(args, res, next) {
+exports.setProjectGrant = function(args, res, next) {
   /**
    * parameters expected in the args:
   * id (String)
-  * images (List)
+  * grant_id (String)
   **/
     var examples = {};
   examples['application/json'] = "aeiou";
@@ -1811,7 +1849,25 @@ exports.setUserImages = function(args, res, next) {
   
 }
 
-exports.setUserKeyword = function(args, res, next) {
+exports.setProjectGrantType = function(args, res, next) {
+  /**
+   * parameters expected in the args:
+  * id (String)
+  * project_main_grant_type (String)
+  **/
+    var examples = {};
+  examples['application/json'] = "aeiou";
+  if(Object.keys(examples).length > 0) {
+    res.setHeader('Content-Type', 'application/json');
+    res.end(JSON.stringify(examples[Object.keys(examples)[0]] || {}, null, 2));
+  }
+  else {
+    res.end();
+  }
+  
+}
+
+exports.setProjectKeyword = function(args, res, next) {
   /**
    * parameters expected in the args:
   * id (String)
@@ -1829,29 +1885,11 @@ exports.setUserKeyword = function(args, res, next) {
   
 }
 
-exports.setUserKeywords = function(args, res, next) {
+exports.setProjectUniversity = function(args, res, next) {
   /**
    * parameters expected in the args:
   * id (String)
-  * keywords (List)
-  **/
-    var examples = {};
-  examples['application/json'] = "aeiou";
-  if(Object.keys(examples).length > 0) {
-    res.setHeader('Content-Type', 'application/json');
-    res.end(JSON.stringify(examples[Object.keys(examples)[0]] || {}, null, 2));
-  }
-  else {
-    res.end();
-  }
-  
-}
-
-exports.setUserReviewById = function(args, res, next) {
-  /**
-   * parameters expected in the args:
-  * id (String)
-  * review_id (String)
+  * university_id (String)
   **/
     var examples = {};
   examples['application/json'] = "aeiou";
@@ -1883,73 +1921,24 @@ exports.settUserProjectById = function(args, res, next) {
   
 }
 
-exports.settUserUniversityById = function(args, res, next) {
+exports.updateProject = function(args, res, next) {
   /**
    * parameters expected in the args:
   * id (String)
+  * project_name (String)
+  * project_main_grant_type (String)
+  * project_description (String)
+  * project_creator_id (List)
+  * project_collaborators_id (List)
+  * project_keywords (List)
+  * project_urls (List)
+  * grant_id (String)
   * university_id (String)
-  **/
-    var examples = {};
-  examples['application/json'] = "aeiou";
-  if(Object.keys(examples).length > 0) {
-    res.setHeader('Content-Type', 'application/json');
-    res.end(JSON.stringify(examples[Object.keys(examples)[0]] || {}, null, 2));
-  }
-  else {
-    res.end();
-  }
-  
-}
-
-exports.updatePostTagsById = function(args, res, next) {
-  /**
-   * parameters expected in the args:
-  * id (String)
-  * user_id (List)
-  **/
-    var examples = {};
-  examples['application/json'] = "aeiou";
-  if(Object.keys(examples).length > 0) {
-    res.setHeader('Content-Type', 'application/json');
-    res.end(JSON.stringify(examples[Object.keys(examples)[0]] || {}, null, 2));
-  }
-  else {
-    res.end();
-  }
-  
-}
-
-exports.updateReviewReviewerById = function(args, res, next) {
-  /**
-   * parameters expected in the args:
-  * id (String)
-  * user_id (String)
-  **/
-    var examples = {};
-  examples['application/json'] = "aeiou";
-  if(Object.keys(examples).length > 0) {
-    res.setHeader('Content-Type', 'application/json');
-    res.end(JSON.stringify(examples[Object.keys(examples)[0]] || {}, null, 2));
-  }
-  else {
-    res.end();
-  }
-  
-}
-
-exports.updateUser = function(args, res, next) {
-  /**
-   * parameters expected in the args:
-  * id (String)
-  * first_name (String)
-  * last_name (String)
-  * is_collaborator (Boolean)
-  * is_creator (Boolean)
-  * city (String)
-  * state (String)
-  * university (String)
-  * project_id (String)
-  * keywords (List)
+  * grant_facilitator (String)
+  * project_file (List)
+  * reviews (List)
+  * posts (List)
+  * is_project_private (Boolean)
   **/
     var examples = {};
   examples['application/json'] = "aeiou";
