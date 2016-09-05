@@ -220,6 +220,9 @@ paths:
             $ref: '#/definitions/Error'
   /Users/uni/{university_id}:
       get:
+        tags:
+        - User
+        - University
         description: |
           Retrieve `User` objects at a particular `University`
         operationId: getUsersByUniversityId
@@ -259,6 +262,9 @@ paths:
               $ref: '#/definitions/Error'  
   /Users/projects/{project_id}:
     get:
+      tags:
+        - User
+        - Project
       description: |
         Retrieve `User` objects on a particular `Project`
       operationId: getUsersByProjectId
@@ -300,6 +306,8 @@ paths:
             $ref: '#/definitions/Error'
   /Users/created/{created_date}:
       get:
+        tags:
+        - User
         description: |
           Retrieve `User` objects created on or after the given date
         operationId: getUsersByCreatedDate
@@ -325,6 +333,8 @@ paths:
               $ref: '#/definitions/Error'            
   /Users/created:
       get:
+        tags:
+        - User
         description: |
           Retrieve `User` objects created on or after the given date2
         operationId: getUsersByCreatedDateForm
@@ -353,6 +363,8 @@ paths:
               $ref: '#/definitions/Error'
   /Users/modified/{modified_date}:
     get:
+      tags:
+        - User
       description: |
         Retrieve `User` objects created on or after the given date
       operationId: getUsersByModifiedDate
@@ -378,6 +390,8 @@ paths:
             $ref: '#/definitions/Error'
   /Users/modified_date:
     get:
+      tags:
+        - User
       description: |
         Retrieve `User` objects created on or after the given date
       operationId: getUsersByModifiedDateForm
@@ -404,6 +418,8 @@ paths:
             $ref: '#/definitions/Error'              
   /Users/keys:
     get:
+      tags:
+        - User
       description: |
         Retrieve `User` objects based on keywords
       operationId: getUsersByKeywords
@@ -652,9 +668,12 @@ paths:
             $ref: '#/definitions/Error'            
   /User/{id}/uni/{university_id}:
     get:
+      tags:
+        - User
+        - University
       description: |
-        Retrieve a 'University' associated with a `User`.
-      operationId: getUserUniversityById
+        Is 'University' associated with a `User`?
+      operationId: isUniversityOnUser
       produces:
         - application/json
       parameters:
@@ -674,12 +693,15 @@ paths:
         '200':
           description: The `University` associated with the `User`
           schema:
-            $ref: '#/definitions/University'
+            type: boolean
         default:
           description: Unexpected error
           schema:
             $ref: '#/definitions/Error'
     post:
+      tags:
+        - User
+        - University
       description: |
         Add a 'University' to a `User`.
       operationId: settUserUniversityById
@@ -708,6 +730,9 @@ paths:
           schema:
             $ref: '#/definitions/Error'
     delete:
+      tags:
+        - User
+        - University
       description: |
         Remove a 'University' fromo a `User`.
       operationId: deleteUserUniversityById
@@ -737,9 +762,11 @@ paths:
             $ref: '#/definitions/Error'
       #not going to add a PUT to modify a project, that should be done directly on the Project paths
       #redundant paths are bad            
-
   /User/{id}/project:
     get:
+      tags:
+        - User
+        - Project
       description: |
         Retrieve all 'Project' associated with a `User`.
       operationId: getAllUserProjectById
@@ -762,6 +789,9 @@ paths:
           schema:
             $ref: '#/definitions/Error'
     delete:
+      tags:
+        - User
+        - Project
       description: |
         Remove all 'Project' ojects from a `User`.
       operationId: deleteAllUserProjectById
@@ -785,9 +815,12 @@ paths:
             $ref: '#/definitions/Error'
   /User/{id}/project/{project_id}:
     get:
+      tags:
+        - User
+        - Project
       description: |
-        Retrieve a 'Project' associated with a `User`.
-      operationId: getUserProjectById
+        Is 'Project' associated with a `User`?
+      operationId: isUserOnProjectById
       produces:
         - application/json
       parameters:
@@ -805,14 +838,17 @@ paths:
           type: string
       responses:
         '200':
-          description: The `Project` associated with the `User`
+          description: The boolean
           schema:
-            $ref: '#/definitions/Project'
+            type: boolean
         default:
           description: Unexpected error
           schema:
             $ref: '#/definitions/Error'
     post:
+      tags:
+        - User
+        - Project
       description: |
         Add a 'Project' to a `User`.
       operationId: settUserProjectById
@@ -841,6 +877,9 @@ paths:
           schema:
             $ref: '#/definitions/Error'
     delete:
+      tags:
+        - User
+        - Project
       description: |
         Remove a 'Project' from a `User`.
       operationId: deleteUserProjectById
@@ -870,6 +909,9 @@ paths:
             $ref: '#/definitions/Error'
   /User/{id}/review:
     get:
+      tags:
+        - User
+        - Review
       description: |
         Retrieve all 'Review' associated with a `User`.
       operationId: getAllUserReviewById
@@ -894,6 +936,9 @@ paths:
           schema:
             $ref: '#/definitions/Error'
     delete:
+      tags:
+        - User
+        - Review
       description: |
         Remove all 'Review' ojects from a `User`.
       operationId: deleteAllUserReviewById
@@ -917,9 +962,12 @@ paths:
             $ref: '#/definitions/Error'
   /User/{id}/review/{review_id}:
     get:
+      tags:
+        - User
+        - Review
       description: |
-        Retrieve a 'Review' associated with a `User`.
-      operationId: getUserReviewById
+        Is a 'Review' associated with a `User`??
+      operationId: isReviewOnUserById
       produces:
         - application/json
       parameters:
@@ -937,14 +985,17 @@ paths:
           type: string
       responses:
         '200':
-          description: The `Review` associated with the `User`
+          description: The boolean
           schema:
-            $ref: '#/definitions/Review'
+            type: boolean
         default:
           description: Unexpected error
           schema:
             $ref: '#/definitions/Error'
     post:
+      tags:
+        - User
+        - Review
       description: |
         Add a 'Review' to a `User`.
       operationId: setUserReviewById
@@ -973,6 +1024,9 @@ paths:
           schema:
             $ref: '#/definitions/Error'
     delete:
+      tags:
+        - User
+        - Review
       description: |
         Remove a 'Review' from a `User`.
       operationId: deleteUserReviewById
@@ -1002,6 +1056,8 @@ paths:
             $ref: '#/definitions/Error'
   /User/{id}/images:
     get:
+      tags:
+        - User
       description: |
         Retrieve all images associated with a `User`.
       operationId: getAllUserImages
@@ -1025,6 +1081,8 @@ paths:
             $ref: '#/definitions/Error'
     #I don't think put makes sense since we'd just have to pull the array, modify it, and send it back anyway
     post:
+      tags:
+        - User
       description: |
         Add images to a `User`.
       operationId: setUserImages
@@ -1058,6 +1116,8 @@ paths:
           schema:
             $ref: '#/definitions/Error'
     delete:
+      tags:
+        - User
       description: |
         Remove an image, or multiple images, from a `User`.
       operationId: deleteImagesFromUserById
@@ -1092,6 +1152,8 @@ paths:
             $ref: '#/definitions/Error'
   /User/{id}/keys:
     get:
+      tags:
+        - User
       description: |
         Retrieve all keywords associated with a `User`.
       operationId: getAllUserKeywords
@@ -1117,6 +1179,8 @@ paths:
             $ref: '#/definitions/Error'
     #I don't think put makes sense since we'd just have to pull the array, modify it, and send it back anyway
     post:
+      tags:
+        - User
       description: |
         Add keywords to a `User`.
       operationId: setUserKeywords
@@ -1148,6 +1212,8 @@ paths:
           schema:
             $ref: '#/definitions/Error'
     delete:
+      tags:
+        - User
       description: |
         Delete keywords from a user
       operationId: deleteKeywordsFromUserById
@@ -1170,7 +1236,39 @@ paths:
           schema:
             $ref: '#/definitions/Error'
   /User/{id}/keys/{keyword}:
+    get:
+      tags:
+        - User
+      description: |
+        Check if a keyword is on a `User`.
+      operationId: isUserHaveKeyword
+      produces:
+        - application/json
+      parameters:
+        -
+          name: id
+          in: path
+          description: The `id` of the `User` to retrieve
+          required: true
+          type: string
+        -
+          name: keyword
+          in: path
+          description: The keyword
+          required: true
+          type: string
+      responses:
+        '200':
+          description: The boolean
+          schema:
+            type: boolean
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
     post:
+      tags:
+        - User
       description: |
         Add a keyword to a `User`.
       operationId: setUserKeyword
@@ -1199,6 +1297,8 @@ paths:
           schema:
             $ref: '#/definitions/Error'
     delete:
+      tags:
+        - User
       description: |
         Delete keyword from a user
       operationId: deleteKeywordFromUserById
@@ -1228,6 +1328,8 @@ paths:
             $ref: '#/definitions/Error'
   /User/{id}/first_name:
     get:
+      tags:
+        - User
       description: |
         Retrieve first name associated with a `User`.
       operationId: getFirstNameById
@@ -1252,6 +1354,9 @@ paths:
           schema:
             $ref: '#/definitions/Error'
     delete:
+      tags:
+        - User
+        - Review
       description: |
         Delete first_name from a user
       operationId: deleteUserFirstName
@@ -1274,7 +1379,40 @@ paths:
           schema:
             $ref: '#/definitions/Error'
   /User/{id}/first_name/{first_name}:
+    get:
+      tags:
+        - User
+      description: |
+        Check if first name is on `User`
+      operationId: isUserFirstName
+      produces:
+        - application/json
+      parameters:
+        -
+          name: id
+          in: path
+          description: The `id` of the `User` to retrieve
+          required: true
+          type: string
+        -
+          name: first_name
+          in: path
+          description: The keywords
+          required: true
+          type: string
+      responses:
+        # Response code
+        '200':
+          description: The boolean
+          schema:
+            type: boolean
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'  
     post:
+      tags:
+        - User
       description: |
         Add first name to a `User`.
       operationId: addUserFirstName
@@ -1303,6 +1441,8 @@ paths:
           schema:
             $ref: '#/definitions/Error'
     put:
+      tags:
+        - User
       description: |
         Modify first name of a `User`.
       operationId: modifyUserFirstName
@@ -1332,6 +1472,8 @@ paths:
             $ref: '#/definitions/Error'
   /User/{id}/last_name:
     get:
+      tags:
+        - User
       description: |
         Retrieve first name associated with a `User`.
       operationId: getLastNameById
@@ -1356,6 +1498,8 @@ paths:
           schema:
             $ref: '#/definitions/Error'
     delete:
+      tags:
+        - User
       description: |
         Delete last_name from a user
       operationId: deleteUserLastName
@@ -1378,7 +1522,40 @@ paths:
           schema:
             $ref: '#/definitions/Error'
   /User/{id}/last_name/{last_name}:
+    get:
+      tags:
+        - User
+      description: |
+        Check if last name is on `User`.
+      operationId: isUserLastName
+      produces:
+        - application/json
+      parameters:
+        -
+          name: id
+          in: path
+          description: The `id` of the `User` to retrieve
+          required: true
+          type: string
+        -
+          name: last_name
+          in: path
+          description: The keywords
+          required: true
+          type: string
+      responses:
+        # Response code
+        '200':
+          description: The boolean
+          schema:
+            type: boolean
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
     post:
+      tags:
+        - User
       description: |
         Add last name to a `User`.
       operationId: addUserLastName
@@ -1407,6 +1584,8 @@ paths:
           schema:
             $ref: '#/definitions/Error'
     put:
+      tags:
+        - User
       description: |
         Modify last name of a `User`.
       operationId: modifyUserLastName
@@ -1436,6 +1615,8 @@ paths:
             $ref: '#/definitions/Error'
   /User/{id}/collaborator:
     get:
+      tags:
+        - User
       description: |
         Retrieve if `User` is a collaborator.
       operationId: isCollaboratorById
@@ -1458,6 +1639,8 @@ paths:
           schema:
             $ref: '#/definitions/Error'
     post:
+      tags:
+        - User
       description: |
         set if `User` is a collaborator.
       operationId: setIsUserCollaboratorById
@@ -1488,6 +1671,8 @@ paths:
           schema:
             $ref: '#/definitions/Error'
     put:
+      tags:
+        - User
       description: |
         set if `User` is a collaborator.
       operationId: setIsUserCollaboratorByIdPut
@@ -1519,6 +1704,8 @@ paths:
             $ref: '#/definitions/Error'
   /User/{id}/creator:
     get:
+      tags:
+        - User
       description: |
         Retrieve if `User` is a creator.
       operationId: isCreatorById
@@ -1541,6 +1728,8 @@ paths:
           schema:
             $ref: '#/definitions/Error'
     post:
+      tags:
+        - User
       description: |
         set if `User` is a creator.
       operationId: setIsUserCreatorById
@@ -1571,6 +1760,8 @@ paths:
           schema:
             $ref: '#/definitions/Error'
     put:
+      tags:
+        - User
       description: |
         set if `User` is a creator.
       operationId: setIsUserCreatorByIdPut
@@ -1602,6 +1793,8 @@ paths:
             $ref: '#/definitions/Error'
   /User/{id}/city:
     get:
+      tags:
+        - User
       description: |
         Retrieve city associated with a `User`.
       operationId: getCityNameById
@@ -1624,6 +1817,8 @@ paths:
           schema:
             $ref: '#/definitions/Error'
     delete:
+      tags:
+        - User
       description: |
         Delete city from a user
       operationId: deleteUserCity
@@ -1646,7 +1841,40 @@ paths:
           schema:
             $ref: '#/definitions/Error'
   /User/{id}/city/{city}:
+    get:
+      tags:
+        - User
+      description: |
+        Check if city is on `User`.
+      operationId: isUserCity
+      produces:
+        - application/json
+      parameters:
+        -
+          name: id
+          in: path
+          description: The `id` of the `User` to retrieve
+          required: true
+          type: string
+        -
+          name: city
+          in: path
+          description: The city
+          required: true
+          type: string
+      responses:
+        # Response code
+        '200':
+          description: The boolean
+          schema:
+            type: boolean
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'    
     post:
+      tags:
+        - User
       description: |
         Add city to a `User`.
       operationId: addUserCity
@@ -1675,6 +1903,8 @@ paths:
           schema:
             $ref: '#/definitions/Error'
     put:
+      tags:
+        - User
       description: |
         Modify city of a `User`.
       operationId: modifyUserCity
@@ -1704,6 +1934,8 @@ paths:
             $ref: '#/definitions/Error'
   /User/{id}/state:
     get:
+      tags:
+        - User
       description: |
         Retrieve state associated with a `User`.
       operationId: getStateById
@@ -1726,6 +1958,8 @@ paths:
           schema:
             $ref: '#/definitions/Error'
     delete:
+      tags:
+        - User
       description: |
         Delete state from a user
       operationId: deleteUserState
@@ -1748,7 +1982,40 @@ paths:
           schema:
             $ref: '#/definitions/Error'
   /User/{id}/state/{state}:
+    get:
+      tags:
+        - User
+      description: |
+        Check if state is on `User`.
+      operationId: isUserState
+      produces:
+        - application/json
+      parameters:
+        -
+          name: id
+          in: path
+          description: The `id` of the `User` to retrieve
+          required: true
+          type: string
+        -
+          name: state
+          in: path
+          description: The state
+          required: true
+          type: string
+      responses:
+        # Response code
+        '200':
+          description: The boolean
+          schema:
+            type: boolean
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error' 
     post:
+      tags:
+        - User
       description: |
         Add state to a `User`.
       operationId: addUserState
@@ -1777,6 +2044,8 @@ paths:
           schema:
             $ref: '#/definitions/Error'
     put:
+      tags:
+        - User
       description: |
         Modify state of a `User`.
       operationId: modifyUserState
@@ -1806,6 +2075,8 @@ paths:
             $ref: '#/definitions/Error'
   /User/{id}/created:
     get:
+      tags:
+        - User
       description: |
         Retrieve creation date of a `User`.
       operationId: getCreatedDateById
@@ -1829,6 +2100,8 @@ paths:
             $ref: '#/definitions/Error'
   /User/{id}/modified:
     get:
+      tags:
+        - User
       description: |
         Retrieve modified date of a `User`.
       operationId: getModifiedDateById
@@ -1973,6 +2246,8 @@ paths:
   /Projects:
     # This is a HTTP operation
     get:
+      tags:
+        - Project
       # Describe this verb here. Note: you can use markdown
       description: |
         Gets `Project` objects.
@@ -2118,8 +2393,6 @@ paths:
           required: false
           type: boolean
           description: is project private?
-      tags:
-        - Projects
       # Expected responses for this operation:
       responses:
         # Response code
@@ -2142,6 +2415,9 @@ paths:
       ######################################
   /Projects/uni/{university_id}:
     get:
+      tags:
+        - Project
+        - University
       description: |
         Retrieve `Project` objects at a particular `University`
       operationId: getProjectsByUniversityId
@@ -2167,6 +2443,9 @@ paths:
             $ref: '#/definitions/Error'
   /Projects/creator/{user_id}:
     get:
+      tags:
+        - Project
+        - User
       description: |
         Retrieve `Project` objects by a particular creator `User`
       operationId: getProjectsByCreatorId
@@ -2192,6 +2471,9 @@ paths:
             $ref: '#/definitions/Error'
   /Projects/collaborator/{user_id}:
     get:
+      tags:
+        - Project
+        - User
       description: |
         Retrieve `Project` objects by a particular collaborator `User`
       operationId: getProjectsByCollaboratorId
@@ -2231,6 +2513,9 @@ paths:
             #get use formdata
   /Projects/grant/{grant_id}:
     get:
+      tags:
+        - Project
+        - Grant
       description: |
         Retrieve `Project` objects associated with a particular `Grant`
       operationId: getProjectsByGrantId
@@ -2270,6 +2555,8 @@ paths:
             #get use formdata
   /Projects/created_date:
     get:
+      tags:
+        - Project
       description: |
         Retrieve `Project` objects created on or later than given date
       operationId: getProjectsByCreatedDateForm
@@ -2296,6 +2583,8 @@ paths:
             $ref: '#/definitions/Error'
   /Projects/created_date/{created_date}:
     get:
+      tags:
+        - Project
       description: |
         Retrieve `Project` objects created on or later than given date
       operationId: getProjectsByCreatedDate
@@ -2321,6 +2610,8 @@ paths:
             $ref: '#/definitions/Error'
   /Projects/modified_date:
     get:
+      tags:
+        - Project
       description: |
         Retrieve `Project` objects modified on or later than given date
       operationId: getProjectsByModifiedDateForm
@@ -2346,6 +2637,8 @@ paths:
             $ref: '#/definitions/Error'
   /Projects/modified_date/{modified_date}:
     get:
+      tags:
+        - Project
       description: |
         Retrieve `Project` objects modified on or later than given date
       operationId: getProjectsByModifiedDate
@@ -2386,6 +2679,8 @@ paths:
   
   /Project:
     post:
+      tags:
+        - Project
       description: |
         Creates `Project` objects. **project_name**, **project_description**,
         **project_creator_id**, and **is_project_private** are required,
@@ -2494,8 +2789,6 @@ paths:
         required: true
         type: boolean
         description: is project private?
-      tags:
-        - User
       # Expected responses for this operation:
       responses:
         # Response code
@@ -2511,6 +2804,8 @@ paths:
     # accidentally nike the wrong thing
   /Project/{id}:
     put:
+      tags:
+        - Project
       description: |
         Updates a `Project` object. All fields other than `id` optional.
       operationId: updateProject
@@ -2623,8 +2918,6 @@ paths:
         required: false
         type: boolean
         description: is project private?
-      tags:
-        - User
       # Expected responses for this operation:
       responses:
         # Response code
@@ -2637,6 +2930,8 @@ paths:
           schema:
             $ref: '#/definitions/Error'
     delete:
+      tags:
+        - Project
       description: |
         Delete a 'Project' by their id.
       operationId: deleteProjectById
@@ -2659,6 +2954,8 @@ paths:
           schema:
             $ref: '#/definitions/Error'
     get:
+      tags:
+        - Project
       description: |
         Retrieve a 'Project' by their id.
       operationId: getProjectById
@@ -2682,6 +2979,9 @@ paths:
             $ref: '#/definitions/Error'
   /Project/{id}/creators:
     get:
+      tags:
+        - Project
+        - User
       description: |
         Get creators of a `Project`.
       operationId: getAllProjectCreators
@@ -2706,6 +3006,9 @@ paths:
           schema:
             $ref: '#/definitions/Error'
     post:
+      tags:
+        - Project
+        - User
       description: |
         Set creators of a `Project`.
       operationId: setAllProjectCreators
@@ -2739,6 +3042,9 @@ paths:
           schema:
             $ref: '#/definitions/Error'
     put:
+      tags:
+        - Project
+        - User
       description: |
         Add to creators of a `Project`.
       operationId: addProjectCreators
@@ -2770,6 +3076,9 @@ paths:
           schema:
             $ref: '#/definitions/Error'
     delete:
+      tags:
+        - Project
+        - User
       description: |
         Remove all 'project_creators' from a `Project`.
       operationId: deleteProjectCreators
@@ -2792,7 +3101,42 @@ paths:
           schema:
             $ref: '#/definitions/Error'
   /Project/{id}/creators/{user_id}:
+    get:
+      tags:
+        - Project
+        - User
+      description: |
+        Check if `User` is creator on `Project', return user if true.
+      operationId: isUserCreatorOnProject
+      produces:
+        - application/json
+      parameters:
+        -
+          name: id
+          in: path
+          description: The `id` of the `User` to retrieve
+          required: true
+          type: string
+        -
+          name: user_id
+          in: path
+          description: The user id
+          required: true
+          type: string
+      responses:
+        # Response code
+        '200':
+          description: The boolean
+          schema:
+            type: boolean
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error' 
     post:
+      tags:
+        - Project
+        - User
       description: |
         Set creator of a `Project`.
       operationId: setProjectCreator
@@ -2821,6 +3165,9 @@ paths:
           schema:
             $ref: '#/definitions/Error'
     put:
+      tags:
+        - Project
+        - User
       description: |
         Add to creators of a `Project`.
       operationId: addProjectCreator
@@ -2849,6 +3196,9 @@ paths:
           schema:
             $ref: '#/definitions/Error'
     delete:
+      tags:
+        - Project
+        - User
       description: |
         Remove a 'project_creator' from a `Project`.
       operationId: deleteProjectCreator
@@ -2878,6 +3228,9 @@ paths:
             $ref: '#/definitions/Error'
   /Project/{id}/collaborators:
     get:
+      tags:
+        - Project
+        - User
       description: |
         Get collaborators of a `Project`.
       operationId: getAllProjectCollaborators
@@ -2902,6 +3255,9 @@ paths:
           schema:
             $ref: '#/definitions/Error'
     post:
+      tags:
+        - Project
+        - User
       description: |
         Set creators of a `Project`.
       operationId: setAllProjectCollaborators
@@ -2933,6 +3289,9 @@ paths:
           schema:
             $ref: '#/definitions/Error'
     put:
+      tags:
+        - Project
+        - User
       description: |
         Add to collaborators of a `Project`.
       operationId: addProjectCollaborators
@@ -2964,6 +3323,9 @@ paths:
           schema:
             $ref: '#/definitions/Error'
     delete:
+      tags:
+        - Project
+        - User
       description: |
         Remove all 'project_collaborators' from a `Project`.
       operationId: deleteProjectCollaborators
@@ -2986,6 +3348,38 @@ paths:
           schema:
             $ref: '#/definitions/Error'
   /Project/{id}/collaborators/{user_id}:
+    get:
+      tags:
+        - Project
+        - User
+      description: |
+        Check if `User` is collaborator on `Project', return if true
+      operationId: isUserCollaboratorOnProject
+      produces:
+        - application/json
+      parameters:
+        -
+          name: id
+          in: path
+          description: The `id` of the `User` to retrieve
+          required: true
+          type: string
+        -
+          name: user_id
+          in: path
+          description: The user id
+          required: true
+          type: string
+      responses:
+        # Response code
+        '200':
+          description: The user
+          schema:
+            $ref: '#/definitions/User'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error' 
     post:
       description: |
         Set collaborators of a `Project`.
@@ -3072,6 +3466,8 @@ paths:
             $ref: '#/definitions/Error'
   /Project/{id}/urls:
     get:
+      tags:
+        - Project
       description: |
         Get urls of a `Project`.
       operationId: getAllProjectUrls
@@ -3096,6 +3492,8 @@ paths:
           schema:
             $ref: '#/definitions/Error'
     post:
+      tags:
+        - Project
       description: |
         Set urls of a `Project`.
       operationId: setAllProjectUrls
@@ -3127,6 +3525,8 @@ paths:
           schema:
             $ref: '#/definitions/Error'
     put:
+      tags:
+        - Project
       description: |
         Add to urls of a `Project`.
       operationId: addProjectUrls
@@ -3158,6 +3558,8 @@ paths:
           schema:
             $ref: '#/definitions/Error'
     delete:
+      tags:
+        - Project
       description: |
         Remove all 'urls' from a `Project`.
       operationId: deleteProjectUrls
@@ -3181,6 +3583,8 @@ paths:
             $ref: '#/definitions/Error'
   /Project/{id}/keys:
     get:
+      tags:
+        - Project
       description: |
         Get keywords of a `Project`.
       operationId: getAllProjectKeywords
@@ -3205,6 +3609,8 @@ paths:
           schema:
             $ref: '#/definitions/Error'
     post:
+      tags:
+        - Project
       description: |
         Set keywords of a `Project`.
       operationId: setAllProjectKeywords
@@ -3236,6 +3642,8 @@ paths:
           schema:
             $ref: '#/definitions/Error'
     put:
+      tags:
+        - Project
       description: |
         Add to keywords of a `Project`.
       operationId: addProjectKeywords
@@ -3267,6 +3675,8 @@ paths:
           schema:
             $ref: '#/definitions/Error'
     delete:
+      tags:
+        - Project
       description: |
         Remove all 'keywords' from a `Project`.
       operationId: deleteProjectKeywords
@@ -3289,7 +3699,40 @@ paths:
           schema:
             $ref: '#/definitions/Error'
   /Project/{id}/keys/{keyword}:
+    get:
+      tags:
+        - Project
+      description: |
+        Check if keyword is on `Project'.
+      operationId: isKeywordOnProject
+      produces:
+        - application/json
+      parameters:
+        -
+          name: id
+          in: path
+          description: The `id` of the `User` to retrieve
+          required: true
+          type: string
+        -
+          name: keyword
+          in: path
+          description: The keyword
+          required: true
+          type: string
+      responses:
+        # Response code
+        '200':
+          description: The boolean
+          schema:
+            type: boolean
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error' 
     post:
+      tags:
+        - Project
       description: |
         Set keyword of a `Project`.
       operationId: setProjectKeyword
@@ -3318,6 +3761,8 @@ paths:
           schema:
             $ref: '#/definitions/Error'
     put:
+      tags:
+        - Project
       description: |
         Add to keyword of a `Project`.
       operationId: addProjectKeyword
@@ -3346,6 +3791,8 @@ paths:
           schema:
             $ref: '#/definitions/Error'
     delete:
+      tags:
+        - Project
       description: |
         Remove a 'keyword' from a `Project`.
       operationId: deleteProjectKeyword
@@ -3375,6 +3822,8 @@ paths:
             $ref: '#/definitions/Error'
   /Project/{id}/files:
     get:
+      tags:
+        - Project
       description: |
         Get files of a `Project`.
       operationId: getAllProjectFiles
@@ -3399,6 +3848,8 @@ paths:
           schema:
             $ref: '#/definitions/Error'
     post:
+      tags:
+        - Project
       description: |
         Set files of a `Project`.
       operationId: setAllProjectFiles
@@ -3430,6 +3881,8 @@ paths:
           schema:
             $ref: '#/definitions/Error'
     put:
+      tags:
+        - Project
       description: |
         Add to files of a `Project`.
       operationId: addProjectFiles
@@ -3461,6 +3914,8 @@ paths:
           schema:
             $ref: '#/definitions/Error'
     delete:
+      tags:
+        - Project
       description: |
         Remove all 'files' from a `Project`.
       operationId: deleteProjectFiles
@@ -3484,6 +3939,9 @@ paths:
             $ref: '#/definitions/Error'
   /Project/{id}/reviews:
     get:
+      tags:
+        - Project
+        - Review
       description: |
         Get reviews of a `Project`.
       operationId: getAllProjectReviews
@@ -3593,9 +4051,12 @@ paths:
             $ref: '#/definitions/Error'
   /Project/{id}/reviews/{review_id}:
     get:
+      tags:
+        - Project
+        - Review
       description: |
-        Get reviews of a `Project`.
-      operationId: getProjectReview
+        Check if `Review` of a `Project` if it is on project
+      operationId: isReviewOnOProject
       produces:
         - application/json
       parameters:
@@ -3613,14 +4074,17 @@ paths:
           type: string
       responses:
         '200':
-          description: The review
+          description: The boolean
           schema:
-            $ref: '#/definitions/Review'
+            type: boolean
         default:
           description: Unexpected error
           schema:
             $ref: '#/definitions/Error'
     put:
+      tags:
+        - Project
+        - Review
       description: |
         Add review to a `Project`.
       operationId: addProjectReview
@@ -3649,6 +4113,9 @@ paths:
           schema:
             $ref: '#/definitions/Error'
     delete:
+      tags:
+        - Project
+        - Review
       description: |
         Remove a 'review' from a `Project`.
       operationId: deleteProjectReview
@@ -3678,6 +4145,9 @@ paths:
             $ref: '#/definitions/Error'
   /Project/{id}/posts:
     get:
+      tags:
+        - Project
+        - Post
       description: |
         Get posts of a `Project`.
       operationId: getAllProjectPosts
@@ -3702,6 +4172,9 @@ paths:
           schema:
             $ref: '#/definitions/Error'
     post:
+      tags:
+        - Project
+        - Post
       description: |
         Set posts of a `Project`.
       operationId: setAllProjectPosts
@@ -3733,6 +4206,9 @@ paths:
           schema:
             $ref: '#/definitions/Error'
     put:
+      tags:
+        - Project
+        - Post
       description: |
         Add to posts of a `Project`.
       operationId: addProjectPosts
@@ -3764,6 +4240,9 @@ paths:
           schema:
             $ref: '#/definitions/Error'
     delete:
+      tags:
+        - Project
+        - Post
       description: |
         Remove all 'posts' from a `Project`.
       operationId: deleteProjectPosts
@@ -3787,9 +4266,12 @@ paths:
             $ref: '#/definitions/Error'
   /Project/{id}/posts/{post_id}:
     get:
+      tags:
+        - Project
+        - Post
       description: |
-        Get reviews of a `Project`.
-      operationId: getProjectPost
+        Check if `Post` is on a `Project`
+      operationId: isPostOnProject
       produces:
         - application/json
       parameters:
@@ -3809,12 +4291,15 @@ paths:
         '200':
           description: The post
           schema:
-            $ref: '#/definitions/Post'
+            type: boolean
         default:
           description: Unexpected error
           schema:
             $ref: '#/definitions/Error'
     put:
+      tags:
+        - Project
+        - Post
       description: |
         Add post to a `Project`.
       operationId: addProjectPost
@@ -3843,6 +4328,9 @@ paths:
           schema:
             $ref: '#/definitions/Error'
     delete:
+      tags:
+        - Project
+        - Post
       description: |
         Remove a 'post' from a `Project`.
       operationId: deleteProjectPost
@@ -3872,6 +4360,8 @@ paths:
             $ref: '#/definitions/Error'
   /Project/{id}/project_name:
     get:
+      tags:
+        - Project
       description: |
         Retrieve project_name associated with a `Project`.
       operationId: getProjectNameById
@@ -3894,6 +4384,8 @@ paths:
           schema:
             $ref: '#/definitions/Error'
     delete:
+      tags:
+        - Project
       description: |
         Delete project_name from a project
       operationId: deleteUserProjectName
@@ -3916,7 +4408,39 @@ paths:
           schema:
             $ref: '#/definitions/Error'
   /Project/{id}/name/{project_name}:
+    get:
+      tags:
+        - Project
+      description: |
+        Check if project name of `Project` is some value
+      operationId: isNameOnProject
+      produces:
+        - application/json
+      parameters:
+        -
+          name: id
+          in: path
+          description: The `id` of the `Project` to retrieve
+          required: true
+          type: string
+        -
+          name: project_name
+          in: path
+          description: The `project_name` of the `Project`
+          required: true
+          type: string
+      responses:
+        '200':
+          description: The post
+          schema:
+            type: boolean
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
     post:
+      tags:
+        - Project
       description: |
         Add project_name to a `Project`.
       operationId: addProjectName
@@ -3945,6 +4469,8 @@ paths:
           schema:
             $ref: '#/definitions/Error'
     put:
+      tags:
+        - Project
       description: |
         Modify project_name of a `Project`.
       operationId: modifyProjectName
@@ -3974,6 +4500,10 @@ paths:
             $ref: '#/definitions/Error'
   /Project/{id}/grant_type:
     get:
+      tags:
+        - Project
+        - Grant
+        - REFACTOR-TODO-move-grant-stuff-to-grant-object
       description: |
         Retrieve project_main_grant_type associated with a `Project`.
       operationId: getProjectGrantTypeById
@@ -3996,6 +4526,10 @@ paths:
           schema:
             $ref: '#/definitions/Error'
     delete:
+      tags:
+        - Project
+        - Grant
+        - REFACTOR-TODO-move-grant-stuff-to-grant-object
       description: |
         Delete project_main_grant_type from a project
       operationId: deleteProjectGrantType
@@ -4018,7 +4552,43 @@ paths:
           schema:
             $ref: '#/definitions/Error'
   /Project/{id}/grant_type/{project_main_grant_type}:
+    get:
+      tags:
+        - Project
+        - Grant
+        - REFACTOR-TODO-move-grant-stuff-to-grant-object
+      description: |
+        Check if grant tyoe  of `Project` is some value
+      operationId: isGrantTypeOnProject
+      produces:
+        - application/json
+      parameters:
+        -
+          name: id
+          in: path
+          description: The `id` of the `Project` to retrieve
+          required: true
+          type: string
+        -
+          name: project_main_grant_type
+          in: path
+          description: The `project_main_grant_type` of the `Project`
+          required: true
+          type: string
+      responses:
+        '200':
+          description: The post
+          schema:
+            type: boolean
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
     post:
+      tags:
+        - Project
+        - Grant
+        - REFACTOR-TODO-move-grant-stuff-to-grant-object
       description: |
         Add project_name to a `Project`.
       operationId: setProjectGrantType
@@ -4047,6 +4617,10 @@ paths:
           schema:
             $ref: '#/definitions/Error'
     put:
+      tags:
+        - Project
+        - Grant
+        - REFACTOR-TODO-move-grant-stuff-to-grant-object
       description: |
         Modify project_name of a `Project`.
       operationId: modifyProjectGrantType
@@ -4076,6 +4650,8 @@ paths:
             $ref: '#/definitions/Error'
   /Project/{id}/description:
     get:
+      tags:
+        - Project
       description: |
         Retrieve project_description associated with a `Project`.
       operationId: getProjectDescriptionById
@@ -4098,6 +4674,8 @@ paths:
           schema:
             $ref: '#/definitions/Error'
     delete:
+      tags:
+        - Project
       description: |
         Delete project_description from a project
       operationId: deleteProjectDescription
@@ -4120,7 +4698,39 @@ paths:
           schema:
             $ref: '#/definitions/Error'
   /Project/{id}/description/{project_description}:
+    get:
+      tags:
+        - Project
+      description: |
+        Check if project descript of `Project` is some value
+      operationId: isProjectDescriptionOnProject
+      produces:
+        - application/json
+      parameters:
+        -
+          name: id
+          in: path
+          description: The `id` of the `Project` to retrieve
+          required: true
+          type: string
+        -
+          name: project_description
+          in: path
+          description: The `project_description` of the `Project`
+          required: true
+          type: string
+      responses:
+        '200':
+          description: The post
+          schema:
+            type: boolean
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
     post:
+      tags:
+        - Project
       description: |
         Add project_description to a `Project`.
       operationId: setProjectDescription
@@ -4149,6 +4759,8 @@ paths:
           schema:
             $ref: '#/definitions/Error'
     put:
+      tags:
+        - Project
       description: |
         Modify project_description of a `Project`.
       operationId: modifyProjectDescription
@@ -4178,6 +4790,9 @@ paths:
             $ref: '#/definitions/Error'
   /Project/{id}/grant:
     get:
+      tags:
+        - Project
+        - Grant
       description: |
         Retrieve grant associated with a `Project`.
       operationId: getProjectGrantById
@@ -4200,6 +4815,9 @@ paths:
           schema:
             $ref: '#/definitions/Error'
     delete:
+      tags:
+        - Project
+        - Grant
       description: |
         Delete grant from a project
       operationId: deleteProjectGrant
@@ -4222,7 +4840,41 @@ paths:
           schema:
             $ref: '#/definitions/Error'
   /Project/{id}/grant/{grant_id}:
+    get:
+      tags:
+        - Project
+        - Grant
+      description: |
+        Check if `Grant` is on `Project`
+      operationId: isGrantOnProject
+      produces:
+        - application/json
+      parameters:
+        -
+          name: id
+          in: path
+          description: The `id` of the `Project` to retrieve
+          required: true
+          type: string
+        -
+          name: grant_id
+          in: path
+          description: The `grant_id` of the `Project`
+          required: true
+          type: string
+      responses:
+        '200':
+          description: The post
+          schema:
+            type: boolean
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
     post:
+      tags:
+        - Project
+        - Grant
       description: |
         Add grant to a `Project`.
       operationId: setProjectGrant
@@ -4251,6 +4903,9 @@ paths:
           schema:
             $ref: '#/definitions/Error'
     put:
+      tags:
+        - Project
+        - Grant
       description: |
         Modify grant of a `Project`.
       operationId: modifyProjectGrant
@@ -4280,6 +4935,9 @@ paths:
             $ref: '#/definitions/Error'
   /Project/{id}/uni:
     get:
+      tags:
+        - Project
+        - University
       description: |
         Retrieve universities associated with a `Project`.
       operationId: getUniversitiesById
@@ -4302,6 +4960,9 @@ paths:
           schema:
             $ref: '#/definitions/Error'
     delete:
+      tags:
+        - Project
+        - University
       description: |
         Delete all universities from a project
       operationId: deleteProjecUniversities
@@ -4324,7 +4985,41 @@ paths:
           schema:
             $ref: '#/definitions/Error'
   /Project/{id}/uni/{university_id}:
+    get:
+      tags:
+        - Project
+        - University
+      description: |
+        Check if project descript of `Project` is some value
+      operationId: isUniversityOnProject
+      produces:
+        - application/json
+      parameters:
+        -
+          name: id
+          in: path
+          description: The `id` of the `Project` to retrieve
+          required: true
+          type: string
+        -
+          name: university_id
+          in: path
+          description: The id of the `University`
+          required: true
+          type: string
+      responses:
+        '200':
+          description: The post
+          schema:
+            type: boolean
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
     post:
+      tags:
+        - Project
+        - University
       description: |
         Set university_id to a `Project`.
       operationId: setProjectUniversity
@@ -4353,6 +5048,9 @@ paths:
           schema:
             $ref: '#/definitions/Error'
     put:
+      tags:
+        - Project
+        - University
       description: |
         Modify university_id of a `Project`.
       operationId: modifyProjectUniversity
@@ -4382,6 +5080,8 @@ paths:
             $ref: '#/definitions/Error'
   /Project/{id}/private:
     get:
+      tags:
+        - Project
       description: |
         Retrieve is_private from a  `Project`.
       operationId: isProjectPrivate
@@ -4404,6 +5104,9 @@ paths:
           schema:
             $ref: '#/definitions/Error'
     put:
+      tags:
+        - Project
+        - University
       description: |
         Set is_private from a  `Project`.
       operationId: setIsProjectPrivate
@@ -4433,6 +5136,1617 @@ paths:
           description: Unexpected error
           schema:
             $ref: '#/definitions/Error'
+
+  ######################################
+    ################Posts#################
+    ######################################
+  #searches
+
+  #/Posts/author/{user_id}
+  #get
+  #/Posts/tags/{user_id}
+  #get
+  #/Posts/keys/{keyword}
+  #get
+  #/Posts/keys
+  #get (multiple keywords, either formData or url query)
+
+  #/Posts/created
+  #get, use formdata so we can just pass json I think
+  #Posts/modified
+  #get, use formdata so we can just pass json I think
+
+    #/Post
+    # get put post delete
+    #/Post/{id}
+    # get put delete
+    #/Post/{id}/tags
+    # get put post delete
+    #/Post/{id}/tags/{user_id}
+    # get put post delete
+    #/Post/{id}/keys
+    # get put post delete, either formBody or urlQuery
+    #/Post/{id}/keys/{keyword}
+    # post delete, get and put don't make sense here since we clearly already know the keyword
+    #/Post/{id}/title
+    #get put
+    #/Post/{id}/text
+    #get put post delete
+    #/Post/{id}/author
+    #get delete
+    #/Post/{id}/private
+    #get put
+
+
+  /Posts:
+    get:
+      tags:
+        - Post
+      description: |
+        Gets `Post` objects.
+        Required query param of **size** determines
+        max number of results per page, and **page** determines
+        which page in the pagination we are. Remaining params optional.
+      operationId: getPosts
+      produces:
+        - application/json
+      consumes:
+        - application/json
+      parameters:
+        -
+          name: size
+          in: formData
+          description: Max size of array to return
+          required: true
+          type: number
+          format: int32
+        -
+          name: page
+          in: formData
+          description: Location in pagination
+          required: true
+          type: number
+          format: int32
+        -
+          name: post_id
+          in: formData
+          required: false
+          type: string
+          description: Unique identifier representing a specific `Post`
+        -
+          name: created_date
+          in: formData
+          required: false
+          type: string
+          format: date-time
+          description: datetime stamp of `Post` creation
+        -
+          name: updated_date
+          in: formData
+          required: false
+          type: string
+          format: date-time
+          description: datetime stamp of `Post` update
+        -
+          name: post_tags_id
+          in: formData
+          required: false
+          type: array
+          items:
+            type: string
+          description: array of `User`s tagged in `Post`
+        -
+          name: post_keywords
+          in: formData
+          required: false
+          type: array
+          items:
+            type: string
+          description: array of keywords for `Post`
+        -
+          name: post_title
+          in: formData
+          required: false
+          type: string
+          description: ID of `User` author of post
+        -
+          name: post_text
+          in: formData
+          required: false
+          type: string
+          description: ID of `User` author of post                    
+        -
+          name: post_creator_id
+          in: formData
+          required: false
+          type: string
+          description: ID of `User` author of post          
+        -
+          name: is_post_private
+          in: formData
+          required: false
+          type: boolean
+          description: is `Post` private?
+      responses:
+        # Response code
+        '200':
+          description: An array of posts
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Post'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+
+
+
+
+      ######################################
+      ##############Definitions#############
+      ######################################
+  
+
+
+
+ 
+  /Posts/author/{user_id}:
+    get:
+      tags:
+        - Post
+        - User
+      description: |
+        Retrieve `Post` objects with a particular `User` as author
+      operationId: getPostsByAuthorId
+      produces:
+        - application/json
+      parameters:
+        -
+          name: user_id
+          in: path
+          description: ID of 'User' to fetch
+          required: true
+          type: string
+      responses:
+        # Response code
+        '200':
+          description: An array of posts
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Post'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /Posts/keys:
+    get:
+      tags:
+          - Post
+      description: |
+        Retrieve `Project` objects by a set of keywords
+      operationId: getPostsByKeywords
+      produces:
+        - application/json
+      consumes:
+        - application/json
+      parameters:
+        -
+          name: keywords
+          in: formData
+          description: Keywords when searching for user
+          required: true
+          type: array
+          items:
+            type: string
+          collectionFormat: csv
+      responses:
+      # Response code
+        '200':
+          description: An array of posts
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Post'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /Posts/keys/{keyword}:
+    get:
+      tags:
+        - Post
+      description: |
+        Retrieve `Project` objects by a particular keyword
+      operationId: getPostsByKeyword
+      produces:
+        - application/json
+      parameters:
+        -
+          name: keyword
+          in: path
+          description: keyword to search for
+          required: true
+          type: string
+      responses:
+        '200':
+          description: posts response
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Post'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /Posts/created_date:
+    get:
+      tags:
+        - Post
+      description: |
+        Retrieve `Post` objects created on or later than given date
+      operationId: getPostsByCreatedDateForm
+      produces:
+        - application/json
+      consumes:
+        - application/json
+      parameters:
+        -
+          name: created_date
+          in: formData
+          description: date of creation
+          required: true
+          type: string
+          format: date-time
+      responses:
+        '200':
+          description: posts response
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Post'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /Posts/created_date/{created_date}:
+    get:
+      tags:
+        - Post
+      description: |
+        Retrieve `Post` objects created on or later than given date
+      operationId: getPostsByCreatedDate
+      produces:
+        - application/json
+      parameters:
+        -
+          name: created_date
+          in: path
+          description: date of creation
+          required: true
+          type: string
+      responses:
+        '200':
+          description: posts response
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Post'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /Posts/modified_date:
+    get:
+      tags:
+        - Post
+      description: |
+        Retrieve `Post` objects modified on or later than given date
+      operationId: getPostsByModifiedDateForm
+      produces:
+        - application/json
+      consumes:
+        - application/json
+      parameters:
+        -
+          name: modified_date
+          in: formData
+          description: date of modification
+          required: true
+          type: string
+          format: date-time
+      responses:
+        '200':
+          description: posts response
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Post'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /Posts/modified_date/{modified_date}:
+    get:
+      tags:
+        - Post
+      description: |
+        Retrieve `Post` objects created on or later than given date
+      operationId: getPostsByModifiedDate
+      produces:
+        - application/json
+      parameters:
+        -
+          name: modified_date
+          in: path
+          description: date of creation
+          required: true
+          type: string
+      responses:
+        '200':
+          description: posts response
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Post'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'    
+
+  /Post:
+    post:
+      tags:
+        - Post
+      description: |
+        Creates `Post` objects. **post_title**, **project_descpost_textription**,
+        **post_creator_id**, and **is_post_private** are required,
+        all others optional.
+      operationId: createPost
+      produces:
+        - application/json
+      consumes:
+        - application/json
+      parameters:
+      -
+        name: post_title
+        in: formData
+        required: false
+        type: string
+        description: ID of `User` author of post
+      -
+        name: post_text
+        in: formData
+        required: false
+        type: string
+        description: ID of `User` author of post  
+      -
+        name: post_creator_id
+        in: formData
+        required: false
+        type: string
+        description: ID of `User` author of post
+      -
+        name: post_tags_id
+        in: formData
+        required: false
+        type: array
+        items:
+          type: string
+        description: array of `User`s tagged in `Post`
+      -
+        name: post_keywords
+        in: formData
+        required: false
+        type: array
+        items:
+          type: string
+        description: array of keywords for `Post`
+      -
+        name: is_post_private
+        in: formData
+        required: false
+        type: boolean
+        description: is `Post` private?
+        # Expected responses for this operation:
+      responses:
+        '200':
+          description: the id of the created `Post`
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'    
+  /Post/{id}:
+    get:
+      tags:
+          - Post
+      description: |
+        Retrieves `Post` objects by **id**.
+      operationId: getPostById
+      produces:
+        -	application/json
+      parameters:
+      -
+        name: id
+        in: path
+        required: true
+        type: string
+        description: The `Post` name
+      responses:
+        # Response code
+        '200':
+          description: The `Post`
+          schema:
+            $ref: '#/definitions/Post'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    put:
+      tags:
+        - Post
+      description: |
+        Updates `Post` objects. **id** is required,
+        all others optional.
+      operationId: updatePosttById
+      produces:
+        -	application/json
+      consumes:
+        -	application/json
+      parameters:
+      -
+        name: id
+        in: path
+        required: true
+        type: string
+        description: The `Post` name
+      -
+        name: post_title
+        in: formData
+        required: false
+        type: string
+        description: The `Post` name
+      -
+        name: post_text
+        in: formData
+        required: false
+        type: string
+        description: The `Post` body
+      -
+        name: post_creator_id
+        in: formData
+        required: false
+        type: string
+        description: ID of `User` author of post
+      -
+        name: post_tags_id
+        in: formData
+        required: false
+        type: array
+        items:
+          type: string
+        description: array of `User`s tagged in `Post`
+      -
+        name: post_keywords
+        in: formData
+        required: false
+        type: array
+        items:
+          type: string
+        description: array of keywords for `Post`
+      -
+        name: is_post_private
+        in: formData
+        required: false
+        type: boolean
+        description: Is post private?
+      # Expected responses for this operation:
+      responses:
+        # Response code
+        200:
+          description: A `Post` object
+          schema:
+            $ref: '#/definitions/Post'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    delete:
+      tags:
+        - Post
+      description: |
+        Deletes `Post` objects by **id**.
+      operationId: deletePostById
+      produces:
+        -	application/json
+      parameters:
+      - name: id
+        in: path
+        required: true
+        type: string
+        description: The `Post` name
+      responses:
+        # Response code
+        '200':
+          description: The `Post` id
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      #should only modify users using the user/{id} route to make sure we don't
+      # accidentally nike the wrong thing   
+  /Post/{id}/tags:
+    get:
+      tags:
+        - Post
+      description: |
+        Retrieves `Post` tags
+      operationId: getPostTagsById
+      produces:
+        -	application/json
+      parameters:
+      -
+        name: id
+        in: path
+        required: true
+        type: string
+        description: The `Post` name
+      responses:
+        # Response code
+        '200':
+          description: The ids of the tagged `User` ids
+          schema:
+            type: array
+            items:
+                type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    post:
+      description: |
+        Replaces tags on `Post` objects. **id** and **tagged_users* both required.
+      operationId: replacePostTagsById
+      produces:
+        -	application/json
+      consumes:
+        -	application/json
+      parameters:
+      -
+        name: id
+        in: path
+        required: true
+        type: string
+        description: The `Post` name
+      -
+        name: tagged_users
+        in: formData
+        required: true
+        type: array
+        items: 
+          type: string
+        description:  new tags
+      tags:
+        - Post
+      # Expected responses for this operation:
+      responses:
+        # Response code
+        '200':
+          description: The `id` of the `Post`
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    delete:
+      description: |
+        Deletes all tags on a `Post` objects by **id**.
+      operationId: deleteProjectTagsById
+      produces:
+        -	application/json
+      parameters:
+      -
+        name: id
+        in: path
+        required: true
+        type: string
+        description: The `Post` name
+      responses:
+        # Response code
+        '200':
+          description: The `Post` id
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /Post/{id}/tags/{user_id}:
+    get:
+      tags:
+        - Post
+        - User
+      description: |
+        Retrieves whether user is tagged on past
+      operationId: getIsUserTagOnProject
+      produces:
+        -	application/json
+      parameters:
+      -
+        name: id
+        in: path
+        required: true
+        type: string
+        description: The `Post` id
+      -
+        name: user_id
+        in: path
+        required: true
+        type: string
+        description: user_id to check for
+      responses:
+        # Response code
+        '200':
+          description: Boolean of whether the user is taged
+          schema:
+            type: boolean
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    put:
+      tags:
+        - Post
+        - User
+      description: |
+        Adds tags to `Post` objects. **id** and **user_id** both required.
+      operationId: updatePostTagsById
+      produces:
+        -	application/json
+      consumes:
+        -	application/json
+      parameters:
+      -
+        name: id
+        in: path
+        required: true
+        type: string
+        description: The `Post` name
+      -
+        name: user_id
+        in: path
+        required: true
+        type: array
+        items:
+          type: string
+        description:  new tags
+      # Expected responses for this operation:
+      responses:
+        # Response code
+        '200':
+          description: The `id` of the `Post`
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    post:
+      tags:
+        - Post
+        - User
+      description: |
+        Adds tag to `Post` objects. **id** and **user_id** both required.
+      operationId: addPostTagsByIdPost
+      produces:
+        -	application/json
+      consumes:
+        -	application/json
+      parameters:
+      -
+        name: id
+        in: path
+        required: true
+        type: string
+        description: The `Post` name
+      -
+        name: user_id
+        in: path
+        required: true
+        type: string
+        description: The `User` id
+      # Expected responses for this operation:
+      responses:
+        # Response code
+        '200':
+          description: The `id` of the `Post`
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    delete:
+      tags:
+        - Post
+        - User
+      description: |
+        Deletes the tags on a `Post` objects by **id** and **user_id**
+      operationId: deletePostTagsById
+      produces:
+        -	application/json
+      parameters:
+      -
+        name: id
+        in: path
+        required: true
+        type: string
+        description: The `Post` name
+      -
+        name: user_id
+        in: path
+        required: true
+        type: string
+        description: The `User` id
+      responses:
+        # Response code
+        '200':
+          description: The `Post` id
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'  
+  /Post/{id}/keys:
+    get:
+      tags:
+        - Post
+      description: |
+        Retrieves `Post` keywords
+      operationId: getPostKeywordsById
+      produces:
+        -	application/json
+      parameters:
+      -
+        name: id
+        in: path
+        required: true
+        type: string
+        description: The `Post` id
+      responses:
+        # Response code
+        '200':
+          description: The keywords
+          schema:
+            type: array
+            items:
+                type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    put:
+      tags:
+        - Post
+      description: |
+        Adds keywords to `Post` objects. **id** and **keywords** both required.
+      operationId: updateProjectKeywordsById
+      produces:
+        -	application/json
+      consumes:
+        -	application/json
+      parameters:
+      -
+        name: id
+        in: path
+        required: true
+        type: string
+        description: The `Post` name
+      -
+        name: keywords
+        in: formData
+        required: true
+        type: array
+        items: 
+          type: string
+        description:  new keywords
+      # Expected responses for this operation:
+      responses:
+        # Response code
+        '200':
+          description: The `id` of the `Post`
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    post:
+      tags:
+        - Post
+      description: |
+        Replaces keywords on `Post` objects. **id** and **keywords* both required.
+      operationId: replacePostKeywordsById
+      produces:
+        -	application/json
+      consumes:
+        -	application/json
+      parameters:
+      -
+        name: id
+        in: path
+        required: true
+        type: string
+        description: The `Post` name
+      -
+        name: keywords
+        in: formData
+        required: true
+        type: array
+        items: 
+          type: string
+        description:  new tags
+      # Expected responses for this operation:
+      responses:
+        # Response code
+        '200':
+          description: The `id` of the `Post`
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    delete:
+      tags:
+        - Post
+      description: |
+        Deletes all tags on a `Post` objects by **id**.
+      operationId: deletePostKeywordsById
+      produces:
+        -	application/json
+      parameters:
+      -
+        name: id
+        in: path
+        required: true
+        type: string
+        description: The `Post` name
+      responses:
+        # Response code
+        '200':
+          description: The `Post` id
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+              $ref: '#/definitions/Error'
+      #should only modify users using the user/{id} route to make sure we don't
+      # accidentally nike the wrong thing
+  /Post/{id}/keys/{keyword}:
+    get:
+      tags:
+        - Post
+      description: |
+        Retrieves whether keyword is on past
+      operationId: isKeywordOnPost
+      produces:
+        -	application/json
+      parameters:
+      -
+        name: id
+        in: path
+        required: true
+        type: string
+        description: The `Post` id
+      -
+        name: keyword
+        in: path
+        required: true
+        type: string
+        description: the keyword
+      responses:
+        # Response code
+        '200':
+          description: Boolean of whether the user is taged
+          schema:
+            type: boolean
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    put:
+      tags:
+        - Post
+      description: |
+        Adds tags to `Post` objects. **id** and **keyword** both required.
+      operationId: addPostKeywordById
+      produces:
+        -	application/json
+      consumes:
+        -	application/json
+      parameters:
+      -
+        name: id
+        in: path
+        required: true
+        type: string
+        description: The `Post's name
+      -
+        name: keyword
+        in: path
+        required: true
+        type: string
+        description: the keyword
+      # Expected responses for this operation:
+      responses:
+        # Response code
+        '200':
+          description: The `id` of the `Post`
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    post:
+      tags:
+        - Post
+      description: |
+        Adds keyword to `Post` objects. **id** and **user_id* both required.
+      operationId: addPostKeywordByIdPost
+      produces:
+        -	application/json
+      consumes:
+        -	application/json
+      parameters:
+      -
+        name: id
+        in: path
+        required: true
+        type: string
+        description: The `Post` name
+      -
+        name: keyword
+        in: path
+        required: true
+        type: string
+        description: The `User` id
+      # Expected responses for this operation:
+      responses:
+        # Response code
+        '200':
+          description: The `id` of the `Post`
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    delete:
+      tags:
+        - Post
+      description: |
+        Deletes a keyword on a `Post` objects by **id** and **keyword**
+      operationId: deletePostKeywordById
+      produces:
+        -	application/json
+      parameters:
+      -
+        name: id
+        in: path
+        required: true
+        type: string
+        description: The `Post` name
+      -
+        name: keyword
+        in: path
+        required: true
+        type: string
+        description: The keyword
+      responses:
+        # Response code
+        '200':
+          description: The `Post` id
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /Post/{id}/title:
+    get:
+      tags:
+        - Post
+      description: |
+        Retrieves `Post` title
+      operationId: getPostTitleById
+      produces:
+        -	application/json
+      parameters:
+      -
+        name: id
+        in: path
+        required: true
+        type: string
+        description: The `Post` id
+      responses:
+        # Response code
+        '200':
+          description: The title
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    put:
+      tags:
+        - Post
+      description: |
+        Sets the post title.  **id** and **title** both required.
+      operationId: updatePostTitleById
+      produces:
+        -	application/json
+      consumes:
+        -	application/json
+      parameters:
+      -
+        name: id
+        in: path
+        required: true
+        type: string
+        description: The `Post` name
+      -
+        name: title
+        in: formData
+        required: true
+        type: string
+        description:  new title
+      # Expected responses for this operation:
+      responses:
+        # Response code
+        '200':
+          description: The `id` of the `Post`
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    post:
+      tags:
+        - Post
+      description: |
+        Sets the post title.  **id** and **title** both required.
+      operationId: updatePostTitleByIdPost
+      produces:
+        -	application/json
+      consumes:
+        -	application/json
+      parameters:
+      -
+        name: id
+        in: path
+        required: true
+        type: string
+        description: The `Post` name
+      -
+        name: title
+        in: formData
+        required: true
+        type: string
+        description:  new title
+      # Expected responses for this operation:
+      responses:
+        # Response code
+        '200':
+          description: The `id` of the `Post`
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    delete:
+      tags:
+        - Post
+      description: |
+        Deletes title of a `Post` objects by **id**.
+      operationId: deletePosTitleById
+      produces:
+        -	application/json
+      parameters:
+      -
+        name: id
+        in: path
+        required: true
+        type: string
+        description: The `Post` id
+      responses:
+        # Response code
+        '200':
+          description: The `Post` id
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /Post/{id}/text:
+    get:
+      tags:
+        - Post
+      description: |
+        Retrieves `Post` text
+      operationId: getPostTextById
+      produces:
+        -	application/json
+      parameters:
+      -
+        name: id
+        in: path
+        required: true
+        type: string
+        description: The `Post` id
+      responses:
+        # Response code
+        '200':
+          description: The text
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    put:
+      tags:
+        - Post
+      description: |
+        Sets the post title.  **id** and **text** both required.
+      operationId: updatePostTextById
+      produces:
+        -	application/json
+      consumes:
+        -	application/json
+      parameters:
+      -
+        name: id
+        in: path
+        required: true
+        type: string
+        description: The `Post` name
+      -
+        name: text
+        in: formData
+        required: true
+        type: string
+        description:  new text
+      # Expected responses for this operation:
+      responses:
+        # Response code
+        '200':
+          description: The `id` of the `Post`
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    post:
+      tags:
+        - Post
+      description: |
+        Sets the post text.  **id** and **text** both required.
+      operationId: updatePostTextByIdPost
+      produces:
+        -	application/json
+      consumes:
+        -	application/json
+      parameters:
+      -
+        name: id
+        in: path
+        required: true
+        type: string
+        description: The `Post` id
+      -
+        name: text
+        in: formData
+        required: true
+        type: string
+        description:  new title
+      # Expected responses for this operation:
+      responses:
+        # Response code
+        '200':
+          description: The `id` of the `Post`
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    delete:
+      tags:
+        - Post
+      description: |
+        Deletes text of a `Post` objects by **id**.
+      operationId: deletePostTextById
+      produces:
+        -	application/json
+      parameters:
+      -
+        name: id
+        in: path
+        required: true
+        type: string
+        description: The `Post` id
+      responses:
+        # Response code
+        '200':
+          description: The `Post` id
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /Post/{id}/author:
+    get:
+      tags:
+        - Post
+        - User
+      description: |
+        Retrieves `Post` author
+      operationId: getPostAuthorById
+      produces:
+        -	application/json
+      parameters:
+      -
+        name: id
+        in: path
+        required: true
+        type: string
+        description: The `Post` id
+      responses:
+        # Response code
+        '200':
+          description: The author
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    put:
+      description: |
+        Sets the post author.  **id** and **author** both required.
+      operationId: updatePostAuthorById
+      produces:
+        -	application/json
+      consumes:
+        -	application/json
+      parameters:
+      -
+        name: id
+        in: path
+        required: true
+        type: string
+        description: The `Post` id
+      -
+        name: author
+        in: formData
+        required: true
+        type: string
+        description:  new author
+      tags:
+        - Post
+      # Expected responses for this operation:
+      responses:
+        # Response code
+        '200':
+          description: The `id` of the `Post`
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    post:
+      description: |
+        Sets the post author.  **id** and **author** both required.
+      operationId: updatePostAuthorByIdPost
+      produces:
+        -	application/json
+      consumes:
+        -	application/json
+      parameters:
+      -
+        name: id
+        in: path
+        required: true
+        type: string
+        description: The `Post` id
+      -
+        name: text
+        in: formData
+        required: true
+        type: string
+        description:  new author
+      tags:
+        - Post
+      # Expected responses for this operation:
+      responses:
+        # Response code
+        '200':
+          description: The `id` of the `Post`
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    delete:
+      tags:
+        - Post
+      description: |
+        Deletes text of a `Post` author by **id**.
+      operationId: deletePostAuthorById
+      produces:
+        -	application/json
+      parameters:
+      -
+        name: id
+        in: path
+        required: true
+        type: string
+        description: The `Post` id
+      responses:
+        # Response code
+        '200':
+          description: The `Post` id
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /Post/{id}/private:
+    get:
+      tags:
+        - Post
+      description: |
+        Retrieves whether `Post` is private
+      operationId: isPostPrivateById
+      produces:
+        -	application/json
+      parameters:
+      -
+        name: id
+        in: path
+        required: true
+        type: string
+        description: The `Post` id
+      responses:
+        # Response code
+        '200':
+          description: The boolean
+          schema:
+            type: boolean
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    put:
+      description: |
+        Sets the post privacy.  **id** and **is_private** both required.
+      operationId: updatePostPrivacyById
+      produces:
+        -	application/json
+      consumes:
+        -	application/json
+      parameters:
+      -
+        name: id
+        in: path
+        required: true
+        type: string
+        description: The `Post` id
+      -
+        name: is_private
+        in: formData
+        required: true
+        type: boolean
+        description:  is post private?
+      tags:
+        - Post
+      # Expected responses for this operation:
+      responses:
+        # Response code
+        '200':
+          description: The `id` of the `Post`
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    post:
+      description: |
+        Sets the post privacy.  **id** and **is_private** both required.
+      operationId: updatePostPrivacyByIdPost
+      produces:
+        -	application/json
+      consumes:
+        -	application/json
+      parameters:
+      -
+        name: id
+        in: path
+        required: true
+        type: string
+        description: The `Post` id
+      -
+        name: is_private
+        in: formData
+        required: true
+        type: boolean
+        description:  is post private?
+      tags:
+        - Post
+      # Expected responses for this operation:
+      responses:
+        # Response code
+        '200':
+          description: The `id` of the `Post`
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'   
+            
+            
+  ######################################
+        ################Grants################
+        ######################################
+
+        #/Grant
+        #get put post delete
+        #/Grant/{id}
+        #get put delete
+        #/Grant/{id}/description
+        #get put
+        #/Grant/{id}/amount
+        #get put
+        #/Grant/{id}/created
+        #get
+        #/Grant/{id}/modified
+        #get
+        #/Grant/{id}/url
+        #get put
+
+        #/Grants/created
+        #get
+        #/Grants/modified
+        #get
+        #/Grants/amount
+        #get
+        #/Grants/keys
+        #get
+
+
+
+        ######################################
+        ###############Reviews################
+        ######################################
+
+        #/Review
+        #get put post delete
+        #/Review/{id}
+        #get put delete
+        #/Review/{id}/body
+        #get put
+        #/Review/{id}/reviewer
+        #get put
+        #/Review/{id}/rating
+        #get put
+        #/Review/{id}/modified
+        #get
+        #/Review/{id}/url
+        #get put
+
+        #/Reviews/created
+        #get
+        #/Reviews/modified
+        #get
+        #/Reviews/rating
+        #get
+        #/Reviews/reviewer/{id}
+        #get
+        #/Reviews/keys
+        #get
+
+
+        ######################################
+        ################Skills################
+        ######################################
+
+        #/Skill
+        #get put post delete
+        #/Skill/{id}
+        #get put delete
+        #/Skill/{id}/body
+        #get put
+        #/Skill/{id}/endorsements/
+        #get put post delete
+        #/Skill/{id}/endorsements/{user_id}
+        #put post delete (get serves no purpose here since this is literally just a list of people who say yup he can do this)
+        #/Skill/{id}/modified
+        #get
+        #/Skill/{id}/url
+        #get put
+
+        #/Skills/created
+        #get
+        #/Skills/modified
+        #get
+        #/Skills/endorsements/{id}
+        #get
+        #/Skills/keys
+        #get      #keyword search
+
+        ######################################
+        #############Universities#############
+        ######################################
+        #/University
+        #get put post delete
+        #/University/{id}
+        #get put delete
+        #/University/{id}/projects
+        #get post put delete
+        #/University/{id}/projects/{project_id}
+        #get post put delete
+        #/University/{id}/geolocation
+        #get put
+
+        #/University/{id}/endorsements/
+        #get put post delete
+        #/University/{id}/endorsements/{user_id}
+        #put post delete (get serves no purpose here since this is literally just a list of people who say yup he can do this)
+        #/University/{id}/created
+        #get
+        #/University/{id}/modified
+        #get
+        #/University/{id}/url
+        #get put
+
+        #/University/{id}/url
+        #get put post delete
+
+        #/University/{id}/users/
+        #get (get associated users, this will actuall be a query of user objects)
+
+        #/University/{id}/grants/
+        #get (get associated grants, this will actuall be a query of grant objects)
+
+        #/Universities/created
+        #get
+        #/Universities/modified
+        #get
+        #/Universities/endorsements/{id}
+        #get
+        #/Universities/keys
+        #get      #keyword search            
 
 definitions:
   User:
