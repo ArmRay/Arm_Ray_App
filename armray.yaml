@@ -204,7 +204,7 @@ paths:
             type: string
           collectionFormat: csv
       tags:
-        - Users
+        - User
       # Expected responses for this operation:
       responses:
         # Response code
@@ -623,6 +623,8 @@ paths:
           schema:
             $ref: '#/definitions/Error'
     delete:
+      tags:
+        - User
       description: |
         Delete a 'User' by their id.
       operationId: deleteUserById
@@ -645,6 +647,8 @@ paths:
           schema:
             $ref: '#/definitions/Error'
     get:
+      tags:
+        - User
       description: |
         Retrieve a 'User' by their id.
       operationId: getUserById
@@ -3381,6 +3385,9 @@ paths:
           schema:
             $ref: '#/definitions/Error' 
     post:
+      tags:
+        - Project
+        - User
       description: |
         Set collaborators of a `Project`.
       operationId: setProjectCollaborators
@@ -3409,6 +3416,9 @@ paths:
           schema:
             $ref: '#/definitions/Error'
     put:
+      tags:
+        - Project
+        - User
       description: |
         Add to collaborator of a `Project`.
       operationId: addProjectCollaborator
@@ -3437,6 +3447,9 @@ paths:
           schema:
             $ref: '#/definitions/Error'
     delete:
+      tags:
+        - Project
+        - User
       description: |
         Remove a 'project_collaborator' from a `Project`.
       operationId: deleteProjectCollaborator
@@ -3966,6 +3979,9 @@ paths:
           schema:
             $ref: '#/definitions/Error'
     post:
+      tags:
+        - Project
+        - Review
       description: |
         Set reviews of a `Project`.
       operationId: setAllProjectReviews
@@ -3997,6 +4013,9 @@ paths:
           schema:
             $ref: '#/definitions/Error'
     put:
+      tags:
+        - Project
+        - Review
       description: |
         Add to reviews of a `Project`.
       operationId: addProjectReviews
@@ -4028,6 +4047,9 @@ paths:
           schema:
             $ref: '#/definitions/Error'
     delete:
+      tags:
+        - Project
+        - Review
       description: |
         Remove all 'reviews' from a `Project`.
       operationId: deleteProjectReviews
@@ -5286,11 +5308,6 @@ paths:
       ######################################
       ##############Definitions#############
       ######################################
-  
-
-
-
- 
   /Posts/author/{user_id}:
     get:
       tags:
@@ -5745,6 +5762,8 @@ paths:
           schema:
             $ref: '#/definitions/Error'
     delete:
+      tags:
+        - Post
       description: |
         Deletes all tags on a `Post` objects by **id**.
       operationId: deleteProjectTagsById
@@ -6644,6 +6663,273 @@ paths:
         #/Grants/keys
         #get
 
+  /Grants:
+    get:
+      tags:
+        - Grant
+      description: |
+        Gets `Grant` objects.
+        Required query param of **size** determines
+        max number of results per page, and **page** determines
+        which page in the pagination we are. Remaining params optional.
+      operationId: getGrants
+      produces:
+        - application/json
+      consumes:
+        - application/json
+      parameters:
+        -
+          name: size
+          in: formData
+          description: Max size of array to return
+          required: true
+          type: number
+          format: int32
+        -
+          name: page
+          in: formData
+          description: Location in pagination
+          required: true
+          type: number
+          format: int32
+        -
+          name: grant_id
+          in: formData
+          required: false
+          type: string
+          description: Unique identifier representing a specific `Grant`
+        -
+          name: created_date
+          in: formData
+          required: false
+          type: string
+          format: date-time
+          description: datetime stamp of `Grant` creation
+        -
+          name: updated_date
+          in: formData
+          required: false
+          type: string
+          format: date-time
+          description: datetime stamp of `Grant` update
+        -
+          name: grant_url
+          in: formData
+          required: false
+          type: array
+          items:
+            type: string
+          description: array of URLs in `Grant`
+        -
+          name: grant_description
+          in: formData
+          required: false
+          type: string
+          description: array of keywords for `Grant`
+        -
+          name: grant_amount
+          in: formData
+          required: false
+          type: string
+          description: Amount of `Grant`
+      responses:
+        # Response code
+        '200':
+          description: An array of `Grant` objects
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Grant'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+
+
+
+
+      ######################################
+      ##############Definitions#############
+      ######################################
+  /Grants/keys:
+    get:
+      tags:
+          - Grant
+      description: |
+        Retrieve `Grant` objects by a set of keywords
+      operationId: getGrantsByKeywords
+      produces:
+        - application/json
+      consumes:
+        - application/json
+      parameters:
+        -
+          name: keywords
+          in: formData
+          description: Keywords when searching for user
+          required: true
+          type: array
+          items:
+            type: string
+          collectionFormat: csv
+      responses:
+      # Response code
+        '200':
+          description: An array of `Grant` objects
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Grant'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /Grants/keys/{keyword}:
+    get:
+      tags:
+        - Grant
+      description: |
+        Retrieve `Project` objects by a particular keyword
+      operationId: getGrantsByKeyword
+      produces:
+        - application/json
+      parameters:
+        -
+          name: keyword
+          in: path
+          description: keyword to search for
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Array of `Grant` objects
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Grant'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /Grants/created_date:
+    get:
+      tags:
+        - Grant
+      description: |
+        Retrieve `Grant` objects created on or later than given date
+      operationId: getGrantsByCreatedDateForm
+      produces:
+        - application/json
+      consumes:
+        - application/json
+      parameters:
+        -
+          name: created_date
+          in: formData
+          description: date of creation
+          required: true
+          type: string
+          format: date-time
+      responses:
+        '200':
+          description: Array of `Grant` objects
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Grant'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /Grants/created_date/{created_date}:
+    get:
+      tags:
+        - Grant
+      description: |
+        Retrieve `Grant` objects created on or later than given date
+      operationId: getGrantsByCreatedDate
+      produces:
+        - application/json
+      parameters:
+        -
+          name: created_date
+          in: path
+          description: date of creation
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Array of `Grant` objects
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Grant'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /Grants/modified_date:
+    get:
+      tags:
+        - Grant
+      description: |
+        Retrieve `Grant` objects modified on or later than given date
+      operationId: getGrantsByModifiedDateForm
+      produces:
+        - application/json
+      consumes:
+        - application/json
+      parameters:
+        -
+          name: modified_date
+          in: formData
+          description: date of modification
+          required: true
+          type: string
+          format: date-time
+      responses:
+        '200':
+          description: Array of `Grant` objects
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Grant'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /Grants/modified_date/{modified_date}:
+    get:
+      tags:
+        - Grant
+      description: |
+        Retrieve `Grant` objects created on or later than given date
+      operationId: getGrantsByModifiedDate
+      produces:
+        - application/json
+      parameters:
+        -
+          name: modified_date
+          in: path
+          description: date of creation
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Array of `Grant` objects
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Grant'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'    
+
+
+
+
+
 
 
         ######################################
@@ -6747,6 +7033,751 @@ paths:
         #get
         #/Universities/keys
         #get      #keyword search            
+  /Grants/amount:
+    get:
+      tags:
+        - Grant
+      description: |
+        Retrieve `Grant` objects based on amount
+      operationId: getGrantsByAmount
+      produces:
+        - application/json
+      consumes:
+        - application/json
+      parameters:
+        -
+          name: minimum
+          in: formData
+          description: minimum grant amount
+          required: true
+          type: number
+          format: float
+        -
+          name: maximum
+          in: formData
+          description: maximum grant amount
+          required: true
+          type: number
+          format: float          
+      responses:
+        '200':
+          description: Array of `Grant` objects
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Grant'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'        
+  /Grants/amount/min/{amount}:
+    get:
+      tags:
+        - Grant
+      description: |
+        Retrieve `Grant` objects based on amount
+      operationId: getGrantsByMinAmount
+      produces:
+        - application/json
+      consumes:
+        - application/json
+      parameters:
+        -
+          name: amount
+          in: path
+          description: minimum grant amount
+          required: true
+          type: number
+          format: float
+      responses:
+        '200':
+          description: Array of `Grant` objects
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Grant'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /Grants/amount/max/{amount}:
+    get:
+      tags:
+        - Grant
+      description: |
+        Retrieve `Grant` objects based on amount
+      operationId: getGrantsByMaxAmount
+      produces:
+        - application/json
+      consumes:
+        - application/json
+      parameters:
+        -
+          name: amount
+          in: path
+          description: maxiumum grant amount
+          required: true
+          type: number
+          format: float
+      responses:
+        '200':
+          description: Array of `Grant` objects
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Grant'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'            
+
+  /Grant:
+    post:
+      tags:
+        - Grant
+      description: |
+        Creates `Grant` objects. **post_title**, **project_descpost_textription**,
+        **post_creator_id**, and **is_post_private** are required,
+        all others optional.
+      operationId: createGrant
+      produces:
+        - application/json
+      consumes:
+        - application/json
+      parameters:
+      -
+        name: grant_url
+        in: formData
+        required: false
+        type: string
+        description: array of URLs for `Grant`
+      -
+        name: grant_description
+        in: formData
+        required: false
+        type: string
+        description: Description of grant
+      -
+        name: amount
+        in: formData
+        required: false
+        type: number
+        description: Amount of grant
+      responses:
+        '200':
+          description: the id of the created `Grant`
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'    
+  
+  /Grant/{id}:
+    get:
+      tags:
+          - Grant
+      description: |
+        Retrieves `Grant` objects by **id**.
+      operationId: getGrantById
+      produces:
+        -	application/json
+      parameters:
+      -
+        name: id
+        in: path
+        required: true
+        type: string
+        description: The `Grant` name
+      responses:
+        # Response code
+        '200':
+          description: The `Grant`
+          schema:
+            $ref: '#/definitions/Grant'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    put:
+      tags:
+        - Grant
+      description: |
+        Updates `Grant` objects. **id** is required,
+        all others optional.
+      operationId: updateGrantById
+      produces:
+        -	application/json
+      consumes:
+        -	application/json
+      parameters:
+      -
+        name: id
+        in: path
+        required: true
+        type: string
+        description: The `Post` name
+      -
+        name: grant_url
+        in: formData
+        required: false
+        type: array
+        items:
+          type: string
+        description: array of URLs for `Grant`
+      -
+        name: grant_description
+        in: formData
+        required: false
+        type: string
+        description: Description of `Grant`
+      -
+        name: amount
+        in: formData
+        required: false
+        type: number
+        format: float
+        description: Amount of `Grant`
+      responses:
+        # Response code
+        '200':
+          description: A `Grant` object
+          schema:
+            $ref: '#/definitions/Grant'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    delete:
+      tags:
+        - Grant
+      description: |
+        Deletes `Grant` objects by **id**.
+      operationId: deleteGrantById
+      produces:
+        -	application/json
+      parameters:
+      - name: id
+        in: path
+        required: true
+        type: string
+        description: The `Grant` name
+      responses:
+        # Response code
+        '200':
+          description: The `Grant` id
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      #should only modify users using the user/{id} route to make sure we don't
+      # accidentally nike the wrong thing   
+  /Grant/{id}/created:
+    get:
+      tags:
+          - Grant
+      description: |
+        Retrieves `Grant` object created date
+      operationId: getGrantCreatedDate
+      produces:
+        -	application/json
+      parameters:
+      -
+        name: id
+        in: path
+        required: true
+        type: string
+        description: The `Grant` name
+      responses:
+        # Response code
+        '200':
+          description: The `Grant` creation date
+          schema:
+            type: string
+            format: date-time
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /Grant/{id}/modified:
+    get:
+      tags:
+          - Grant
+      description: |
+        Retrieves `Grant` objects modified date
+      operationId: getGrantModifiedDate
+      produces:
+        -	application/json
+      parameters:
+      -
+        name: id
+        in: path
+        required: true
+        type: string
+        description: The `Grant` name
+      responses:
+        # Response code
+        '200':
+          description: The `Grant` modified date
+          schema:
+            type: string
+            format: date-time
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /Grant/{id}/url:
+    get:
+      tags:
+          - Grant
+      description: |
+        Retrieves `Grant` url
+      operationId: getGrantUrl
+      produces:
+        -	application/json
+      parameters:
+      -
+        name: id
+        in: path
+        required: true
+        type: string
+        description: The `Grant` name
+      responses:
+        # Response code
+        '200':
+          description: The `Grant` url array
+          schema:
+            type: array
+            items:
+              type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'       
+    put:
+      tags:
+          - Grant
+      description: |
+        Add `Grant` url
+      operationId: addGrantUrl
+      produces:
+        -	application/json
+      consumes:
+        -	application/json
+      parameters:
+      -
+        name: id
+        in: path
+        required: true
+        type: string
+        description: The `Grant` name
+      -
+        name: url
+        in: formData
+        required: true
+        type: string
+        description: The `Grant` url
+      responses:
+        # Response code
+        '200':
+          description: The `Grant` id
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'     
+    post:
+      tags:
+          - Grant
+      description: |
+        Replace `Grant` url array
+      operationId: setGrantUrls
+      produces:
+        -	application/json
+      consumes:
+        -	application/json
+      parameters:
+      -
+        name: id
+        in: path
+        required: true
+        type: string
+        description: The `Grant` name
+      -
+        name: urls
+        in: formData
+        required: true
+        type: array
+        items:
+          type: string
+        description: The `Grant` urls
+      responses:
+        # Response code
+        '200':
+          description: The `Grant` id
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'      
+    delete:
+      tags:
+          - Grant
+      description: |
+        Clear `Grant` url array
+      operationId: clearGrantUrls
+      produces:
+        -	application/json
+      parameters:
+      -
+        name: id
+        in: path
+        required: true
+        type: string
+        description: The `Grant` name
+      responses:
+        # Response code
+        '200':
+          description: The `Grant` id
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'               
+  /Grant/{id}/description:
+    get:
+      tags:
+          - Grant
+      description: |
+        Retrieves `Grant` description
+      operationId: getGrantDescription
+      produces:
+        -	application/json
+      parameters:
+      -
+        name: id
+        in: path
+        required: true
+        type: string
+        description: The `Grant` name
+      responses:
+        # Response code
+        '200':
+          description: The `Grant` id
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'           
+    put:
+      tags:
+          - Grant
+      description: |
+        Modify `Grant` description
+      operationId: modifyGrantDescription
+      produces:
+        -	application/json
+      parameters:
+      -
+        name: id
+        in: path
+        required: true
+        type: string
+        description: The `Grant` name
+      -
+        name: description
+        in: formData
+        required: true
+        type: string
+        description: the `Grant` description
+      responses:
+        # Response code
+        '200':
+          description: The `Grant` url array
+          schema:
+            type: array
+            items:
+              type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'                
+    post:
+      tags:
+          - Grant
+      description: |
+        Set `Grant` description
+      operationId: setGrantDescription
+      produces:
+        -	application/json
+      parameters:
+      -
+        name: id
+        in: path
+        required: true
+        type: string
+        description: The `Grant` name
+      -
+        name: description
+        in: formData
+        required: true
+        type: string
+        description: the `Grant` description
+      responses:
+        # Response code
+        '200':
+          description: The `Grant` url array
+          schema:
+            type: array
+            items:
+              type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'   
+    delete:
+      tags:
+          - Grant
+      description: |
+        Clear `Grant` description
+      operationId: clearGrantDescription
+      produces:
+        -	application/json
+      parameters:
+      -
+        name: id
+        in: path
+        required: true
+        type: string
+        description: The `Grant` name
+      responses:
+        # Response code
+        '200':
+          description: The `Grant` id
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'              
+  /Grant/{id}/amount:
+    get:
+      tags:
+          - Grant
+      description: |
+        Retrieves `Grant` amount
+      operationId: getGrantAmount
+      produces:
+        -	application/json
+      parameters:
+      -
+        name: id
+        in: path
+        required: true
+        type: string
+        description: The `Grant` name
+      responses:
+        # Response code
+        '200':
+          description: The `Grant` amount
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'           
+    put:
+      tags:
+          - Grant
+      description: |
+        Modify `Grant` amount
+      operationId: modifyGrantAmount
+      produces:
+        -	application/json
+      parameters:
+      -
+        name: id
+        in: path
+        required: true
+        type: string
+        description: The `Grant` name
+      -
+        name: amount
+        in: formData
+        required: true
+        type: number
+        format: float
+        description: the `Grant` amount
+      responses:
+        # Response code
+        '200':
+          description: The `Grant` id
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'                
+    post:
+      tags:
+          - Grant
+      description: |
+        Set `Grant` amount
+      operationId: setGrantAmount
+      produces:
+        -	application/json
+      parameters:
+      -
+        name: id
+        in: path
+        required: true
+        type: string
+        description: The `Grant` name
+      -
+        name: amount
+        in: formData
+        required: true
+        type: number
+        format: float
+        description: the `Grant` amount
+      responses:
+        # Response code
+        '200':
+          description: The `Grant` id
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'   
+    delete:
+      tags:
+          - Grant
+      description: |
+        Clear `Grant` amount
+      operationId: clearGrantAmount
+      produces:
+        -	application/json
+      parameters:
+      -
+        name: id
+        in: path
+        required: true
+        type: string
+        description: The `Grant` name
+      responses:
+        # Response code
+        '200':
+          description: The `Grant` id
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'   
+  /Grant/{id}/amount/{amount}:
+    get:
+      tags:
+          - Grant
+      description: |
+        Retrieves if `Grant` amount is equal to param
+      operationId: isGrantAmount
+      produces:
+        -	application/json
+      consumes:
+        -	application/json
+      parameters:
+      -
+        name: id
+        in: path
+        required: true
+        type: string
+        description: The `Grant` name
+      -
+        name: amount
+        in: path
+        required: true
+        type: string
+        description: The `Grant` amount
+      responses:
+        # Response code
+        '200':
+          description: The `Grant` amount
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'           
+    put:
+      tags:
+          - Grant
+      description: |
+        Modify `Grant` amount
+      operationId: modifyGrantAmountPath
+      produces:
+        -	application/json
+      parameters:
+      -
+        name: id
+        in: path
+        required: true
+        type: string
+        description: The `Grant` name
+      -
+        name: amount
+        in: path
+        required: true
+        type: string
+        description: the `Grant` amount
+      responses:
+        # Response code
+        '200':
+          description: The `Grant` id
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'                
+    post:
+      tags:
+          - Grant
+      description: |
+        Set `Grant` amount
+      operationId: setGrantAmountPath
+      produces:
+        -	application/json
+      parameters:
+      -
+        name: id
+        in: path
+        required: true
+        type: string
+        description: The `Grant` name
+      -
+        name: amount
+        in: path
+        required: true
+        type: string
+        description: the `Grant` amount
+      responses:
+        # Response code
+        '200':
+          description: The `Grant` id
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'   
+  
 
 definitions:
   User:
