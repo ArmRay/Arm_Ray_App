@@ -96,9 +96,9 @@ exports.createPost = function(args, res, next) {
   * post_title (String)
   * post_text (String)
   * post_creator_id (String)
+  * is_post_private (Boolean)
   * post_tags_id (List)
   * post_keywords (List)
-  * is_post_private (Boolean)
   **/
     var examples = {};
   examples['application/json'] = "aeiou";
@@ -301,6 +301,7 @@ exports.getAllProjectPosts = function(args, res, next) {
     "last_name" : "aeiou",
     "is_creator" : true,
     "project_ids" : [ "aeiou" ],
+    "user_skill_ids" : [ "aeiou" ],
     "review_ids" : [ "aeiou" ],
     "is_collaborator" : true,
     "is_user_private" : true,
@@ -383,6 +384,7 @@ exports.getPostById = function(args, res, next) {
     "last_name" : "aeiou",
     "is_creator" : true,
     "project_ids" : [ "aeiou" ],
+    "user_skill_ids" : [ "aeiou" ],
     "review_ids" : [ "aeiou" ],
     "is_collaborator" : true,
     "is_user_private" : true,
@@ -508,6 +510,7 @@ exports.getPosts = function(args, res, next) {
     "last_name" : "aeiou",
     "is_creator" : true,
     "project_ids" : [ "aeiou" ],
+    "user_skill_ids" : [ "aeiou" ],
     "review_ids" : [ "aeiou" ],
     "is_collaborator" : true,
     "is_user_private" : true,
@@ -555,6 +558,7 @@ exports.getPostsByAuthorId = function(args, res, next) {
     "last_name" : "aeiou",
     "is_creator" : true,
     "project_ids" : [ "aeiou" ],
+    "user_skill_ids" : [ "aeiou" ],
     "review_ids" : [ "aeiou" ],
     "is_collaborator" : true,
     "is_user_private" : true,
@@ -602,6 +606,7 @@ exports.getPostsByCreatedDate = function(args, res, next) {
     "last_name" : "aeiou",
     "is_creator" : true,
     "project_ids" : [ "aeiou" ],
+    "user_skill_ids" : [ "aeiou" ],
     "review_ids" : [ "aeiou" ],
     "is_collaborator" : true,
     "is_user_private" : true,
@@ -649,6 +654,7 @@ exports.getPostsByCreatedDateForm = function(args, res, next) {
     "last_name" : "aeiou",
     "is_creator" : true,
     "project_ids" : [ "aeiou" ],
+    "user_skill_ids" : [ "aeiou" ],
     "review_ids" : [ "aeiou" ],
     "is_collaborator" : true,
     "is_user_private" : true,
@@ -696,6 +702,7 @@ exports.getPostsByKeyword = function(args, res, next) {
     "last_name" : "aeiou",
     "is_creator" : true,
     "project_ids" : [ "aeiou" ],
+    "user_skill_ids" : [ "aeiou" ],
     "review_ids" : [ "aeiou" ],
     "is_collaborator" : true,
     "is_user_private" : true,
@@ -743,6 +750,7 @@ exports.getPostsByKeywords = function(args, res, next) {
     "last_name" : "aeiou",
     "is_creator" : true,
     "project_ids" : [ "aeiou" ],
+    "user_skill_ids" : [ "aeiou" ],
     "review_ids" : [ "aeiou" ],
     "is_collaborator" : true,
     "is_user_private" : true,
@@ -790,6 +798,7 @@ exports.getPostsByModifiedDate = function(args, res, next) {
     "last_name" : "aeiou",
     "is_creator" : true,
     "project_ids" : [ "aeiou" ],
+    "user_skill_ids" : [ "aeiou" ],
     "review_ids" : [ "aeiou" ],
     "is_collaborator" : true,
     "is_user_private" : true,
@@ -837,6 +846,7 @@ exports.getPostsByModifiedDateForm = function(args, res, next) {
     "last_name" : "aeiou",
     "is_creator" : true,
     "project_ids" : [ "aeiou" ],
+    "user_skill_ids" : [ "aeiou" ],
     "review_ids" : [ "aeiou" ],
     "is_collaborator" : true,
     "is_user_private" : true,
@@ -1159,6 +1169,7 @@ exports.updatePosttById = function(args, res, next) {
     "last_name" : "aeiou",
     "is_creator" : true,
     "project_ids" : [ "aeiou" ],
+    "user_skill_ids" : [ "aeiou" ],
     "review_ids" : [ "aeiou" ],
     "is_collaborator" : true,
     "is_user_private" : true,

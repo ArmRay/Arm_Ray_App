@@ -348,6 +348,8 @@ exports.getGrants = function(args, res, next) {
   * grant_url (List)
   * grant_description (String)
   * grant_amount (String)
+  * min_amount (String)
+  * max_amount (String)
   **/
     var examples = {};
   examples['application/json'] = [ {

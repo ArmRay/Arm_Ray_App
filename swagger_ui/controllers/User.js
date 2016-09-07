@@ -38,12 +38,32 @@ module.exports.addUserLastName = function addUserLastName (req, res, next) {
   User.addUserLastName(req.swagger.params, res, next);
 };
 
+module.exports.addUserSkill = function addUserSkill (req, res, next) {
+  User.addUserSkill(req.swagger.params, res, next);
+};
+
+module.exports.addUserSkillEndorsementById = function addUserSkillEndorsementById (req, res, next) {
+  User.addUserSkillEndorsementById(req.swagger.params, res, next);
+};
+
+module.exports.addUserSkillEndorsementsById = function addUserSkillEndorsementsById (req, res, next) {
+  User.addUserSkillEndorsementsById(req.swagger.params, res, next);
+};
+
+module.exports.addUserSkills = function addUserSkills (req, res, next) {
+  User.addUserSkills(req.swagger.params, res, next);
+};
+
 module.exports.addUserState = function addUserState (req, res, next) {
   User.addUserState(req.swagger.params, res, next);
 };
 
 module.exports.createUser = function createUser (req, res, next) {
   User.createUser(req.swagger.params, res, next);
+};
+
+module.exports.createUserSkill = function createUserSkill (req, res, next) {
+  User.createUserSkill(req.swagger.params, res, next);
 };
 
 module.exports.deleteAllUserProjectById = function deleteAllUserProjectById (req, res, next) {
@@ -94,6 +114,14 @@ module.exports.deleteReviewReviewerById = function deleteReviewReviewerById (req
   User.deleteReviewReviewerById(req.swagger.params, res, next);
 };
 
+module.exports.deleteSkillFromUserById = function deleteSkillFromUserById (req, res, next) {
+  User.deleteSkillFromUserById(req.swagger.params, res, next);
+};
+
+module.exports.deleteSkillsFromUserById = function deleteSkillsFromUserById (req, res, next) {
+  User.deleteSkillsFromUserById(req.swagger.params, res, next);
+};
+
 module.exports.deleteUserById = function deleteUserById (req, res, next) {
   User.deleteUserById(req.swagger.params, res, next);
 };
@@ -116,6 +144,14 @@ module.exports.deleteUserProjectById = function deleteUserProjectById (req, res,
 
 module.exports.deleteUserReviewById = function deleteUserReviewById (req, res, next) {
   User.deleteUserReviewById(req.swagger.params, res, next);
+};
+
+module.exports.deleteUserSkillSkilById = function deleteUserSkillSkilById (req, res, next) {
+  User.deleteUserSkillSkilById(req.swagger.params, res, next);
+};
+
+module.exports.deleteUserSkillwById = function deleteUserSkillwById (req, res, next) {
+  User.deleteUserSkillwById(req.swagger.params, res, next);
 };
 
 module.exports.deleteUserState = function deleteUserState (req, res, next) {
@@ -150,6 +186,10 @@ module.exports.getAllUserReviewById = function getAllUserReviewById (req, res, n
   User.getAllUserReviewById(req.swagger.params, res, next);
 };
 
+module.exports.getAllUserSkills = function getAllUserSkills (req, res, next) {
+  User.getAllUserSkills(req.swagger.params, res, next);
+};
+
 module.exports.getCityNameById = function getCityNameById (req, res, next) {
   User.getCityNameById(req.swagger.params, res, next);
 };
@@ -160,6 +200,10 @@ module.exports.getCreatedDateById = function getCreatedDateById (req, res, next)
 
 module.exports.getFirstNameById = function getFirstNameById (req, res, next) {
   User.getFirstNameById(req.swagger.params, res, next);
+};
+
+module.exports.getIsSkillOnUser = function getIsSkillOnUser (req, res, next) {
+  User.getIsSkillOnUser(req.swagger.params, res, next);
 };
 
 module.exports.getIsUserTagOnProject = function getIsUserTagOnProject (req, res, next) {
@@ -202,8 +246,56 @@ module.exports.getStateById = function getStateById (req, res, next) {
   User.getStateById(req.swagger.params, res, next);
 };
 
+module.exports.getUSerSkillSkillById = function getUSerSkillSkillById (req, res, next) {
+  User.getUSerSkillSkillById(req.swagger.params, res, next);
+};
+
 module.exports.getUserById = function getUserById (req, res, next) {
   User.getUserById(req.swagger.params, res, next);
+};
+
+module.exports.getUserSkillById = function getUserSkillById (req, res, next) {
+  User.getUserSkillById(req.swagger.params, res, next);
+};
+
+module.exports.getUserSkillByUser = function getUserSkillByUser (req, res, next) {
+  User.getUserSkillByUser(req.swagger.params, res, next);
+};
+
+module.exports.getUserSkillEndorsementById = function getUserSkillEndorsementById (req, res, next) {
+  User.getUserSkillEndorsementById(req.swagger.params, res, next);
+};
+
+module.exports.getUserSkillUserById = function getUserSkillUserById (req, res, next) {
+  User.getUserSkillUserById(req.swagger.params, res, next);
+};
+
+module.exports.getUserSkills = function getUserSkills (req, res, next) {
+  User.getUserSkills(req.swagger.params, res, next);
+};
+
+module.exports.getUserSkillsByCreatedDate = function getUserSkillsByCreatedDate (req, res, next) {
+  User.getUserSkillsByCreatedDate(req.swagger.params, res, next);
+};
+
+module.exports.getUserSkillsByCreatedDateForm = function getUserSkillsByCreatedDateForm (req, res, next) {
+  User.getUserSkillsByCreatedDateForm(req.swagger.params, res, next);
+};
+
+module.exports.getUserSkillsByModifiedDate = function getUserSkillsByModifiedDate (req, res, next) {
+  User.getUserSkillsByModifiedDate(req.swagger.params, res, next);
+};
+
+module.exports.getUserSkillsByModifiedDateForm = function getUserSkillsByModifiedDateForm (req, res, next) {
+  User.getUserSkillsByModifiedDateForm(req.swagger.params, res, next);
+};
+
+module.exports.getUserSkillsbyEndorsementId = function getUserSkillsbyEndorsementId (req, res, next) {
+  User.getUserSkillsbyEndorsementId(req.swagger.params, res, next);
+};
+
+module.exports.getUserSkillsbyEndorsementIds = function getUserSkillsbyEndorsementIds (req, res, next) {
+  User.getUserSkillsbyEndorsementIds(req.swagger.params, res, next);
 };
 
 module.exports.getUsers = function getUsers (req, res, next) {
@@ -232,6 +324,10 @@ module.exports.getUsersByModifiedDateForm = function getUsersByModifiedDateForm 
 
 module.exports.getUsersByProjectId = function getUsersByProjectId (req, res, next) {
   User.getUsersByProjectId(req.swagger.params, res, next);
+};
+
+module.exports.getUsersBySkills = function getUsersBySkills (req, res, next) {
+  User.getUsersBySkills(req.swagger.params, res, next);
 };
 
 module.exports.getUsersByUniversityId = function getUsersByUniversityId (req, res, next) {
@@ -306,6 +402,14 @@ module.exports.modifyUserState = function modifyUserState (req, res, next) {
   User.modifyUserState(req.swagger.params, res, next);
 };
 
+module.exports.removeUserSkillEndorsementById = function removeUserSkillEndorsementById (req, res, next) {
+  User.removeUserSkillEndorsementById(req.swagger.params, res, next);
+};
+
+module.exports.removeUserSkillEndorsementsById = function removeUserSkillEndorsementsById (req, res, next) {
+  User.removeUserSkillEndorsementsById(req.swagger.params, res, next);
+};
+
 module.exports.setAllProjectCollaborators = function setAllProjectCollaborators (req, res, next) {
   User.setAllProjectCollaborators(req.swagger.params, res, next);
 };
@@ -358,6 +462,30 @@ module.exports.setUserReviewById = function setUserReviewById (req, res, next) {
   User.setUserReviewById(req.swagger.params, res, next);
 };
 
+module.exports.setUserSkill = function setUserSkill (req, res, next) {
+  User.setUserSkill(req.swagger.params, res, next);
+};
+
+module.exports.setUserSkillEndorsementById = function setUserSkillEndorsementById (req, res, next) {
+  User.setUserSkillEndorsementById(req.swagger.params, res, next);
+};
+
+module.exports.setUserSkillEndorsementsById = function setUserSkillEndorsementsById (req, res, next) {
+  User.setUserSkillEndorsementsById(req.swagger.params, res, next);
+};
+
+module.exports.setUserSkillSkillDescriptionById = function setUserSkillSkillDescriptionById (req, res, next) {
+  User.setUserSkillSkillDescriptionById(req.swagger.params, res, next);
+};
+
+module.exports.setUserSkillUserById = function setUserSkillUserById (req, res, next) {
+  User.setUserSkillUserById(req.swagger.params, res, next);
+};
+
+module.exports.setUserSkills = function setUserSkills (req, res, next) {
+  User.setUserSkills(req.swagger.params, res, next);
+};
+
 module.exports.settUserProjectById = function settUserProjectById (req, res, next) {
   User.settUserProjectById(req.swagger.params, res, next);
 };
@@ -376,4 +504,16 @@ module.exports.updateReviewReviewerById = function updateReviewReviewerById (req
 
 module.exports.updateUser = function updateUser (req, res, next) {
   User.updateUser(req.swagger.params, res, next);
+};
+
+module.exports.updateUserSkillById = function updateUserSkillById (req, res, next) {
+  User.updateUserSkillById(req.swagger.params, res, next);
+};
+
+module.exports.updateUserSkillSkill = function updateUserSkillSkill (req, res, next) {
+  User.updateUserSkillSkill(req.swagger.params, res, next);
+};
+
+module.exports.updateUserSkillUserById = function updateUserSkillUserById (req, res, next) {
+  User.updateUserSkillUserById(req.swagger.params, res, next);
 };
