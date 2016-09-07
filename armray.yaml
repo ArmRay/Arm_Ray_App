@@ -203,6 +203,14 @@ paths:
           items:
             type: string
           collectionFormat: csv
+        - name: skills
+          in: formData
+          description: skills to search for
+          required: false
+          type: array
+          items:
+            type: string
+          collectionFormat: csv
       tags:
         - User
       # Expected responses for this operation:
@@ -448,6 +456,38 @@ paths:
           description: Unexpected error
           schema:
             $ref: '#/definitions/Error'
+  /Users/skills:
+    get:
+      tags:
+        - User
+      description: |
+        Retrieve `User` objects based on skills
+      operationId: getUsersBySkills
+      produces:
+        - application/json
+      consumes:
+        - application/json
+      parameters:
+        -
+          name: skills
+          in: formData
+          description: Skills when searching for user
+          required: true
+          type: array
+          items:
+            type: string
+          collectionFormat: csv
+      responses:
+        '200':
+          description: users response
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/User'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'            
   ##/User routes
   /User:
     post:
@@ -1319,6 +1359,260 @@ paths:
           name: keyword
           in: path
           description: The keyword
+          required: true
+          type: string
+      responses:
+        '200':
+          description: The `user_id` associated with the `User`
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /User/{id}/skills/{skill_id}:
+    get:
+      tags:
+        - User
+        - Skill
+      description: |
+        Check if skill is associated with a `User`.
+      operationId: getIsSkillOnUser
+      produces:
+        - application/json
+      parameters:
+        -
+          name: id
+          in: path
+          description: The `id` of the `User` to retrieve
+          required: true
+          type: string
+        -
+          name: skill_id
+          in: path
+          description: The `id` of the `Skill` to retrieve
+          required: true
+          type: string          
+      responses:
+        '200':
+          description: An array of UserSkills ids 
+          schema:
+            type: array
+            items:
+              type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    #I don't think put makes sense since we'd just have to pull the array, modify it, and send it back anyway
+    post:
+      tags:
+        - User
+        - Skill
+      description: |
+        Set skill on a `User`.
+      operationId: setUserSkill
+      produces:
+        - application/json
+      parameters:
+        -
+          name: id
+          in: path
+          description: The `id` of the `User` to retrieve
+          required: true
+          type: string
+        -
+          name: skill_id
+          in: path
+          description: The skills is
+          required: true
+          type: string
+          collectionFormat: csv
+      responses:
+        '200':
+          description: The user_id associated with the `User`
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    #I don't think put makes sense since we'd just have to pull the array, modify it, and send it back anyway
+    put:
+      tags:
+        - User
+        - Skill
+      description: |
+        Add skill to a `User`.
+      operationId: addUserSkill
+      produces:
+        - application/json
+      parameters:
+        -
+          name: id
+          in: path
+          description: The `id` of the `User` to retrieve
+          required: true
+          type: string
+        -
+          name: skill_id
+          in: path
+          description: The skills id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: The user_id associated with the `User`
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'            
+    delete:
+      tags:
+        - User
+        - Skill
+      description: |
+        Delete skill from a user
+      operationId: deleteSkillFromUserById
+      produces:
+        - application/json
+      parameters:
+        -
+          name: id
+          in: path
+          description: The `id` of the `User` to retrieve
+          required: true
+          type: string
+        -
+          name: skill_id
+          in: path
+          description: The `id` of the `Skill` to delete
+          required: true
+          type: string
+
+      responses:
+        '200':
+          description: The `user_id` associated with the `User`
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /User/{id}/skills:
+    get:
+      tags:
+        - User
+        - Skill
+      description: |
+        Retrieve all skills associated with a `User`.
+      operationId: getAllUserSkills
+      produces:
+        - application/json
+      parameters:
+        -
+          name: id
+          in: path
+          description: The `id` of the `User` to retrieve
+          required: true
+          type: string
+      responses:
+        '200':
+          description: An array of UserSkills ids 
+          schema:
+            type: array
+            items:
+              type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    #I don't think put makes sense since we'd just have to pull the array, modify it, and send it back anyway
+    post:
+      tags:
+        - User
+        - Skill
+      description: |
+        Set skills on a `User`.
+      operationId: setUserSkills
+      produces:
+        - application/json
+      parameters:
+        -
+          name: id
+          in: path
+          description: The `id` of the `User` to retrieve
+          required: true
+          type: string
+        -
+          name: keywords
+          in: formData
+          description: The skills ids
+          required: true
+          type: array
+          items:
+            type: string
+          collectionFormat: csv
+      responses:
+        '200':
+          description: The user_id associated with the `User`
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    #I don't think put makes sense since we'd just have to pull the array, modify it, and send it back anyway
+    put:
+      tags:
+        - User
+        - Skill
+      description: |
+        Add skills to a `User`.
+      operationId: addUserSkills
+      produces:
+        - application/json
+      parameters:
+        -
+          name: id
+          in: path
+          description: The `id` of the `User` to retrieve
+          required: true
+          type: string
+        -
+          name: keywords
+          in: formData
+          description: The skills ids
+          required: true
+          type: array
+          items:
+            type: string
+          collectionFormat: csv
+      responses:
+        '200':
+          description: The user_id associated with the `User`
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'            
+    delete:
+      tags:
+        - User
+        - Skill
+      description: |
+        Delete skills from a user
+      operationId: deleteSkillsFromUserById
+      produces:
+        - application/json
+      parameters:
+        -
+          name: id
+          in: path
+          description: The `id` of the `User` to retrieve
           required: true
           type: string
       responses:
@@ -5516,9 +5810,7 @@ paths:
       tags:
         - Post
       description: |
-        Creates `Post` objects. **post_title**, **project_descpost_textription**,
-        **post_creator_id**, and **is_post_private** are required,
-        all others optional.
+        Creates `Post` objects.  **post_tags_id** and **post_keywords** optional, all others required.
       operationId: createPost
       produces:
         - application/json
@@ -5528,19 +5820,19 @@ paths:
       -
         name: post_title
         in: formData
-        required: false
+        required: true
         type: string
         description: ID of `User` author of post
       -
         name: post_text
         in: formData
-        required: false
+        required: true
         type: string
         description: ID of `User` author of post  
       -
         name: post_creator_id
         in: formData
-        required: false
+        required: true
         type: string
         description: ID of `User` author of post
       -
@@ -5562,7 +5854,7 @@ paths:
       -
         name: is_post_private
         in: formData
-        required: false
+        required: true
         type: boolean
         description: is `Post` private?
         # Expected responses for this operation:
@@ -6635,32 +6927,32 @@ paths:
             
             
   ######################################
-        ################Grants################
-        ######################################
+  ################Grants################
+  ######################################
 
-        #/Grant
-        #get put post delete
-        #/Grant/{id}
-        #get put delete
-        #/Grant/{id}/description
-        #get put
-        #/Grant/{id}/amount
-        #get put
-        #/Grant/{id}/created
-        #get
-        #/Grant/{id}/modified
-        #get
-        #/Grant/{id}/url
-        #get put
+  #/Grant
+  #get put post delete
+  #/Grant/{id}
+  #get put delete
+  #/Grant/{id}/description
+  #get put
+  #/Grant/{id}/amount
+  #get put
+  #/Grant/{id}/created
+  #get
+  #/Grant/{id}/modified
+  #get
+  #/Grant/{id}/url
+  #get put
 
-        #/Grants/created
-        #get
-        #/Grants/modified
-        #get
-        #/Grants/amount
-        #get
-        #/Grants/keys
-        #get
+  #/Grants/created
+  #get
+  #/Grants/modified
+  #get
+  #/Grants/amount
+  #get
+  #/Grants/keys
+  #get
 
   /Grants:
     get:
@@ -6731,6 +7023,18 @@ paths:
           required: false
           type: string
           description: Amount of `Grant`
+        -
+          name: min_amount
+          in: formData
+          required: false
+          type: string
+          description: Minimum `Grant` amount to search
+        -
+          name: max_amount
+          in: formData
+          required: false
+          type: string
+          description: Maximum `Grant` amount to search          
       responses:
         # Response code
         '200':
@@ -7027,9 +7331,7 @@ paths:
       tags:
         - Grant
       description: |
-        Creates `Grant` objects. **post_title**, **project_descpost_textription**,
-        **post_creator_id**, and **is_post_private** are required,
-        all others optional.
+        Creates `Grant` objects. All fields required.
       operationId: createGrant
       produces:
         - application/json
@@ -7039,19 +7341,19 @@ paths:
       -
         name: grant_url
         in: formData
-        required: false
+        required: true
         type: string
         description: array of URLs for `Grant`
       -
         name: grant_description
         in: formData
-        required: false
+        required: true
         type: string
         description: Description of grant
       -
         name: amount
         in: formData
-        required: false
+        required: true
         type: number
         description: Amount of grant
       responses:
@@ -7913,35 +8215,35 @@ paths:
             $ref: '#/definitions/Error'   
 
 
-        ######################################
-        ###############Reviews################
-        ######################################
+  ######################################
+  ###############Reviews################
+  ######################################
 
-        #/Review
-        #get put post delete
-        #/Review/{id}
-        #get put delete
-        #/Review/{id}/body
-        #get put
-        #/Review/{id}/reviewer
-        #get put
-        #/Review/{id}/rating
-        #get put
-        #/Review/{id}/modified
-        #get
-        #/Review/{id}/url
-        #get put
+  #/Review
+  #get put post delete
+  #/Review/{id}
+  #get put delete
+  #/Review/{id}/body
+  #get put
+  #/Review/{id}/reviewer
+  #get put
+  #/Review/{id}/rating
+  #get put
+  #/Review/{id}/modified
+  #get
+  #/Review/{id}/url
+  #get put
 
-        #/Reviews/created
-        #get
-        #/Reviews/modified
-        #get
-        #/Reviews/rating
-        #get
-        #/Reviews/reviewer/{id}
-        #get
-        #/Reviews/keys (? should we do keywords here?)
-        #get
+  #/Reviews/created
+  #get
+  #/Reviews/modified
+  #get
+  #/Reviews/rating
+  #get
+  #/Reviews/reviewer/{id}
+  #get
+  #/Reviews/keys (? should we do keywords here?)
+  #get
 
 
   /Reviews:
@@ -8029,7 +8331,7 @@ paths:
       tags:
         - Review
       description: |
-        Retrieve `Grant` objects created on or later than given date
+        Retrieve `Review` objects created on or later than given date
       operationId: getReviewsByCreatedDateForm
       produces:
         - application/json
@@ -8072,11 +8374,11 @@ paths:
           type: string
       responses:
         '200':
-          description: Array of `Grant` objects
+          description: Array of `Review` objects
           schema:
             type: array
             items:
-              $ref: '#/definitions/Grant'
+              $ref: '#/definitions/Review'
         default:
           description: Unexpected error
           schema:
@@ -8234,86 +8536,6 @@ paths:
           schema:
             $ref: '#/definitions/Error'
 
-      ######################################
-      ##############Definitions#############
-      ######################################
-
-
-
-
-
-
-
-        ######################################
-        ################Skills################
-        ######################################
-
-        #/Skill
-        #get put post delete
-        #/Skill/{id}
-        #get put delete
-        #/Skill/{id}/body
-        #get put
-        #/Skill/{id}/endorsements/
-        #get put post delete
-        #/Skill/{id}/endorsements/{user_id}
-        #put post delete (get serves no purpose here since this is literally just a list of people who say yup he can do this)
-        #/Skill/{id}/modified
-        #get
-        #/Skill/{id}/url
-        #get put
-
-        #/Skills/created
-        #get
-        #/Skills/modified
-        #get
-        #/Skills/endorsements/{id}
-        #get
-        #/Skills/keys
-        #get      #keyword search
-
-        ######################################
-        #############Universities#############
-        ######################################
-        #/University
-        #get put post delete
-        #/University/{id}
-        #get put delete
-        #/University/{id}/projects
-        #get post put delete
-        #/University/{id}/projects/{project_id}
-        #get post put delete
-        #/University/{id}/geolocation
-        #get put
-
-        #/University/{id}/endorsements/
-        #get put post delete
-        #/University/{id}/endorsements/{user_id}
-        #put post delete (get serves no purpose here since this is literally just a list of people who say yup he can do this)
-        #/University/{id}/created
-        #get
-        #/University/{id}/modified
-        #get
-        #/University/{id}/url
-        #get put
-
-        #/University/{id}/url
-        #get put post delete
-
-        #/University/{id}/users/
-        #get (get associated users, this will actuall be a query of user objects)
-
-        #/University/{id}/grants/
-        #get (get associated grants, this will actuall be a query of grant objects)
-
-        #/Universities/created
-        #get
-        #/Universities/modified
-        #get
-        #/Universities/endorsements/{id}
-        #get
-        #/Universities/keys
-        #get      #keyword search            
 
   /Review/{id}:
     get:
@@ -9025,6 +9247,1733 @@ paths:
           schema:
             $ref: '#/definitions/Error'            
 
+
+  ######################################
+  ################Skills################
+  ######################################
+
+  #/Skill
+  #get put post delete
+  #/Skill/{id}
+  #get put delete
+  #/Skill/{id}/body
+  #get put
+  #/Skill/{id}/modified
+  #get
+  #/Skill/{id}/url
+  #get put
+
+  #/Skills/created
+  #get
+  #/Skills/modified
+  #get
+  #/Skills/keys
+  #get      #keyword search
+
+
+  /Skills:
+    get:
+      tags:
+        - Skill
+      description: |
+        Gets `Skill` objects.
+        Required query param of **size** determines
+        max number of results per page, and **page** determines
+        which page in the pagination we are. Remaining params optional.
+      operationId: getSkills
+      produces:
+        - application/json
+      consumes:
+        - application/json
+      parameters:
+        -
+          name: size
+          in: formData
+          description: Max size of array to return
+          required: true
+          type: number
+          format: int32
+        -
+          name: page
+          in: formData
+          description: Location in pagination
+          required: true
+          type: number
+          format: int32
+        -
+          name: skill_id
+          in: formData
+          required: false
+          type: string
+          description: Unique identifier representing a specific `Skill`
+        -
+          name: created_date
+          in: formData
+          required: false
+          type: string
+          format: date-time
+          description: datetime stamp of `Skill` creation
+        -
+          name: updated_date
+          in: formData
+          required: false
+          type: string
+          format: date-time
+          description: datetime stamp of `Skill` update
+        -
+          name: description
+          in: formData
+          required: false
+          type: string
+          description: description of `Skill`
+      responses:
+        # Response code
+        '200':
+          description: An array of `Skill` objects
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Skill'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /Skills/created_date:
+    get:
+      tags:
+        - Skill
+      description: |
+        Retrieve `Skill` objects created on or later than given date
+      operationId: getSkillsByCreatedDateForm
+      produces:
+        - application/json
+      consumes:
+        - application/json
+      parameters:
+        -
+          name: created_date
+          in: formData
+          description: date of creation
+          required: true
+          type: string
+          format: date-time
+      responses:
+        '200':
+          description: Array of `Skill` objects
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Skill'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /Skills/created_date/{created_date}:
+    get:
+      tags:
+        - Skill
+      description: |
+        Retrieve `Skill` objects created on or later than given date
+      operationId: getSkillsByCreatedDate
+      produces:
+        - application/json
+      parameters:
+        -
+          name: created_date
+          in: path
+          description: date of creation
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Array of `Skill` objects
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Skill'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /Skills/modified_date:
+    get:
+      tags:
+        - Skill
+      description: |
+        Retrieve `Skill` objects modified on or later than given date
+      operationId: getSkillsByModifiedDateForm
+      produces:
+        - application/json
+      consumes:
+        - application/json
+      parameters:
+        -
+          name: modified_date
+          in: formData
+          description: date of modification
+          required: true
+          type: string
+          format: date-time
+      responses:
+        '200':
+          description: Array of `Skill` objects
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Skill'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /Skills/modified_date/{modified_date}:
+    get:
+      tags:
+        - Skill
+      description: |
+        Retrieve `Review` objects created on or later than given date
+      operationId: getSkillsByModifiedDate
+      produces:
+        - application/json
+      parameters:
+        -
+          name: modified_date
+          in: path
+          description: date of creation
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Array of `Skill` objects
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Skill'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'      
+  #probably should avoid using this route if possible, but depends on descipriton format
+  /Skills/description:
+    get:
+      tags:
+        - Skill
+      description: |
+        Retrieve `Skill` objects with specified description
+      operationId: getSkillsByDescription
+      produces:
+        - application/json
+      parameters:
+        -
+          name: description
+          in: formData
+          description: text of description
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Array of `Skill` objects
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Skill'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'    
+  /Skills/description/{description}:
+    get:
+      tags:
+        - Skill
+      description: |
+        Retrieve if `Skill` object has specified description
+      operationId: getIsDescriptionOnSkills
+      produces:
+        - application/json
+      parameters:
+        -
+          name: description
+          in: path
+          description: text of description
+          required: true
+          type: string
+      responses:
+        '200':
+          description: The boolean
+          schema:
+            type: boolean
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'      
+  
+      
+  /Skill:
+    put:
+      tags:
+        - Skill
+      description: |
+        Creates `Skill` objects.
+        Required query param of **size** determines
+        max number of results per page, and **page** determines
+        which page in the pagination we are. Remaining params optional.
+      operationId: createSkills
+      produces:
+        - application/json
+      consumes:
+        - application/json
+      parameters:
+        -
+          name: description
+          in: formData
+          required: false
+          type: string
+          description: description of `Skill`
+      responses:
+        # Response code
+        '200':
+          description: An array of `Skill` objects
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Skill'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'      
+  /Skill/{id}:
+    get:
+      tags:
+          - Skill
+      description: |
+        Retrieves `Skill` objects by **id**.
+      operationId: getSkillById
+      produces:
+        -	application/json
+      parameters:
+      -
+        name: id
+        in: path
+        required: true
+        type: string
+        description: The `Skill` id
+      responses:
+        # Response code
+        '200':
+          description: The `Skill`
+          schema:
+            $ref: '#/definitions/Skill'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    put:
+      tags:
+        - Skill
+      description: |
+        Updates `Skill` objects. **id** is required,
+        all others optional.
+      operationId: updateSkillById
+      produces:
+        -	application/json
+      consumes:
+        -	application/json
+      parameters:
+      -
+        name: id
+        in: path
+        required: true
+        type: string
+        description: The `Post` name
+      -
+        name: description
+        in: formData
+        required: false
+        type: string
+        description: description of `Skill` 
+      responses:
+        # Response code
+        '200':
+          description: A `Review` object
+          schema:
+            $ref: '#/definitions/Skill'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    delete:
+      tags:
+        - Skill
+      description: |
+        Deletes `Skill` objects by **id**.
+      operationId: deleteSkillwById
+      produces:
+        -	application/json
+      parameters:
+      - name: id
+        in: path
+        required: true
+        type: string
+        description: The `Skill` id
+      responses:
+        # Response code
+        '200':
+          description: The `Review` id
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      #should only modify users using the user/{id} route to make sure we don't
+      # accidentally nike the wrong thing   
+  /Skill/{id}/description:
+    get:
+      tags:
+        - Skill
+      description: |
+        Gets description of `Skill`
+      operationId: getSkillBodyById
+      produces:
+        -	application/json
+      parameters:
+      -
+        name: id
+        in: path
+        required: true
+        type: string
+        description: The `Skill` id
+      responses:
+        # Response code
+        '200':
+          description: The `Skill` body
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    put:
+      tags:
+        - Skill
+      description: |
+        Updates `Skill` description. 
+      operationId: updateSkillDescriptionByIdForm
+      produces:
+        -	application/json
+      consumes:
+        -	application/json
+      parameters:
+      -
+        name: id
+        in: path
+        required: true
+        type: string
+        description: The `Skill` name
+      -
+        name: description
+        in: formData
+        required: true
+        type: string
+      responses:
+        # Response code
+        '200':
+          description: A `Skill` id
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    post:
+      tags:
+        - Skill
+      description: |
+        Set `Skill` body. 
+      operationId: setSkillDescriptionByIdForn
+      produces:
+        -	application/json
+      consumes:
+        -	application/json
+      parameters:
+      -
+        name: id
+        in: path
+        required: true
+        type: string
+        description: The `Skill` name
+      -
+        name: description
+        in: formData
+        required: true
+        type: string
+        description: The `Skill` description
+      responses:
+        # Response code
+        '200':
+          description: A `Skill` id
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'            
+    delete:
+      tags:
+        - Skill
+      description: |
+        Deletes `Skill` body
+      operationId: deleteSkillDescriptionByIdForn
+      produces:
+        -	application/json
+      parameters:
+      - name: id
+        in: path
+        required: true
+        type: string
+        description: The `Skill` name
+      responses:
+        # Response code
+        '200':
+          description: The `Skill` id
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      #should only modify users using the user/{id} route to make sure we don't
+      # accidentally nike the wrong thing   
+  /Skill/{id}/description/{description}:
+    get:
+      tags:
+        - Skill
+      description: |
+        Gets if description of `Skill` is on `Skill`
+      operationId: getIsSkillBodyById
+      produces:
+        -	application/json
+      parameters:
+      -
+        name: id
+        in: path
+        required: true
+        type: string
+        description: The `Skill` id
+      -
+        name: description
+        in: path
+        required: true
+        type: string
+        description: The `Skill` description
+      responses:
+        # Response code
+        '200':
+          description: The boolean
+          schema:
+            type: boolean
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    put:
+      tags:
+        - Skill
+      description: |
+        Updates `Skill` description. 
+      operationId: updateSkillDescriptionById
+      produces:
+        -	application/json
+      parameters:
+      -
+        name: id
+        in: path
+        required: true
+        type: string
+        description: The `Skill` name
+      -
+        name: description
+        in: path
+        required: true
+        type: string
+      responses:
+        # Response code
+        '200':
+          description: A `Skill` id
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    post:
+      tags:
+        - Skill
+      description: |
+        Set `Skill` body. 
+      operationId: setSkillDescriptionById
+      produces:
+        -	application/json
+      parameters:
+      -
+        name: id
+        in: path
+        required: true
+        type: string
+        description: The `Skill` id
+      -
+        name: description
+        in: path
+        required: true
+        type: string
+        description: The `Skill` description
+      responses:
+        # Response code
+        '200':
+          description: A `Skill` id
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'            
+  /Skill/{id}/created:
+    get:
+      tags:
+        - Skill
+      description: |
+        Gets `Skill` created date
+      operationId: getSkillCreatedDateById
+      produces:
+        -	application/json
+      parameters:
+      -
+        name: id
+        in: path
+        required: true
+        type: string
+        description: The `Skill` id
+      responses:
+        # Response code
+        '200':
+          description: The `Skill` create date
+          schema:
+            type: string
+            format: date-time
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /Skill/{id}/updated:
+    get:
+      tags:
+        - Skill
+      description: |
+        Gets `Skill` updated date
+      operationId: getSkillUpdatedDateById
+      produces:
+        -	application/json
+      parameters:
+      -
+        name: id
+        in: path
+        required: true
+        type: string
+        description: The `Skill` id
+      responses:
+        # Response code
+        '200':
+          description: The `Skill` update date
+          schema:
+            type: string
+            format: date-time
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'            
+      
+  ######################################
+  ##############UserSkills##############
+  ######################################
+
+  #/UserSkill
+  #get put post delete
+  #/UserSkill/{id}
+  #get put delete
+  #/UserSkill/{id}/user
+  #get put
+  #/UserSkill/{id}/skill
+  #get
+  #/UserSkill/{id}/endorsements
+  #get put
+
+  #/UserSkills/created
+  #get
+  #/UserSkills/modified
+  #get
+  #/UserSkills/user
+  #get      #keyword search
+  #/UserSkills/skill
+  #get      #keyword search
+  #/UserSkills/endorsements
+  #get      #keyword search
+
+
+  /UserSkills:
+    get:
+      tags:
+        - Skill
+        - UserSkill
+        - User
+      description: |
+        Gets `UserSkill` objects.
+        Required query param of **size** determines
+        max number of results per page, and **page** determines
+        which page in the pagination we are. Remaining params optional.
+      operationId: getUserSkills
+      produces:
+        - application/json
+      consumes:
+        - application/json
+      parameters:
+        -
+          name: size
+          in: formData
+          description: Max size of array to return
+          required: true
+          type: number
+          format: int32
+        -
+          name: page
+          in: formData
+          description: Location in pagination
+          required: true
+          type: number
+          format: int32
+        -
+          name: userskill_id
+          in: formData
+          required: false
+          type: string
+          description: Unique identifier representing a specific `UserSkill`
+        -
+          name: user_id
+          in: formData
+          required: false
+          type: string
+          description: Unique identifier representing a specific `User` that owns a skill
+        -
+          name: skill_id
+          in: formData
+          required: false
+          type: string
+          description: Unique identifier representing a specific `Skill` that a `UserSkill` represents
+        -
+          name: created_date
+          in: formData
+          required: false
+          type: string
+          format: date-time
+          description: datetime stamp of `Skill` creation
+        -
+          name: updated_date
+          in: formData
+          required: false
+          type: string
+          format: date-time
+          description: datetime stamp of `Skill` update
+        -
+          name: endorsement_ids
+          in: formData
+          required: false
+          type: array
+          items:
+            type: string
+          description: id of `User` endorser
+      responses:
+        # Response code
+        '200':
+          description: An array of `UserSkill` objects
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/UserSkill'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /UserSkills/created_date:
+    get:
+      tags:
+        - UserSkill
+        - Skill
+        - User
+      description: |
+        Retrieve `UserSkill` objects created on or later than given date
+      operationId: getUserSkillsByCreatedDateForm
+      produces:
+        - application/json
+      consumes:
+        - application/json
+      parameters:
+        -
+          name: created_date
+          in: formData
+          description: date of creation
+          required: true
+          type: string
+          format: date-time
+      responses:
+        '200':
+          description: Array of `UserSkill` objects
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/UserSkill'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /UserSkills/created_date/{created_date}:
+    get:
+      tags:
+        - Skill
+        - UserSkill
+        - User
+      description: |
+        Retrieve `UserSkill` objects created on or later than given date
+      operationId: getUserSkillsByCreatedDate
+      produces:
+        - application/json
+      parameters:
+        -
+          name: created_date
+          in: path
+          description: date of creation
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Array of `UserSkill` objects
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/UserSkill'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /UserSkills/modified_date:
+    get:
+      tags:
+        - Skill
+        - UserSkill
+        - User
+      description: |
+        Retrieve `UserSkill` objects modified on or later than given date
+      operationId: getUserSkillsByModifiedDateForm
+      produces:
+        - application/json
+      consumes:
+        - application/json
+      parameters:
+        -
+          name: modified_date
+          in: formData
+          description: date of modification
+          required: true
+          type: string
+          format: date-time
+      responses:
+        '200':
+          description: Array of `UserSkill` objects
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/UserSkill'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /UserSkills/modified_date/{modified_date}:
+    get:
+      tags:
+        - Skill
+        - UserSkill
+        - User
+      description: |
+        Retrieve `UserSkill` objects created on or later than given date
+      operationId: getUserSkillsByModifiedDate
+      produces:
+        - application/json
+      parameters:
+        -
+          name: modified_date
+          in: path
+          description: date of creation
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Array of `UserSkill` objects
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/UserSkill'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'      
+  #probably should avoid using this route if possible, but depends on descipriton format
+  /UserSkills/user/{user_id}:
+    get:
+      tags:
+        - UserSkill
+        - Skill
+        - User
+      description: |
+        Retrieve `UserSkill` objects with specified description
+      operationId: getUserSkillByUser
+      produces:
+        - application/json
+      parameters:
+        -
+          name: user_id
+          in: path
+          description: Id of `User` to get `UserSkill` objects for
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Array of `UserSkill` objects
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/UserSkill'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'    
+  /UserSkills/description/skill/{skill_id}:
+    get:
+      tags:
+        - Skill
+        - UserSkill
+      description: |
+        Retrieve `UserSkill` objects with a specific `Skill` id
+      operationId: getUserSkillsbySkillId
+      produces:
+        - application/json
+      parameters:
+        -
+          name: skill_id
+          in: path
+          description: id of `Skill`
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Array of `UserSkill` objects
+          schema:
+            $ref: '#/definitions/UserSkill'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /UserSkills/description/skill:
+    get:
+      tags:
+        - Skill
+        - UserSkill
+      description: |
+        Retrieve `UserSkill` objects with a specific set of `Skill` ids
+      operationId: getUserSkillsbySkillIds
+      produces:
+        - application/json
+      parameters:
+        -
+          name: skill_ids
+          in: formData
+          description: id of `Skill` objects
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Array of `UserSkill` objects
+          schema:
+            $ref: '#/definitions/UserSkill'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'            
+  /UserSkills/description/endorsements/{user_id}:
+    get:
+      tags:
+        - Skill
+        - UserSkill
+        - User
+      description: |
+        Retrieve `UserSkill` objects endorsed by a specific `User`
+      operationId: getUserSkillsbyEndorsementId
+      produces:
+        - application/json
+      parameters:
+        -
+          name: user_id
+          in: path
+          description: id of `User`
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Array of `UserSkill` objects
+          schema:
+            $ref: '#/definitions/UserSkill'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'            
+  /UserSkills/description/endorsements:
+    get:
+      tags:
+        - Skill
+        - UserSkill
+        - User
+      description: |
+        Retrieve `UserSkill` objects endorsed by a specific set of `User` obejects
+      operationId: getUserSkillsbyEndorsementIds
+      produces:
+        - application/json
+      parameters:
+        -
+          name: user_id
+          in: formData
+          description: ids of `User` objects
+          required: true
+          type: array
+          items:
+            type: string
+      responses:
+        '200':
+          description: Array of `UserSkill` objects
+          schema:
+            $ref: '#/definitions/UserSkill'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'              
+  
+  /UserSkill:
+    post:
+      tags:
+        - Skill
+        - UserSkill
+        - User
+      description: |
+        Creates `UserSkill` objects. **user_id** and **skill_id** are required, **endorsements** optional.
+      operationId: createUserSkill
+      produces:
+        - application/json
+      consumes:
+        - application/json
+      parameters:
+        -
+          name: user_id
+          in: formData
+          required: false
+          type: string
+          description: Unique identifier representing a specific `User` that has a `UserSkill` represents      
+        -
+          name: skill_id
+          in: formData
+          required: false
+          type: string
+          description: Unique identifier representing a specific `Skill` that a `UserSkill` represents
+        -
+          name: endorsement_ids
+          in: formData
+          required: false
+          type: array
+          items:
+            type: string
+          description: id of `User` endorser
+      responses:
+        # Response code
+        '200':
+          description: An array of `UserSkill` objects
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/UserSkill'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'      
+  /UserSkill/{id}:
+    get:
+      tags:
+          - Skill
+          - UserSkill
+          - User
+      description: |
+        Retrieves `UserSkill` object by **id**.
+      operationId: getUserSkillById
+      produces:
+        -	application/json
+      parameters:
+      -
+        name: id
+        in: path
+        required: true
+        type: string
+        description: The `UserSkill` id
+      responses:
+        # Response code
+        '200':
+          description: The `UserSkill`
+          schema:
+            $ref: '#/definitions/UserSkill'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    put:
+      tags:
+        - UserSkill
+        - Skill
+        - User
+      description: |
+        Updates `UserSkill` objects. **id** is required,
+        all others optional.
+      operationId: updateUserSkillById
+      produces:
+        -	application/json
+      consumes:
+        -	application/json
+      parameters:
+      -
+        name: id
+        in: path
+        required: true
+        type: string
+        description: The `Post` name
+      -
+        name: user_id
+        in: formData
+        required: false
+        type: string
+        description: id of `User` that has skill
+      -
+        name: skill_id
+        in: formData
+        required: false
+        type: string
+        description: id of `Skill` that this `UserSkill` represents
+      -
+        name: endorsement_ids
+        in: formData
+        required: false
+        type: array
+        items:
+          type: string
+        description: The `User` objects who gave endorsement to `Skill`
+      responses:
+        # Response code
+        '200':
+          description: A `Review` object
+          schema:
+            $ref: '#/definitions/Skill'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    delete:
+      tags:
+        - Skill
+        - UserSkill
+        - User
+      description: |
+        Deletes `UserSkill` objects by **id**.
+      operationId: deleteUserSkillwById
+      produces:
+        -	application/json
+      parameters:
+      - name: id
+        in: path
+        required: true
+        type: string
+        description: The `UserSkill` id
+      responses:
+        # Response code
+        '200':
+          description: The `UserSkill` id
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      #should only modify users using the user/{id} route to make sure we don't
+      # accidentally nike the wrong thing   
+  /UserSkill/{id}/skill:
+    get:
+      tags:
+        - Skill
+        - UserSkill
+        - User
+      description: |
+        Gets the `Skill`
+      operationId: getUSerSkillSkillById
+      produces:
+        -	application/json
+      parameters:
+      -
+        name: id
+        in: path
+        required: true
+        type: string
+        description: The `Skill` id
+      responses:
+        # Response code
+        '200':
+          description: The `Skill`
+          schema:
+            $ref: '#/definitions/Skill'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    delete:
+      tags:
+        - Skill
+        - UserSkill
+        - User
+      description: |
+        Deletes `Skill` body
+      operationId: deleteUserSkillSkilById
+      produces:
+        -	application/json
+      parameters:
+      - name: id
+        in: path
+        required: true
+        type: string
+        description: The `UserSkill` id
+      responses:
+        # Response code
+        '200':
+          description: The `UserSkill` id
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /UserSkill/{id}/skill/{skill_id}:            
+    put:
+      tags:
+        - Skill
+        - UserSkill
+        - User
+      description: |
+        Updates `Skill` contained in `UserSkill` . 
+      operationId: updateUserSkillSkill
+      produces:
+        -	application/json
+      consumes:
+        -	application/json
+      parameters:
+      -
+        name: id
+        in: path
+        required: true
+        type: string
+        description: The `UserSkill` name
+      -
+        name: skill_id
+        in: path
+        required: true
+        type: string
+        description: The `Skill` id
+      responses:
+        # Response code
+        '200':
+          description: A `UserSkill` id
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    post:
+      tags:
+        - Skill
+        - UserSkill
+        - User
+      description: |
+        Set `UserSkill` body. 
+      operationId: setUserSkillSkillDescriptionById
+      produces:
+        -	application/json
+      consumes:
+        -	application/json
+      parameters:
+      -
+        name: id
+        in: path
+        required: true
+        type: string
+        description: The `UserSkill` name
+      -
+        name: skill_id
+        in: path
+        required: true
+        type: string
+        description: The `Skill` id
+      responses:
+        # Response code
+        '200':
+          description: A `Skill` id
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'     
+      #should only modify users using the user/{id} route to make sure we don't
+      # accidentally nike the wrong thing   
+  /UserSkill/{id}/user:
+    get:
+      tags:
+        - Skill
+        - UserSkill
+        - User
+      description: |
+        Gets the `user`
+      operationId: getUserSkillUserById
+      produces:
+        -	application/json
+      parameters:
+      -
+        name: id
+        in: path
+        required: true
+        type: string
+        description: The `Skill` id
+      responses:
+        # Response code
+        '200':
+          description: The `Skill`
+          schema:
+            $ref: '#/definitions/Skill'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    delete:
+      tags:
+        - Skill
+      description: |
+        Deletes `Skill` body
+      operationId: deleteUserSkillUserById
+      produces:
+        -	application/json
+      parameters:
+      - name: id
+        in: path
+        required: true
+        type: string
+        description: The `UserSkill` id
+      responses:
+        # Response code
+        '200':
+          description: The `UserSkill` id
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /UserSkill/{id}/user/{user_id}:            
+    put:
+      tags:
+        - Skill
+        - UserSkill
+        - User
+      description: |
+        Updates `User` contained in `UserSkill` . 
+      operationId: updateUserSkillUserById
+      produces:
+        -	application/json
+      consumes:
+        -	application/json
+      parameters:
+      -
+        name: id
+        in: path
+        required: true
+        type: string
+        description: The `UserSkill` name
+      -
+        name: user_id
+        in: path
+        required: true
+        type: string
+        description: The `User` id
+      responses:
+        # Response code
+        '200':
+          description: A `UserSkill` id
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    post:
+      tags:
+        - Skill
+        - UserSkill
+        - User
+      description: |
+        Set `User` on `UserSkill` . 
+      operationId: setUserSkillUserById
+      produces:
+        -	application/json
+      consumes:
+        -	application/json
+      parameters:
+      -
+        name: id
+        in: path
+        required: true
+        type: string
+        description: The `UserSkill` name
+      -
+        name: user_id
+        in: path
+        required: true
+        type: string
+        description: The `Skill` id
+      responses:
+        # Response code
+        '200':
+          description: A `Skill` id
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'     
+      #should only modify users using the user/{id} route to make sure we don't
+      # accidentally nike the wrong thing         
+  /UserSkill/{id}/endorsement:            
+    get:
+      tags:
+        - Skill
+        - UserSkill
+        - User
+      description: |
+        Gets `User` ndorsements in `UserSkill` . 
+      operationId: getUserSkillEndorsementById
+      produces:
+        -	application/json
+      consumes:
+        -	application/json
+      parameters:
+      -
+        name: id
+        in: path
+        required: true
+        type: string
+        description: The `UserSkill` id
+      responses:
+        # Response code
+        '200':
+          description: The `UserSkill` 
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/UserSkill'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    post:
+      tags:
+        - Skill
+        - UserSkill
+        - User
+      description: |
+        Set `User` on `UserSkill` . 
+      operationId: setUserSkillEndorsementsById
+      produces:
+        -	application/json
+      consumes:
+        -	application/json
+      parameters:
+      -
+        name: id
+        in: path
+        required: true
+        type: string
+        description: The `UserSkill` name
+      -
+        name: user_id
+        in: formData
+        required: true
+        type: array
+        items:
+          type: string
+        description: The `User` id
+      responses:
+        # Response code
+        '200':
+          description: A `Skill` id
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'     
+      #should only modify users using the user/{id} route to make sure we don't
+      # accidentally nike the wrong thing   
+    put:
+      tags:
+        - Skill
+        - UserSkill
+        - User
+      description: |
+        Add `User` objects on `UserSkill` . 
+      operationId: addUserSkillEndorsementsById
+      produces:
+        -	application/json
+      consumes:
+        -	application/json
+      parameters:
+      -
+        name: id
+        in: path
+        required: true
+        type: string
+        description: The `UserSkill` name
+      -
+        name: user_id
+        in: formData
+        required: true
+        type: array
+        items:
+          type: string
+        description: The `User` ids
+      responses:
+        # Response code
+        '200':
+          description: A `Skill` id
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'     
+      #should only modify users using the user/{id} route to make sure we don't
+      # accidentally nike the wrong thing         
+    delete:
+      tags:
+        - Skill
+        - UserSkill
+        - User
+      description: |
+        Remove all `User` endorsement on `UserSkill` . 
+      operationId: removeUserSkillEndorsementsById
+      produces:
+        -	application/json
+      consumes:
+        -	application/json
+      parameters:
+      -
+        name: id
+        in: path
+        required: true
+        type: string
+        description: The `UserSkill` name
+      responses:
+        # Response code
+        '200':
+          description: A `Skill` id
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'     
+      #should only modify users using the user/{id} route to make sure we don't
+      # accidentally nike the wrong thing         
+  /UserSkill/{id}/endorsement/{user_id}:            
+    put:
+      tags:
+        - Skill
+        - UserSkill
+        - User
+      description: |
+        Adds `User` to endorsements in `UserSkill` . 
+      operationId: addUserSkillEndorsementById
+      produces:
+        -	application/json
+      consumes:
+        -	application/json
+      parameters:
+      -
+        name: id
+        in: path
+        required: true
+        type: string
+        description: The `UserSkill` id
+      -
+        name: user_id
+        in: path
+        required: true
+        type: string
+        description: The `User` id
+      responses:
+        # Response code
+        '200':
+          description: A `UserSkill` id
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    post:
+      tags:
+        - Skill
+        - UserSkill
+        - User
+      description: |
+        Set `User` on `UserSkill` . 
+      operationId: setUserSkillEndorsementById
+      produces:
+        -	application/json
+      consumes:
+        -	application/json
+      parameters:
+      -
+        name: id
+        in: path
+        required: true
+        type: string
+        description: The `UserSkill` name
+      -
+        name: user_id
+        in: path
+        required: true
+        type: string
+        description: The `User` id
+      responses:
+        # Response code
+        '200':
+          description: A `Skill` id
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'     
+      #should only modify users using the user/{id} route to make sure we don't
+      # accidentally nike the wrong thing   
+    delete:
+      tags:
+        - Skill
+        - UserSkill
+        - User
+      description: |
+        Remove `User` endorsement on `UserSkill` . 
+      operationId: removeUserSkillEndorsementById
+      produces:
+        -	application/json
+      consumes:
+        -	application/json
+      parameters:
+      -
+        name: id
+        in: path
+        required: true
+        type: string
+        description: The `UserSkill` name
+      -
+        name: user_id
+        in: path
+        required: true
+        type: string
+        description: The `User` id
+      responses:
+        # Response code
+        '200':
+          description: A `Skill` id
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'     
+      #should only modify users using the user/{id} route to make sure we don't
+      # accidentally nike the wrong thing             
+  /UserSkill/{id}/created:
+    get:
+      tags:
+        - Skill
+        - UserSkill
+      description: |
+        Gets `UserSkill` created date
+      operationId: getUserSkillCreatedDateById
+      produces:
+        -	application/json
+      parameters:
+      -
+        name: id
+        in: path
+        required: true
+        type: string
+        description: The `UserSkill` id
+      responses:
+        # Response code
+        '200':
+          description: The `UserSkill` create date
+          schema:
+            type: string
+            format: date-time
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /UserSkill/{id}/updated:
+    get:
+      tags:
+        - Skill
+        - UserSkill
+      description: |
+        Gets `UserSkill` updated date
+      operationId: getUserSkillUpdatedDateById
+      produces:
+        -	application/json
+      parameters:
+      -
+        name: id
+        in: path
+        required: true
+        type: string
+        description: The `UserSkill` id
+      responses:
+        # Response code
+        '200':
+          description: The `UserSkill` update date
+          schema:
+            type: string
+            format: date-time
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'            
+
 definitions:
   User:
     type: object
@@ -9069,11 +11018,6 @@ definitions:
       state:
         type: string
         description: State of user location
-      #recent_collaborators:
-      #  type: array
-      #  items:
-      #    $ref: '#/definitions/User'
-      #  description: array of recent collaborators
       recent_collaborators_id:
         type: array
         items:
@@ -9084,11 +11028,6 @@ definitions:
         items:
           type: string
         description: array of universities the user is associated with
-      #projects:
-      #  type: array
-      #  items:
-      #    $ref: '#/definitions/Project'
-      #  description: array of user projects
       project_ids:
         type: array
         items:
@@ -9099,16 +11038,16 @@ definitions:
         items:
           type: string
         description: array of keywords associated with the user
-      #reviews:
-      #  type: array
-      #  items:
-      #    $ref: '#/definitions/Review'
-      #  description: array of reviews
       review_ids:
         type: array
         items:
           type: string
         description: array of review ids
+      user_skill_ids:
+        type: array
+        items:
+          type: string
+        description: array of userskill ids
       is_user_private:
         type: boolean
         description:  is user profile public or private?
@@ -9400,17 +11339,7 @@ definitions:
         description: datetime stamp of skill update
       description:
         type: string
-        description: text body of skill
-      #endorsements:
-      #  type: array
-      #  items:
-      #    $ref: '#/definitions/User'
-      #  description: users who have endorsed the user for this skill
-      endorsements_id:
-        type: array
-        items:
-          type: string
-        description: ids of users who have endorsed the user for this skill
+        description: Description of `Skill`
   Skills:
     type: object
     properties:
@@ -9430,6 +11359,50 @@ definitions:
         type: array
         items:
           $ref: '#/definitions/Skill'
+  UserSkill:
+    type: object
+    properties:
+      review_id:
+        type: string
+        description: id of `Endorsement`
+      created_date:
+        type: string
+        format: date-time
+        description: datetime stamp of `Endorsement` creation
+      updated_date:
+        type: string
+        format: date-time
+        description: datetime stamp of `Endorsement` update
+      user_id:
+        type: string
+        description: Id of `User` who added this skill
+      endorsements:
+        type: array
+        items:
+          type: string
+        description: Array of ids of `User` who give `Endorsement` to user for skill
+      skill_id:
+        type: string
+        description: id of `Skill` that user is claiming
+  UserSkills:
+    type: object
+    properties:
+      offset:
+        type: integer
+        format: int32
+        description: Position in pagination.
+      limit:
+        type: integer
+        format: int32
+        description: Number of items to retrieve (100 max).
+      count:
+        type: integer
+        format: int32
+        description: Total number of items available.
+      history:
+        type: array
+        items:
+          $ref: '#/definitions/UserSkill'          
   University:
     type: object
     properties:
