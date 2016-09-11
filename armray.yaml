@@ -8316,11 +8316,9 @@ paths:
       responses:
         # Response code
         '200':
-          description: An array of `Review` objects
+          description: An `Review` object
           schema:
-            type: array
-            items:
-              $ref: '#/definitions/Review'
+            $ref: '#/definitions/Review'
         default:
           description: Unexpected error
           schema:
@@ -9530,11 +9528,9 @@ paths:
       responses:
         # Response code
         '200':
-          description: An array of `Skill` objects
+          description: A `Skill` object
           schema:
-            type: array
-            items:
-              $ref: '#/definitions/Skill'
+            $ref: '#/definitions/Skill'
         default:
           description: Unexpected error
           schema:
@@ -10298,11 +10294,9 @@ paths:
       responses:
         # Response code
         '200':
-          description: An array of `UserSkill` objects
+          description: A `UserSkill` object
           schema:
-            type: array
-            items:
-              $ref: '#/definitions/UserSkill'
+            $ref: '#/definitions/UserSkill'
         default:
           description: Unexpected error
           schema:
@@ -11279,7 +11273,6 @@ paths:
           description: Unexpected error
           schema:
             $ref: '#/definitions/Error'    
-
   /Universities/city/{city}:
     get:
       tags:
@@ -11529,6 +11522,1300 @@ paths:
     ######################################
       ##############Definitions#############
       ######################################
+  /Universities/projects/{project_id}:
+    get:
+      tags:
+        - University
+        - Project
+      description: |
+        Retrieve `University` objects with specified project id
+      operationId: getUniversitiesByProject
+      produces:
+        - application/json
+      parameters:
+        -
+          name: project_id
+          in: path
+          description: ID of `Project` to search for
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Array of `University` objects
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/University'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'    
+  /Universities/projects:
+    get:
+      tags:
+        - University
+        - Project
+      description: |
+        Retrieve `University` objects with specified projects
+      operationId: getUniversitiesByProjectsForm
+      produces:
+        - application/json
+      consumes:
+        - application/json        
+      parameters:
+        -
+          name: projects
+          in: formData
+          description: Array of `Project` id items to search for
+          required: true
+          type: array
+          items:
+            type: string
+      responses:
+        '200':
+          description: Array of `University` objects
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/University'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'    
+
+  /University:
+    post:
+      tags:
+        - University
+      description: |
+        Creates `University` objects. **name**, **city**, and **state** are required, all others optional.
+      operationId: createUniversity
+      produces:
+        - application/json
+      consumes:
+        - application/json
+      parameters:
+        -
+          name: name
+          in: formData
+          required: true
+          type: string
+          description: Name of `University`
+        -
+          name: city
+          in: formData
+          required: true
+          type: string
+          description: City of `University`
+        -
+          name: state
+          in: formData
+          required: true
+          type: string
+          description: state of `University`
+        -
+          name: geolocation
+          in: formData
+          required: false
+          type: string
+          description: 2 item tuple representing lat/long of `University`; if not provided will be calculated based on city/state
+        -
+          name: project_ids
+          in: formData
+          required: false
+          type: array
+          items:
+            type: string
+          description: ids of `Project` items at `University`
+        -
+          name: profile_images
+          in: formData
+          required: false
+          type: array
+          items:
+            type: string
+          description: paths to profile images for `University`
+      responses:
+        # Response code
+        '200':
+          description: A `University` object
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/University'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'      
+  /University/{id}:
+    get:
+      tags:
+          - University
+      description: |
+        Retrieves `University` object by **id**.
+      operationId: getUniversityById
+      produces:
+        -	application/json
+      parameters:
+      -
+        name: id
+        in: path
+        required: true
+        type: string
+        description: The `UserSkill` id
+      responses:
+        # Response code
+        '200':
+          description: The `University`
+          schema:
+            $ref: '#/definitions/University'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    put:
+      tags:
+        - University
+      description: |
+        Updates `University` objects. **id** is required,
+        all others optional.
+      operationId: updateUniversityById
+      produces:
+        -	application/json
+      consumes:
+        -	application/json
+      parameters:
+      -
+        name: id
+        in: path
+        required: true
+        type: string
+        description: The `University` id
+      -
+        name: name
+        in: formData
+        required: true
+        type: string
+        description: Name of `University`
+      -
+        name: city
+        in: formData
+        required: true
+        type: string
+        description: City of `University`
+      -
+        name: state
+        in: formData
+        required: true
+        type: string
+        description: state of `University`
+      -
+        name: geolocation
+        in: formData
+        required: false
+        type: string
+        description: 2 item tuple representing lat/long of `University`; if not provided will be calculated based on city/state
+      -
+        name: project_ids
+        in: formData
+        required: false
+        type: array
+        items:
+          type: string
+        description: ids of `Project` items at `University`
+      -
+        name: profile_images
+        in: formData
+        required: false
+        type: array
+        items:
+          type: string
+        description: paths to profile images for `University`
+      responses:
+        # Response code
+        '200':
+          description: A `University` object
+          schema:
+            $ref: '#/definitions/University'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    delete:
+      tags:
+        - University
+      description: |
+        Deletes `University` objects by **id**.
+      operationId: deleteUniversityById
+      produces:
+        -	application/json
+      parameters:
+      - name: id
+        in: path
+        required: true
+        type: string
+        description: The `University` id
+      responses:
+        # Response code
+        '200':
+          description: The `University` id
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      #should only modify users using the user/{id} route to make sure we don't
+      # accidentally nike the wrong thing   
+  /University/{id}/name:
+    get:
+      tags:
+        - University
+      description: |
+        Gets the `University` name
+      operationId: getUniversityNameById
+      produces:
+        -	application/json
+      parameters:
+      -
+        name: id
+        in: path
+        required: true
+        type: string
+        description: The `University` id
+      responses:
+        # Response code
+        '200':
+          description: The `University` name
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    delete:
+      tags:
+        - University
+      description: |
+        Deletes `University` name
+      operationId: deleteUniversityNameById
+      produces:
+        -	application/json
+      parameters:
+      - name: id
+        in: path
+        required: true
+        type: string
+        description: The `University` id
+      responses:
+        # Response code
+        '200':
+          description: The `University` id
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /University/{id}/name/{name}:
+    get:
+      tags:
+        - University
+      description: |
+        Gets if the `University` name matches the parameter
+      operationId: isUniversityNameById
+      produces:
+        -	application/json
+      parameters:
+      -
+        name: id
+        in: path
+        required: true
+        type: string
+        description: The `University` id
+      -
+        name: name
+        in: path
+        required: true
+        type: string
+        description: The `University` name        
+      responses:
+        # Response code
+        '200':
+          description: The boolean
+          schema:
+            type: boolean
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    put:
+      tags:
+        - University
+      description: |
+        Updates `University` name
+      operationId: updateUniversityNameById
+      produces:
+        -	application/json
+      parameters:
+      - name: id
+        in: path
+        required: true
+        type: string
+        description: The `University` id
+      - name: name
+        in: path
+        required: true
+        type: string
+        description: The `University` name
+      responses:
+        # Response code
+        '200':
+          description: The `University` id
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    post:
+      tags:
+        - University
+      description: |
+        Sets `University` name
+      operationId: setUniversityNameById
+      produces:
+        -	application/json
+      parameters:
+      - name: id
+        in: path
+        required: true
+        type: string
+        description: The `University` id
+      - name: name
+        in: path
+        required: true
+        type: string
+        description: The `University` name
+      responses:
+        # Response code
+        '200':
+          description: The `University` id
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'            
+  /University/{id}/city:
+    get:
+      tags:
+        - University
+      description: |
+        Gets the `University` city
+      operationId: getUniversityCityById
+      produces:
+        -	application/json
+      parameters:
+      -
+        name: id
+        in: path
+        required: true
+        type: string
+        description: The `University` id
+      responses:
+        # Response code
+        '200':
+          description: The `University` city
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    delete:
+      tags:
+        - University
+      description: |
+        Deletes `University` city
+      operationId: deleteUniversityCityById
+      produces:
+        -	application/json
+      parameters:
+      - name: id
+        in: path
+        required: true
+        type: string
+        description: The `University` id
+      responses:
+        # Response code
+        '200':
+          description: The `University` id
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /University/{id}/city/{city}:
+    get:
+      tags:
+        - University
+      description: |
+        Gets if the `University` city matches the parameter
+      operationId: isUniversityCityById
+      produces:
+        -	application/json
+      parameters:
+      -
+        name: id
+        in: path
+        required: true
+        type: string
+        description: The `University` id
+      -
+        name: city
+        in: path
+        required: true
+        type: string
+        description: The `University` city        
+      responses:
+        # Response code
+        '200':
+          description: The boolean
+          schema:
+            type: boolean
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    put:
+      tags:
+        - University
+      description: |
+        Updates `University` city
+      operationId: updateUniversityCityById
+      produces:
+        -	application/json
+      parameters:
+      - name: id
+        in: path
+        required: true
+        type: string
+        description: The `University` id
+      - name: city
+        in: path
+        required: true
+        type: string
+        description: The `University` city
+      responses:
+        # Response code
+        '200':
+          description: The `University` id
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    post:
+      tags:
+        - University
+      description: |
+        Sets `University` city
+      operationId: setUniversityCityById
+      produces:
+        -	application/json
+      parameters:
+      - name: id
+        in: path
+        required: true
+        type: string
+        description: The `University` id
+      - name: city
+        in: path
+        required: true
+        type: string
+        description: The `University` city
+      responses:
+        # Response code
+        '200':
+          description: The `University` id
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'            
+  /University/{id}/state:
+    get:
+      tags:
+        - University
+      description: |
+        Gets the `University` state
+      operationId: getUniversityStateById
+      produces:
+        -	application/json
+      parameters:
+      -
+        name: id
+        in: path
+        required: true
+        type: string
+        description: The `University` id
+      responses:
+        # Response code
+        '200':
+          description: The `University` state
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    delete:
+      tags:
+        - University
+      description: |
+        Deletes `University` state
+      operationId: deleteUniversityStateById
+      produces:
+        -	application/json
+      parameters:
+      - name: id
+        in: path
+        required: true
+        type: string
+        description: The `University` id
+      responses:
+        # Response code
+        '200':
+          description: The `University` id
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /University/{id}/state/{state}:
+    get:
+      tags:
+        - University
+      description: |
+        Gets if the `University` state matches the parameter
+      operationId: isUniversityStateById
+      produces:
+        -	application/json
+      parameters:
+      -
+        name: id
+        in: path
+        required: true
+        type: string
+        description: The `University` id
+      -
+        name: state
+        in: path
+        required: true
+        type: string
+        description: The `University` state        
+      responses:
+        # Response code
+        '200':
+          description: The boolean
+          schema:
+            type: boolean
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    put:
+      tags:
+        - University
+      description: |
+        Updates `University` state
+      operationId: updateUniversityStateById
+      produces:
+        -	application/json
+      parameters:
+      - name: id
+        in: path
+        required: true
+        type: string
+        description: The `University` id
+      - name: state
+        in: path
+        required: true
+        type: string
+        description: The `University` state
+      responses:
+        # Response code
+        '200':
+          description: The `University` id
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    post:
+      tags:
+        - University
+      description: |
+        Sets `University` state
+      operationId: setUniversityStateById
+      produces:
+        -	application/json
+      parameters:
+      - name: id
+        in: path
+        required: true
+        type: string
+        description: The `University` id
+      - name: state
+        in: path
+        required: true
+        type: string
+        description: The `University` state
+      responses:
+        # Response code
+        '200':
+          description: The `University` id
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'            
+  /University/{id}/geolocation:
+    get:
+      tags:
+        - University
+      description: |
+        Gets the `University` geolocation
+      operationId: getUniversityGeolocationById
+      produces:
+        -	application/json
+      parameters:
+      -
+        name: id
+        in: path
+        required: true
+        type: string
+        description: The `University` id
+      responses:
+        # Response code
+        '200':
+          description: The `University` geolocation as a tuple
+          schema:
+            type: array
+            items:
+              type: number
+              format: float
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    put:
+      tags:
+        - University
+      description: |
+        Updates `University` geolocation
+      operationId: updateUniversityGeolocationByIdForm
+      produces:
+        -	application/json
+      consumes:
+        -	application/json        
+      parameters:
+      - 
+        name: id
+        in: path
+        required: true
+        type: string
+        description: The `University` id
+      -
+        name: lat
+        in: formData
+        required: true
+        type: number
+        format: float
+        description: The `University` latitude
+      -
+        name: long
+        in: formData
+        required: true
+        type: number
+        format: float
+        description: The `University` longitude      
+      responses:
+        # Response code
+        '200':
+          description: The `University` id
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    post:
+      tags:
+        - University
+      description: |
+        Sets `University` geolocation
+      operationId: setUniversityGeolocationByIdForm
+      produces:
+        -	application/json
+      consumes:
+        -	application/json        
+      parameters:
+      - 
+        name: id
+        in: path
+        required: true
+        type: string
+        description: The `University` id
+      -
+        name: lat
+        in: formData
+        required: true
+        type: number
+        format: float
+        description: The `University` latitude
+      -
+        name: long
+        in: formData
+        required: true
+        type: number
+        format: float
+        description: The `University` longitude    
+      responses:
+        # Response code
+        '200':
+          description: The `University` id
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'                      
+    delete:
+      tags:
+        - University
+      description: |
+        Deletes `University` geolocation
+      operationId: deleteUniversityGeolocationById
+      produces:
+        -	application/json
+      parameters:
+      - name: id
+        in: path
+        required: true
+        type: string
+        description: The `University` id
+      responses:
+        # Response code
+        '200':
+          description: The `University` id
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /University/{id}/geolocation/{lat}/{long}:
+    get:
+      tags:
+        - University
+      description: |
+        Gets if the `University` geolocation the parameters
+      operationId: isUniversityGeolocationById
+      produces:
+        -	application/json
+      parameters:
+      -
+        name: id
+        in: path
+        required: true
+        type: string
+        description: The `University` id
+      -
+        name: lat
+        in: path
+        required: true
+        type: number
+        format: float
+        description: The `University` latitude
+      -
+        name: long
+        in: path
+        required: true
+        type: number
+        format: float
+        description: The `University` longitude        
+      responses:
+        # Response code
+        '200':
+          description: The boolean
+          schema:
+            type: boolean
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    put:
+      tags:
+        - University
+      description: |
+        Updates `University` geolocation
+      operationId: updateUniversityGeolocationById
+      produces:
+        -	application/json
+      parameters:
+      - 
+        name: id
+        in: path
+        required: true
+        type: string
+        description: The `University` id
+      -
+        name: lat
+        in: path
+        required: true
+        type: number
+        format: float
+        description: The `University` latitude
+      -
+        name: long
+        in: path
+        required: true
+        type: number
+        format: float
+        description: The `University` longitude      
+      responses:
+        # Response code
+        '200':
+          description: The `University` id
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    post:
+      tags:
+        - University
+      description: |
+        Sets `University` state
+      operationId: setUniversityGeolocationById
+      produces:
+        -	application/json
+      parameters:
+      - 
+        name: id
+        in: path
+        required: true
+        type: string
+        description: The `University` id
+      -
+        name: lat
+        in: path
+        required: true
+        type: number
+        format: float
+        description: The `University` latitude
+      -
+        name: long
+        in: path
+        required: true
+        type: number
+        format: float
+        description: The `University` longitude    
+      responses:
+        # Response code
+        '200':
+          description: The `University` id
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'            
+  /University/{id}/projects:
+    get:
+      tags:
+        - University
+        - Project
+      description: |
+        Gets the `University` projects
+      operationId: getUniversityProjectsById
+      produces:
+        -	application/json
+      parameters:
+      -
+        name: id
+        in: path
+        required: true
+        type: string
+        description: The `University` id
+      responses:
+        # Response code
+        '200':
+          description: The `University` state
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    delete:
+      tags:
+        - University
+        - Project
+      description: |
+        Deletes `University` projects
+      operationId: deleteUniversityProjectsById
+      produces:
+        -	application/json
+      parameters:
+      - name: id
+        in: path
+        required: true
+        type: string
+        description: The `University` id
+      responses:
+        # Response code
+        '200':
+          description: The `University` id
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    post:
+      tags:
+        - University
+        - Project
+      description: |
+        Sets `University` projects
+      operationId: setUniversityProjectsById
+      produces:
+        -	application/json
+      consumes:
+        -	application/json        
+      parameters:
+      - 
+        name: id
+        in: path
+        required: true
+        type: string
+        description: The `University` id
+      -
+        name: project_ids
+        in: formData
+        required: true
+        description: The `Project` ids        
+        type: array
+        items:
+          type: string        
+      responses:
+        # Response code
+        '200':
+          description: The `University` id
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    put:
+      tags:
+        - University
+        - Project
+      description: |
+        Adds `University` projects
+      operationId: addUniversityProjectsById
+      produces:
+        -	application/json
+      consumes:
+        -	application/json        
+      parameters:
+      - 
+        name: id
+        in: path
+        required: true
+        type: string
+        description: The `University` id
+      -
+        name: project_ids
+        in: formData
+        required: true
+        description: The `Project` ids        
+        type: array
+        items:
+          type: string        
+      responses:
+        # Response code
+        '200':
+          description: The `University` id
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /University/{id}/projects/{project_id}:
+    get:
+      tags:
+        - University
+        - Project
+      description: |
+        Gets if the `University` has the `Project`
+      operationId: isUniversityProjectsById
+      produces:
+        -	application/json
+      parameters:
+      -
+        name: id
+        in: path
+        required: true
+        type: string
+        description: The `University` id
+      -
+        name: project_id
+        in: path
+        required: true
+        type: string
+        description: The `Project` id        
+      responses:
+        # Response code
+        '200':
+          description: The boolean
+          schema:
+            type: boolean
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    delete:
+      tags:
+        - University
+        - Project
+      description: |
+        Deletes `Project` from `University` 
+      operationId: deleteUniversityProjectById
+      produces:
+        -	application/json
+      parameters:
+      - name: id
+        in: path
+        required: true
+        type: string
+        description: The `University` id
+      -
+        name: project_id
+        in: path
+        required: true
+        type: string
+        description: The `Project` id                
+      responses:
+        # Response code
+        '200':
+          description: The `University` id
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    post:
+      tags:
+        - University
+        - Project
+      description: |
+        Sets `University` projects to this single project (probably will never use this)
+      operationId: setUniversityProjectById
+      produces:
+        -	application/json
+      parameters:
+      - 
+        name: id
+        in: path
+        required: true
+        type: string
+        description: The `University` id
+      -
+        name: project_id
+        in: path
+        required: true
+        type: string
+        description: The `Project` id        
+      responses:
+        # Response code
+        '200':
+          description: The `University` id
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    put:
+      tags:
+        - University
+        - Project
+      description: |
+        Adds `University` project
+      operationId: addUniversityProjectById
+      produces:
+        -	application/json
+      parameters:
+      - 
+        name: id
+        in: path
+        required: true
+        type: string
+        description: The `University` id
+      -
+        name: project_id
+        in: path
+        required: true
+        type: string
+        description: The `Project` ids      
+      responses:
+        # Response code
+        '200':
+          description: The `University` id
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'            
+  /University/{id}/images:
+    get:
+      tags:
+        - University
+      description: |
+        Gets the `University` images
+      operationId: getUniversityimagesById
+      produces:
+        -	application/json
+      parameters:
+      -
+        name: id
+        in: path
+        required: true
+        type: string
+        description: The `University` id
+      responses:
+        # Response code
+        '200':
+          description: The `University` image paths
+          schema:
+            type: array
+            items:
+              type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    delete:
+      tags:
+        - University
+      description: |
+        Deletes `University` images
+      operationId: deleteUniversityImagesById
+      produces:
+        -	application/json
+      parameters:
+      - name: id
+        in: path
+        required: true
+        type: string
+        description: The `University` id
+      responses:
+        # Response code
+        '200':
+          description: The `University` id
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    post:
+      tags:
+        - University
+      description: |
+        Sets `University` profile image paths
+      operationId: setUniversityImagesById
+      produces:
+        -	application/json
+      consumes:
+        -	application/json        
+      parameters:
+      - 
+        name: id
+        in: path
+        required: true
+        type: string
+        description: The `University` id
+      -
+        name: profile_image_paths
+        in: formData
+        required: true
+        description: The `University` profile image paths
+        type: array
+        items:
+          type: string        
+      responses:
+        # Response code
+        '200':
+          description: The `University` id
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    put:
+      tags:
+        - University
+        - Project
+      description: |
+        Adds `University` projects
+      operationId: addUniversityProfileImagesById
+      produces:
+        -	application/json
+      consumes:
+        -	application/json        
+      parameters:
+      - 
+        name: id
+        in: path
+        required: true
+        type: string
+        description: The `University` id
+      -
+        name: profile_image_paths
+        in: formData
+        required: true
+        description:  The `University` profile image paths
+        type: array
+        items:
+          type: string        
+      responses:
+        # Response code
+        '200':
+          description: The `University` id
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+     
 
 definitions:
   User:
