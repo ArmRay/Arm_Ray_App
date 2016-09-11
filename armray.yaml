@@ -1102,6 +1102,7 @@ paths:
     get:
       tags:
         - User
+        - TODO-create-images-object
       description: |
         Retrieve all images associated with a `User`.
       operationId: getAllUserImages
@@ -7051,9 +7052,7 @@ paths:
 
 
 
-      ######################################
-      ##############Definitions#############
-      ######################################
+  
   /Grants/keys:
     get:
       tags:
@@ -10973,6 +10972,563 @@ paths:
           description: Unexpected error
           schema:
             $ref: '#/definitions/Error'            
+
+
+######################################
+  ##############University##############
+  ######################################
+
+  #/University
+  #get put post delete
+  #/University/{id}
+  #get put delete
+  #/University/{id}/name
+  #get put
+  #/University/{id}/name/{name}
+  #get put
+  #/University/{id}/geolocation
+  #get
+  #/University/{id}/geolocation/{lat}/{long}
+  #get
+  #/University/{id}/city
+  #get put
+  #/University/{id}/city/{city}
+  #get put
+  #/University/{id}/state
+  #get put
+  #/University/{id}/state/{state}
+  #get put
+  #/University/{id}/projects
+  #/University/{id}/projects/{project}
+  
+  #/Universities
+  #/Universities/created
+  #/Universities/created/{created_date}
+  #get
+  #/Universities/modified
+  #/Universities/modified/{modified_date}
+  #get
+  #/Universities/name/{name}
+  #get      #keyword search
+  #/Universities/geolocation
+  #/Universities/geolocation/{lat}/{long}
+  #/Universities/geolocation/{lat}/{long}/{radius}
+  #get      #keyword search
+  #/Universities/city/{city}
+  #/Universities/state/{state}
+  #/Universities/projects/
+  #/Universities/projects/{project_id}
+  
+
+
+  /Universities:
+    get:
+      tags:
+        - University
+      description: |
+        Gets `University` objects.
+        Required query param of **size** determines
+        max number of results per page, and **page** determines
+        which page in the pagination we are. Remaining params optional.
+      operationId: getUniversities
+      produces:
+        - application/json
+      consumes:
+        - application/json
+      parameters:
+        -
+          name: size
+          in: formData
+          description: Max size of array to return
+          required: true
+          type: number
+          format: int32
+        -
+          name: page
+          in: formData
+          description: Location in pagination
+          required: true
+          type: number
+          format: int32
+        -
+          name: university_id
+          in: formData
+          required: false
+          type: string
+          description: Unique identifier representing a specific `University`
+        -
+          name: name
+          in: formData
+          required: false
+          type: string
+          description: Name of a `University`
+        -
+          name: city
+          in: formData
+          required: false
+          type: string
+          description: City of `University`
+        -
+          name: state
+          in: formData
+          required: false
+          type: string
+          description: City of `University`          
+        -
+          name: created_date
+          in: formData
+          required: false
+          type: string
+          format: date-time
+          description: datetime stamp of `University` creation
+        -
+          name: updated_date
+          in: formData
+          required: false
+          type: string
+          format: date-time
+          description: datetime stamp of `University` update
+        -
+          name: project_ids
+          in: formData
+          required: false
+          type: array
+          items:
+            type: string
+          description: id of `Project` objects at this university
+      responses:
+        # Response code
+        '200':
+          description: An array of `University` objects
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/University'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /Universities/created_date:
+    get:
+      tags:
+        - University
+      description: |
+        Retrieve `University` objects created on or later than given date
+      operationId: getUniversitiesByCreatedDateForm
+      produces:
+        - application/json
+      consumes:
+        - application/json
+      parameters:
+        -
+          name: created_date
+          in: formData
+          description: date of creation
+          required: true
+          type: string
+          format: date-time
+      responses:
+        '200':
+          description: Array of `University` objects
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/University'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /Universities/created_date/{created_date}:
+    get:
+      tags:
+        - University
+      description: |
+        Retrieve `University` objects created on or later than given date
+      operationId: getUniversitiesByCreatedDate
+      produces:
+        - application/json
+      parameters:
+        -
+          name: created_date
+          in: path
+          description: date of creation
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Array of `University` objects
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/University'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /Universities/modified_date:
+    get:
+      tags:
+        - University
+      description: |
+        Retrieve `University` objects modified on or later than given date
+      operationId: getUniversitiesByModifiedDateForm
+      produces:
+        - application/json
+      consumes:
+        - application/json
+      parameters:
+        -
+          name: modified_date
+          in: formData
+          description: date of modification
+          required: true
+          type: string
+          format: date-time
+      responses:
+        '200':
+          description: Array of `University` objects
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/University'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /Universities/modified_date/{modified_date}:
+    get:
+      tags:
+        - University
+      description: |
+        Retrieve `University` objects created on or later than given date
+      operationId: getUniversitiesByModifiedDate
+      produces:
+        - application/json
+      parameters:
+        -
+          name: modified_date
+          in: path
+          description: date of creation
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Array of `University` objects
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/University'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'      
+  #probably should avoid using this route if possible, but depends on descipriton format
+  /Universities/name/{name}:
+    get:
+      tags:
+        - University
+      description: |
+        Retrieve `University` objects with specified name
+      operationId: getUniversitiesByName
+      produces:
+        - application/json
+      parameters:
+        -
+          name: name
+          in: path
+          description: Name of `University` to search for
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Array of `University` objects
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/University'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'    
+  /Universities/name:
+    get:
+      tags:
+        - University
+      description: |
+        Retrieve `University` objects with specified name
+      operationId: getUniversitiesByNameForm
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        -
+          name: name
+          in: formData
+          description: Name of `University` to search for
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Array of `University` objects
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/University'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'    
+
+  /Universities/city/{city}:
+    get:
+      tags:
+        - University
+      description: |
+        Retrieve `University` objects with specified city
+      operationId: getUniversitiesByCity
+      produces:
+        - application/json
+      parameters:
+        -
+          name: city
+          in: path
+          description: City of `University` to search for
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Array of `University` objects
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/University'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'    
+  /Universities/city:
+    get:
+      tags:
+        - University
+      description: |
+        Retrieve `University` objects with specified city
+      operationId: getUniversitiesByCityForm
+      produces:
+        - application/json
+      consumes:
+        - application/json        
+      parameters:
+        -
+          name: city
+          in: formData
+          description: City of `University` to search for
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Array of `University` objects
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/University'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'    
+  /Universities/state/{state}:
+    get:
+      tags:
+        - University
+      description: |
+        Retrieve `University` objects with specified state
+      operationId: getUniversitiesByState
+      produces:
+        - application/json
+      parameters:
+        -
+          name: state
+          in: path
+          description: State of `University` to search for
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Array of `University` objects
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/University'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'    
+  /Universities/state:
+    get:
+      tags:
+        - University
+      description: |
+        Retrieve `University` objects with specified state
+      operationId: getUniversitiesByStateForm
+      produces:
+        - application/json
+      consumes:
+        - application/json        
+      parameters:
+        -
+          name: state
+          in: formData
+          description: State of `University` to search for
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Array of `University` objects
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/University'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'    
+  /Universities/geolocation:
+    get:
+      tags:
+        - University
+      description: |
+        Retrieve `University` objects with specified geolocation; radius is optional, defaults to 25 miles
+      operationId: getUniversitiesByGeolocationForm
+      produces:
+        - application/json
+      consumes:
+        - application/json        
+      parameters:
+        -
+          name: lat
+          in: formData
+          description: State of `University` to search for
+          required: true
+          type: number
+          format: float
+        -
+          name: long
+          in: formData
+          description: State of `University` to search for
+          required: true
+          type: number
+          format: float
+        -
+          name: radius
+          in: formData
+          description: Radius from specified lat and long to search, defaults to 25 miles if not specified
+          required: false
+          type: number
+          format: float
+      responses:
+        '200':
+          description: Array of `University` objects
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/University'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'    
+  /Universities/geolocation/{lat}/{long}:
+    get:
+      tags:
+        - University
+      description: |
+        Retrieve `University` objects with specified geolocation; radius is optional, defaults to 25 miles
+      operationId: getUniversitiesByGeolocationFormAndPath
+      produces:
+        - application/json
+      parameters:
+        -
+          name: lat
+          in: path
+          description: State of `University` to search for
+          required: true
+          type: number
+          format: float
+        -
+          name: long
+          in: path
+          description: State of `University` to search for
+          required: true
+          type: number
+          format: float
+        -
+          name: radius
+          in: formData
+          description: Radius from specified lat and long to search, defaults to 25 miles if not specified
+          required: false
+          type: number
+          format: float
+      responses:
+        '200':
+          description: Array of `University` objects
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/University'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'    
+  /Universities/geolocation/{lat}/{long}/{radius}:
+    get:
+      tags:
+        - University
+      description: |
+        Retrieve `University` objects with specified geolocation and radius
+      operationId: getUniversitiesByGeolocationPath
+      produces:
+        - application/json
+      parameters:
+        -
+          name: lat
+          in: path
+          description: State of `University` to search for
+          required: true
+          type: number
+          format: float
+        -
+          name: long
+          in: path
+          description: State of `University` to search for
+          required: true
+          type: number
+          format: float
+        -
+          name: radius
+          in: path
+          description: Radius from specified lat and long to search, defaults to 25 miles if not specified
+          required: true
+          type: number
+          format: float
+      responses:
+        '200':
+          description: Array of `University` objects
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/University'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'    
+  
+
+
+
+
+
+    ######################################
+      ##############Definitions#############
+      ######################################
 
 definitions:
   User:

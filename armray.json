@@ -1316,7 +1316,8 @@
         "/User/{id}/images": {
             "get": {
                 "tags": [
-                    "User"
+                    "User",
+                    "TODO-create-images-object"
                 ],
                 "description": "Retrieve all images associated with a `User`.\n",
                 "operationId": "getAllUserImages",
@@ -13858,6 +13859,675 @@
                         "schema": {
                             "type": "string",
                             "format": "date-time"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/Universities": {
+            "get": {
+                "tags": [
+                    "University"
+                ],
+                "description": "Gets `University` objects.\nRequired query param of **size** determines\nmax number of results per page, and **page** determines\nwhich page in the pagination we are. Remaining params optional.\n",
+                "operationId": "getUniversities",
+                "produces": [
+                    "application/json"
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "size",
+                        "in": "formData",
+                        "description": "Max size of array to return",
+                        "required": true,
+                        "type": "number",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "page",
+                        "in": "formData",
+                        "description": "Location in pagination",
+                        "required": true,
+                        "type": "number",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "university_id",
+                        "in": "formData",
+                        "required": false,
+                        "type": "string",
+                        "description": "Unique identifier representing a specific `University`"
+                    },
+                    {
+                        "name": "name",
+                        "in": "formData",
+                        "required": false,
+                        "type": "string",
+                        "description": "Name of a `University`"
+                    },
+                    {
+                        "name": "city",
+                        "in": "formData",
+                        "required": false,
+                        "type": "string",
+                        "description": "City of `University`"
+                    },
+                    {
+                        "name": "state",
+                        "in": "formData",
+                        "required": false,
+                        "type": "string",
+                        "description": "City of `University`"
+                    },
+                    {
+                        "name": "created_date",
+                        "in": "formData",
+                        "required": false,
+                        "type": "string",
+                        "format": "date-time",
+                        "description": "datetime stamp of `University` creation"
+                    },
+                    {
+                        "name": "updated_date",
+                        "in": "formData",
+                        "required": false,
+                        "type": "string",
+                        "format": "date-time",
+                        "description": "datetime stamp of `University` update"
+                    },
+                    {
+                        "name": "project_ids",
+                        "in": "formData",
+                        "required": false,
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "id of `Project` objects at this university"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "An array of `University` objects",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/University"
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/Universities/created_date": {
+            "get": {
+                "tags": [
+                    "University"
+                ],
+                "description": "Retrieve `University` objects created on or later than given date\n",
+                "operationId": "getUniversitiesByCreatedDateForm",
+                "produces": [
+                    "application/json"
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "created_date",
+                        "in": "formData",
+                        "description": "date of creation",
+                        "required": true,
+                        "type": "string",
+                        "format": "date-time"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Array of `University` objects",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/University"
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/Universities/created_date/{created_date}": {
+            "get": {
+                "tags": [
+                    "University"
+                ],
+                "description": "Retrieve `University` objects created on or later than given date\n",
+                "operationId": "getUniversitiesByCreatedDate",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "created_date",
+                        "in": "path",
+                        "description": "date of creation",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Array of `University` objects",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/University"
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/Universities/modified_date": {
+            "get": {
+                "tags": [
+                    "University"
+                ],
+                "description": "Retrieve `University` objects modified on or later than given date\n",
+                "operationId": "getUniversitiesByModifiedDateForm",
+                "produces": [
+                    "application/json"
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "modified_date",
+                        "in": "formData",
+                        "description": "date of modification",
+                        "required": true,
+                        "type": "string",
+                        "format": "date-time"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Array of `University` objects",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/University"
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/Universities/modified_date/{modified_date}": {
+            "get": {
+                "tags": [
+                    "University"
+                ],
+                "description": "Retrieve `University` objects created on or later than given date\n",
+                "operationId": "getUniversitiesByModifiedDate",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "modified_date",
+                        "in": "path",
+                        "description": "date of creation",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Array of `University` objects",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/University"
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/Universities/name/{name}": {
+            "get": {
+                "tags": [
+                    "University"
+                ],
+                "description": "Retrieve `University` objects with specified name\n",
+                "operationId": "getUniversitiesByName",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "name",
+                        "in": "path",
+                        "description": "Name of `University` to search for",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Array of `University` objects",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/University"
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/Universities/name": {
+            "get": {
+                "tags": [
+                    "University"
+                ],
+                "description": "Retrieve `University` objects with specified name\n",
+                "operationId": "getUniversitiesByNameForm",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "name",
+                        "in": "formData",
+                        "description": "Name of `University` to search for",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Array of `University` objects",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/University"
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/Universities/city/{city}": {
+            "get": {
+                "tags": [
+                    "University"
+                ],
+                "description": "Retrieve `University` objects with specified city\n",
+                "operationId": "getUniversitiesByCity",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "city",
+                        "in": "path",
+                        "description": "City of `University` to search for",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Array of `University` objects",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/University"
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/Universities/city": {
+            "get": {
+                "tags": [
+                    "University"
+                ],
+                "description": "Retrieve `University` objects with specified city\n",
+                "operationId": "getUniversitiesByCityForm",
+                "produces": [
+                    "application/json"
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "city",
+                        "in": "formData",
+                        "description": "City of `University` to search for",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Array of `University` objects",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/University"
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/Universities/state/{state}": {
+            "get": {
+                "tags": [
+                    "University"
+                ],
+                "description": "Retrieve `University` objects with specified state\n",
+                "operationId": "getUniversitiesByState",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "state",
+                        "in": "path",
+                        "description": "State of `University` to search for",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Array of `University` objects",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/University"
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/Universities/state": {
+            "get": {
+                "tags": [
+                    "University"
+                ],
+                "description": "Retrieve `University` objects with specified state\n",
+                "operationId": "getUniversitiesByStateForm",
+                "produces": [
+                    "application/json"
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "state",
+                        "in": "formData",
+                        "description": "State of `University` to search for",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Array of `University` objects",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/University"
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/Universities/geolocation": {
+            "get": {
+                "tags": [
+                    "University"
+                ],
+                "description": "Retrieve `University` objects with specified geolocation; radius is optional, defaults to 25 miles\n",
+                "operationId": "getUniversitiesByGeolocationForm",
+                "produces": [
+                    "application/json"
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "lat",
+                        "in": "formData",
+                        "description": "State of `University` to search for",
+                        "required": true,
+                        "type": "number",
+                        "format": "float"
+                    },
+                    {
+                        "name": "long",
+                        "in": "formData",
+                        "description": "State of `University` to search for",
+                        "required": true,
+                        "type": "number",
+                        "format": "float"
+                    },
+                    {
+                        "name": "radius",
+                        "in": "formData",
+                        "description": "Radius from specified lat and long to search, defaults to 25 miles if not specified",
+                        "required": false,
+                        "type": "number",
+                        "format": "float"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Array of `University` objects",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/University"
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/Universities/geolocation/{lat}/{long}": {
+            "get": {
+                "tags": [
+                    "University"
+                ],
+                "description": "Retrieve `University` objects with specified geolocation; radius is optional, defaults to 25 miles\n",
+                "operationId": "getUniversitiesByGeolocationFormAndPath",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "lat",
+                        "in": "path",
+                        "description": "State of `University` to search for",
+                        "required": true,
+                        "type": "number",
+                        "format": "float"
+                    },
+                    {
+                        "name": "long",
+                        "in": "path",
+                        "description": "State of `University` to search for",
+                        "required": true,
+                        "type": "number",
+                        "format": "float"
+                    },
+                    {
+                        "name": "radius",
+                        "in": "formData",
+                        "description": "Radius from specified lat and long to search, defaults to 25 miles if not specified",
+                        "required": false,
+                        "type": "number",
+                        "format": "float"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Array of `University` objects",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/University"
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/Universities/geolocation/{lat}/{long}/{radius}": {
+            "get": {
+                "tags": [
+                    "University"
+                ],
+                "description": "Retrieve `University` objects with specified geolocation and radius\n",
+                "operationId": "getUniversitiesByGeolocationPath",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "lat",
+                        "in": "path",
+                        "description": "State of `University` to search for",
+                        "required": true,
+                        "type": "number",
+                        "format": "float"
+                    },
+                    {
+                        "name": "long",
+                        "in": "path",
+                        "description": "State of `University` to search for",
+                        "required": true,
+                        "type": "number",
+                        "format": "float"
+                    },
+                    {
+                        "name": "radius",
+                        "in": "path",
+                        "description": "Radius from specified lat and long to search, defaults to 25 miles if not specified",
+                        "required": true,
+                        "type": "number",
+                        "format": "float"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Array of `University` objects",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/University"
+                            }
                         }
                     },
                     "default": {
