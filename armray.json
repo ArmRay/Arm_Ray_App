@@ -60,14 +60,14 @@
                     {
                         "name": "is_collaborator",
                         "in": "formData",
-                        "description": "is user a collaborator?",
+                        "description": "is `User`a collaborator?",
                         "required": false,
                         "type": "boolean"
                     },
                     {
                         "name": "is_creator",
                         "in": "formData",
-                        "description": "is user a creator?",
+                        "description": "is `User`a creator?",
                         "required": false,
                         "type": "boolean"
                     },
@@ -88,7 +88,7 @@
                     {
                         "name": "university_ids",
                         "in": "formData",
-                        "description": "universities a user is associated with",
+                        "description": "universities a `User`is associated with",
                         "required": false,
                         "type": "array",
                         "items": {
@@ -99,21 +99,21 @@
                     {
                         "name": "project_id",
                         "in": "formData",
-                        "description": "project_id the user is associated with",
+                        "description": "project_id the `User`is associated with",
                         "required": false,
                         "type": "string"
                     },
                     {
                         "name": "created_date",
                         "in": "formData",
-                        "description": "date the user was created",
+                        "description": "date the `User`was created",
                         "required": false,
                         "type": "string"
                     },
                     {
                         "name": "modified_date",
                         "in": "formData",
-                        "description": "date the user was modified",
+                        "description": "date the `User`was modified",
                         "required": false,
                         "type": "string"
                     },
@@ -578,7 +578,7 @@
                     {
                         "name": "university_ids",
                         "in": "formData",
-                        "description": "university a `User` is associated with",
+                        "description": "The `University`a `User` is associated with",
                         "required": false,
                         "type": "array",
                         "items": {
@@ -687,7 +687,7 @@
                     {
                         "name": "university",
                         "in": "formData",
-                        "description": "university a `User` is associated with",
+                        "description": "The `University`a `User` is associated with",
                         "required": false,
                         "type": "string"
                     },
@@ -1686,7 +1686,7 @@
                     "User",
                     "Skill"
                 ],
-                "description": "Check if skill is associated with a `User`.\n",
+                "description": "Check if `Skill`is associated with a `User`.\n",
                 "operationId": "getIsSkillOnUser",
                 "produces": [
                     "application/json"
@@ -1730,7 +1730,7 @@
                     "User",
                     "Skill"
                 ],
-                "description": "Set skill on a `User`.\n",
+                "description": "Set `Skill`on a `User`.\n",
                 "operationId": "setUserSkill",
                 "produces": [
                     "application/json"
@@ -1772,7 +1772,7 @@
                     "User",
                     "Skill"
                 ],
-                "description": "Add skill to a `User`.\n",
+                "description": "Add `Skill`to a `User`.\n",
                 "operationId": "addUserSkill",
                 "produces": [
                     "application/json"
@@ -1813,7 +1813,7 @@
                     "User",
                     "Skill"
                 ],
-                "description": "Delete skill from a user\n",
+                "description": "Delete `Skill`from a user\n",
                 "operationId": "deleteSkillFromUserById",
                 "produces": [
                     "application/json"
@@ -2457,7 +2457,7 @@
                     {
                         "name": "isCollaborator",
                         "in": "formData",
-                        "description": "Is user a collaborator?",
+                        "description": "Is `User`a collaborator?",
                         "required": true,
                         "type": "boolean"
                     }
@@ -2500,7 +2500,7 @@
                     {
                         "name": "isCollaborator",
                         "in": "formData",
-                        "description": "Is user a collaborator?",
+                        "description": "Is `User`a collaborator?",
                         "required": true,
                         "type": "boolean"
                     }
@@ -2578,7 +2578,7 @@
                     {
                         "name": "isCreator",
                         "in": "formData",
-                        "description": "Is user a creator?",
+                        "description": "Is `User`a creator?",
                         "required": true,
                         "type": "boolean"
                     }
@@ -2621,7 +2621,7 @@
                     {
                         "name": "isCollaborator",
                         "in": "formData",
-                        "description": "Is user a creator?",
+                        "description": "Is `User`a creator?",
                         "required": true,
                         "type": "boolean"
                     }
@@ -3135,7 +3135,7 @@
                         "required": false,
                         "type": "string",
                         "format": "date-time",
-                        "description": "datetime stamp of project creation"
+                        "description": "datetime stamp of `Project`creation"
                     },
                     {
                         "name": "updated_date",
@@ -3143,7 +3143,7 @@
                         "required": false,
                         "type": "string",
                         "format": "date-time",
-                        "description": "datetime stamp of project update"
+                        "description": "datetime stamp of `Project`update"
                     },
                     {
                         "name": "project_name",
@@ -3157,7 +3157,7 @@
                         "in": "formData",
                         "required": false,
                         "type": "string",
-                        "description": "Project's grant type"
+                        "description": "Project's `Grant`type"
                     },
                     {
                         "name": "project_description",
@@ -3174,7 +3174,7 @@
                         "items": {
                             "type": "string"
                         },
-                        "description": "array of project creator ids"
+                        "description": "array of `Project`creator ids"
                     },
                     {
                         "name": "project_collaborators_id",
@@ -3184,7 +3184,7 @@
                         "items": {
                             "type": "string"
                         },
-                        "description": "array of project collaborator ids"
+                        "description": "array of `Project`collaborator ids"
                     },
                     {
                         "name": "project_keywords",
@@ -3194,7 +3194,7 @@
                         "items": {
                             "type": "string"
                         },
-                        "description": "array of project keywords"
+                        "description": "array of `Project`keywords"
                     },
                     {
                         "name": "project_urls",
@@ -3204,28 +3204,28 @@
                         "items": {
                             "type": "string"
                         },
-                        "description": "array of project URLs"
+                        "description": "array of `Project`URLs"
                     },
                     {
                         "name": "grant_id",
                         "in": "formData",
                         "required": false,
                         "type": "string",
-                        "description": "Grant ID"
+                        "description": "The `Grant`ID"
                     },
                     {
                         "name": "university_id",
                         "in": "formData",
                         "required": false,
                         "type": "string",
-                        "description": "ID of university hosting research"
+                        "description": "ID of `University`hosting research"
                     },
                     {
                         "name": "grant_facilitator",
                         "in": "formData",
                         "required": false,
                         "type": "string",
-                        "description": "Name of individual fascilitating grant funding"
+                        "description": "Name of individual fascilitating `Grant`funding"
                     },
                     {
                         "name": "project_file",
@@ -3262,7 +3262,7 @@
                         "in": "formData",
                         "required": false,
                         "type": "boolean",
-                        "description": "is project private?"
+                        "description": "is `Project`private?"
                     }
                 ],
                 "responses": {
@@ -3619,7 +3619,7 @@
                         "in": "formData",
                         "required": false,
                         "type": "string",
-                        "description": "Project's grant type"
+                        "description": "Project's `Grant`type"
                     },
                     {
                         "name": "project_description",
@@ -3636,7 +3636,7 @@
                         "items": {
                             "type": "string"
                         },
-                        "description": "array of project creator ids"
+                        "description": "array of `Project`creator ids"
                     },
                     {
                         "name": "project_collaborators_id",
@@ -3646,7 +3646,7 @@
                         "items": {
                             "type": "string"
                         },
-                        "description": "array of project collaborator ids"
+                        "description": "array of `Project`collaborator ids"
                     },
                     {
                         "name": "project_keywords",
@@ -3656,7 +3656,7 @@
                         "items": {
                             "type": "string"
                         },
-                        "description": "array of project keywords"
+                        "description": "array of `Project`keywords"
                     },
                     {
                         "name": "project_urls",
@@ -3666,28 +3666,31 @@
                         "items": {
                             "type": "string"
                         },
-                        "description": "array of project URLs"
+                        "description": "array of `Project`URLs"
                     },
                     {
-                        "name": "grant_id",
+                        "name": "grant_ids",
                         "in": "formData",
                         "required": false,
-                        "type": "string",
-                        "description": "Grant ID"
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "The `Grant` IDs"
                     },
                     {
                         "name": "university_id",
                         "in": "formData",
                         "required": false,
                         "type": "string",
-                        "description": "ID of university hosting research"
+                        "description": "ID of `University`hosting research"
                     },
                     {
                         "name": "grant_facilitator",
                         "in": "formData",
                         "required": false,
                         "type": "string",
-                        "description": "Name of individual fascilitating grant funding"
+                        "description": "Name of individual fascilitating `Grant`funding"
                     },
                     {
                         "name": "project_file",
@@ -3724,7 +3727,7 @@
                         "in": "formData",
                         "required": true,
                         "type": "boolean",
-                        "description": "is project private?"
+                        "description": "is `Project`private?"
                     }
                 ],
                 "responses": {
@@ -3762,7 +3765,7 @@
                         "in": "path",
                         "required": true,
                         "type": "string",
-                        "description": "project id"
+                        "description": "The `Project`id"
                     },
                     {
                         "name": "project_name",
@@ -3776,7 +3779,7 @@
                         "in": "formData",
                         "required": false,
                         "type": "string",
-                        "description": "Project's grant type"
+                        "description": "Project's `Grant`type"
                     },
                     {
                         "name": "project_description",
@@ -3793,7 +3796,7 @@
                         "items": {
                             "type": "string"
                         },
-                        "description": "array of project creator ids"
+                        "description": "array of `Project`creator ids"
                     },
                     {
                         "name": "project_collaborators_id",
@@ -3803,7 +3806,7 @@
                         "items": {
                             "type": "string"
                         },
-                        "description": "array of project collaborator ids"
+                        "description": "array of `Project`collaborator ids"
                     },
                     {
                         "name": "project_keywords",
@@ -3813,7 +3816,7 @@
                         "items": {
                             "type": "string"
                         },
-                        "description": "array of project keywords"
+                        "description": "array of `Project`keywords"
                     },
                     {
                         "name": "project_urls",
@@ -3823,28 +3826,31 @@
                         "items": {
                             "type": "string"
                         },
-                        "description": "array of project URLs"
+                        "description": "array of `Project`URLs"
                     },
                     {
                         "name": "grant_id",
                         "in": "formData",
                         "required": false,
-                        "type": "string",
-                        "description": "Grant ID"
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "The `Grant` IDs"
                     },
                     {
                         "name": "university_id",
                         "in": "formData",
                         "required": false,
                         "type": "string",
-                        "description": "ID of university hosting research"
+                        "description": "ID of `University`hosting research"
                     },
                     {
                         "name": "grant_facilitator",
                         "in": "formData",
                         "required": false,
                         "type": "string",
-                        "description": "Name of individual fascilitating grant funding"
+                        "description": "Name of individual fascilitating `Grant`funding"
                     },
                     {
                         "name": "project_file",
@@ -3881,7 +3887,7 @@
                         "in": "formData",
                         "required": false,
                         "type": "boolean",
-                        "description": "is project private?"
+                        "description": "is `Project`private?"
                     }
                 ],
                 "responses": {
@@ -4138,7 +4144,7 @@
                     "Project",
                     "User"
                 ],
-                "description": "Check if `User` is creator on `Project', return user if true.\n",
+                "description": "Check if `User` is creator on `Project', return `User`if true.\n",
                 "operationId": "isUserCreatorOnProject",
                 "produces": [
                     "application/json"
@@ -4154,7 +4160,7 @@
                     {
                         "name": "user_id",
                         "in": "path",
-                        "description": "The user id",
+                        "description": "The `User`id",
                         "required": true,
                         "type": "string"
                     }
@@ -4483,7 +4489,7 @@
                     {
                         "name": "user_id",
                         "in": "path",
-                        "description": "The user id",
+                        "description": "The `User`id",
                         "required": true,
                         "type": "string"
                     }
@@ -5476,7 +5482,7 @@
                     "Project",
                     "Review"
                 ],
-                "description": "Add review to a `Project`.\n",
+                "description": "Add `Review`to a `Project`.\n",
                 "operationId": "addProjectReview",
                 "produces": [
                     "application/json"
@@ -5764,7 +5770,7 @@
                     "Project",
                     "Post"
                 ],
-                "description": "Add post to a `Project`.\n",
+                "description": "Add `Post`to a `Project`.\n",
                 "operationId": "addProjectPost",
                 "produces": [
                     "application/json"
@@ -5915,7 +5921,7 @@
                 "tags": [
                     "Project"
                 ],
-                "description": "Check if project name of `Project` is some value\n",
+                "description": "Check if `Project`name of `Project` is some value\n",
                 "operationId": "isNameOnProject",
                 "produces": [
                     "application/json"
@@ -6032,206 +6038,6 @@
                 }
             }
         },
-        "/Project/{id}/grant_type": {
-            "get": {
-                "tags": [
-                    "Project",
-                    "Grant",
-                    "REFACTOR-TODO-move-grant-stuff-to-grant-object"
-                ],
-                "description": "Retrieve project_main_grant_type associated with a `Project`.\n",
-                "operationId": "getProjectGrantTypeById",
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "The `id` of the `Project` to retrieve",
-                        "required": true,
-                        "type": "string"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "The project_main_grant_type",
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    "default": {
-                        "description": "Unexpected error",
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }
-                }
-            },
-            "delete": {
-                "tags": [
-                    "Project",
-                    "Grant",
-                    "REFACTOR-TODO-move-grant-stuff-to-grant-object"
-                ],
-                "description": "Delete project_main_grant_type from a project\n",
-                "operationId": "deleteProjectGrantType",
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "The `id` of the `Project` to retrieve",
-                        "required": true,
-                        "type": "string"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "The `project_main_grant_type` associated with the `Project`",
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    "default": {
-                        "description": "Unexpected error",
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }
-                }
-            }
-        },
-        "/Project/{id}/grant_type/{project_main_grant_type}": {
-            "get": {
-                "tags": [
-                    "Project",
-                    "Grant",
-                    "REFACTOR-TODO-move-grant-stuff-to-grant-object"
-                ],
-                "description": "Check if grant tyoe  of `Project` is some value\n",
-                "operationId": "isGrantTypeOnProject",
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "The `id` of the `Project` to retrieve",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "project_main_grant_type",
-                        "in": "path",
-                        "description": "The `project_main_grant_type` of the `Project`",
-                        "required": true,
-                        "type": "string"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "The post",
-                        "schema": {
-                            "type": "boolean"
-                        }
-                    },
-                    "default": {
-                        "description": "Unexpected error",
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }
-                }
-            },
-            "post": {
-                "tags": [
-                    "Project",
-                    "Grant",
-                    "REFACTOR-TODO-move-grant-stuff-to-grant-object"
-                ],
-                "description": "Add project_name to a `Project`.\n",
-                "operationId": "setProjectGrantType",
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "The `id` of the `Project` to retrieve",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "project_main_grant_type",
-                        "in": "path",
-                        "description": "The project_main_grant_type",
-                        "required": true,
-                        "type": "string"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "The id associated with the `Project`",
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    "default": {
-                        "description": "Unexpected error",
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }
-                }
-            },
-            "put": {
-                "tags": [
-                    "Project",
-                    "Grant",
-                    "REFACTOR-TODO-move-grant-stuff-to-grant-object"
-                ],
-                "description": "Modify project_name of a `Project`.\n",
-                "operationId": "modifyProjectGrantType",
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "The `id` of the `Project` to retrieve",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "project_main_grant_type",
-                        "in": "path",
-                        "description": "The project_main_grant_type",
-                        "required": true,
-                        "type": "string"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "The id associated with the `Project`",
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    "default": {
-                        "description": "Unexpected error",
-                        "schema": {
-                            "$ref": "#/definitions/Error"
-                        }
-                    }
-                }
-            }
-        },
         "/Project/{id}/description": {
             "get": {
                 "tags": [
@@ -6305,7 +6111,7 @@
                 "tags": [
                     "Project"
                 ],
-                "description": "Check if project descript of `Project` is some value\n",
+                "description": "Check if `Project`descript of `Project` is some value\n",
                 "operationId": "isProjectDescriptionOnProject",
                 "produces": [
                     "application/json"
@@ -6428,7 +6234,7 @@
                     "Project",
                     "Grant"
                 ],
-                "description": "Retrieve grant associated with a `Project`.\n",
+                "description": "Retrieve `Grant`associated with a `Project`.\n",
                 "operationId": "getProjectGrantById",
                 "produces": [
                     "application/json"
@@ -6462,7 +6268,7 @@
                     "Project",
                     "Grant"
                 ],
-                "description": "Delete grant from a project\n",
+                "description": "Delete `Grant`from a project\n",
                 "operationId": "deleteProjectGrant",
                 "produces": [
                     "application/json"
@@ -6539,7 +6345,7 @@
                     "Project",
                     "Grant"
                 ],
-                "description": "Add grant to a `Project`.\n",
+                "description": "Add `Grant`to a `Project`.\n",
                 "operationId": "setProjectGrant",
                 "produces": [
                     "application/json"
@@ -6580,7 +6386,7 @@
                     "Project",
                     "Grant"
                 ],
-                "description": "Modify grant of a `Project`.\n",
+                "description": "Modify `Grant`of a `Project`.\n",
                 "operationId": "modifyProjectGrant",
                 "produces": [
                     "application/json"
@@ -6693,7 +6499,7 @@
                     "Project",
                     "University"
                 ],
-                "description": "Check if project descript of `Project` is some value\n",
+                "description": "Check if `Project`descript of `Project` is some value\n",
                 "operationId": "isUniversityOnProject",
                 "produces": [
                     "application/json"
@@ -6869,7 +6675,7 @@
                     {
                         "name": "is_private",
                         "in": "formData",
-                        "description": "is project private?",
+                        "description": "is `Project`private?",
                         "required": true,
                         "type": "boolean"
                     }
@@ -6975,14 +6781,14 @@
                         "in": "formData",
                         "required": false,
                         "type": "string",
-                        "description": "ID of `User` author of post"
+                        "description": "ID of `User` author of `Post`"
                     },
                     {
                         "name": "post_creator_id",
                         "in": "formData",
                         "required": false,
                         "type": "string",
-                        "description": "ID of `User` author of post"
+                        "description": "ID of `User` author of `Post`"
                     },
                     {
                         "name": "is_post_private",
@@ -7319,7 +7125,7 @@
                         "in": "formData",
                         "required": true,
                         "type": "string",
-                        "description": "ID of `User` author of post"
+                        "description": "ID of `User` author of `Post`"
                     },
                     {
                         "name": "post_creator_id",
@@ -7472,7 +7278,7 @@
                         "in": "formData",
                         "required": false,
                         "type": "boolean",
-                        "description": "Is post private?"
+                        "description": "Is `Post`private?"
                     }
                 ],
                 "responses": {
@@ -7647,7 +7453,7 @@
                     "Post",
                     "User"
                 ],
-                "description": "Retrieves whether user is tagged on past\n",
+                "description": "Retrieves whether `User`is tagged on past\n",
                 "operationId": "getIsUserTagOnProject",
                 "produces": [
                     "application/json"
@@ -7670,7 +7476,7 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Boolean of whether the user is taged",
+                        "description": "Boolean of whether the `User`is taged",
                         "schema": {
                             "type": "boolean"
                         }
@@ -8007,7 +7813,7 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Boolean of whether the user is taged",
+                        "description": "Boolean of whether the `User`is taged",
                         "schema": {
                             "type": "boolean"
                         }
@@ -8185,7 +7991,7 @@
                 "tags": [
                     "Post"
                 ],
-                "description": "Sets the post title.  **id** and **title** both required.\n",
+                "description": "Sets the `Post`title.  **id** and **title** both required.\n",
                 "operationId": "updatePostTitleById",
                 "produces": [
                     "application/json"
@@ -8228,7 +8034,7 @@
                 "tags": [
                     "Post"
                 ],
-                "description": "Sets the post title.  **id** and **title** both required.\n",
+                "description": "Sets the `Post`title.  **id** and **title** both required.\n",
                 "operationId": "updatePostTitleByIdPost",
                 "produces": [
                     "application/json"
@@ -8339,7 +8145,7 @@
                 "tags": [
                     "Post"
                 ],
-                "description": "Sets the post title.  **id** and **text** both required.\n",
+                "description": "Sets the `Post`title.  **id** and **text** both required.\n",
                 "operationId": "updatePostTextById",
                 "produces": [
                     "application/json"
@@ -8382,7 +8188,7 @@
                 "tags": [
                     "Post"
                 ],
-                "description": "Sets the post text.  **id** and **text** both required.\n",
+                "description": "Sets the `Post`text.  **id** and **text** both required.\n",
                 "operationId": "updatePostTextByIdPost",
                 "produces": [
                     "application/json"
@@ -8491,7 +8297,7 @@
                 }
             },
             "put": {
-                "description": "Sets the post author.  **id** and **author** both required.\n",
+                "description": "Sets the `Post`author.  **id** and **author** both required.\n",
                 "operationId": "updatePostAuthorById",
                 "produces": [
                     "application/json"
@@ -8534,7 +8340,7 @@
                 }
             },
             "post": {
-                "description": "Sets the post author.  **id** and **author** both required.\n",
+                "description": "Sets the `Post`author.  **id** and **author** both required.\n",
                 "operationId": "updatePostAuthorByIdPost",
                 "produces": [
                     "application/json"
@@ -8645,7 +8451,7 @@
                 }
             },
             "put": {
-                "description": "Sets the post privacy.  **id** and **is_private** both required.\n",
+                "description": "Sets the `Post`privacy.  **id** and **is_private** both required.\n",
                 "operationId": "updatePostPrivacyById",
                 "produces": [
                     "application/json"
@@ -8666,7 +8472,7 @@
                         "in": "formData",
                         "required": true,
                         "type": "boolean",
-                        "description": "is post private?"
+                        "description": "is `Post`private?"
                     }
                 ],
                 "tags": [
@@ -8688,7 +8494,7 @@
                 }
             },
             "post": {
-                "description": "Sets the post privacy.  **id** and **is_private** both required.\n",
+                "description": "Sets the `Post`privacy.  **id** and **is_private** both required.\n",
                 "operationId": "updatePostPrivacyByIdPost",
                 "produces": [
                     "application/json"
@@ -8709,7 +8515,7 @@
                         "in": "formData",
                         "required": true,
                         "type": "boolean",
-                        "description": "is post private?"
+                        "description": "is `Post`private?"
                     }
                 ],
                 "tags": [
@@ -9102,7 +8908,7 @@
                     {
                         "name": "minimum",
                         "in": "formData",
-                        "description": "minimum grant amount",
+                        "description": "minimum `Grant`amount",
                         "required": true,
                         "type": "number",
                         "format": "float"
@@ -9110,7 +8916,91 @@
                     {
                         "name": "maximum",
                         "in": "formData",
-                        "description": "maximum grant amount",
+                        "description": "maximum `Grant`amount",
+                        "required": true,
+                        "type": "number",
+                        "format": "float"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Array of `Grant` objects",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Grant"
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/Grants/type": {
+            "get": {
+                "tags": [
+                    "Grant"
+                ],
+                "description": "Retrieve `Grant` objects based on type\n",
+                "operationId": "getGrantsByTypeForm",
+                "produces": [
+                    "application/json"
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "type",
+                        "in": "formData",
+                        "description": "The `Grant`type",
+                        "required": true,
+                        "type": "number",
+                        "format": "float"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Array of `Grant` objects",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Grant"
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/Grants/type/{type}": {
+            "get": {
+                "tags": [
+                    "Grant"
+                ],
+                "description": "Retrieve `Grant` objects based on type\n",
+                "operationId": "getGrantsByType",
+                "produces": [
+                    "application/json"
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "type",
+                        "in": "path",
+                        "description": "The `Grant`type",
                         "required": true,
                         "type": "number",
                         "format": "float"
@@ -9152,7 +9042,7 @@
                     {
                         "name": "amount",
                         "in": "path",
-                        "description": "minimum grant amount",
+                        "description": "minimum `Grant`amount",
                         "required": true,
                         "type": "number",
                         "format": "float"
@@ -9194,7 +9084,57 @@
                     {
                         "name": "amount",
                         "in": "path",
-                        "description": "maxiumum grant amount",
+                        "description": "maxiumum `Grant`amount",
+                        "required": true,
+                        "type": "number",
+                        "format": "float"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Array of `Grant` objects",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Grant"
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/Grants/amount/min/{min}/max/{max}": {
+            "get": {
+                "tags": [
+                    "Grant"
+                ],
+                "description": "Retrieve `Grant` objects based on amount\n",
+                "operationId": "getGrantsByAmountRange",
+                "produces": [
+                    "application/json"
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "min",
+                        "in": "path",
+                        "description": "maxiumum `Grant`amount",
+                        "required": true,
+                        "type": "number",
+                        "format": "float"
+                    },
+                    {
+                        "name": "max",
+                        "in": "path",
+                        "description": "maxiumum `Grant`amount",
                         "required": true,
                         "type": "number",
                         "format": "float"
@@ -10061,6 +10001,281 @@
                 }
             }
         },
+        "/Grant/{id}/type": {
+            "get": {
+                "tags": [
+                    "Grant"
+                ],
+                "description": "Retrieves `Grant` amount\n",
+                "operationId": "getGrantType",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The `Grant` id"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The `Grant` type",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Grant"
+                ],
+                "description": "Modify `Grant` amount\n",
+                "operationId": "modifyGrantType",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The `Grant` name"
+                    },
+                    {
+                        "name": "type",
+                        "in": "formData",
+                        "required": true,
+                        "type": "number",
+                        "format": "float",
+                        "description": "the `Grant` type"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The `Grant` id",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Grant"
+                ],
+                "description": "Set `Grant` amount\n",
+                "operationId": "setGrantType",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The `Grant` name"
+                    },
+                    {
+                        "name": "type",
+                        "in": "formData",
+                        "required": true,
+                        "type": "number",
+                        "format": "float",
+                        "description": "the `Grant` type"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The `Grant` id",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Grant"
+                ],
+                "description": "Clear `Grant` type\n",
+                "operationId": "clearGrantType",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The `Grant` name"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The `Grant` id",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/Grant/{id}/type/{type}": {
+            "get": {
+                "tags": [
+                    "Grant"
+                ],
+                "description": "Retrieves if `Grant` amount is equal to param\n",
+                "operationId": "isGrantType",
+                "produces": [
+                    "application/json"
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The `Grant` name"
+                    },
+                    {
+                        "name": "type",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The `Grant` type"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The boolean",
+                        "schema": {
+                            "type": "boolean"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Grant"
+                ],
+                "description": "Modify `Grant` amount\n",
+                "operationId": "modifyGrantTypePath",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The `Grant` name"
+                    },
+                    {
+                        "name": "type",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "the `Grant` type"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The `Grant` id",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Grant"
+                ],
+                "description": "Set `Grant` type\n",
+                "operationId": "setGrantTypePath",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "The `Grant` name"
+                    },
+                    {
+                        "name": "type",
+                        "in": "path",
+                        "required": true,
+                        "type": "string",
+                        "description": "the `Grant` type"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The `Grant` id",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
         "/Grant/{id}/keys": {
             "get": {
                 "tags": [
@@ -10453,7 +10668,7 @@
                         "required": false,
                         "type": "number",
                         "format": "int32",
-                        "description": "Integer rating of review (1-5)"
+                        "description": "Integer rating of `Review`(1-5)"
                     }
                 ],
                 "responses": {
@@ -10829,7 +11044,7 @@
                         "in": "formData",
                         "required": false,
                         "type": "string",
-                        "description": "User who wrote `Review`"
+                        "description": "The `User`who wrote `Review`"
                     },
                     {
                         "name": "rating",
@@ -11063,7 +11278,7 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "The `Review` reviewer user id",
+                        "description": "The `Review` reviewer `User`id",
                         "schema": {
                             "type": "string"
                         }
@@ -11117,7 +11332,7 @@
                     "Review",
                     "User"
                 ],
-                "description": "Is user the reviewer?\n",
+                "description": "Is `User`the reviewer?\n",
                 "operationId": "isUserReviewReviewer",
                 "produces": [
                     "application/json"
@@ -11625,7 +11840,7 @@
                 "tags": [
                     "Review"
                 ],
-                "description": "Gets review created date\n",
+                "description": "Gets `Review`created date\n",
                 "operationId": "getReviewCreatedDateById",
                 "produces": [
                     "application/json"
@@ -11661,7 +11876,7 @@
                 "tags": [
                     "Review"
                 ],
-                "description": "Gets review updated date\n",
+                "description": "Gets `Review`updated date\n",
                 "operationId": "getReviewUpdatedDateById",
                 "produces": [
                     "application/json"
@@ -14536,7 +14751,7 @@
                     "University",
                     "Project"
                 ],
-                "description": "Retrieve `University` objects with specified project id\n",
+                "description": "Retrieve `University` objects with specified `Project`id\n",
                 "operationId": "getUniversitiesByProject",
                 "produces": [
                     "application/json"
@@ -15995,7 +16210,7 @@
                     "University",
                     "Project"
                 ],
-                "description": "Sets `University` projects to this single project (probably will never use this)\n",
+                "description": "Sets `University` projects to this single `Project`(probably will never use this)\n",
                 "operationId": "setUniversityProjectById",
                 "produces": [
                     "application/json"
@@ -16256,11 +16471,11 @@
                 },
                 "is_creator": {
                     "type": "boolean",
-                    "description": "Is user a project creator?"
+                    "description": "Is `User`a `Project`creator?"
                 },
                 "is_collaborator": {
                     "type": "boolean",
-                    "description": "Is user a project collaborator?"
+                    "description": "Is `User`a `Project`collaborator?"
                 },
                 "profile_images": {
                     "type": "array",
@@ -16272,12 +16487,12 @@
                 "created_date": {
                     "type": "string",
                     "format": "date-time",
-                    "description": "datetime stamp of user creation"
+                    "description": "datetime stamp of `User`creation"
                 },
                 "updated_date": {
                     "type": "string",
                     "format": "date-time",
-                    "description": "datetime stamp of user update"
+                    "description": "datetime stamp of `User`update"
                 },
                 "geolocation": {
                     "type": "array",
@@ -16289,11 +16504,11 @@
                 },
                 "city": {
                     "type": "string",
-                    "description": "City of user location"
+                    "description": "City of `User`location"
                 },
                 "state": {
                     "type": "string",
-                    "description": "State of user location"
+                    "description": "State of `User`location"
                 },
                 "recent_collaborators_id": {
                     "type": "array",
@@ -16307,14 +16522,14 @@
                     "items": {
                         "type": "string"
                     },
-                    "description": "array of universities the user is associated with"
+                    "description": "array of universities the `User`is associated with"
                 },
                 "project_ids": {
                     "type": "array",
                     "items": {
                         "type": "string"
                     },
-                    "description": "array of user projects"
+                    "description": "array of `User`projects"
                 },
                 "keywords": {
                     "type": "array",
@@ -16328,18 +16543,18 @@
                     "items": {
                         "type": "string"
                     },
-                    "description": "array of review ids"
+                    "description": "array of `Review`ids"
                 },
                 "user_skill_ids": {
                     "type": "array",
                     "items": {
                         "type": "string"
                     },
-                    "description": "array of userskill ids"
+                    "description": "array of `UserSkill`ids"
                 },
                 "is_user_private": {
                     "type": "boolean",
-                    "description": "is user profile public or private?"
+                    "description": "is `User`profile public or private?"
                 }
             }
         },
@@ -16379,20 +16594,16 @@
                 "created_date": {
                     "type": "string",
                     "format": "date-time",
-                    "description": "datetime stamp of project creation"
+                    "description": "datetime stamp of `Project`creation"
                 },
                 "updated_date": {
                     "type": "string",
                     "format": "date-time",
-                    "description": "datetime stamp of project update"
+                    "description": "datetime stamp of `Project`update"
                 },
                 "project_name": {
                     "type": "string",
                     "description": "Project's name"
-                },
-                "project_main_grant_type": {
-                    "type": "string",
-                    "description": "Project's grant type"
                 },
                 "project_description": {
                     "type": "string",
@@ -16403,47 +16614,50 @@
                     "items": {
                         "type": "string"
                     },
-                    "description": "array of project creator ids"
+                    "description": "array of `Project`creator ids"
                 },
                 "project_collaborators_id": {
                     "type": "array",
                     "items": {
                         "type": "string"
                     },
-                    "description": "array of project collaborator ids"
+                    "description": "array of `Project`collaborator ids"
                 },
                 "project_keywords": {
                     "type": "array",
                     "items": {
                         "type": "string"
                     },
-                    "description": "array of project keywords"
+                    "description": "array of `Project`keywords"
                 },
                 "project_urls": {
                     "type": "array",
                     "items": {
                         "type": "string"
                     },
-                    "description": "array of project URLs"
+                    "description": "array of `Project`URLs"
                 },
-                "grant_id": {
-                    "type": "string",
-                    "description": "Grant ID"
+                "grant_ids": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "Array of `Grant` IDs associated with the `Project`"
                 },
                 "university_id": {
                     "type": "string",
-                    "description": "ID of university hosting research"
+                    "description": "ID of `University`hosting research"
                 },
                 "grant_facilitator": {
                     "type": "string",
-                    "description": "Name of individual fascilitating grant funding"
+                    "description": "Name of individual fascilitating `Grant` funding"
                 },
                 "project_file": {
                     "type": "array",
                     "items": {
                         "type": "string"
                     },
-                    "description": "files for grant"
+                    "description": "Paths to files for `Grant`"
                 },
                 "reviews": {
                     "type": "array",
@@ -16461,7 +16675,7 @@
                 },
                 "is_project_private": {
                     "type": "boolean",
-                    "description": "is project private?"
+                    "description": "is `Project`private?"
                 }
             }
         },
@@ -16501,12 +16715,12 @@
                 "created_date": {
                     "type": "string",
                     "format": "date-time",
-                    "description": "datetime stamp of post creation"
+                    "description": "datetime stamp of `Post`creation"
                 },
                 "updated_date": {
                     "type": "string",
                     "format": "date-time",
-                    "description": "datetime stamp of post update"
+                    "description": "datetime stamp of `Post`update"
                 },
                 "post_title": {
                     "type": "string",
@@ -16543,11 +16757,11 @@
                     "items": {
                         "type": "string"
                     },
-                    "description": "tagged user ids"
+                    "description": "tagged `User`ids"
                 },
                 "is_post_private": {
                     "type": "boolean",
-                    "description": "is post private?"
+                    "description": "is `Post`private?"
                 }
             }
         },
@@ -16587,12 +16801,12 @@
                 "created_date": {
                     "type": "string",
                     "format": "date-time",
-                    "description": "datetime stamp of grant creation"
+                    "description": "datetime stamp of `Grant`creation"
                 },
                 "updated_date": {
                     "type": "string",
                     "format": "date-time",
-                    "description": "datetime stamp of grant update"
+                    "description": "datetime stamp of `Grant`update"
                 },
                 "grant_url": {
                     "type": "array",
@@ -16606,11 +16820,15 @@
                     "items": {
                         "type": "string"
                     },
-                    "description": "grant keywords"
+                    "description": "The `Grant`keywords"
                 },
                 "grant_description": {
                     "type": "string",
-                    "description": "Grant description"
+                    "description": "The `Grant`description"
+                },
+                "grant_type": {
+                    "type": "string",
+                    "description": "The `Grant` type"
                 },
                 "grant_amount": {
                     "type": "number",
@@ -16655,12 +16873,12 @@
                 "created_date": {
                     "type": "string",
                     "format": "date-time",
-                    "description": "datetime stamp of review creation"
+                    "description": "datetime stamp of `Review`creation"
                 },
                 "updated_date": {
                     "type": "string",
                     "format": "date-time",
-                    "description": "datetime stamp of review update"
+                    "description": "datetime stamp of `Review`update"
                 },
                 "review_body": {
                     "type": "string",
@@ -16672,7 +16890,7 @@
                 },
                 "reviewer_id": {
                     "type": "string",
-                    "description": "reviewer user id"
+                    "description": "reviewer `User`id"
                 },
                 "rating": {
                     "type": "integer",
@@ -16717,12 +16935,12 @@
                 "created_date": {
                     "type": "string",
                     "format": "date-time",
-                    "description": "datetime stamp of skill creation"
+                    "description": "datetime stamp of `Skill`creation"
                 },
                 "updated_date": {
                     "type": "string",
                     "format": "date-time",
-                    "description": "datetime stamp of skill update"
+                    "description": "datetime stamp of `Skill`update"
                 },
                 "description": {
                     "type": "string",
@@ -16782,11 +17000,11 @@
                     "items": {
                         "type": "string"
                     },
-                    "description": "Array of ids of `User` who give `Endorsement` to user for skill"
+                    "description": "Array of ids of `User` who give `Endorsement` to `User`for skill"
                 },
                 "skill_id": {
                     "type": "string",
-                    "description": "id of `Skill` that user is claiming"
+                    "description": "id of `Skill` that `User`is claiming"
                 }
             }
         },

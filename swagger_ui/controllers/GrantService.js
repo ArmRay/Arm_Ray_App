@@ -105,6 +105,23 @@ exports.clearGrantKeywords = function(args, res, next) {
   
 }
 
+exports.clearGrantType = function(args, res, next) {
+  /**
+   * parameters expected in the args:
+  * id (String)
+  **/
+    var examples = {};
+  examples['application/json'] = "aeiou";
+  if(Object.keys(examples).length > 0) {
+    res.setHeader('Content-Type', 'application/json');
+    res.end(JSON.stringify(examples[Object.keys(examples)[0]] || {}, null, 2));
+  }
+  else {
+    res.end();
+  }
+  
+}
+
 exports.clearGrantUrls = function(args, res, next) {
   /**
    * parameters expected in the args:
@@ -193,23 +210,6 @@ exports.deleteProjectGrant = function(args, res, next) {
   
 }
 
-exports.deleteProjectGrantType = function(args, res, next) {
-  /**
-   * parameters expected in the args:
-  * id (String)
-  **/
-    var examples = {};
-  examples['application/json'] = "aeiou";
-  if(Object.keys(examples).length > 0) {
-    res.setHeader('Content-Type', 'application/json');
-    res.end(JSON.stringify(examples[Object.keys(examples)[0]] || {}, null, 2));
-  }
-  else {
-    res.end();
-  }
-  
-}
-
 exports.getGrantAmount = function(args, res, next) {
   /**
    * parameters expected in the args:
@@ -237,6 +237,7 @@ exports.getGrantById = function(args, res, next) {
   "grant_url" : [ "aeiou" ],
   "grant_description" : "aeiou",
   "grant_amount" : 1.3579000000000001069366817318950779736042022705078125,
+  "grant_type" : "aeiou",
   "grant_id" : "aeiou",
   "grant_keywords" : [ "aeiou" ],
   "created_date" : "2000-01-23T04:56:07.000+00:00",
@@ -320,6 +321,23 @@ exports.getGrantModifiedDate = function(args, res, next) {
   
 }
 
+exports.getGrantType = function(args, res, next) {
+  /**
+   * parameters expected in the args:
+  * id (String)
+  **/
+    var examples = {};
+  examples['application/json'] = "aeiou";
+  if(Object.keys(examples).length > 0) {
+    res.setHeader('Content-Type', 'application/json');
+    res.end(JSON.stringify(examples[Object.keys(examples)[0]] || {}, null, 2));
+  }
+  else {
+    res.end();
+  }
+  
+}
+
 exports.getGrantUrl = function(args, res, next) {
   /**
    * parameters expected in the args:
@@ -356,6 +374,7 @@ exports.getGrants = function(args, res, next) {
   "grant_url" : [ "aeiou" ],
   "grant_description" : "aeiou",
   "grant_amount" : 1.3579000000000001069366817318950779736042022705078125,
+  "grant_type" : "aeiou",
   "grant_id" : "aeiou",
   "grant_keywords" : [ "aeiou" ],
   "created_date" : "2000-01-23T04:56:07.000+00:00",
@@ -382,6 +401,34 @@ exports.getGrantsByAmount = function(args, res, next) {
   "grant_url" : [ "aeiou" ],
   "grant_description" : "aeiou",
   "grant_amount" : 1.3579000000000001069366817318950779736042022705078125,
+  "grant_type" : "aeiou",
+  "grant_id" : "aeiou",
+  "grant_keywords" : [ "aeiou" ],
+  "created_date" : "2000-01-23T04:56:07.000+00:00",
+  "updated_date" : "2000-01-23T04:56:07.000+00:00"
+} ];
+  if(Object.keys(examples).length > 0) {
+    res.setHeader('Content-Type', 'application/json');
+    res.end(JSON.stringify(examples[Object.keys(examples)[0]] || {}, null, 2));
+  }
+  else {
+    res.end();
+  }
+  
+}
+
+exports.getGrantsByAmountRange = function(args, res, next) {
+  /**
+   * parameters expected in the args:
+  * min (Float)
+  * max (Float)
+  **/
+    var examples = {};
+  examples['application/json'] = [ {
+  "grant_url" : [ "aeiou" ],
+  "grant_description" : "aeiou",
+  "grant_amount" : 1.3579000000000001069366817318950779736042022705078125,
+  "grant_type" : "aeiou",
   "grant_id" : "aeiou",
   "grant_keywords" : [ "aeiou" ],
   "created_date" : "2000-01-23T04:56:07.000+00:00",
@@ -407,6 +454,7 @@ exports.getGrantsByCreatedDate = function(args, res, next) {
   "grant_url" : [ "aeiou" ],
   "grant_description" : "aeiou",
   "grant_amount" : 1.3579000000000001069366817318950779736042022705078125,
+  "grant_type" : "aeiou",
   "grant_id" : "aeiou",
   "grant_keywords" : [ "aeiou" ],
   "created_date" : "2000-01-23T04:56:07.000+00:00",
@@ -432,6 +480,7 @@ exports.getGrantsByCreatedDateForm = function(args, res, next) {
   "grant_url" : [ "aeiou" ],
   "grant_description" : "aeiou",
   "grant_amount" : 1.3579000000000001069366817318950779736042022705078125,
+  "grant_type" : "aeiou",
   "grant_id" : "aeiou",
   "grant_keywords" : [ "aeiou" ],
   "created_date" : "2000-01-23T04:56:07.000+00:00",
@@ -457,6 +506,7 @@ exports.getGrantsByKeyword = function(args, res, next) {
   "grant_url" : [ "aeiou" ],
   "grant_description" : "aeiou",
   "grant_amount" : 1.3579000000000001069366817318950779736042022705078125,
+  "grant_type" : "aeiou",
   "grant_id" : "aeiou",
   "grant_keywords" : [ "aeiou" ],
   "created_date" : "2000-01-23T04:56:07.000+00:00",
@@ -482,6 +532,7 @@ exports.getGrantsByKeywords = function(args, res, next) {
   "grant_url" : [ "aeiou" ],
   "grant_description" : "aeiou",
   "grant_amount" : 1.3579000000000001069366817318950779736042022705078125,
+  "grant_type" : "aeiou",
   "grant_id" : "aeiou",
   "grant_keywords" : [ "aeiou" ],
   "created_date" : "2000-01-23T04:56:07.000+00:00",
@@ -507,6 +558,7 @@ exports.getGrantsByMaxAmount = function(args, res, next) {
   "grant_url" : [ "aeiou" ],
   "grant_description" : "aeiou",
   "grant_amount" : 1.3579000000000001069366817318950779736042022705078125,
+  "grant_type" : "aeiou",
   "grant_id" : "aeiou",
   "grant_keywords" : [ "aeiou" ],
   "created_date" : "2000-01-23T04:56:07.000+00:00",
@@ -532,6 +584,7 @@ exports.getGrantsByMinAmount = function(args, res, next) {
   "grant_url" : [ "aeiou" ],
   "grant_description" : "aeiou",
   "grant_amount" : 1.3579000000000001069366817318950779736042022705078125,
+  "grant_type" : "aeiou",
   "grant_id" : "aeiou",
   "grant_keywords" : [ "aeiou" ],
   "created_date" : "2000-01-23T04:56:07.000+00:00",
@@ -557,6 +610,7 @@ exports.getGrantsByModifiedDate = function(args, res, next) {
   "grant_url" : [ "aeiou" ],
   "grant_description" : "aeiou",
   "grant_amount" : 1.3579000000000001069366817318950779736042022705078125,
+  "grant_type" : "aeiou",
   "grant_id" : "aeiou",
   "grant_keywords" : [ "aeiou" ],
   "created_date" : "2000-01-23T04:56:07.000+00:00",
@@ -582,6 +636,59 @@ exports.getGrantsByModifiedDateForm = function(args, res, next) {
   "grant_url" : [ "aeiou" ],
   "grant_description" : "aeiou",
   "grant_amount" : 1.3579000000000001069366817318950779736042022705078125,
+  "grant_type" : "aeiou",
+  "grant_id" : "aeiou",
+  "grant_keywords" : [ "aeiou" ],
+  "created_date" : "2000-01-23T04:56:07.000+00:00",
+  "updated_date" : "2000-01-23T04:56:07.000+00:00"
+} ];
+  if(Object.keys(examples).length > 0) {
+    res.setHeader('Content-Type', 'application/json');
+    res.end(JSON.stringify(examples[Object.keys(examples)[0]] || {}, null, 2));
+  }
+  else {
+    res.end();
+  }
+  
+}
+
+exports.getGrantsByType = function(args, res, next) {
+  /**
+   * parameters expected in the args:
+  * type (Float)
+  **/
+    var examples = {};
+  examples['application/json'] = [ {
+  "grant_url" : [ "aeiou" ],
+  "grant_description" : "aeiou",
+  "grant_amount" : 1.3579000000000001069366817318950779736042022705078125,
+  "grant_type" : "aeiou",
+  "grant_id" : "aeiou",
+  "grant_keywords" : [ "aeiou" ],
+  "created_date" : "2000-01-23T04:56:07.000+00:00",
+  "updated_date" : "2000-01-23T04:56:07.000+00:00"
+} ];
+  if(Object.keys(examples).length > 0) {
+    res.setHeader('Content-Type', 'application/json');
+    res.end(JSON.stringify(examples[Object.keys(examples)[0]] || {}, null, 2));
+  }
+  else {
+    res.end();
+  }
+  
+}
+
+exports.getGrantsByTypeForm = function(args, res, next) {
+  /**
+   * parameters expected in the args:
+  * type (Float)
+  **/
+    var examples = {};
+  examples['application/json'] = [ {
+  "grant_url" : [ "aeiou" ],
+  "grant_description" : "aeiou",
+  "grant_amount" : 1.3579000000000001069366817318950779736042022705078125,
+  "grant_type" : "aeiou",
   "grant_id" : "aeiou",
   "grant_keywords" : [ "aeiou" ],
   "created_date" : "2000-01-23T04:56:07.000+00:00",
@@ -607,28 +714,12 @@ exports.getProjectGrantById = function(args, res, next) {
   "grant_url" : [ "aeiou" ],
   "grant_description" : "aeiou",
   "grant_amount" : 1.3579000000000001069366817318950779736042022705078125,
+  "grant_type" : "aeiou",
   "grant_id" : "aeiou",
   "grant_keywords" : [ "aeiou" ],
   "created_date" : "2000-01-23T04:56:07.000+00:00",
   "updated_date" : "2000-01-23T04:56:07.000+00:00"
 };
-  if(Object.keys(examples).length > 0) {
-    res.setHeader('Content-Type', 'application/json');
-    res.end(JSON.stringify(examples[Object.keys(examples)[0]] || {}, null, 2));
-  }
-  else {
-    res.end();
-  }
-  
-}
-
-exports.getProjectGrantTypeById = function(args, res, next) {
-  /**
-   * parameters expected in the args:
-  * id (String)
-  **/
-    var examples = {};
-  examples['application/json'] = "aeiou";
   if(Object.keys(examples).length > 0) {
     res.setHeader('Content-Type', 'application/json');
     res.end(JSON.stringify(examples[Object.keys(examples)[0]] || {}, null, 2));
@@ -658,11 +749,10 @@ exports.getProjectsByGrantId = function(args, res, next) {
   "university_id" : "aeiou",
   "reviews" : [ "aeiou" ],
   "project_id" : "aeiou",
-  "grant_id" : "aeiou",
   "project_file" : [ "aeiou" ],
+  "grant_ids" : [ "aeiou" ],
   "created_date" : "2000-01-23T04:56:07.000+00:00",
-  "updated_date" : "2000-01-23T04:56:07.000+00:00",
-  "project_main_grant_type" : "aeiou"
+  "updated_date" : "2000-01-23T04:56:07.000+00:00"
 } ];
   if(Object.keys(examples).length > 0) {
     res.setHeader('Content-Type', 'application/json');
@@ -728,11 +818,11 @@ exports.isGrantOnProject = function(args, res, next) {
   
 }
 
-exports.isGrantTypeOnProject = function(args, res, next) {
+exports.isGrantType = function(args, res, next) {
   /**
    * parameters expected in the args:
   * id (String)
-  * project_main_grant_type (String)
+  * type (String)
   **/
     var examples = {};
   examples['application/json'] = true;
@@ -800,11 +890,11 @@ exports.modifyGrantDescription = function(args, res, next) {
   
 }
 
-exports.modifyProjectGrant = function(args, res, next) {
+exports.modifyGrantType = function(args, res, next) {
   /**
    * parameters expected in the args:
   * id (String)
-  * grant_id (String)
+  * type (Float)
   **/
     var examples = {};
   examples['application/json'] = "aeiou";
@@ -818,11 +908,29 @@ exports.modifyProjectGrant = function(args, res, next) {
   
 }
 
-exports.modifyProjectGrantType = function(args, res, next) {
+exports.modifyGrantTypePath = function(args, res, next) {
   /**
    * parameters expected in the args:
   * id (String)
-  * project_main_grant_type (String)
+  * type (String)
+  **/
+    var examples = {};
+  examples['application/json'] = "aeiou";
+  if(Object.keys(examples).length > 0) {
+    res.setHeader('Content-Type', 'application/json');
+    res.end(JSON.stringify(examples[Object.keys(examples)[0]] || {}, null, 2));
+  }
+  else {
+    res.end();
+  }
+  
+}
+
+exports.modifyProjectGrant = function(args, res, next) {
+  /**
+   * parameters expected in the args:
+  * id (String)
+  * grant_id (String)
   **/
     var examples = {};
   examples['application/json'] = "aeiou";
@@ -926,6 +1034,42 @@ exports.setGrantKeywords = function(args, res, next) {
   
 }
 
+exports.setGrantType = function(args, res, next) {
+  /**
+   * parameters expected in the args:
+  * id (String)
+  * type (Float)
+  **/
+    var examples = {};
+  examples['application/json'] = "aeiou";
+  if(Object.keys(examples).length > 0) {
+    res.setHeader('Content-Type', 'application/json');
+    res.end(JSON.stringify(examples[Object.keys(examples)[0]] || {}, null, 2));
+  }
+  else {
+    res.end();
+  }
+  
+}
+
+exports.setGrantTypePath = function(args, res, next) {
+  /**
+   * parameters expected in the args:
+  * id (String)
+  * type (String)
+  **/
+    var examples = {};
+  examples['application/json'] = "aeiou";
+  if(Object.keys(examples).length > 0) {
+    res.setHeader('Content-Type', 'application/json');
+    res.end(JSON.stringify(examples[Object.keys(examples)[0]] || {}, null, 2));
+  }
+  else {
+    res.end();
+  }
+  
+}
+
 exports.setGrantUrls = function(args, res, next) {
   /**
    * parameters expected in the args:
@@ -962,24 +1106,6 @@ exports.setProjectGrant = function(args, res, next) {
   
 }
 
-exports.setProjectGrantType = function(args, res, next) {
-  /**
-   * parameters expected in the args:
-  * id (String)
-  * project_main_grant_type (String)
-  **/
-    var examples = {};
-  examples['application/json'] = "aeiou";
-  if(Object.keys(examples).length > 0) {
-    res.setHeader('Content-Type', 'application/json');
-    res.end(JSON.stringify(examples[Object.keys(examples)[0]] || {}, null, 2));
-  }
-  else {
-    res.end();
-  }
-  
-}
-
 exports.updateGrantById = function(args, res, next) {
   /**
    * parameters expected in the args:
@@ -993,6 +1119,7 @@ exports.updateGrantById = function(args, res, next) {
   "grant_url" : [ "aeiou" ],
   "grant_description" : "aeiou",
   "grant_amount" : 1.3579000000000001069366817318950779736042022705078125,
+  "grant_type" : "aeiou",
   "grant_id" : "aeiou",
   "grant_keywords" : [ "aeiou" ],
   "created_date" : "2000-01-23T04:56:07.000+00:00",

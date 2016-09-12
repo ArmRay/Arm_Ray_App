@@ -712,6 +712,198 @@ paths:
           schema:
             $ref: "#/definitions/Error"
       x-swagger-router-controller: "Grant"
+  /Grant/{id}/type:
+    get:
+      tags:
+      - "Grant"
+      description: "Retrieves `Grant` amount\n"
+      operationId: "getGrantType"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `Grant` id"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The `Grant` type"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Grant"
+    post:
+      tags:
+      - "Grant"
+      description: "Set `Grant` amount\n"
+      operationId: "setGrantType"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `Grant` name"
+        required: true
+        type: "string"
+      - name: "type"
+        in: "formData"
+        description: "the `Grant` type"
+        required: true
+        type: "number"
+        format: "float"
+      responses:
+        200:
+          description: "The `Grant` id"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Grant"
+    put:
+      tags:
+      - "Grant"
+      description: "Modify `Grant` amount\n"
+      operationId: "modifyGrantType"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `Grant` name"
+        required: true
+        type: "string"
+      - name: "type"
+        in: "formData"
+        description: "the `Grant` type"
+        required: true
+        type: "number"
+        format: "float"
+      responses:
+        200:
+          description: "The `Grant` id"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Grant"
+    delete:
+      tags:
+      - "Grant"
+      description: "Clear `Grant` type\n"
+      operationId: "clearGrantType"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `Grant` name"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The `Grant` id"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Grant"
+  /Grant/{id}/type/{type}:
+    get:
+      tags:
+      - "Grant"
+      description: "Retrieves if `Grant` amount is equal to param\n"
+      operationId: "isGrantType"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `Grant` name"
+        required: true
+        type: "string"
+      - name: "type"
+        in: "path"
+        description: "The `Grant` type"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The boolean"
+          schema:
+            type: "boolean"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Grant"
+    post:
+      tags:
+      - "Grant"
+      description: "Set `Grant` type\n"
+      operationId: "setGrantTypePath"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `Grant` name"
+        required: true
+        type: "string"
+      - name: "type"
+        in: "path"
+        description: "the `Grant` type"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The `Grant` id"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Grant"
+    put:
+      tags:
+      - "Grant"
+      description: "Modify `Grant` amount\n"
+      operationId: "modifyGrantTypePath"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `Grant` name"
+        required: true
+        type: "string"
+      - name: "type"
+        in: "path"
+        description: "the `Grant` type"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The `Grant` id"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Grant"
   /Grant/{id}/url:
     get:
       tags:
@@ -919,13 +1111,13 @@ paths:
       parameters:
       - name: "minimum"
         in: "formData"
-        description: "minimum grant amount"
+        description: "minimum `Grant`amount"
         required: true
         type: "number"
         format: "float"
       - name: "maximum"
         in: "formData"
-        description: "maximum grant amount"
+        description: "maximum `Grant`amount"
         required: true
         type: "number"
         format: "float"
@@ -954,7 +1146,7 @@ paths:
       parameters:
       - name: "amount"
         in: "path"
-        description: "maxiumum grant amount"
+        description: "maxiumum `Grant`amount"
         required: true
         type: "number"
         format: "float"
@@ -983,7 +1175,42 @@ paths:
       parameters:
       - name: "amount"
         in: "path"
-        description: "minimum grant amount"
+        description: "minimum `Grant`amount"
+        required: true
+        type: "number"
+        format: "float"
+      responses:
+        200:
+          description: "Array of `Grant` objects"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Grant"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Grant"
+  /Grants/amount/min/{min}/max/{max}:
+    get:
+      tags:
+      - "Grant"
+      description: "Retrieve `Grant` objects based on amount\n"
+      operationId: "getGrantsByAmountRange"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "min"
+        in: "path"
+        description: "maxiumum `Grant`amount"
+        required: true
+        type: "number"
+        format: "float"
+      - name: "max"
+        in: "path"
+        description: "maxiumum `Grant`amount"
         required: true
         type: "number"
         format: "float"
@@ -1166,6 +1393,64 @@ paths:
           schema:
             $ref: "#/definitions/Error"
       x-swagger-router-controller: "Grant"
+  /Grants/type:
+    get:
+      tags:
+      - "Grant"
+      description: "Retrieve `Grant` objects based on type\n"
+      operationId: "getGrantsByTypeForm"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "type"
+        in: "formData"
+        description: "The `Grant`type"
+        required: true
+        type: "number"
+        format: "float"
+      responses:
+        200:
+          description: "Array of `Grant` objects"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Grant"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Grant"
+  /Grants/type/{type}:
+    get:
+      tags:
+      - "Grant"
+      description: "Retrieve `Grant` objects based on type\n"
+      operationId: "getGrantsByType"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "type"
+        in: "path"
+        description: "The `Grant`type"
+        required: true
+        type: "number"
+        format: "float"
+      responses:
+        200:
+          description: "Array of `Grant` objects"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Grant"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Grant"
   /Post:
     post:
       tags:
@@ -1185,7 +1470,7 @@ paths:
         type: "string"
       - name: "post_text"
         in: "formData"
-        description: "ID of `User` author of post"
+        description: "ID of `User` author of `Post`"
         required: true
         type: "string"
       - name: "post_creator_id"
@@ -1296,7 +1581,7 @@ paths:
         collectionFormat: "multi"
       - name: "is_post_private"
         in: "formData"
-        description: "Is post private?"
+        description: "Is `Post`private?"
         required: false
         type: "boolean"
       responses:
@@ -1360,7 +1645,7 @@ paths:
     post:
       tags:
       - "Post"
-      description: "Sets the post author.  **id** and **author** both required.\n"
+      description: "Sets the `Post`author.  **id** and **author** both required.\n"
       operationId: "updatePostAuthorByIdPost"
       consumes:
       - "application/json"
@@ -1390,7 +1675,7 @@ paths:
     put:
       tags:
       - "Post"
-      description: "Sets the post author.  **id** and **author** both required.\n"
+      description: "Sets the `Post`author.  **id** and **author** both required.\n"
       operationId: "updatePostAuthorById"
       consumes:
       - "application/json"
@@ -1578,7 +1863,7 @@ paths:
         type: "string"
       responses:
         200:
-          description: "Boolean of whether the user is taged"
+          description: "Boolean of whether the `User`is taged"
           schema:
             type: "boolean"
         default:
@@ -1701,7 +1986,7 @@ paths:
     post:
       tags:
       - "Post"
-      description: "Sets the post privacy.  **id** and **is_private** both required.\n"
+      description: "Sets the `Post`privacy.  **id** and **is_private** both required.\n"
       operationId: "updatePostPrivacyByIdPost"
       consumes:
       - "application/json"
@@ -1715,7 +2000,7 @@ paths:
         type: "string"
       - name: "is_private"
         in: "formData"
-        description: "is post private?"
+        description: "is `Post`private?"
         required: true
         type: "boolean"
       responses:
@@ -1731,7 +2016,7 @@ paths:
     put:
       tags:
       - "Post"
-      description: "Sets the post privacy.  **id** and **is_private** both required.\n"
+      description: "Sets the `Post`privacy.  **id** and **is_private** both required.\n"
       operationId: "updatePostPrivacyById"
       consumes:
       - "application/json"
@@ -1745,7 +2030,7 @@ paths:
         type: "string"
       - name: "is_private"
         in: "formData"
-        description: "is post private?"
+        description: "is `Post`private?"
         required: true
         type: "boolean"
       responses:
@@ -1846,7 +2131,7 @@ paths:
       tags:
       - "Post"
       - "User"
-      description: "Retrieves whether user is tagged on past\n"
+      description: "Retrieves whether `User`is tagged on past\n"
       operationId: "getIsUserTagOnProject"
       produces:
       - "application/json"
@@ -1863,7 +2148,7 @@ paths:
         type: "string"
       responses:
         200:
-          description: "Boolean of whether the user is taged"
+          description: "Boolean of whether the `User`is taged"
           schema:
             type: "boolean"
         default:
@@ -1992,7 +2277,7 @@ paths:
     post:
       tags:
       - "Post"
-      description: "Sets the post text.  **id** and **text** both required.\n"
+      description: "Sets the `Post`text.  **id** and **text** both required.\n"
       operationId: "updatePostTextByIdPost"
       consumes:
       - "application/json"
@@ -2022,7 +2307,7 @@ paths:
     put:
       tags:
       - "Post"
-      description: "Sets the post title.  **id** and **text** both required.\n"
+      description: "Sets the `Post`title.  **id** and **text** both required.\n"
       operationId: "updatePostTextById"
       consumes:
       - "application/json"
@@ -2099,7 +2384,7 @@ paths:
     post:
       tags:
       - "Post"
-      description: "Sets the post title.  **id** and **title** both required.\n"
+      description: "Sets the `Post`title.  **id** and **title** both required.\n"
       operationId: "updatePostTitleByIdPost"
       consumes:
       - "application/json"
@@ -2129,7 +2414,7 @@ paths:
     put:
       tags:
       - "Post"
-      description: "Sets the post title.  **id** and **title** both required.\n"
+      description: "Sets the `Post`title.  **id** and **title** both required.\n"
       operationId: "updatePostTitleById"
       consumes:
       - "application/json"
@@ -2244,12 +2529,12 @@ paths:
         type: "string"
       - name: "post_text"
         in: "formData"
-        description: "ID of `User` author of post"
+        description: "ID of `User` author of `Post`"
         required: false
         type: "string"
       - name: "post_creator_id"
         in: "formData"
-        description: "ID of `User` author of post"
+        description: "ID of `User` author of `Post`"
         required: false
         type: "string"
       - name: "is_post_private"
@@ -2483,7 +2768,7 @@ paths:
         type: "string"
       - name: "project_main_grant_type"
         in: "formData"
-        description: "Project's grant type"
+        description: "Project's `Grant`type"
         required: false
         type: "string"
       - name: "project_description"
@@ -2493,7 +2778,7 @@ paths:
         type: "string"
       - name: "project_creator_id"
         in: "formData"
-        description: "array of project creator ids"
+        description: "array of `Project`creator ids"
         required: true
         type: "array"
         items:
@@ -2501,7 +2786,7 @@ paths:
         collectionFormat: "multi"
       - name: "project_collaborators_id"
         in: "formData"
-        description: "array of project collaborator ids"
+        description: "array of `Project`collaborator ids"
         required: false
         type: "array"
         items:
@@ -2509,7 +2794,7 @@ paths:
         collectionFormat: "multi"
       - name: "project_keywords"
         in: "formData"
-        description: "array of project keywords"
+        description: "array of `Project`keywords"
         required: false
         type: "array"
         items:
@@ -2517,25 +2802,28 @@ paths:
         collectionFormat: "multi"
       - name: "project_urls"
         in: "formData"
-        description: "array of project URLs"
+        description: "array of `Project`URLs"
         required: false
         type: "array"
         items:
           type: "string"
         collectionFormat: "multi"
-      - name: "grant_id"
+      - name: "grant_ids"
         in: "formData"
-        description: "Grant ID"
+        description: "The `Grant` IDs"
         required: false
-        type: "string"
+        type: "array"
+        items:
+          type: "string"
+        collectionFormat: "multi"
       - name: "university_id"
         in: "formData"
-        description: "ID of university hosting research"
+        description: "ID of `University`hosting research"
         required: false
         type: "string"
       - name: "grant_facilitator"
         in: "formData"
-        description: "Name of individual fascilitating grant funding"
+        description: "Name of individual fascilitating `Grant`funding"
         required: false
         type: "string"
       - name: "project_file"
@@ -2564,7 +2852,7 @@ paths:
         collectionFormat: "multi"
       - name: "is_project_private"
         in: "formData"
-        description: "is project private?"
+        description: "is `Project`private?"
         required: true
         type: "boolean"
       responses:
@@ -2613,7 +2901,7 @@ paths:
       parameters:
       - name: "id"
         in: "path"
-        description: "project id"
+        description: "The `Project`id"
         required: true
         type: "string"
       - name: "project_name"
@@ -2623,7 +2911,7 @@ paths:
         type: "string"
       - name: "project_main_grant_type"
         in: "formData"
-        description: "Project's grant type"
+        description: "Project's `Grant`type"
         required: false
         type: "string"
       - name: "project_description"
@@ -2633,7 +2921,7 @@ paths:
         type: "string"
       - name: "project_creator_id"
         in: "formData"
-        description: "array of project creator ids"
+        description: "array of `Project`creator ids"
         required: false
         type: "array"
         items:
@@ -2641,7 +2929,7 @@ paths:
         collectionFormat: "multi"
       - name: "project_collaborators_id"
         in: "formData"
-        description: "array of project collaborator ids"
+        description: "array of `Project`collaborator ids"
         required: false
         type: "array"
         items:
@@ -2649,7 +2937,7 @@ paths:
         collectionFormat: "multi"
       - name: "project_keywords"
         in: "formData"
-        description: "array of project keywords"
+        description: "array of `Project`keywords"
         required: false
         type: "array"
         items:
@@ -2657,7 +2945,7 @@ paths:
         collectionFormat: "multi"
       - name: "project_urls"
         in: "formData"
-        description: "array of project URLs"
+        description: "array of `Project`URLs"
         required: false
         type: "array"
         items:
@@ -2665,17 +2953,20 @@ paths:
         collectionFormat: "multi"
       - name: "grant_id"
         in: "formData"
-        description: "Grant ID"
+        description: "The `Grant` IDs"
         required: false
-        type: "string"
+        type: "array"
+        items:
+          type: "string"
+        collectionFormat: "multi"
       - name: "university_id"
         in: "formData"
-        description: "ID of university hosting research"
+        description: "ID of `University`hosting research"
         required: false
         type: "string"
       - name: "grant_facilitator"
         in: "formData"
-        description: "Name of individual fascilitating grant funding"
+        description: "Name of individual fascilitating `Grant`funding"
         required: false
         type: "string"
       - name: "project_file"
@@ -2704,7 +2995,7 @@ paths:
         collectionFormat: "multi"
       - name: "is_project_private"
         in: "formData"
-        description: "is project private?"
+        description: "is `Project`private?"
         required: false
         type: "boolean"
       responses:
@@ -2872,7 +3163,7 @@ paths:
         type: "string"
       - name: "user_id"
         in: "path"
-        description: "The user id"
+        description: "The `User`id"
         required: true
         type: "string"
       responses:
@@ -3094,7 +3385,7 @@ paths:
       tags:
       - "Project"
       - "User"
-      description: "Check if `User` is creator on `Project', return user if true.\n"
+      description: "Check if `User` is creator on `Project', return `User`if true.\n"
       operationId: "isUserCreatorOnProject"
       produces:
       - "application/json"
@@ -3106,7 +3397,7 @@ paths:
         type: "string"
       - name: "user_id"
         in: "path"
-        description: "The user id"
+        description: "The `User`id"
         required: true
         type: "string"
       responses:
@@ -3257,7 +3548,7 @@ paths:
     get:
       tags:
       - "Project"
-      description: "Check if project descript of `Project` is some value\n"
+      description: "Check if `Project`descript of `Project` is some value\n"
       operationId: "isProjectDescriptionOnProject"
       produces:
       - "application/json"
@@ -3454,7 +3745,7 @@ paths:
       tags:
       - "Project"
       - "Grant"
-      description: "Retrieve grant associated with a `Project`.\n"
+      description: "Retrieve `Grant`associated with a `Project`.\n"
       operationId: "getProjectGrantById"
       produces:
       - "application/json"
@@ -3478,7 +3769,7 @@ paths:
       tags:
       - "Project"
       - "Grant"
-      description: "Delete grant from a project\n"
+      description: "Delete `Grant`from a project\n"
       operationId: "deleteProjectGrant"
       produces:
       - "application/json"
@@ -3532,7 +3823,7 @@ paths:
       tags:
       - "Project"
       - "Grant"
-      description: "Add grant to a `Project`.\n"
+      description: "Add `Grant`to a `Project`.\n"
       operationId: "setProjectGrant"
       produces:
       - "application/json"
@@ -3561,7 +3852,7 @@ paths:
       tags:
       - "Project"
       - "Grant"
-      description: "Modify grant of a `Project`.\n"
+      description: "Modify `Grant`of a `Project`.\n"
       operationId: "modifyProjectGrant"
       produces:
       - "application/json"
@@ -3574,148 +3865,6 @@ paths:
       - name: "grant_id"
         in: "path"
         description: "The grant_id"
-        required: true
-        type: "string"
-      responses:
-        200:
-          description: "The id associated with the `Project`"
-          schema:
-            type: "string"
-        default:
-          description: "Unexpected error"
-          schema:
-            $ref: "#/definitions/Error"
-      x-swagger-router-controller: "Project"
-  /Project/{id}/grant_type:
-    get:
-      tags:
-      - "Project"
-      - "Grant"
-      - "REFACTOR-TODO-move-grant-stuff-to-grant-object"
-      description: "Retrieve project_main_grant_type associated with a `Project`.\n"
-      operationId: "getProjectGrantTypeById"
-      produces:
-      - "application/json"
-      parameters:
-      - name: "id"
-        in: "path"
-        description: "The `id` of the `Project` to retrieve"
-        required: true
-        type: "string"
-      responses:
-        200:
-          description: "The project_main_grant_type"
-          schema:
-            type: "string"
-        default:
-          description: "Unexpected error"
-          schema:
-            $ref: "#/definitions/Error"
-      x-swagger-router-controller: "Project"
-    delete:
-      tags:
-      - "Project"
-      - "Grant"
-      - "REFACTOR-TODO-move-grant-stuff-to-grant-object"
-      description: "Delete project_main_grant_type from a project\n"
-      operationId: "deleteProjectGrantType"
-      produces:
-      - "application/json"
-      parameters:
-      - name: "id"
-        in: "path"
-        description: "The `id` of the `Project` to retrieve"
-        required: true
-        type: "string"
-      responses:
-        200:
-          description: "The `project_main_grant_type` associated with the `Project`"
-          schema:
-            type: "string"
-        default:
-          description: "Unexpected error"
-          schema:
-            $ref: "#/definitions/Error"
-      x-swagger-router-controller: "Project"
-  /Project/{id}/grant_type/{project_main_grant_type}:
-    get:
-      tags:
-      - "Project"
-      - "Grant"
-      - "REFACTOR-TODO-move-grant-stuff-to-grant-object"
-      description: "Check if grant tyoe  of `Project` is some value\n"
-      operationId: "isGrantTypeOnProject"
-      produces:
-      - "application/json"
-      parameters:
-      - name: "id"
-        in: "path"
-        description: "The `id` of the `Project` to retrieve"
-        required: true
-        type: "string"
-      - name: "project_main_grant_type"
-        in: "path"
-        description: "The `project_main_grant_type` of the `Project`"
-        required: true
-        type: "string"
-      responses:
-        200:
-          description: "The post"
-          schema:
-            type: "boolean"
-        default:
-          description: "Unexpected error"
-          schema:
-            $ref: "#/definitions/Error"
-      x-swagger-router-controller: "Project"
-    post:
-      tags:
-      - "Project"
-      - "Grant"
-      - "REFACTOR-TODO-move-grant-stuff-to-grant-object"
-      description: "Add project_name to a `Project`.\n"
-      operationId: "setProjectGrantType"
-      produces:
-      - "application/json"
-      parameters:
-      - name: "id"
-        in: "path"
-        description: "The `id` of the `Project` to retrieve"
-        required: true
-        type: "string"
-      - name: "project_main_grant_type"
-        in: "path"
-        description: "The project_main_grant_type"
-        required: true
-        type: "string"
-      responses:
-        200:
-          description: "The id associated with the `Project`"
-          schema:
-            type: "string"
-        default:
-          description: "Unexpected error"
-          schema:
-            $ref: "#/definitions/Error"
-      x-swagger-router-controller: "Project"
-    put:
-      tags:
-      - "Project"
-      - "Grant"
-      - "REFACTOR-TODO-move-grant-stuff-to-grant-object"
-      description: "Modify project_name of a `Project`.\n"
-      operationId: "modifyProjectGrantType"
-      produces:
-      - "application/json"
-      parameters:
-      - name: "id"
-        in: "path"
-        description: "The `id` of the `Project` to retrieve"
-        required: true
-        type: "string"
-      - name: "project_main_grant_type"
-        in: "path"
-        description: "The project_main_grant_type"
         required: true
         type: "string"
       responses:
@@ -3956,7 +4105,7 @@ paths:
     get:
       tags:
       - "Project"
-      description: "Check if project name of `Project` is some value\n"
+      description: "Check if `Project`name of `Project` is some value\n"
       operationId: "isNameOnProject"
       produces:
       - "application/json"
@@ -4186,7 +4335,7 @@ paths:
       tags:
       - "Project"
       - "Post"
-      description: "Add post to a `Project`.\n"
+      description: "Add `Post`to a `Project`.\n"
       operationId: "addProjectPost"
       produces:
       - "application/json"
@@ -4281,7 +4430,7 @@ paths:
         type: "string"
       - name: "is_private"
         in: "formData"
-        description: "is project private?"
+        description: "is `Project`private?"
         required: true
         type: "boolean"
       responses:
@@ -4490,7 +4639,7 @@ paths:
       tags:
       - "Project"
       - "Review"
-      description: "Add review to a `Project`.\n"
+      description: "Add `Review`to a `Project`.\n"
       operationId: "addProjectReview"
       produces:
       - "application/json"
@@ -4598,7 +4747,7 @@ paths:
       tags:
       - "Project"
       - "University"
-      description: "Check if project descript of `Project` is some value\n"
+      description: "Check if `Project`descript of `Project` is some value\n"
       operationId: "isUniversityOnProject"
       produces:
       - "application/json"
@@ -4824,13 +4973,13 @@ paths:
         type: "string"
       - name: "created_date"
         in: "formData"
-        description: "datetime stamp of project creation"
+        description: "datetime stamp of `Project`creation"
         required: false
         type: "string"
         format: "date-time"
       - name: "updated_date"
         in: "formData"
-        description: "datetime stamp of project update"
+        description: "datetime stamp of `Project`update"
         required: false
         type: "string"
         format: "date-time"
@@ -4841,7 +4990,7 @@ paths:
         type: "string"
       - name: "project_main_grant_type"
         in: "formData"
-        description: "Project's grant type"
+        description: "Project's `Grant`type"
         required: false
         type: "string"
       - name: "project_description"
@@ -4851,7 +5000,7 @@ paths:
         type: "string"
       - name: "project_creator_id"
         in: "formData"
-        description: "array of project creator ids"
+        description: "array of `Project`creator ids"
         required: false
         type: "array"
         items:
@@ -4859,7 +5008,7 @@ paths:
         collectionFormat: "multi"
       - name: "project_collaborators_id"
         in: "formData"
-        description: "array of project collaborator ids"
+        description: "array of `Project`collaborator ids"
         required: false
         type: "array"
         items:
@@ -4867,7 +5016,7 @@ paths:
         collectionFormat: "multi"
       - name: "project_keywords"
         in: "formData"
-        description: "array of project keywords"
+        description: "array of `Project`keywords"
         required: false
         type: "array"
         items:
@@ -4875,7 +5024,7 @@ paths:
         collectionFormat: "multi"
       - name: "project_urls"
         in: "formData"
-        description: "array of project URLs"
+        description: "array of `Project`URLs"
         required: false
         type: "array"
         items:
@@ -4883,17 +5032,17 @@ paths:
         collectionFormat: "multi"
       - name: "grant_id"
         in: "formData"
-        description: "Grant ID"
+        description: "The `Grant`ID"
         required: false
         type: "string"
       - name: "university_id"
         in: "formData"
-        description: "ID of university hosting research"
+        description: "ID of `University`hosting research"
         required: false
         type: "string"
       - name: "grant_facilitator"
         in: "formData"
-        description: "Name of individual fascilitating grant funding"
+        description: "Name of individual fascilitating `Grant`funding"
         required: false
         type: "string"
       - name: "project_file"
@@ -4922,7 +5071,7 @@ paths:
         collectionFormat: "multi"
       - name: "is_project_private"
         in: "formData"
-        description: "is project private?"
+        description: "is `Project`private?"
         required: false
         type: "boolean"
       responses:
@@ -5196,7 +5345,7 @@ paths:
         type: "string"
       - name: "reviewer_id"
         in: "formData"
-        description: "User who wrote `Review`"
+        description: "The `User`who wrote `Review`"
         required: false
         type: "string"
       - name: "rating"
@@ -5347,7 +5496,7 @@ paths:
     get:
       tags:
       - "Review"
-      description: "Gets review created date\n"
+      description: "Gets `Review`created date\n"
       operationId: "getReviewCreatedDateById"
       produces:
       - "application/json"
@@ -5518,7 +5667,7 @@ paths:
         type: "string"
       responses:
         200:
-          description: "The `Review` reviewer user id"
+          description: "The `Review` reviewer `User`id"
           schema:
             type: "string"
         default:
@@ -5555,7 +5704,7 @@ paths:
       tags:
       - "Review"
       - "User"
-      description: "Is user the reviewer?\n"
+      description: "Is `User`the reviewer?\n"
       operationId: "isUserReviewReviewer"
       produces:
       - "application/json"
@@ -5673,7 +5822,7 @@ paths:
     get:
       tags:
       - "Review"
-      description: "Gets review updated date\n"
+      description: "Gets `Review`updated date\n"
       operationId: "getReviewUpdatedDateById"
       produces:
       - "application/json"
@@ -5851,17 +6000,15 @@ paths:
         type: "string"
       - name: "rating"
         in: "formData"
-        description: "Integer rating of review (1-5)"
+        description: "Integer rating of `Review`(1-5)"
         required: false
         type: "number"
         format: "int32"
       responses:
         200:
-          description: "An array of `Review` objects"
+          description: "An `Review` object"
           schema:
-            type: "array"
-            items:
-              $ref: "#/definitions/Review"
+            $ref: "#/definitions/Review"
         default:
           description: "Unexpected error"
           schema:
@@ -6089,11 +6236,9 @@ paths:
         type: "string"
       responses:
         200:
-          description: "An array of `Skill` objects"
+          description: "A `Skill` object"
           schema:
-            type: "array"
-            items:
-              $ref: "#/definitions/Skill"
+            $ref: "#/definitions/Skill"
         default:
           description: "Unexpected error"
           schema:
@@ -6635,6 +6780,1687 @@ paths:
           schema:
             $ref: "#/definitions/Error"
       x-swagger-router-controller: "Skill"
+  /Universities:
+    get:
+      tags:
+      - "University"
+      description: "Gets `University` objects.\nRequired query param of **size** determines\n\
+        max number of results per page, and **page** determines\nwhich page in the\
+        \ pagination we are. Remaining params optional.\n"
+      operationId: "getUniversities"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "size"
+        in: "formData"
+        description: "Max size of array to return"
+        required: true
+        type: "number"
+        format: "int32"
+      - name: "page"
+        in: "formData"
+        description: "Location in pagination"
+        required: true
+        type: "number"
+        format: "int32"
+      - name: "university_id"
+        in: "formData"
+        description: "Unique identifier representing a specific `University`"
+        required: false
+        type: "string"
+      - name: "name"
+        in: "formData"
+        description: "Name of a `University`"
+        required: false
+        type: "string"
+      - name: "city"
+        in: "formData"
+        description: "City of `University`"
+        required: false
+        type: "string"
+      - name: "state"
+        in: "formData"
+        description: "City of `University`"
+        required: false
+        type: "string"
+      - name: "created_date"
+        in: "formData"
+        description: "datetime stamp of `University` creation"
+        required: false
+        type: "string"
+        format: "date-time"
+      - name: "updated_date"
+        in: "formData"
+        description: "datetime stamp of `University` update"
+        required: false
+        type: "string"
+        format: "date-time"
+      - name: "project_ids"
+        in: "formData"
+        description: "id of `Project` objects at this university"
+        required: false
+        type: "array"
+        items:
+          type: "string"
+        collectionFormat: "multi"
+      responses:
+        200:
+          description: "An array of `University` objects"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/University"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "University"
+  /Universities/city:
+    get:
+      tags:
+      - "University"
+      description: "Retrieve `University` objects with specified city\n"
+      operationId: "getUniversitiesByCityForm"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "city"
+        in: "formData"
+        description: "City of `University` to search for"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "Array of `University` objects"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/University"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "University"
+  /Universities/city/{city}:
+    get:
+      tags:
+      - "University"
+      description: "Retrieve `University` objects with specified city\n"
+      operationId: "getUniversitiesByCity"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "city"
+        in: "path"
+        description: "City of `University` to search for"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "Array of `University` objects"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/University"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "University"
+  /Universities/created_date:
+    get:
+      tags:
+      - "University"
+      description: "Retrieve `University` objects created on or later than given date\n"
+      operationId: "getUniversitiesByCreatedDateForm"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "created_date"
+        in: "formData"
+        description: "date of creation"
+        required: true
+        type: "string"
+        format: "date-time"
+      responses:
+        200:
+          description: "Array of `University` objects"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/University"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "University"
+  /Universities/created_date/{created_date}:
+    get:
+      tags:
+      - "University"
+      description: "Retrieve `University` objects created on or later than given date\n"
+      operationId: "getUniversitiesByCreatedDate"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "created_date"
+        in: "path"
+        description: "date of creation"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "Array of `University` objects"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/University"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "University"
+  /Universities/geolocation:
+    get:
+      tags:
+      - "University"
+      description: "Retrieve `University` objects with specified geolocation; radius\
+        \ is optional, defaults to 25 miles\n"
+      operationId: "getUniversitiesByGeolocationForm"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "lat"
+        in: "formData"
+        description: "State of `University` to search for"
+        required: true
+        type: "number"
+        format: "float"
+      - name: "long"
+        in: "formData"
+        description: "State of `University` to search for"
+        required: true
+        type: "number"
+        format: "float"
+      - name: "radius"
+        in: "formData"
+        description: "Radius from specified lat and long to search, defaults to 25\
+          \ miles if not specified"
+        required: false
+        type: "number"
+        format: "float"
+      responses:
+        200:
+          description: "Array of `University` objects"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/University"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "University"
+  /Universities/geolocation/{lat}/{long}:
+    get:
+      tags:
+      - "University"
+      description: "Retrieve `University` objects with specified geolocation; radius\
+        \ is optional, defaults to 25 miles\n"
+      operationId: "getUniversitiesByGeolocationFormAndPath"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "lat"
+        in: "path"
+        description: "State of `University` to search for"
+        required: true
+        type: "number"
+        format: "float"
+      - name: "long"
+        in: "path"
+        description: "State of `University` to search for"
+        required: true
+        type: "number"
+        format: "float"
+      - name: "radius"
+        in: "formData"
+        description: "Radius from specified lat and long to search, defaults to 25\
+          \ miles if not specified"
+        required: false
+        type: "number"
+        format: "float"
+      responses:
+        200:
+          description: "Array of `University` objects"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/University"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "University"
+  /Universities/geolocation/{lat}/{long}/{radius}:
+    get:
+      tags:
+      - "University"
+      description: "Retrieve `University` objects with specified geolocation and radius\n"
+      operationId: "getUniversitiesByGeolocationPath"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "lat"
+        in: "path"
+        description: "State of `University` to search for"
+        required: true
+        type: "number"
+        format: "float"
+      - name: "long"
+        in: "path"
+        description: "State of `University` to search for"
+        required: true
+        type: "number"
+        format: "float"
+      - name: "radius"
+        in: "path"
+        description: "Radius from specified lat and long to search, defaults to 25\
+          \ miles if not specified"
+        required: true
+        type: "number"
+        format: "float"
+      responses:
+        200:
+          description: "Array of `University` objects"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/University"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "University"
+  /Universities/modified_date:
+    get:
+      tags:
+      - "University"
+      description: "Retrieve `University` objects modified on or later than given\
+        \ date\n"
+      operationId: "getUniversitiesByModifiedDateForm"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "modified_date"
+        in: "formData"
+        description: "date of modification"
+        required: true
+        type: "string"
+        format: "date-time"
+      responses:
+        200:
+          description: "Array of `University` objects"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/University"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "University"
+  /Universities/modified_date/{modified_date}:
+    get:
+      tags:
+      - "University"
+      description: "Retrieve `University` objects created on or later than given date\n"
+      operationId: "getUniversitiesByModifiedDate"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "modified_date"
+        in: "path"
+        description: "date of creation"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "Array of `University` objects"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/University"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "University"
+  /Universities/name:
+    get:
+      tags:
+      - "University"
+      description: "Retrieve `University` objects with specified name\n"
+      operationId: "getUniversitiesByNameForm"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "name"
+        in: "formData"
+        description: "Name of `University` to search for"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "Array of `University` objects"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/University"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "University"
+  /Universities/name/{name}:
+    get:
+      tags:
+      - "University"
+      description: "Retrieve `University` objects with specified name\n"
+      operationId: "getUniversitiesByName"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "name"
+        in: "path"
+        description: "Name of `University` to search for"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "Array of `University` objects"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/University"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "University"
+  /Universities/projects:
+    get:
+      tags:
+      - "University"
+      - "Project"
+      description: "Retrieve `University` objects with specified projects\n"
+      operationId: "getUniversitiesByProjectsForm"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "projects"
+        in: "formData"
+        description: "Array of `Project` id items to search for"
+        required: true
+        type: "array"
+        items:
+          type: "string"
+        collectionFormat: "multi"
+      responses:
+        200:
+          description: "Array of `University` objects"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/University"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "University"
+  /Universities/projects/{project_id}:
+    get:
+      tags:
+      - "University"
+      - "Project"
+      description: "Retrieve `University` objects with specified `Project`id\n"
+      operationId: "getUniversitiesByProject"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "project_id"
+        in: "path"
+        description: "ID of `Project` to search for"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "Array of `University` objects"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/University"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "University"
+  /Universities/state:
+    get:
+      tags:
+      - "University"
+      description: "Retrieve `University` objects with specified state\n"
+      operationId: "getUniversitiesByStateForm"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "state"
+        in: "formData"
+        description: "State of `University` to search for"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "Array of `University` objects"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/University"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "University"
+  /Universities/state/{state}:
+    get:
+      tags:
+      - "University"
+      description: "Retrieve `University` objects with specified state\n"
+      operationId: "getUniversitiesByState"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "state"
+        in: "path"
+        description: "State of `University` to search for"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "Array of `University` objects"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/University"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "University"
+  /University:
+    post:
+      tags:
+      - "University"
+      description: "Creates `University` objects. **name**, **city**, and **state**\
+        \ are required, all others optional.\n"
+      operationId: "createUniversity"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "name"
+        in: "formData"
+        description: "Name of `University`"
+        required: true
+        type: "string"
+      - name: "city"
+        in: "formData"
+        description: "City of `University`"
+        required: true
+        type: "string"
+      - name: "state"
+        in: "formData"
+        description: "state of `University`"
+        required: true
+        type: "string"
+      - name: "geolocation"
+        in: "formData"
+        description: "2 item tuple representing lat/long of `University`; if not provided\
+          \ will be calculated based on city/state"
+        required: false
+        type: "string"
+      - name: "project_ids"
+        in: "formData"
+        description: "ids of `Project` items at `University`"
+        required: false
+        type: "array"
+        items:
+          type: "string"
+        collectionFormat: "multi"
+      - name: "profile_images"
+        in: "formData"
+        description: "paths to profile images for `University`"
+        required: false
+        type: "array"
+        items:
+          type: "string"
+        collectionFormat: "multi"
+      responses:
+        200:
+          description: "A `University` object"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/University"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "University"
+  /University/{id}:
+    get:
+      tags:
+      - "University"
+      description: "Retrieves `University` object by **id**.\n"
+      operationId: "getUniversityById"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `UserSkill` id"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The `University`"
+          schema:
+            $ref: "#/definitions/University"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "University"
+    put:
+      tags:
+      - "University"
+      description: "Updates `University` objects. **id** is required,\nall others\
+        \ optional.\n"
+      operationId: "updateUniversityById"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `University` id"
+        required: true
+        type: "string"
+      - name: "name"
+        in: "formData"
+        description: "Name of `University`"
+        required: true
+        type: "string"
+      - name: "city"
+        in: "formData"
+        description: "City of `University`"
+        required: true
+        type: "string"
+      - name: "state"
+        in: "formData"
+        description: "state of `University`"
+        required: true
+        type: "string"
+      - name: "geolocation"
+        in: "formData"
+        description: "2 item tuple representing lat/long of `University`; if not provided\
+          \ will be calculated based on city/state"
+        required: false
+        type: "string"
+      - name: "project_ids"
+        in: "formData"
+        description: "ids of `Project` items at `University`"
+        required: false
+        type: "array"
+        items:
+          type: "string"
+        collectionFormat: "multi"
+      - name: "profile_images"
+        in: "formData"
+        description: "paths to profile images for `University`"
+        required: false
+        type: "array"
+        items:
+          type: "string"
+        collectionFormat: "multi"
+      responses:
+        200:
+          description: "A `University` object"
+          schema:
+            $ref: "#/definitions/University"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "University"
+    delete:
+      tags:
+      - "University"
+      description: "Deletes `University` objects by **id**.\n"
+      operationId: "deleteUniversityById"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `University` id"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The `University` id"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "University"
+  /University/{id}/city:
+    get:
+      tags:
+      - "University"
+      description: "Gets the `University` city\n"
+      operationId: "getUniversityCityById"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `University` id"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The `University` city"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "University"
+    delete:
+      tags:
+      - "University"
+      description: "Deletes `University` city\n"
+      operationId: "deleteUniversityCityById"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `University` id"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The `University` id"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "University"
+  /University/{id}/city/{city}:
+    get:
+      tags:
+      - "University"
+      description: "Gets if the `University` city matches the parameter\n"
+      operationId: "isUniversityCityById"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `University` id"
+        required: true
+        type: "string"
+      - name: "city"
+        in: "path"
+        description: "The `University` city"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The boolean"
+          schema:
+            type: "boolean"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "University"
+    post:
+      tags:
+      - "University"
+      description: "Sets `University` city\n"
+      operationId: "setUniversityCityById"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `University` id"
+        required: true
+        type: "string"
+      - name: "city"
+        in: "path"
+        description: "The `University` city"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The `University` id"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "University"
+    put:
+      tags:
+      - "University"
+      description: "Updates `University` city\n"
+      operationId: "updateUniversityCityById"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `University` id"
+        required: true
+        type: "string"
+      - name: "city"
+        in: "path"
+        description: "The `University` city"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The `University` id"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "University"
+  /University/{id}/geolocation:
+    get:
+      tags:
+      - "University"
+      description: "Gets the `University` geolocation\n"
+      operationId: "getUniversityGeolocationById"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `University` id"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The `University` geolocation as a tuple"
+          schema:
+            type: "array"
+            items:
+              type: "number"
+              format: "float"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "University"
+    post:
+      tags:
+      - "University"
+      description: "Sets `University` geolocation\n"
+      operationId: "setUniversityGeolocationByIdForm"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `University` id"
+        required: true
+        type: "string"
+      - name: "lat"
+        in: "formData"
+        description: "The `University` latitude"
+        required: true
+        type: "number"
+        format: "float"
+      - name: "long"
+        in: "formData"
+        description: "The `University` longitude"
+        required: true
+        type: "number"
+        format: "float"
+      responses:
+        200:
+          description: "The `University` id"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "University"
+    put:
+      tags:
+      - "University"
+      description: "Updates `University` geolocation\n"
+      operationId: "updateUniversityGeolocationByIdForm"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `University` id"
+        required: true
+        type: "string"
+      - name: "lat"
+        in: "formData"
+        description: "The `University` latitude"
+        required: true
+        type: "number"
+        format: "float"
+      - name: "long"
+        in: "formData"
+        description: "The `University` longitude"
+        required: true
+        type: "number"
+        format: "float"
+      responses:
+        200:
+          description: "The `University` id"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "University"
+    delete:
+      tags:
+      - "University"
+      description: "Deletes `University` geolocation\n"
+      operationId: "deleteUniversityGeolocationById"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `University` id"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The `University` id"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "University"
+  /University/{id}/geolocation/{lat}/{long}:
+    get:
+      tags:
+      - "University"
+      description: "Gets if the `University` geolocation the parameters\n"
+      operationId: "isUniversityGeolocationById"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `University` id"
+        required: true
+        type: "string"
+      - name: "lat"
+        in: "path"
+        description: "The `University` latitude"
+        required: true
+        type: "number"
+        format: "float"
+      - name: "long"
+        in: "path"
+        description: "The `University` longitude"
+        required: true
+        type: "number"
+        format: "float"
+      responses:
+        200:
+          description: "The boolean"
+          schema:
+            type: "boolean"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "University"
+    post:
+      tags:
+      - "University"
+      description: "Sets `University` state\n"
+      operationId: "setUniversityGeolocationById"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `University` id"
+        required: true
+        type: "string"
+      - name: "lat"
+        in: "path"
+        description: "The `University` latitude"
+        required: true
+        type: "number"
+        format: "float"
+      - name: "long"
+        in: "path"
+        description: "The `University` longitude"
+        required: true
+        type: "number"
+        format: "float"
+      responses:
+        200:
+          description: "The `University` id"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "University"
+    put:
+      tags:
+      - "University"
+      description: "Updates `University` geolocation\n"
+      operationId: "updateUniversityGeolocationById"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `University` id"
+        required: true
+        type: "string"
+      - name: "lat"
+        in: "path"
+        description: "The `University` latitude"
+        required: true
+        type: "number"
+        format: "float"
+      - name: "long"
+        in: "path"
+        description: "The `University` longitude"
+        required: true
+        type: "number"
+        format: "float"
+      responses:
+        200:
+          description: "The `University` id"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "University"
+  /University/{id}/images:
+    get:
+      tags:
+      - "University"
+      description: "Gets the `University` images\n"
+      operationId: "getUniversityimagesById"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `University` id"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The `University` image paths"
+          schema:
+            type: "array"
+            items:
+              type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "University"
+    post:
+      tags:
+      - "University"
+      description: "Sets `University` profile image paths\n"
+      operationId: "setUniversityImagesById"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `University` id"
+        required: true
+        type: "string"
+      - name: "profile_image_paths"
+        in: "formData"
+        description: "The `University` profile image paths"
+        required: true
+        type: "array"
+        items:
+          type: "string"
+        collectionFormat: "multi"
+      responses:
+        200:
+          description: "The `University` id"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "University"
+    put:
+      tags:
+      - "University"
+      - "Project"
+      description: "Adds `University` projects\n"
+      operationId: "addUniversityProfileImagesById"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `University` id"
+        required: true
+        type: "string"
+      - name: "profile_image_paths"
+        in: "formData"
+        description: "The `University` profile image paths"
+        required: true
+        type: "array"
+        items:
+          type: "string"
+        collectionFormat: "multi"
+      responses:
+        200:
+          description: "The `University` id"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "University"
+    delete:
+      tags:
+      - "University"
+      description: "Deletes `University` images\n"
+      operationId: "deleteUniversityImagesById"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `University` id"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The `University` id"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "University"
+  /University/{id}/name:
+    get:
+      tags:
+      - "University"
+      description: "Gets the `University` name\n"
+      operationId: "getUniversityNameById"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `University` id"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The `University` name"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "University"
+    delete:
+      tags:
+      - "University"
+      description: "Deletes `University` name\n"
+      operationId: "deleteUniversityNameById"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `University` id"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The `University` id"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "University"
+  /University/{id}/name/{name}:
+    get:
+      tags:
+      - "University"
+      description: "Gets if the `University` name matches the parameter\n"
+      operationId: "isUniversityNameById"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `University` id"
+        required: true
+        type: "string"
+      - name: "name"
+        in: "path"
+        description: "The `University` name"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The boolean"
+          schema:
+            type: "boolean"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "University"
+    post:
+      tags:
+      - "University"
+      description: "Sets `University` name\n"
+      operationId: "setUniversityNameById"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `University` id"
+        required: true
+        type: "string"
+      - name: "name"
+        in: "path"
+        description: "The `University` name"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The `University` id"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "University"
+    put:
+      tags:
+      - "University"
+      description: "Updates `University` name\n"
+      operationId: "updateUniversityNameById"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `University` id"
+        required: true
+        type: "string"
+      - name: "name"
+        in: "path"
+        description: "The `University` name"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The `University` id"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "University"
+  /University/{id}/projects:
+    get:
+      tags:
+      - "University"
+      - "Project"
+      description: "Gets the `University` projects\n"
+      operationId: "getUniversityProjectsById"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `University` id"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The `University` state"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "University"
+    post:
+      tags:
+      - "University"
+      - "Project"
+      description: "Sets `University` projects\n"
+      operationId: "setUniversityProjectsById"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `University` id"
+        required: true
+        type: "string"
+      - name: "project_ids"
+        in: "formData"
+        description: "The `Project` ids"
+        required: true
+        type: "array"
+        items:
+          type: "string"
+        collectionFormat: "multi"
+      responses:
+        200:
+          description: "The `University` id"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "University"
+    put:
+      tags:
+      - "University"
+      - "Project"
+      description: "Adds `University` projects\n"
+      operationId: "addUniversityProjectsById"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `University` id"
+        required: true
+        type: "string"
+      - name: "project_ids"
+        in: "formData"
+        description: "The `Project` ids"
+        required: true
+        type: "array"
+        items:
+          type: "string"
+        collectionFormat: "multi"
+      responses:
+        200:
+          description: "The `University` id"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "University"
+    delete:
+      tags:
+      - "University"
+      - "Project"
+      description: "Deletes `University` projects\n"
+      operationId: "deleteUniversityProjectsById"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `University` id"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The `University` id"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "University"
+  /University/{id}/projects/{project_id}:
+    get:
+      tags:
+      - "University"
+      - "Project"
+      description: "Gets if the `University` has the `Project`\n"
+      operationId: "isUniversityProjectsById"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `University` id"
+        required: true
+        type: "string"
+      - name: "project_id"
+        in: "path"
+        description: "The `Project` id"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The boolean"
+          schema:
+            type: "boolean"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "University"
+    post:
+      tags:
+      - "University"
+      - "Project"
+      description: "Sets `University` projects to this single `Project`(probably will\
+        \ never use this)\n"
+      operationId: "setUniversityProjectById"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `University` id"
+        required: true
+        type: "string"
+      - name: "project_id"
+        in: "path"
+        description: "The `Project` id"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The `University` id"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "University"
+    put:
+      tags:
+      - "University"
+      - "Project"
+      description: "Adds `University` project\n"
+      operationId: "addUniversityProjectById"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `University` id"
+        required: true
+        type: "string"
+      - name: "project_id"
+        in: "path"
+        description: "The `Project` ids"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The `University` id"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "University"
+    delete:
+      tags:
+      - "University"
+      - "Project"
+      description: "Deletes `Project` from `University` \n"
+      operationId: "deleteUniversityProjectById"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `University` id"
+        required: true
+        type: "string"
+      - name: "project_id"
+        in: "path"
+        description: "The `Project` id"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The `University` id"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "University"
+  /University/{id}/state:
+    get:
+      tags:
+      - "University"
+      description: "Gets the `University` state\n"
+      operationId: "getUniversityStateById"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `University` id"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The `University` state"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "University"
+    delete:
+      tags:
+      - "University"
+      description: "Deletes `University` state\n"
+      operationId: "deleteUniversityStateById"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `University` id"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The `University` id"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "University"
+  /University/{id}/state/{state}:
+    get:
+      tags:
+      - "University"
+      description: "Gets if the `University` state matches the parameter\n"
+      operationId: "isUniversityStateById"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `University` id"
+        required: true
+        type: "string"
+      - name: "state"
+        in: "path"
+        description: "The `University` state"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The boolean"
+          schema:
+            type: "boolean"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "University"
+    post:
+      tags:
+      - "University"
+      description: "Sets `University` state\n"
+      operationId: "setUniversityStateById"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `University` id"
+        required: true
+        type: "string"
+      - name: "state"
+        in: "path"
+        description: "The `University` state"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The `University` id"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "University"
+    put:
+      tags:
+      - "University"
+      description: "Updates `University` state\n"
+      operationId: "updateUniversityStateById"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `University` id"
+        required: true
+        type: "string"
+      - name: "state"
+        in: "path"
+        description: "The `University` state"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The `University` id"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "University"
   /User:
     post:
       tags:
@@ -6680,7 +8506,7 @@ paths:
         type: "string"
       - name: "university_ids"
         in: "formData"
-        description: "university a `User` is associated with"
+        description: "The `University`a `User` is associated with"
         required: false
         type: "array"
         items:
@@ -6780,7 +8606,7 @@ paths:
         type: "string"
       - name: "university"
         in: "formData"
-        description: "university a `User` is associated with"
+        description: "The `University`a `User` is associated with"
         required: false
         type: "string"
       - name: "project_id"
@@ -7002,7 +8828,7 @@ paths:
         type: "string"
       - name: "isCollaborator"
         in: "formData"
-        description: "Is user a collaborator?"
+        description: "Is `User`a collaborator?"
         required: true
         type: "boolean"
       responses:
@@ -7032,7 +8858,7 @@ paths:
         type: "string"
       - name: "isCollaborator"
         in: "formData"
-        description: "Is user a collaborator?"
+        description: "Is `User`a collaborator?"
         required: true
         type: "boolean"
       responses:
@@ -7110,7 +8936,7 @@ paths:
         type: "string"
       - name: "isCreator"
         in: "formData"
-        description: "Is user a creator?"
+        description: "Is `User`a creator?"
         required: true
         type: "boolean"
       responses:
@@ -7140,7 +8966,7 @@ paths:
         type: "string"
       - name: "isCollaborator"
         in: "formData"
-        description: "Is user a creator?"
+        description: "Is `User`a creator?"
         required: true
         type: "boolean"
       responses:
@@ -7292,6 +9118,7 @@ paths:
     get:
       tags:
       - "User"
+      - "TODO-create-images-object"
       description: "Retrieve all images associated with a `User`.\n"
       operationId: "getAllUserImages"
       produces:
@@ -8097,7 +9924,7 @@ paths:
       tags:
       - "User"
       - "Skill"
-      description: "Check if skill is associated with a `User`.\n"
+      description: "Check if `Skill`is associated with a `User`.\n"
       operationId: "getIsSkillOnUser"
       produces:
       - "application/json"
@@ -8128,7 +9955,7 @@ paths:
       tags:
       - "User"
       - "Skill"
-      description: "Set skill on a `User`.\n"
+      description: "Set `Skill`on a `User`.\n"
       operationId: "setUserSkill"
       produces:
       - "application/json"
@@ -8158,7 +9985,7 @@ paths:
       tags:
       - "User"
       - "Skill"
-      description: "Add skill to a `User`.\n"
+      description: "Add `Skill`to a `User`.\n"
       operationId: "addUserSkill"
       produces:
       - "application/json"
@@ -8187,7 +10014,7 @@ paths:
       tags:
       - "User"
       - "Skill"
-      description: "Delete skill from a user\n"
+      description: "Delete `Skill`from a user\n"
       operationId: "deleteSkillFromUserById"
       produces:
       - "application/json"
@@ -8468,11 +10295,9 @@ paths:
         collectionFormat: "multi"
       responses:
         200:
-          description: "An array of `UserSkill` objects"
+          description: "A `UserSkill` object"
           schema:
-            type: "array"
-            items:
-              $ref: "#/definitions/UserSkill"
+            $ref: "#/definitions/UserSkill"
         default:
           description: "Unexpected error"
           schema:
@@ -9445,12 +11270,12 @@ paths:
         type: "string"
       - name: "is_collaborator"
         in: "formData"
-        description: "is user a collaborator?"
+        description: "is `User`a collaborator?"
         required: false
         type: "boolean"
       - name: "is_creator"
         in: "formData"
-        description: "is user a creator?"
+        description: "is `User`a creator?"
         required: false
         type: "boolean"
       - name: "city"
@@ -9465,7 +11290,7 @@ paths:
         type: "string"
       - name: "university_ids"
         in: "formData"
-        description: "universities a user is associated with"
+        description: "universities a `User`is associated with"
         required: false
         type: "array"
         items:
@@ -9473,17 +11298,17 @@ paths:
         collectionFormat: "csv"
       - name: "project_id"
         in: "formData"
-        description: "project_id the user is associated with"
+        description: "project_id the `User`is associated with"
         required: false
         type: "string"
       - name: "created_date"
         in: "formData"
-        description: "date the user was created"
+        description: "date the `User`was created"
         required: false
         type: "string"
       - name: "modified_date"
         in: "formData"
-        description: "date the user was modified"
+        description: "date the `User`was modified"
         required: false
         type: "string"
       - name: "keywords"
@@ -9779,10 +11604,10 @@ definitions:
         description: "User's last name"
       is_creator:
         type: "boolean"
-        description: "Is user a project creator?"
+        description: "Is `User`a `Project`creator?"
       is_collaborator:
         type: "boolean"
-        description: "Is user a project collaborator?"
+        description: "Is `User`a `Project`collaborator?"
       profile_images:
         type: "array"
         description: "Array of file system paths to profile images"
@@ -9791,11 +11616,11 @@ definitions:
       created_date:
         type: "string"
         format: "date-time"
-        description: "datetime stamp of user creation"
+        description: "datetime stamp of `User`creation"
       updated_date:
         type: "string"
         format: "date-time"
-        description: "datetime stamp of user update"
+        description: "datetime stamp of `User`update"
       geolocation:
         type: "array"
         description: "Tuple representing latitude/longitude of user"
@@ -9804,10 +11629,10 @@ definitions:
           format: "double"
       city:
         type: "string"
-        description: "City of user location"
+        description: "City of `User`location"
       state:
         type: "string"
-        description: "State of user location"
+        description: "State of `User`location"
       recent_collaborators_id:
         type: "array"
         description: "array of user_ids of recent collaborators"
@@ -9815,12 +11640,12 @@ definitions:
           type: "string"
       university_ids:
         type: "array"
-        description: "array of universities the user is associated with"
+        description: "array of universities the `User`is associated with"
         items:
           type: "string"
       project_ids:
         type: "array"
-        description: "array of user projects"
+        description: "array of `User`projects"
         items:
           type: "string"
       keywords:
@@ -9830,17 +11655,17 @@ definitions:
           type: "string"
       review_ids:
         type: "array"
-        description: "array of review ids"
+        description: "array of `Review`ids"
         items:
           type: "string"
       user_skill_ids:
         type: "array"
-        description: "array of userskill ids"
+        description: "array of `UserSkill`ids"
         items:
           type: "string"
       is_user_private:
         type: "boolean"
-        description: "is user profile public or private?"
+        description: "is `User`profile public or private?"
   Users:
     type: "object"
     properties:
@@ -9869,52 +11694,51 @@ definitions:
       created_date:
         type: "string"
         format: "date-time"
-        description: "datetime stamp of project creation"
+        description: "datetime stamp of `Project`creation"
       updated_date:
         type: "string"
         format: "date-time"
-        description: "datetime stamp of project update"
+        description: "datetime stamp of `Project`update"
       project_name:
         type: "string"
         description: "Project's name"
-      project_main_grant_type:
-        type: "string"
-        description: "Project's grant type"
       project_description:
         type: "string"
         description: "Description of project"
       project_creator_id:
         type: "array"
-        description: "array of project creator ids"
+        description: "array of `Project`creator ids"
         items:
           type: "string"
       project_collaborators_id:
         type: "array"
-        description: "array of project collaborator ids"
+        description: "array of `Project`collaborator ids"
         items:
           type: "string"
       project_keywords:
         type: "array"
-        description: "array of project keywords"
+        description: "array of `Project`keywords"
         items:
           type: "string"
       project_urls:
         type: "array"
-        description: "array of project URLs"
+        description: "array of `Project`URLs"
         items:
           type: "string"
-      grant_id:
-        type: "string"
-        description: "Grant ID"
+      grant_ids:
+        type: "array"
+        description: "Array of `Grant` IDs associated with the `Project`"
+        items:
+          type: "string"
       university_id:
         type: "string"
-        description: "ID of university hosting research"
+        description: "ID of `University`hosting research"
       grant_facilitator:
         type: "string"
-        description: "Name of individual fascilitating grant funding"
+        description: "Name of individual fascilitating `Grant` funding"
       project_file:
         type: "array"
-        description: "files for grant"
+        description: "Paths to files for `Grant`"
         items:
           type: "string"
       reviews:
@@ -9929,7 +11753,7 @@ definitions:
           type: "string"
       is_project_private:
         type: "boolean"
-        description: "is project private?"
+        description: "is `Project`private?"
   Projects:
     type: "object"
     properties:
@@ -9958,11 +11782,11 @@ definitions:
       created_date:
         type: "string"
         format: "date-time"
-        description: "datetime stamp of post creation"
+        description: "datetime stamp of `Post`creation"
       updated_date:
         type: "string"
         format: "date-time"
-        description: "datetime stamp of post update"
+        description: "datetime stamp of `Post`update"
       post_title:
         type: "string"
         description: "title of post"
@@ -9987,12 +11811,12 @@ definitions:
           $ref: "#/definitions/User"
       post_tags_id:
         type: "array"
-        description: "tagged user ids"
+        description: "tagged `User`ids"
         items:
           type: "string"
       is_post_private:
         type: "boolean"
-        description: "is post private?"
+        description: "is `Post`private?"
   Posts:
     type: "object"
     properties:
@@ -10021,11 +11845,11 @@ definitions:
       created_date:
         type: "string"
         format: "date-time"
-        description: "datetime stamp of grant creation"
+        description: "datetime stamp of `Grant`creation"
       updated_date:
         type: "string"
         format: "date-time"
-        description: "datetime stamp of grant update"
+        description: "datetime stamp of `Grant`update"
       grant_url:
         type: "array"
         description: "URL of grants"
@@ -10033,12 +11857,15 @@ definitions:
           type: "string"
       grant_keywords:
         type: "array"
-        description: "grant keywords"
+        description: "The `Grant`keywords"
         items:
           type: "string"
       grant_description:
         type: "string"
-        description: "Grant description"
+        description: "The `Grant`description"
+      grant_type:
+        type: "string"
+        description: "The `Grant` type"
       grant_amount:
         type: "number"
         format: "double"
@@ -10071,11 +11898,11 @@ definitions:
       created_date:
         type: "string"
         format: "date-time"
-        description: "datetime stamp of review creation"
+        description: "datetime stamp of `Review`creation"
       updated_date:
         type: "string"
         format: "date-time"
-        description: "datetime stamp of review update"
+        description: "datetime stamp of `Review`update"
       review_body:
         type: "string"
         description: "text body of review"
@@ -10084,7 +11911,7 @@ definitions:
         $ref: "#/definitions/User"
       reviewer_id:
         type: "string"
-        description: "reviewer user id"
+        description: "reviewer `User`id"
       rating:
         type: "integer"
         format: "int32"
@@ -10117,11 +11944,11 @@ definitions:
       created_date:
         type: "string"
         format: "date-time"
-        description: "datetime stamp of skill creation"
+        description: "datetime stamp of `Skill`creation"
       updated_date:
         type: "string"
         format: "date-time"
-        description: "datetime stamp of skill update"
+        description: "datetime stamp of `Skill`update"
       description:
         type: "string"
         description: "Description of `Skill`"
@@ -10163,12 +11990,12 @@ definitions:
         description: "Id of `User` who added this skill"
       endorsements:
         type: "array"
-        description: "Array of ids of `User` who give `Endorsement` to user for skill"
+        description: "Array of ids of `User` who give `Endorsement` to `User`for skill"
         items:
           type: "string"
       skill_id:
         type: "string"
-        description: "id of `Skill` that user is claiming"
+        description: "id of `Skill` that `User`is claiming"
   UserSkills:
     type: "object"
     properties:

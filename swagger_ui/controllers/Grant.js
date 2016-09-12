@@ -30,6 +30,10 @@ module.exports.clearGrantKeywords = function clearGrantKeywords (req, res, next)
   Grant.clearGrantKeywords(req.swagger.params, res, next);
 };
 
+module.exports.clearGrantType = function clearGrantType (req, res, next) {
+  Grant.clearGrantType(req.swagger.params, res, next);
+};
+
 module.exports.clearGrantUrls = function clearGrantUrls (req, res, next) {
   Grant.clearGrantUrls(req.swagger.params, res, next);
 };
@@ -48,10 +52,6 @@ module.exports.deleteGrantKeyword = function deleteGrantKeyword (req, res, next)
 
 module.exports.deleteProjectGrant = function deleteProjectGrant (req, res, next) {
   Grant.deleteProjectGrant(req.swagger.params, res, next);
-};
-
-module.exports.deleteProjectGrantType = function deleteProjectGrantType (req, res, next) {
-  Grant.deleteProjectGrantType(req.swagger.params, res, next);
 };
 
 module.exports.getGrantAmount = function getGrantAmount (req, res, next) {
@@ -78,6 +78,10 @@ module.exports.getGrantModifiedDate = function getGrantModifiedDate (req, res, n
   Grant.getGrantModifiedDate(req.swagger.params, res, next);
 };
 
+module.exports.getGrantType = function getGrantType (req, res, next) {
+  Grant.getGrantType(req.swagger.params, res, next);
+};
+
 module.exports.getGrantUrl = function getGrantUrl (req, res, next) {
   Grant.getGrantUrl(req.swagger.params, res, next);
 };
@@ -88,6 +92,10 @@ module.exports.getGrants = function getGrants (req, res, next) {
 
 module.exports.getGrantsByAmount = function getGrantsByAmount (req, res, next) {
   Grant.getGrantsByAmount(req.swagger.params, res, next);
+};
+
+module.exports.getGrantsByAmountRange = function getGrantsByAmountRange (req, res, next) {
+  Grant.getGrantsByAmountRange(req.swagger.params, res, next);
 };
 
 module.exports.getGrantsByCreatedDate = function getGrantsByCreatedDate (req, res, next) {
@@ -122,12 +130,16 @@ module.exports.getGrantsByModifiedDateForm = function getGrantsByModifiedDateFor
   Grant.getGrantsByModifiedDateForm(req.swagger.params, res, next);
 };
 
-module.exports.getProjectGrantById = function getProjectGrantById (req, res, next) {
-  Grant.getProjectGrantById(req.swagger.params, res, next);
+module.exports.getGrantsByType = function getGrantsByType (req, res, next) {
+  Grant.getGrantsByType(req.swagger.params, res, next);
 };
 
-module.exports.getProjectGrantTypeById = function getProjectGrantTypeById (req, res, next) {
-  Grant.getProjectGrantTypeById(req.swagger.params, res, next);
+module.exports.getGrantsByTypeForm = function getGrantsByTypeForm (req, res, next) {
+  Grant.getGrantsByTypeForm(req.swagger.params, res, next);
+};
+
+module.exports.getProjectGrantById = function getProjectGrantById (req, res, next) {
+  Grant.getProjectGrantById(req.swagger.params, res, next);
 };
 
 module.exports.getProjectsByGrantId = function getProjectsByGrantId (req, res, next) {
@@ -146,8 +158,8 @@ module.exports.isGrantOnProject = function isGrantOnProject (req, res, next) {
   Grant.isGrantOnProject(req.swagger.params, res, next);
 };
 
-module.exports.isGrantTypeOnProject = function isGrantTypeOnProject (req, res, next) {
-  Grant.isGrantTypeOnProject(req.swagger.params, res, next);
+module.exports.isGrantType = function isGrantType (req, res, next) {
+  Grant.isGrantType(req.swagger.params, res, next);
 };
 
 module.exports.modifyGrantAmount = function modifyGrantAmount (req, res, next) {
@@ -162,12 +174,16 @@ module.exports.modifyGrantDescription = function modifyGrantDescription (req, re
   Grant.modifyGrantDescription(req.swagger.params, res, next);
 };
 
-module.exports.modifyProjectGrant = function modifyProjectGrant (req, res, next) {
-  Grant.modifyProjectGrant(req.swagger.params, res, next);
+module.exports.modifyGrantType = function modifyGrantType (req, res, next) {
+  Grant.modifyGrantType(req.swagger.params, res, next);
 };
 
-module.exports.modifyProjectGrantType = function modifyProjectGrantType (req, res, next) {
-  Grant.modifyProjectGrantType(req.swagger.params, res, next);
+module.exports.modifyGrantTypePath = function modifyGrantTypePath (req, res, next) {
+  Grant.modifyGrantTypePath(req.swagger.params, res, next);
+};
+
+module.exports.modifyProjectGrant = function modifyProjectGrant (req, res, next) {
+  Grant.modifyProjectGrant(req.swagger.params, res, next);
 };
 
 module.exports.setGrantAmount = function setGrantAmount (req, res, next) {
@@ -190,16 +206,20 @@ module.exports.setGrantKeywords = function setGrantKeywords (req, res, next) {
   Grant.setGrantKeywords(req.swagger.params, res, next);
 };
 
+module.exports.setGrantType = function setGrantType (req, res, next) {
+  Grant.setGrantType(req.swagger.params, res, next);
+};
+
+module.exports.setGrantTypePath = function setGrantTypePath (req, res, next) {
+  Grant.setGrantTypePath(req.swagger.params, res, next);
+};
+
 module.exports.setGrantUrls = function setGrantUrls (req, res, next) {
   Grant.setGrantUrls(req.swagger.params, res, next);
 };
 
 module.exports.setProjectGrant = function setProjectGrant (req, res, next) {
   Grant.setProjectGrant(req.swagger.params, res, next);
-};
-
-module.exports.setProjectGrantType = function setProjectGrantType (req, res, next) {
-  Grant.setProjectGrantType(req.swagger.params, res, next);
 };
 
 module.exports.updateGrantById = function updateGrantById (req, res, next) {

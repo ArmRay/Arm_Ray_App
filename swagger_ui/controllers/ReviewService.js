@@ -738,7 +738,7 @@ exports.getReviewss = function(args, res, next) {
   * rating (BigDecimal)
   **/
     var examples = {};
-  examples['application/json'] = [ {
+  examples['application/json'] = {
   "review_id" : "aeiou",
   "reviewer_id" : "aeiou",
   "rating" : 123,
@@ -765,7 +765,7 @@ exports.getReviewss = function(args, res, next) {
     "geolocation" : [ 1.3579000000000001069366817318950779736042022705078125 ]
   },
   "review_body" : "aeiou"
-} ];
+};
   if(Object.keys(examples).length > 0) {
     res.setHeader('Content-Type', 'application/json');
     res.end(JSON.stringify(examples[Object.keys(examples)[0]] || {}, null, 2));

@@ -267,14 +267,14 @@ exports.createUserSkill = function(args, res, next) {
   * endorsement_ids (List)
   **/
     var examples = {};
-  examples['application/json'] = [ {
+  examples['application/json'] = {
   "review_id" : "aeiou",
   "user_id" : "aeiou",
   "endorsements" : [ "aeiou" ],
   "skill_id" : "aeiou",
   "created_date" : "2000-01-23T04:56:07.000+00:00",
   "updated_date" : "2000-01-23T04:56:07.000+00:00"
-} ];
+};
   if(Object.keys(examples).length > 0) {
     res.setHeader('Content-Type', 'application/json');
     res.end(JSON.stringify(examples[Object.keys(examples)[0]] || {}, null, 2));
@@ -790,11 +790,10 @@ exports.getAllUserProjectById = function(args, res, next) {
   "university_id" : "aeiou",
   "reviews" : [ "aeiou" ],
   "project_id" : "aeiou",
-  "grant_id" : "aeiou",
   "project_file" : [ "aeiou" ],
+  "grant_ids" : [ "aeiou" ],
   "created_date" : "2000-01-23T04:56:07.000+00:00",
-  "updated_date" : "2000-01-23T04:56:07.000+00:00",
-  "project_main_grant_type" : "aeiou"
+  "updated_date" : "2000-01-23T04:56:07.000+00:00"
 };
   if(Object.keys(examples).length > 0) {
     res.setHeader('Content-Type', 'application/json');
@@ -1072,11 +1071,10 @@ exports.getProjectsByCollaboratorId = function(args, res, next) {
   "university_id" : "aeiou",
   "reviews" : [ "aeiou" ],
   "project_id" : "aeiou",
-  "grant_id" : "aeiou",
   "project_file" : [ "aeiou" ],
+  "grant_ids" : [ "aeiou" ],
   "created_date" : "2000-01-23T04:56:07.000+00:00",
-  "updated_date" : "2000-01-23T04:56:07.000+00:00",
-  "project_main_grant_type" : "aeiou"
+  "updated_date" : "2000-01-23T04:56:07.000+00:00"
 } ];
   if(Object.keys(examples).length > 0) {
     res.setHeader('Content-Type', 'application/json');
@@ -1107,11 +1105,10 @@ exports.getProjectsByCreatorId = function(args, res, next) {
   "university_id" : "aeiou",
   "reviews" : [ "aeiou" ],
   "project_id" : "aeiou",
-  "grant_id" : "aeiou",
   "project_file" : [ "aeiou" ],
+  "grant_ids" : [ "aeiou" ],
   "created_date" : "2000-01-23T04:56:07.000+00:00",
-  "updated_date" : "2000-01-23T04:56:07.000+00:00",
-  "project_main_grant_type" : "aeiou"
+  "updated_date" : "2000-01-23T04:56:07.000+00:00"
 } ];
   if(Object.keys(examples).length > 0) {
     res.setHeader('Content-Type', 'application/json');

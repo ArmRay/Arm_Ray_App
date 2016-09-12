@@ -58,6 +58,18 @@ module.exports.addProjectUrls = function addProjectUrls (req, res, next) {
   Project.addProjectUrls(req.swagger.params, res, next);
 };
 
+module.exports.addUniversityProfileImagesById = function addUniversityProfileImagesById (req, res, next) {
+  Project.addUniversityProfileImagesById(req.swagger.params, res, next);
+};
+
+module.exports.addUniversityProjectById = function addUniversityProjectById (req, res, next) {
+  Project.addUniversityProjectById(req.swagger.params, res, next);
+};
+
+module.exports.addUniversityProjectsById = function addUniversityProjectsById (req, res, next) {
+  Project.addUniversityProjectsById(req.swagger.params, res, next);
+};
+
 module.exports.createProject = function createProject (req, res, next) {
   Project.createProject(req.swagger.params, res, next);
 };
@@ -102,10 +114,6 @@ module.exports.deleteProjectGrant = function deleteProjectGrant (req, res, next)
   Project.deleteProjectGrant(req.swagger.params, res, next);
 };
 
-module.exports.deleteProjectGrantType = function deleteProjectGrantType (req, res, next) {
-  Project.deleteProjectGrantType(req.swagger.params, res, next);
-};
-
 module.exports.deleteProjectKeyword = function deleteProjectKeyword (req, res, next) {
   Project.deleteProjectKeyword(req.swagger.params, res, next);
 };
@@ -132,6 +140,14 @@ module.exports.deleteProjectReviews = function deleteProjectReviews (req, res, n
 
 module.exports.deleteProjectUrls = function deleteProjectUrls (req, res, next) {
   Project.deleteProjectUrls(req.swagger.params, res, next);
+};
+
+module.exports.deleteUniversityProjectById = function deleteUniversityProjectById (req, res, next) {
+  Project.deleteUniversityProjectById(req.swagger.params, res, next);
+};
+
+module.exports.deleteUniversityProjectsById = function deleteUniversityProjectsById (req, res, next) {
+  Project.deleteUniversityProjectsById(req.swagger.params, res, next);
 };
 
 module.exports.deleteUserProjectById = function deleteUserProjectById (req, res, next) {
@@ -186,10 +202,6 @@ module.exports.getProjectGrantById = function getProjectGrantById (req, res, nex
   Project.getProjectGrantById(req.swagger.params, res, next);
 };
 
-module.exports.getProjectGrantTypeById = function getProjectGrantTypeById (req, res, next) {
-  Project.getProjectGrantTypeById(req.swagger.params, res, next);
-};
-
 module.exports.getProjectNameById = function getProjectNameById (req, res, next) {
   Project.getProjectNameById(req.swagger.params, res, next);
 };
@@ -234,16 +246,24 @@ module.exports.getUniversitiesById = function getUniversitiesById (req, res, nex
   Project.getUniversitiesById(req.swagger.params, res, next);
 };
 
+module.exports.getUniversitiesByProject = function getUniversitiesByProject (req, res, next) {
+  Project.getUniversitiesByProject(req.swagger.params, res, next);
+};
+
+module.exports.getUniversitiesByProjectsForm = function getUniversitiesByProjectsForm (req, res, next) {
+  Project.getUniversitiesByProjectsForm(req.swagger.params, res, next);
+};
+
+module.exports.getUniversityProjectsById = function getUniversityProjectsById (req, res, next) {
+  Project.getUniversityProjectsById(req.swagger.params, res, next);
+};
+
 module.exports.getUsersByProjectId = function getUsersByProjectId (req, res, next) {
   Project.getUsersByProjectId(req.swagger.params, res, next);
 };
 
 module.exports.isGrantOnProject = function isGrantOnProject (req, res, next) {
   Project.isGrantOnProject(req.swagger.params, res, next);
-};
-
-module.exports.isGrantTypeOnProject = function isGrantTypeOnProject (req, res, next) {
-  Project.isGrantTypeOnProject(req.swagger.params, res, next);
 };
 
 module.exports.isKeywordOnProject = function isKeywordOnProject (req, res, next) {
@@ -274,6 +294,10 @@ module.exports.isUniversityOnProject = function isUniversityOnProject (req, res,
   Project.isUniversityOnProject(req.swagger.params, res, next);
 };
 
+module.exports.isUniversityProjectsById = function isUniversityProjectsById (req, res, next) {
+  Project.isUniversityProjectsById(req.swagger.params, res, next);
+};
+
 module.exports.isUserCollaboratorOnProject = function isUserCollaboratorOnProject (req, res, next) {
   Project.isUserCollaboratorOnProject(req.swagger.params, res, next);
 };
@@ -292,10 +316,6 @@ module.exports.modifyProjectDescription = function modifyProjectDescription (req
 
 module.exports.modifyProjectGrant = function modifyProjectGrant (req, res, next) {
   Project.modifyProjectGrant(req.swagger.params, res, next);
-};
-
-module.exports.modifyProjectGrantType = function modifyProjectGrantType (req, res, next) {
-  Project.modifyProjectGrantType(req.swagger.params, res, next);
 };
 
 module.exports.modifyProjectName = function modifyProjectName (req, res, next) {
@@ -354,16 +374,20 @@ module.exports.setProjectGrant = function setProjectGrant (req, res, next) {
   Project.setProjectGrant(req.swagger.params, res, next);
 };
 
-module.exports.setProjectGrantType = function setProjectGrantType (req, res, next) {
-  Project.setProjectGrantType(req.swagger.params, res, next);
-};
-
 module.exports.setProjectKeyword = function setProjectKeyword (req, res, next) {
   Project.setProjectKeyword(req.swagger.params, res, next);
 };
 
 module.exports.setProjectUniversity = function setProjectUniversity (req, res, next) {
   Project.setProjectUniversity(req.swagger.params, res, next);
+};
+
+module.exports.setUniversityProjectById = function setUniversityProjectById (req, res, next) {
+  Project.setUniversityProjectById(req.swagger.params, res, next);
+};
+
+module.exports.setUniversityProjectsById = function setUniversityProjectsById (req, res, next) {
+  Project.setUniversityProjectsById(req.swagger.params, res, next);
 };
 
 module.exports.settUserProjectById = function settUserProjectById (req, res, next) {

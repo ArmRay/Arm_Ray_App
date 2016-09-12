@@ -234,6 +234,60 @@ exports.addProjectUrls = function(args, res, next) {
   
 }
 
+exports.addUniversityProfileImagesById = function(args, res, next) {
+  /**
+   * parameters expected in the args:
+  * id (String)
+  * profile_image_paths (List)
+  **/
+    var examples = {};
+  examples['application/json'] = "aeiou";
+  if(Object.keys(examples).length > 0) {
+    res.setHeader('Content-Type', 'application/json');
+    res.end(JSON.stringify(examples[Object.keys(examples)[0]] || {}, null, 2));
+  }
+  else {
+    res.end();
+  }
+  
+}
+
+exports.addUniversityProjectById = function(args, res, next) {
+  /**
+   * parameters expected in the args:
+  * id (String)
+  * project_id (String)
+  **/
+    var examples = {};
+  examples['application/json'] = "aeiou";
+  if(Object.keys(examples).length > 0) {
+    res.setHeader('Content-Type', 'application/json');
+    res.end(JSON.stringify(examples[Object.keys(examples)[0]] || {}, null, 2));
+  }
+  else {
+    res.end();
+  }
+  
+}
+
+exports.addUniversityProjectsById = function(args, res, next) {
+  /**
+   * parameters expected in the args:
+  * id (String)
+  * project_ids (List)
+  **/
+    var examples = {};
+  examples['application/json'] = "aeiou";
+  if(Object.keys(examples).length > 0) {
+    res.setHeader('Content-Type', 'application/json');
+    res.end(JSON.stringify(examples[Object.keys(examples)[0]] || {}, null, 2));
+  }
+  else {
+    res.end();
+  }
+  
+}
+
 exports.createProject = function(args, res, next) {
   /**
    * parameters expected in the args:
@@ -245,7 +299,7 @@ exports.createProject = function(args, res, next) {
   * project_collaborators_id (List)
   * project_keywords (List)
   * project_urls (List)
-  * grant_id (String)
+  * grant_ids (List)
   * university_id (String)
   * grant_facilitator (String)
   * project_file (List)
@@ -436,23 +490,6 @@ exports.deleteProjectGrant = function(args, res, next) {
   
 }
 
-exports.deleteProjectGrantType = function(args, res, next) {
-  /**
-   * parameters expected in the args:
-  * id (String)
-  **/
-    var examples = {};
-  examples['application/json'] = "aeiou";
-  if(Object.keys(examples).length > 0) {
-    res.setHeader('Content-Type', 'application/json');
-    res.end(JSON.stringify(examples[Object.keys(examples)[0]] || {}, null, 2));
-  }
-  else {
-    res.end();
-  }
-  
-}
-
 exports.deleteProjectKeyword = function(args, res, next) {
   /**
    * parameters expected in the args:
@@ -559,6 +596,41 @@ exports.deleteProjectReviews = function(args, res, next) {
 }
 
 exports.deleteProjectUrls = function(args, res, next) {
+  /**
+   * parameters expected in the args:
+  * id (String)
+  **/
+    var examples = {};
+  examples['application/json'] = "aeiou";
+  if(Object.keys(examples).length > 0) {
+    res.setHeader('Content-Type', 'application/json');
+    res.end(JSON.stringify(examples[Object.keys(examples)[0]] || {}, null, 2));
+  }
+  else {
+    res.end();
+  }
+  
+}
+
+exports.deleteUniversityProjectById = function(args, res, next) {
+  /**
+   * parameters expected in the args:
+  * id (String)
+  * project_id (String)
+  **/
+    var examples = {};
+  examples['application/json'] = "aeiou";
+  if(Object.keys(examples).length > 0) {
+    res.setHeader('Content-Type', 'application/json');
+    res.end(JSON.stringify(examples[Object.keys(examples)[0]] || {}, null, 2));
+  }
+  else {
+    res.end();
+  }
+  
+}
+
+exports.deleteUniversityProjectsById = function(args, res, next) {
   /**
    * parameters expected in the args:
   * id (String)
@@ -806,11 +878,10 @@ exports.getAllUserProjectById = function(args, res, next) {
   "university_id" : "aeiou",
   "reviews" : [ "aeiou" ],
   "project_id" : "aeiou",
-  "grant_id" : "aeiou",
   "project_file" : [ "aeiou" ],
+  "grant_ids" : [ "aeiou" ],
   "created_date" : "2000-01-23T04:56:07.000+00:00",
-  "updated_date" : "2000-01-23T04:56:07.000+00:00",
-  "project_main_grant_type" : "aeiou"
+  "updated_date" : "2000-01-23T04:56:07.000+00:00"
 };
   if(Object.keys(examples).length > 0) {
     res.setHeader('Content-Type', 'application/json');
@@ -866,28 +937,12 @@ exports.getProjectGrantById = function(args, res, next) {
   "grant_url" : [ "aeiou" ],
   "grant_description" : "aeiou",
   "grant_amount" : 1.3579000000000001069366817318950779736042022705078125,
+  "grant_type" : "aeiou",
   "grant_id" : "aeiou",
   "grant_keywords" : [ "aeiou" ],
   "created_date" : "2000-01-23T04:56:07.000+00:00",
   "updated_date" : "2000-01-23T04:56:07.000+00:00"
 };
-  if(Object.keys(examples).length > 0) {
-    res.setHeader('Content-Type', 'application/json');
-    res.end(JSON.stringify(examples[Object.keys(examples)[0]] || {}, null, 2));
-  }
-  else {
-    res.end();
-  }
-  
-}
-
-exports.getProjectGrantTypeById = function(args, res, next) {
-  /**
-   * parameters expected in the args:
-  * id (String)
-  **/
-    var examples = {};
-  examples['application/json'] = "aeiou";
   if(Object.keys(examples).length > 0) {
     res.setHeader('Content-Type', 'application/json');
     res.end(JSON.stringify(examples[Object.keys(examples)[0]] || {}, null, 2));
@@ -952,11 +1007,10 @@ exports.getProjects = function(args, res, next) {
   "university_id" : "aeiou",
   "reviews" : [ "aeiou" ],
   "project_id" : "aeiou",
-  "grant_id" : "aeiou",
   "project_file" : [ "aeiou" ],
+  "grant_ids" : [ "aeiou" ],
   "created_date" : "2000-01-23T04:56:07.000+00:00",
-  "updated_date" : "2000-01-23T04:56:07.000+00:00",
-  "project_main_grant_type" : "aeiou"
+  "updated_date" : "2000-01-23T04:56:07.000+00:00"
 } ];
   if(Object.keys(examples).length > 0) {
     res.setHeader('Content-Type', 'application/json');
@@ -987,11 +1041,10 @@ exports.getProjectsByCollaboratorId = function(args, res, next) {
   "university_id" : "aeiou",
   "reviews" : [ "aeiou" ],
   "project_id" : "aeiou",
-  "grant_id" : "aeiou",
   "project_file" : [ "aeiou" ],
+  "grant_ids" : [ "aeiou" ],
   "created_date" : "2000-01-23T04:56:07.000+00:00",
-  "updated_date" : "2000-01-23T04:56:07.000+00:00",
-  "project_main_grant_type" : "aeiou"
+  "updated_date" : "2000-01-23T04:56:07.000+00:00"
 } ];
   if(Object.keys(examples).length > 0) {
     res.setHeader('Content-Type', 'application/json');
@@ -1022,11 +1075,10 @@ exports.getProjectsByCreatedDate = function(args, res, next) {
   "university_id" : "aeiou",
   "reviews" : [ "aeiou" ],
   "project_id" : "aeiou",
-  "grant_id" : "aeiou",
   "project_file" : [ "aeiou" ],
+  "grant_ids" : [ "aeiou" ],
   "created_date" : "2000-01-23T04:56:07.000+00:00",
-  "updated_date" : "2000-01-23T04:56:07.000+00:00",
-  "project_main_grant_type" : "aeiou"
+  "updated_date" : "2000-01-23T04:56:07.000+00:00"
 } ];
   if(Object.keys(examples).length > 0) {
     res.setHeader('Content-Type', 'application/json');
@@ -1057,11 +1109,10 @@ exports.getProjectsByCreatedDateForm = function(args, res, next) {
   "university_id" : "aeiou",
   "reviews" : [ "aeiou" ],
   "project_id" : "aeiou",
-  "grant_id" : "aeiou",
   "project_file" : [ "aeiou" ],
+  "grant_ids" : [ "aeiou" ],
   "created_date" : "2000-01-23T04:56:07.000+00:00",
-  "updated_date" : "2000-01-23T04:56:07.000+00:00",
-  "project_main_grant_type" : "aeiou"
+  "updated_date" : "2000-01-23T04:56:07.000+00:00"
 } ];
   if(Object.keys(examples).length > 0) {
     res.setHeader('Content-Type', 'application/json');
@@ -1092,11 +1143,10 @@ exports.getProjectsByCreatorId = function(args, res, next) {
   "university_id" : "aeiou",
   "reviews" : [ "aeiou" ],
   "project_id" : "aeiou",
-  "grant_id" : "aeiou",
   "project_file" : [ "aeiou" ],
+  "grant_ids" : [ "aeiou" ],
   "created_date" : "2000-01-23T04:56:07.000+00:00",
-  "updated_date" : "2000-01-23T04:56:07.000+00:00",
-  "project_main_grant_type" : "aeiou"
+  "updated_date" : "2000-01-23T04:56:07.000+00:00"
 } ];
   if(Object.keys(examples).length > 0) {
     res.setHeader('Content-Type', 'application/json');
@@ -1127,11 +1177,10 @@ exports.getProjectsByGrantId = function(args, res, next) {
   "university_id" : "aeiou",
   "reviews" : [ "aeiou" ],
   "project_id" : "aeiou",
-  "grant_id" : "aeiou",
   "project_file" : [ "aeiou" ],
+  "grant_ids" : [ "aeiou" ],
   "created_date" : "2000-01-23T04:56:07.000+00:00",
-  "updated_date" : "2000-01-23T04:56:07.000+00:00",
-  "project_main_grant_type" : "aeiou"
+  "updated_date" : "2000-01-23T04:56:07.000+00:00"
 } ];
   if(Object.keys(examples).length > 0) {
     res.setHeader('Content-Type', 'application/json');
@@ -1162,11 +1211,10 @@ exports.getProjectsByModifiedDate = function(args, res, next) {
   "university_id" : "aeiou",
   "reviews" : [ "aeiou" ],
   "project_id" : "aeiou",
-  "grant_id" : "aeiou",
   "project_file" : [ "aeiou" ],
+  "grant_ids" : [ "aeiou" ],
   "created_date" : "2000-01-23T04:56:07.000+00:00",
-  "updated_date" : "2000-01-23T04:56:07.000+00:00",
-  "project_main_grant_type" : "aeiou"
+  "updated_date" : "2000-01-23T04:56:07.000+00:00"
 } ];
   if(Object.keys(examples).length > 0) {
     res.setHeader('Content-Type', 'application/json');
@@ -1197,11 +1245,10 @@ exports.getProjectsByModifiedDateForm = function(args, res, next) {
   "university_id" : "aeiou",
   "reviews" : [ "aeiou" ],
   "project_id" : "aeiou",
-  "grant_id" : "aeiou",
   "project_file" : [ "aeiou" ],
+  "grant_ids" : [ "aeiou" ],
   "created_date" : "2000-01-23T04:56:07.000+00:00",
-  "updated_date" : "2000-01-23T04:56:07.000+00:00",
-  "project_main_grant_type" : "aeiou"
+  "updated_date" : "2000-01-23T04:56:07.000+00:00"
 } ];
   if(Object.keys(examples).length > 0) {
     res.setHeader('Content-Type', 'application/json');
@@ -1276,6 +1323,77 @@ exports.getUniversitiesById = function(args, res, next) {
   
 }
 
+exports.getUniversitiesByProject = function(args, res, next) {
+  /**
+   * parameters expected in the args:
+  * project_id (String)
+  **/
+    var examples = {};
+  examples['application/json'] = [ {
+  "city" : "aeiou",
+  "profile_images" : [ "aeiou" ],
+  "created_date" : "2000-01-23T04:56:07.000+00:00",
+  "updated_date" : "2000-01-23T04:56:07.000+00:00",
+  "university_name" : "aeiou",
+  "state" : "aeiou",
+  "uni_id" : "aeiou",
+  "project_ids" : [ "aeiou" ],
+  "geolocation" : [ 1.3579000000000001069366817318950779736042022705078125 ]
+} ];
+  if(Object.keys(examples).length > 0) {
+    res.setHeader('Content-Type', 'application/json');
+    res.end(JSON.stringify(examples[Object.keys(examples)[0]] || {}, null, 2));
+  }
+  else {
+    res.end();
+  }
+  
+}
+
+exports.getUniversitiesByProjectsForm = function(args, res, next) {
+  /**
+   * parameters expected in the args:
+  * projects (List)
+  **/
+    var examples = {};
+  examples['application/json'] = [ {
+  "city" : "aeiou",
+  "profile_images" : [ "aeiou" ],
+  "created_date" : "2000-01-23T04:56:07.000+00:00",
+  "updated_date" : "2000-01-23T04:56:07.000+00:00",
+  "university_name" : "aeiou",
+  "state" : "aeiou",
+  "uni_id" : "aeiou",
+  "project_ids" : [ "aeiou" ],
+  "geolocation" : [ 1.3579000000000001069366817318950779736042022705078125 ]
+} ];
+  if(Object.keys(examples).length > 0) {
+    res.setHeader('Content-Type', 'application/json');
+    res.end(JSON.stringify(examples[Object.keys(examples)[0]] || {}, null, 2));
+  }
+  else {
+    res.end();
+  }
+  
+}
+
+exports.getUniversityProjectsById = function(args, res, next) {
+  /**
+   * parameters expected in the args:
+  * id (String)
+  **/
+    var examples = {};
+  examples['application/json'] = "aeiou";
+  if(Object.keys(examples).length > 0) {
+    res.setHeader('Content-Type', 'application/json');
+    res.end(JSON.stringify(examples[Object.keys(examples)[0]] || {}, null, 2));
+  }
+  else {
+    res.end();
+  }
+  
+}
+
 exports.getUsersByProjectId = function(args, res, next) {
   /**
    * parameters expected in the args:
@@ -1319,24 +1437,6 @@ exports.isGrantOnProject = function(args, res, next) {
    * parameters expected in the args:
   * id (String)
   * grant_id (String)
-  **/
-    var examples = {};
-  examples['application/json'] = true;
-  if(Object.keys(examples).length > 0) {
-    res.setHeader('Content-Type', 'application/json');
-    res.end(JSON.stringify(examples[Object.keys(examples)[0]] || {}, null, 2));
-  }
-  else {
-    res.end();
-  }
-  
-}
-
-exports.isGrantTypeOnProject = function(args, res, next) {
-  /**
-   * parameters expected in the args:
-  * id (String)
-  * project_main_grant_type (String)
   **/
     var examples = {};
   examples['application/json'] = true;
@@ -1475,6 +1575,24 @@ exports.isUniversityOnProject = function(args, res, next) {
   
 }
 
+exports.isUniversityProjectsById = function(args, res, next) {
+  /**
+   * parameters expected in the args:
+  * id (String)
+  * project_id (String)
+  **/
+    var examples = {};
+  examples['application/json'] = true;
+  if(Object.keys(examples).length > 0) {
+    res.setHeader('Content-Type', 'application/json');
+    res.end(JSON.stringify(examples[Object.keys(examples)[0]] || {}, null, 2));
+  }
+  else {
+    res.end();
+  }
+  
+}
+
 exports.isUserCollaboratorOnProject = function(args, res, next) {
   /**
    * parameters expected in the args:
@@ -1571,24 +1689,6 @@ exports.modifyProjectGrant = function(args, res, next) {
    * parameters expected in the args:
   * id (String)
   * grant_id (String)
-  **/
-    var examples = {};
-  examples['application/json'] = "aeiou";
-  if(Object.keys(examples).length > 0) {
-    res.setHeader('Content-Type', 'application/json');
-    res.end(JSON.stringify(examples[Object.keys(examples)[0]] || {}, null, 2));
-  }
-  else {
-    res.end();
-  }
-  
-}
-
-exports.modifyProjectGrantType = function(args, res, next) {
-  /**
-   * parameters expected in the args:
-  * id (String)
-  * project_main_grant_type (String)
   **/
     var examples = {};
   examples['application/json'] = "aeiou";
@@ -1854,24 +1954,6 @@ exports.setProjectGrant = function(args, res, next) {
   
 }
 
-exports.setProjectGrantType = function(args, res, next) {
-  /**
-   * parameters expected in the args:
-  * id (String)
-  * project_main_grant_type (String)
-  **/
-    var examples = {};
-  examples['application/json'] = "aeiou";
-  if(Object.keys(examples).length > 0) {
-    res.setHeader('Content-Type', 'application/json');
-    res.end(JSON.stringify(examples[Object.keys(examples)[0]] || {}, null, 2));
-  }
-  else {
-    res.end();
-  }
-  
-}
-
 exports.setProjectKeyword = function(args, res, next) {
   /**
    * parameters expected in the args:
@@ -1895,6 +1977,42 @@ exports.setProjectUniversity = function(args, res, next) {
    * parameters expected in the args:
   * id (String)
   * university_id (String)
+  **/
+    var examples = {};
+  examples['application/json'] = "aeiou";
+  if(Object.keys(examples).length > 0) {
+    res.setHeader('Content-Type', 'application/json');
+    res.end(JSON.stringify(examples[Object.keys(examples)[0]] || {}, null, 2));
+  }
+  else {
+    res.end();
+  }
+  
+}
+
+exports.setUniversityProjectById = function(args, res, next) {
+  /**
+   * parameters expected in the args:
+  * id (String)
+  * project_id (String)
+  **/
+    var examples = {};
+  examples['application/json'] = "aeiou";
+  if(Object.keys(examples).length > 0) {
+    res.setHeader('Content-Type', 'application/json');
+    res.end(JSON.stringify(examples[Object.keys(examples)[0]] || {}, null, 2));
+  }
+  else {
+    res.end();
+  }
+  
+}
+
+exports.setUniversityProjectsById = function(args, res, next) {
+  /**
+   * parameters expected in the args:
+  * id (String)
+  * project_ids (List)
   **/
     var examples = {};
   examples['application/json'] = "aeiou";
@@ -1937,7 +2055,7 @@ exports.updateProject = function(args, res, next) {
   * project_collaborators_id (List)
   * project_keywords (List)
   * project_urls (List)
-  * grant_id (String)
+  * grant_id (List)
   * university_id (String)
   * grant_facilitator (String)
   * project_file (List)
