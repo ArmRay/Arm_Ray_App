@@ -6,21 +6,20 @@ var  mongoose = require('mongoose');
 var projectSchema = new mongoose.Schema({
 
             project_id: String,
+            project_name: String,
+            project_description: String,
+            university_id: String,
+            grant_facilitator: String,
+            posts_id: [],
+            project_collaborators_id: [],
+            grants_id: [],
+            project_file: [],
+            reviews_id: [],
+            project_keywords: [],
+            project_creator_id: [],
+            project_urls: [],
             created_date: String,
             updated_date: String,
-            project_name: String,
-            project_main_grant_type: String,
-            project_description: String,
-            project_creator_id: [],
-            project_collaborators_id: [],
-            project_keywords: [],
-            project_urls: [],
-            grant_id: String,
-            university: String,
-            grant_facilitator: String,
-            project_file: [],
-            reviews: [],
-            posts: [],
             is_project_private: Boolean
 
 });

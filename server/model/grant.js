@@ -8,11 +8,13 @@ var mongoose = require('mongoose');
 var grantSchema = new mongoose.Schema({
 
         grant_id: String,
-        created_date: String,
-        updated_date: String,
-        grant_url: [],
+        grant_type: String,
         grant_description: String,
-        grant_amount: Number
+        grant_amount: Number,
+        grant_url: [],
+        grant_keywords: [],
+        created_date: String,
+        modified_date: String
 
 });
 
