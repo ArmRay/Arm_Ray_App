@@ -1,0 +1,6791 @@
+info:
+  description: Definition of ArmRay backend data-modification API
+  title: ArmRay API
+  version: 0.0.1
+schemes:
+  - http
+swagger: '2.0'
+basePath: /armray/api/0.1/rest/modify
+produces:
+  - application/json
+consumes:
+  - application/json
+
+paths:
+  /Grant:
+    post:
+      consumes:
+        - application/json
+      description: |
+        Creates `Grant` objects. All fields required.
+      operationId: createGrant
+      parameters:
+        - description: array of URLs for `Grant`
+          in: formData
+          name: grant_url
+          required: true
+          type: string
+        - description: Description of grant
+          in: formData
+          name: grant_description
+          required: true
+          type: string
+        - description: Amount of grant
+          in: formData
+          name: amount
+          required: true
+          type: number
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: the id of the created `Grant`
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - Grant
+  '/Grant/{id}':
+    delete:
+      description: |
+        Deletes `Grant` objects by **id**.
+      operationId: deleteGrantById
+      parameters:
+        - description: The `Grant` name
+          in: path
+          name: id
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The `Grant` id
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - Grant
+    put:
+      consumes:
+        - application/json
+      description: |
+        Updates `Grant` objects. **id** is required,
+        all others optional.
+      operationId: updateGrantById
+      parameters:
+        - description: The `Post` name
+          in: path
+          name: id
+          required: true
+          type: string
+        - description: array of URLs for `Grant`
+          in: formData
+          items:
+            type: string
+          name: grant_url
+          required: false
+          type: array
+        - description: Description of `Grant`
+          in: formData
+          name: grant_description
+          required: false
+          type: string
+        - description: Amount of `Grant`
+          format: float
+          in: formData
+          name: amount
+          required: false
+          type: number
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: A `Grant` object
+          schema:
+            $ref: '#/definitions/Grant'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - Grant
+  '/Grant/{id}/amount':
+    delete:
+      description: |
+        Clear `Grant` amount
+      operationId: clearGrantAmount
+      parameters:
+        - description: The `Grant` name
+          in: path
+          name: id
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The `Grant` id
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - Grant
+    post:
+      description: |
+        Set `Grant` amount
+      operationId: setGrantAmount
+      parameters:
+        - description: The `Grant` name
+          in: path
+          name: id
+          required: true
+          type: string
+        - description: the `Grant` amount
+          format: float
+          in: formData
+          name: amount
+          required: true
+          type: number
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The `Grant` id
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - Grant
+    put:
+      description: |
+        Modify `Grant` amount
+      operationId: modifyGrantAmount
+      parameters:
+        - description: The `Grant` name
+          in: path
+          name: id
+          required: true
+          type: string
+        - description: the `Grant` amount
+          format: float
+          in: formData
+          name: amount
+          required: true
+          type: number
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The `Grant` id
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - Grant
+  '/Grant/{id}/amount/{amount}':
+    post:
+      description: |
+        Set `Grant` amount
+      operationId: setGrantAmountPath
+      parameters:
+        - description: The `Grant` name
+          in: path
+          name: id
+          required: true
+          type: string
+        - description: the `Grant` amount
+          in: path
+          name: amount
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The `Grant` id
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - Grant
+    put:
+      description: |
+        Modify `Grant` amount
+      operationId: modifyGrantAmountPath
+      parameters:
+        - description: The `Grant` name
+          in: path
+          name: id
+          required: true
+          type: string
+        - description: the `Grant` amount
+          in: path
+          name: amount
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The `Grant` id
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - Grant
+  '/Grant/{id}/created': {}
+  '/Grant/{id}/description':
+    delete:
+      description: |
+        Clear `Grant` description
+      operationId: clearGrantDescription
+      parameters:
+        - description: The `Grant` name
+          in: path
+          name: id
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The `Grant` id
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - Grant
+    post:
+      description: |
+        Set `Grant` description
+      operationId: setGrantDescription
+      parameters:
+        - description: The `Grant` name
+          in: path
+          name: id
+          required: true
+          type: string
+        - description: the `Grant` description
+          in: formData
+          name: description
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The `Grant` url array
+          schema:
+            items:
+              type: string
+            type: array
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - Grant
+    put:
+      description: |
+        Modify `Grant` description
+      operationId: modifyGrantDescription
+      parameters:
+        - description: The `Grant` name
+          in: path
+          name: id
+          required: true
+          type: string
+        - description: the `Grant` description
+          in: formData
+          name: description
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The `Grant` url array
+          schema:
+            items:
+              type: string
+            type: array
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - Grant
+  '/Grant/{id}/keys':
+    delete:
+      description: |
+        Clear `Grant` keywords
+      operationId: clearGrantKeywords
+      parameters:
+        - description: The `Grant` id
+          in: path
+          name: id
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The `Grant` id
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - Grant
+    post:
+      description: |
+        Set `Grant` keywords
+      operationId: setGrantKeywords
+      parameters:
+        - description: The `Grant` name
+          in: path
+          name: id
+          required: true
+          type: string
+        - description: the `Grant` keywords
+          in: formData
+          items:
+            type: string
+          name: keywords
+          required: true
+          type: array
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The `Grant` id
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - Grant
+    put:
+      description: |
+        Modify `Grant` keywords
+      operationId: addGrantKeywords
+      parameters:
+        - description: The `Grant` name
+          in: path
+          name: id
+          required: true
+          type: string
+        - description: the `Grant` keywords
+          in: formData
+          items:
+            type: string
+          name: keywords
+          required: true
+          type: array
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The `Grant` id
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - Grant
+  '/Grant/{id}/keys/{keyword}':
+    delete:
+      description: |
+        Set `Grant` keyword
+      operationId: deleteGrantKeyword
+      parameters:
+        - description: The `Grant` name
+          in: path
+          name: id
+          required: true
+          type: string
+        - description: the `Grant` keyword
+          in: path
+          name: keyword
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The `Grant` id
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - Grant
+    post:
+      description: |
+        Set `Grant` keyword
+      operationId: setGrantKeywordPath
+      parameters:
+        - description: The `Grant` name
+          in: path
+          name: id
+          required: true
+          type: string
+        - description: the `Grant` keyword
+          in: path
+          name: keyword
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The `Grant` id
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - Grant
+    put:
+      description: |
+        Add `Grant` keyword
+      operationId: addGrantKeyword
+      parameters:
+        - description: The `Grant` name
+          in: path
+          name: id
+          required: true
+          type: string
+        - description: the `Grant` keyword
+          in: path
+          name: keyword
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The `Grant` id
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - Grant
+  '/Grant/{id}/modified': {}
+  '/Grant/{id}/type':
+    delete:
+      description: |
+        Clear `Grant` type
+      operationId: clearGrantType
+      parameters:
+        - description: The `Grant` name
+          in: path
+          name: id
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The `Grant` id
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - Grant
+    post:
+      description: |
+        Set `Grant` amount
+      operationId: setGrantType
+      parameters:
+        - description: The `Grant` name
+          in: path
+          name: id
+          required: true
+          type: string
+        - description: the `Grant` type
+          format: float
+          in: formData
+          name: type
+          required: true
+          type: number
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The `Grant` id
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - Grant
+    put:
+      description: |
+        Modify `Grant` amount
+      operationId: modifyGrantType
+      parameters:
+        - description: The `Grant` name
+          in: path
+          name: id
+          required: true
+          type: string
+        - description: the `Grant` type
+          format: float
+          in: formData
+          name: type
+          required: true
+          type: number
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The `Grant` id
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - Grant
+  '/Grant/{id}/type/{type}':
+    post:
+      description: |
+        Set `Grant` type
+      operationId: setGrantTypePath
+      parameters:
+        - description: The `Grant` name
+          in: path
+          name: id
+          required: true
+          type: string
+        - description: the `Grant` type
+          in: path
+          name: type
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The `Grant` id
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - Grant
+    put:
+      description: |
+        Modify `Grant` amount
+      operationId: modifyGrantTypePath
+      parameters:
+        - description: The `Grant` name
+          in: path
+          name: id
+          required: true
+          type: string
+        - description: the `Grant` type
+          in: path
+          name: type
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The `Grant` id
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - Grant
+  '/Grant/{id}/url':
+    delete:
+      description: |
+        Clear `Grant` url array
+      operationId: clearGrantUrls
+      parameters:
+        - description: The `Grant` name
+          in: path
+          name: id
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The `Grant` id
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - Grant
+    post:
+      consumes:
+        - application/json
+      description: |
+        Replace `Grant` url array
+      operationId: setGrantUrls
+      parameters:
+        - description: The `Grant` name
+          in: path
+          name: id
+          required: true
+          type: string
+        - description: The `Grant` urls
+          in: formData
+          items:
+            type: string
+          name: urls
+          required: true
+          type: array
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The `Grant` id
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - Grant
+    put:
+      consumes:
+        - application/json
+      description: |
+        Add `Grant` url
+      operationId: addGrantUrl
+      parameters:
+        - description: The `Grant` name
+          in: path
+          name: id
+          required: true
+          type: string
+        - description: The `Grant` url
+          in: formData
+          name: url
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The `Grant` id
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - Grant
+  /Post:
+    post:
+      consumes:
+        - application/json
+      description: >
+        Creates `Post` objects.  **post_tags_id** and **post_keywords**
+        optional, all others required.
+      operationId: createPost
+      parameters:
+        - description: ID of `User` author of post
+          in: formData
+          name: post_title
+          required: true
+          type: string
+        - description: ID of `User` author of `Post`
+          in: formData
+          name: post_text
+          required: true
+          type: string
+        - description: ID of `User` author of post
+          in: formData
+          name: post_creator_id
+          required: true
+          type: string
+        - description: array of `User`s tagged in `Post`
+          in: formData
+          items:
+            type: string
+          name: post_tags_id
+          required: false
+          type: array
+        - description: array of keywords for `Post`
+          in: formData
+          items:
+            type: string
+          name: post_keywords
+          required: false
+          type: array
+        - description: is `Post` private?
+          in: formData
+          name: is_post_private
+          required: true
+          type: boolean
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: the id of the created `Post`
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - Post
+  '/Post/{id}':
+    delete:
+      description: |
+        Deletes `Post` objects by **id**.
+      operationId: deletePostById
+      parameters:
+        - description: The `Post` name
+          in: path
+          name: id
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The `Post` id
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - Post
+    put:
+      consumes:
+        - application/json
+      description: |
+        Updates `Post` objects. **id** is required,
+        all others optional.
+      operationId: updatePosttById
+      parameters:
+        - description: The `Post` name
+          in: path
+          name: id
+          required: true
+          type: string
+        - description: The `Post` name
+          in: formData
+          name: post_title
+          required: false
+          type: string
+        - description: The `Post` body
+          in: formData
+          name: post_text
+          required: false
+          type: string
+        - description: ID of `User` author of post
+          in: formData
+          name: post_creator_id
+          required: false
+          type: string
+        - description: array of `User`s tagged in `Post`
+          in: formData
+          items:
+            type: string
+          name: post_tags_id
+          required: false
+          type: array
+        - description: array of keywords for `Post`
+          in: formData
+          items:
+            type: string
+          name: post_keywords
+          required: false
+          type: array
+        - description: Is `Post`private?
+          in: formData
+          name: is_post_private
+          required: false
+          type: boolean
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: A `Post` object
+          schema:
+            $ref: '#/definitions/Post'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - Post
+  '/Post/{id}/author':
+    delete:
+      description: |
+        Deletes text of a `Post` author by **id**.
+      operationId: deletePostAuthorById
+      parameters:
+        - description: The `Post` id
+          in: path
+          name: id
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The `Post` id
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - Post
+    post:
+      consumes:
+        - application/json
+      description: |
+        Sets the `Post`author.  **id** and **author** both required.
+      operationId: updatePostAuthorByIdPost
+      parameters:
+        - description: The `Post` id
+          in: path
+          name: id
+          required: true
+          type: string
+        - description: new author
+          in: formData
+          name: text
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The `id` of the `Post`
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - Post
+    put:
+      consumes:
+        - application/json
+      description: |
+        Sets the `Post`author.  **id** and **author** both required.
+      operationId: updatePostAuthorById
+      parameters:
+        - description: The `Post` id
+          in: path
+          name: id
+          required: true
+          type: string
+        - description: new author
+          in: formData
+          name: author
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The `id` of the `Post`
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - Post
+  '/Post/{id}/keys':
+    delete:
+      description: |
+        Deletes all tags on a `Post` objects by **id**.
+      operationId: deletePostKeywordsById
+      parameters:
+        - description: The `Post` name
+          in: path
+          name: id
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The `Post` id
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - Post
+    post:
+      consumes:
+        - application/json
+      description: >
+        Replaces keywords on `Post` objects. **id** and **keywords* both
+        required.
+      operationId: replacePostKeywordsById
+      parameters:
+        - description: The `Post` name
+          in: path
+          name: id
+          required: true
+          type: string
+        - description: new tags
+          in: formData
+          items:
+            type: string
+          name: keywords
+          required: true
+          type: array
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The `id` of the `Post`
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - Post
+    put:
+      consumes:
+        - application/json
+      description: |
+        Adds keywords to `Post` objects. **id** and **keywords** both required.
+      operationId: updateProjectKeywordsById
+      parameters:
+        - description: The `Post` name
+          in: path
+          name: id
+          required: true
+          type: string
+        - description: new keywords
+          in: formData
+          items:
+            type: string
+          name: keywords
+          required: true
+          type: array
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The `id` of the `Post`
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - Post
+  '/Post/{id}/keys/{keyword}':
+    delete:
+      description: |
+        Deletes a keyword on a `Post` objects by **id** and **keyword**
+      operationId: deletePostKeywordById
+      parameters:
+        - description: The `Post` name
+          in: path
+          name: id
+          required: true
+          type: string
+        - description: The keyword
+          in: path
+          name: keyword
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The `Post` id
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - Post
+    post:
+      consumes:
+        - application/json
+      description: |
+        Adds keyword to `Post` objects. **id** and **user_id* both required.
+      operationId: addPostKeywordByIdPost
+      parameters:
+        - description: The `Post` name
+          in: path
+          name: id
+          required: true
+          type: string
+        - description: The `User` id
+          in: path
+          name: keyword
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The `id` of the `Post`
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - Post
+    put:
+      consumes:
+        - application/json
+      description: |
+        Adds tags to `Post` objects. **id** and **keyword** both required.
+      operationId: addPostKeywordById
+      parameters:
+        - description: The `Post's name
+          in: path
+          name: id
+          required: true
+          type: string
+        - description: the keyword
+          in: path
+          name: keyword
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The `id` of the `Post`
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - Post
+  '/Post/{id}/private':
+    post:
+      consumes:
+        - application/json
+      description: |
+        Sets the `Post`privacy.  **id** and **is_private** both required.
+      operationId: updatePostPrivacyByIdPost
+      parameters:
+        - description: The `Post` id
+          in: path
+          name: id
+          required: true
+          type: string
+        - description: is `Post`private?
+          in: formData
+          name: is_private
+          required: true
+          type: boolean
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The `id` of the `Post`
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - Post
+    put:
+      consumes:
+        - application/json
+      description: |
+        Sets the `Post`privacy.  **id** and **is_private** both required.
+      operationId: updatePostPrivacyById
+      parameters:
+        - description: The `Post` id
+          in: path
+          name: id
+          required: true
+          type: string
+        - description: is `Post`private?
+          in: formData
+          name: is_private
+          required: true
+          type: boolean
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The `id` of the `Post`
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - Post
+  '/Post/{id}/tags':
+    delete:
+      description: |
+        Deletes all tags on a `Post` objects by **id**.
+      operationId: deleteProjectTagsById
+      parameters:
+        - description: The `Post` name
+          in: path
+          name: id
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The `Post` id
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - Post
+    post:
+      consumes:
+        - application/json
+      description: >
+        Replaces tags on `Post` objects. **id** and **tagged_users* both
+        required.
+      operationId: replacePostTagsById
+      parameters:
+        - description: The `Post` name
+          in: path
+          name: id
+          required: true
+          type: string
+        - description: new tags
+          in: formData
+          items:
+            type: string
+          name: tagged_users
+          required: true
+          type: array
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The `id` of the `Post`
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - Post
+  '/Post/{id}/tags/{user_id}':
+    delete:
+      description: |
+        Deletes the tags on a `Post` objects by **id** and **user_id**
+      operationId: deletePostTagsById
+      parameters:
+        - description: The `Post` name
+          in: path
+          name: id
+          required: true
+          type: string
+        - description: The `User` id
+          in: path
+          name: user_id
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The `Post` id
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - Post
+        - User
+    post:
+      consumes:
+        - application/json
+      description: |
+        Adds tag to `Post` objects. **id** and **user_id** both required.
+      operationId: addPostTagsByIdPost
+      parameters:
+        - description: The `Post` name
+          in: path
+          name: id
+          required: true
+          type: string
+        - description: The `User` id
+          in: path
+          name: user_id
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The `id` of the `Post`
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - Post
+        - User
+    put:
+      consumes:
+        - application/json
+      description: |
+        Adds tags to `Post` objects. **id** and **user_id** both required.
+      operationId: updatePostTagsById
+      parameters:
+        - description: The `Post` name
+          in: path
+          name: id
+          required: true
+          type: string
+        - description: new tags
+          in: path
+          items:
+            type: string
+          name: user_id
+          required: true
+          type: array
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The `id` of the `Post`
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - Post
+        - User
+  '/Post/{id}/text':
+    delete:
+      description: |
+        Deletes text of a `Post` objects by **id**.
+      operationId: deletePostTextById
+      parameters:
+        - description: The `Post` id
+          in: path
+          name: id
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The `Post` id
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - Post
+    post:
+      consumes:
+        - application/json
+      description: |
+        Sets the `Post`text.  **id** and **text** both required.
+      operationId: updatePostTextByIdPost
+      parameters:
+        - description: The `Post` id
+          in: path
+          name: id
+          required: true
+          type: string
+        - description: new title
+          in: formData
+          name: text
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The `id` of the `Post`
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - Post
+    put:
+      consumes:
+        - application/json
+      description: |
+        Sets the `Post`title.  **id** and **text** both required.
+      operationId: updatePostTextById
+      parameters:
+        - description: The `Post` name
+          in: path
+          name: id
+          required: true
+          type: string
+        - description: new text
+          in: formData
+          name: text
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The `id` of the `Post`
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - Post
+  '/Post/{id}/title':
+    delete:
+      description: |
+        Deletes title of a `Post` objects by **id**.
+      operationId: deletePosTitleById
+      parameters:
+        - description: The `Post` id
+          in: path
+          name: id
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The `Post` id
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - Post
+    post:
+      consumes:
+        - application/json
+      description: |
+        Sets the `Post`title.  **id** and **title** both required.
+      operationId: updatePostTitleByIdPost
+      parameters:
+        - description: The `Post` name
+          in: path
+          name: id
+          required: true
+          type: string
+        - description: new title
+          in: formData
+          name: title
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The `id` of the `Post`
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - Post
+    put:
+      consumes:
+        - application/json
+      description: |
+        Sets the `Post`title.  **id** and **title** both required.
+      operationId: updatePostTitleById
+      parameters:
+        - description: The `Post` name
+          in: path
+          name: id
+          required: true
+          type: string
+        - description: new title
+          in: formData
+          name: title
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The `id` of the `Post`
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - Post
+  /Project:
+    post:
+      consumes:
+        - application/json
+      description: |
+        Creates `Project` objects. **project_name**, **project_description**,
+        **project_creator_id**, and **is_project_private** are required,
+        all others optional.
+      operationId: createProject
+      parameters:
+        - description: Project's name
+          in: formData
+          name: project_name
+          required: true
+          type: string
+        - description: Project's `Grant`type
+          in: formData
+          name: project_main_grant_type
+          required: false
+          type: string
+        - description: Description of project
+          in: formData
+          name: project_description
+          required: true
+          type: string
+        - description: array of `Project`creator ids
+          in: formData
+          items:
+            type: string
+          name: project_creator_id
+          required: true
+          type: array
+        - description: array of `Project`collaborator ids
+          in: formData
+          items:
+            type: string
+          name: project_collaborators_id
+          required: false
+          type: array
+        - description: array of `Project`keywords
+          in: formData
+          items:
+            type: string
+          name: project_keywords
+          required: false
+          type: array
+        - description: array of `Project`URLs
+          in: formData
+          items:
+            type: string
+          name: project_urls
+          required: false
+          type: array
+        - description: The `Grant` IDs
+          in: formData
+          items:
+            type: string
+          name: grant_ids
+          required: false
+          type: array
+        - description: ID of `University`hosting research
+          in: formData
+          name: university_id
+          required: false
+          type: string
+        - description: Name of individual fascilitating `Grant`funding
+          in: formData
+          name: grant_facilitator
+          required: false
+          type: string
+        - description: files for grant
+          in: formData
+          items:
+            type: string
+          name: project_file
+          required: false
+          type: array
+        - description: reviews
+          in: formData
+          items:
+            type: string
+          name: reviews
+          required: false
+          type: array
+        - description: posts related to project
+          in: formData
+          items:
+            type: string
+          name: posts
+          required: false
+          type: array
+        - description: is `Project`private?
+          in: formData
+          name: is_project_private
+          required: true
+          type: boolean
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The `id` of the created user
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - Project
+  '/Project/{id}':
+    delete:
+      description: |
+        Delete a 'Project' by their id.
+      operationId: deleteProjectById
+      parameters:
+        - description: the `id` of the `Project` to delete
+          in: path
+          name: id
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The `id` of the deleted `Project`
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - Project
+    put:
+      consumes:
+        - application/json
+      description: |
+        Updates a `Project` object. All fields other than `id` optional.
+      operationId: updateProject
+      parameters:
+        - description: The `Project`id
+          in: path
+          name: id
+          required: true
+          type: string
+        - description: Project's name
+          in: formData
+          name: project_name
+          required: false
+          type: string
+        - description: Project's `Grant`type
+          in: formData
+          name: project_main_grant_type
+          required: false
+          type: string
+        - description: Description of project
+          in: formData
+          name: project_description
+          required: false
+          type: string
+        - description: array of `Project`creator ids
+          in: formData
+          items:
+            type: string
+          name: project_creator_id
+          required: false
+          type: array
+        - description: array of `Project`collaborator ids
+          in: formData
+          items:
+            type: string
+          name: project_collaborators_id
+          required: false
+          type: array
+        - description: array of `Project`keywords
+          in: formData
+          items:
+            type: string
+          name: project_keywords
+          required: false
+          type: array
+        - description: array of `Project`URLs
+          in: formData
+          items:
+            type: string
+          name: project_urls
+          required: false
+          type: array
+        - description: The `Grant` IDs
+          in: formData
+          items:
+            type: string
+          name: grant_id
+          required: false
+          type: array
+        - description: ID of `University`hosting research
+          in: formData
+          name: university_id
+          required: false
+          type: string
+        - description: Name of individual fascilitating `Grant`funding
+          in: formData
+          name: grant_facilitator
+          required: false
+          type: string
+        - description: files for grant
+          in: formData
+          items:
+            type: string
+          name: project_file
+          required: false
+          type: array
+        - description: reviews
+          in: formData
+          items:
+            type: string
+          name: reviews
+          required: false
+          type: array
+        - description: posts related to project
+          in: formData
+          items:
+            type: string
+          name: posts
+          required: false
+          type: array
+        - description: is `Project`private?
+          in: formData
+          name: is_project_private
+          required: false
+          type: boolean
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The `id` of the updatee `Project`
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - Project
+  '/Project/{id}/collaborators':
+    delete:
+      description: |
+        Remove all 'project_collaborators' from a `Project`.
+      operationId: deleteProjectCollaborators
+      parameters:
+        - description: The `id` of the `Project` to retrieve
+          in: path
+          name: id
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The `project_id` associated with the `Project`
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - Project
+        - User
+    post:
+      description: |
+        Set creators of a `Project`.
+      operationId: setAllProjectCollaborators
+      parameters:
+        - description: The `id` of the `Project` to retrieve
+          in: path
+          name: id
+          required: true
+          type: string
+        - collectionFormat: csv
+          description: The `ids` of the ollaborators
+          in: formData
+          items:
+            type: string
+          name: collaborators
+          required: true
+          type: array
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The `id` associated with the `Project`
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - Project
+        - User
+    put:
+      description: |
+        Add to collaborators of a `Project`.
+      operationId: addProjectCollaborators
+      parameters:
+        - description: The `id` of the `Project` to retrieve
+          in: path
+          name: id
+          required: true
+          type: string
+        - collectionFormat: csv
+          description: The `ids` of the collaborators
+          in: formData
+          items:
+            type: string
+          name: collaborators
+          required: true
+          type: array
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The `id` associated with the `Project`
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - Project
+        - User
+  '/Project/{id}/collaborators/{user_id}':
+    delete:
+      description: |
+        Remove a 'project_collaborator' from a `Project`.
+      operationId: deleteProjectCollaborator
+      parameters:
+        - description: The `id` of the `Project` to retrieve
+          in: path
+          name: id
+          required: true
+          type: string
+        - description: The `ids` of the collaborator
+          in: path
+          name: user_id
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The `project_id` associated with the `Project`
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - Project
+        - User
+    post:
+      description: |
+        Set collaborators of a `Project`.
+      operationId: setProjectCollaborators
+      parameters:
+        - description: The `id` of the `Project` to retrieve
+          in: path
+          name: id
+          required: true
+          type: string
+        - description: The `id` of the collaborator
+          in: path
+          name: user_id
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The `id` associated with the `Project`
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - Project
+        - User
+    put:
+      description: |
+        Add to collaborator of a `Project`.
+      operationId: addProjectCollaborator
+      parameters:
+        - description: The `id` of the `Project` to retrieve
+          in: path
+          name: id
+          required: true
+          type: string
+        - description: The `ids` of the collaborator
+          in: path
+          name: user_id
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The `id` associated with the `Project`
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - Project
+        - User
+  '/Project/{id}/creators':
+    delete:
+      description: |
+        Remove all 'project_creators' from a `Project`.
+      operationId: deleteProjectCreators
+      parameters:
+        - description: The `id` of the `Project` to retrieve
+          in: path
+          name: id
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The `project_id` associated with the `Project`
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - Project
+        - User
+    post:
+      consumes:
+        - application/json
+      description: |
+        Set creators of a `Project`.
+      operationId: setAllProjectCreators
+      parameters:
+        - description: The `id` of the `Project` to retrieve
+          in: path
+          name: id
+          required: true
+          type: string
+        - collectionFormat: csv
+          description: The `ids` of the creators
+          in: formData
+          items:
+            type: string
+          name: creators
+          required: true
+          type: array
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The `id` associated with the `Project`
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - Project
+        - User
+    put:
+      description: |
+        Add to creators of a `Project`.
+      operationId: addProjectCreators
+      parameters:
+        - description: The `id` of the `Project` to retrieve
+          in: path
+          name: id
+          required: true
+          type: string
+        - collectionFormat: csv
+          description: The `ids` of the creators
+          in: formData
+          items:
+            type: string
+          name: creators
+          required: true
+          type: array
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The `id` associated with the `Project`
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - Project
+        - User
+  '/Project/{id}/creators/{user_id}':
+    delete:
+      description: |
+        Remove a 'project_creator' from a `Project`.
+      operationId: deleteProjectCreator
+      parameters:
+        - description: The `id` of the `Project` to retrieve
+          in: path
+          name: id
+          required: true
+          type: string
+        - description: The `ids` of the creators
+          in: path
+          name: user_id
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The `project_id` associated with the `Project`
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - Project
+        - User
+    post:
+      description: |
+        Set creator of a `Project`.
+      operationId: setProjectCreator
+      parameters:
+        - description: The `id` of the `Project` to retrieve
+          in: path
+          name: id
+          required: true
+          type: string
+        - description: The `id` of the creator
+          in: path
+          name: user_id
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The `id` associated with the `Project`
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - Project
+        - User
+    put:
+      description: |
+        Add to creators of a `Project`.
+      operationId: addProjectCreator
+      parameters:
+        - description: The `id` of the `Project` to retrieve
+          in: path
+          name: id
+          required: true
+          type: string
+        - description: The `ids` of the creators
+          in: path
+          name: user_id
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The `id` associated with the `Project`
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - Project
+        - User
+  '/Project/{id}/description':
+    delete:
+      description: |
+        Delete project_description from a project
+      operationId: deleteProjectDescription
+      parameters:
+        - description: The `id` of the `Project` to retrieve
+          in: path
+          name: id
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The `project_description` associated with the `Project`
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - Project
+  '/Project/{id}/description/{project_description}':
+    post:
+      description: |
+        Add project_description to a `Project`.
+      operationId: setProjectDescription
+      parameters:
+        - description: The `id` of the `Project` to retrieve
+          in: path
+          name: id
+          required: true
+          type: string
+        - description: The project_description
+          in: path
+          name: project_description
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The id associated with the `Project`
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - Project
+    put:
+      description: |
+        Modify project_description of a `Project`.
+      operationId: modifyProjectDescription
+      parameters:
+        - description: The `id` of the `Project` to retrieve
+          in: path
+          name: id
+          required: true
+          type: string
+        - description: The project_description
+          in: path
+          name: project_description
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The id associated with the `Project`
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - Project
+  '/Project/{id}/files':
+    delete:
+      description: |
+        Remove all 'files' from a `Project`.
+      operationId: deleteProjectFiles
+      parameters:
+        - description: The `id` of the `Project` to retrieve
+          in: path
+          name: id
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The `id` associated with the `Project`
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - Project
+    post:
+      description: |
+        Set files of a `Project`.
+      operationId: setAllProjectFiles
+      parameters:
+        - description: The `id` of the `Project` to retrieve
+          in: path
+          name: id
+          required: true
+          type: string
+        - collectionFormat: csv
+          description: The `files` of the project
+          in: formData
+          items:
+            type: string
+          name: files
+          required: true
+          type: array
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The `id` associated with the `Project`
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - Project
+    put:
+      description: |
+        Add to files of a `Project`.
+      operationId: addProjectFiles
+      parameters:
+        - description: The `id` of the `Project` to retrieve
+          in: path
+          name: id
+          required: true
+          type: string
+        - collectionFormat: csv
+          description: The `files` of the `Project``
+          in: formData
+          items:
+            type: string
+          name: urls
+          required: true
+          type: array
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The `id` associated with the `Project`
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - Project
+  '/Project/{id}/grant':
+    delete:
+      description: |
+        Delete `Grant`from a project
+      operationId: deleteProjectGrant
+      parameters:
+        - description: The `id` of the `Project` to retrieve
+          in: path
+          name: id
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The `grant` associated with the `Project`
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - Project
+        - Grant
+  '/Project/{id}/grant/{grant_id}':
+    post:
+      description: |
+        Add `Grant`to a `Project`.
+      operationId: setProjectGrant
+      parameters:
+        - description: The `id` of the `Project` to retrieve
+          in: path
+          name: id
+          required: true
+          type: string
+        - description: The grant_id
+          in: path
+          name: grant_id
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The id associated with the `Project`
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - Project
+        - Grant
+    put:
+      description: |
+        Modify `Grant`of a `Project`.
+      operationId: modifyProjectGrant
+      parameters:
+        - description: The `id` of the `Project` to retrieve
+          in: path
+          name: id
+          required: true
+          type: string
+        - description: The grant_id
+          in: path
+          name: grant_id
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The id associated with the `Project`
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - Project
+        - Grant
+  '/Project/{id}/keys':
+    delete:
+      description: |
+        Remove all 'keywords' from a `Project`.
+      operationId: deleteProjectKeywords
+      parameters:
+        - description: The `id` of the `Project` to retrieve
+          in: path
+          name: id
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The `project_id` associated with the `Project`
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - Project
+    post:
+      description: |
+        Set keywords of a `Project`.
+      operationId: setAllProjectKeywords
+      parameters:
+        - description: The `id` of the `Project` to retrieve
+          in: path
+          name: id
+          required: true
+          type: string
+        - collectionFormat: csv
+          description: The `keywords` of the `Project``
+          in: formData
+          items:
+            type: string
+          name: keywords
+          required: true
+          type: array
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The `id` associated with the `Project`
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - Project
+    put:
+      description: |
+        Add to keywords of a `Project`.
+      operationId: addProjectKeywords
+      parameters:
+        - description: The `id` of the `Project` to retrieve
+          in: path
+          name: id
+          required: true
+          type: string
+        - collectionFormat: csv
+          description: The `ids` of the collaborators
+          in: formData
+          items:
+            type: string
+          name: keywords
+          required: true
+          type: array
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The `id` associated with the `Project`
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - Project
+  '/Project/{id}/keys/{keyword}':
+    delete:
+      description: |
+        Remove a 'keyword' from a `Project`.
+      operationId: deleteProjectKeyword
+      parameters:
+        - description: The `id` of the `Project` to retrieve
+          in: path
+          name: id
+          required: true
+          type: string
+        - description: The keyword
+          in: path
+          name: keyword
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The `project_id` associated with the `Project`
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - Project
+    post:
+      description: |
+        Set keyword of a `Project`.
+      operationId: setProjectKeyword
+      parameters:
+        - description: The `id` of the `Project` to retrieve
+          in: path
+          name: id
+          required: true
+          type: string
+        - description: The `keyword`
+          in: path
+          name: keyword
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The `id` associated with the `Project`
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - Project
+    put:
+      description: |
+        Add to keyword of a `Project`.
+      operationId: addProjectKeyword
+      parameters:
+        - description: The `id` of the `Project` to retrieve
+          in: path
+          name: id
+          required: true
+          type: string
+        - description: The keyword
+          in: path
+          name: keyword
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The `id` associated with the `Project`
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - Project
+  '/Project/{id}/name/{project_name}':
+    post:
+      description: |
+        Add project_name to a `Project`.
+      operationId: addProjectName
+      parameters:
+        - description: The `id` of the `Project` to retrieve
+          in: path
+          name: id
+          required: true
+          type: string
+        - description: The project_name
+          in: path
+          name: project_name
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The id associated with the `Project`
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - Project
+    put:
+      description: |
+        Modify project_name of a `Project`.
+      operationId: modifyProjectName
+      parameters:
+        - description: The `id` of the `Project` to retrieve
+          in: path
+          name: id
+          required: true
+          type: string
+        - description: The project_name
+          in: path
+          name: project_name
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The id associated with the `Project`
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - Project
+  '/Project/{id}/posts':
+    delete:
+      description: |
+        Remove all 'posts' from a `Project`.
+      operationId: deleteProjectPosts
+      parameters:
+        - description: The `id` of the `Project` to retrieve
+          in: path
+          name: id
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The `project_id` associated with the `Project`
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - Project
+        - Post
+    post:
+      description: |
+        Set posts of a `Project`.
+      operationId: setAllProjectPosts
+      parameters:
+        - description: The `id` of the `Project` to retrieve
+          in: path
+          name: id
+          required: true
+          type: string
+        - collectionFormat: csv
+          description: The `ids` of the posts
+          in: formData
+          items:
+            type: string
+          name: posts
+          required: true
+          type: array
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The `id` associated with the `Project`
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - Project
+        - Post
+    put:
+      description: |
+        Add to posts of a `Project`.
+      operationId: addProjectPosts
+      parameters:
+        - description: The `id` of the `Project` to retrieve
+          in: path
+          name: id
+          required: true
+          type: string
+        - collectionFormat: csv
+          description: The `ids` of the posts
+          in: formData
+          items:
+            type: string
+          name: reviews
+          required: true
+          type: array
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The `id` associated with the `Project`
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - Project
+        - Post
+  '/Project/{id}/posts/{post_id}':
+    delete:
+      description: |
+        Remove a 'post' from a `Project`.
+      operationId: deleteProjectPost
+      parameters:
+        - description: The `id` of the `Project` to retrieve
+          in: path
+          name: id
+          required: true
+          type: string
+        - description: The `ids` of the post
+          in: path
+          name: post_id
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The `project_id` associated with the `Project`
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - Project
+        - Post
+    put:
+      description: |
+        Add `Post`to a `Project`.
+      operationId: addProjectPost
+      parameters:
+        - description: The `id` of the `Project` to retrieve
+          in: path
+          name: id
+          required: true
+          type: string
+        - description: The `id` of the post
+          in: path
+          name: post_id
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The `project_id` associated with the `Project`
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - Project
+        - Post
+  '/Project/{id}/private':
+    put:
+      consumes:
+        - application/json
+      description: |
+        Set is_private from a  `Project`.
+      operationId: setIsProjectPrivate
+      parameters:
+        - description: The `id` of the `Project` to retrieve
+          in: path
+          name: id
+          required: true
+          type: string
+        - description: is `Project`private?
+          in: formData
+          name: is_private
+          required: true
+          type: boolean
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The boolean
+          schema:
+            type: boolean
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - Project
+  '/Project/{id}/project_name':
+    delete:
+      description: |
+        Delete project_name from a project
+      operationId: deleteUserProjectName
+      parameters:
+        - description: The `id` of the `Project` to retrieve
+          in: path
+          name: id
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The `project_name` associated with the `Project`
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - Project
+  '/Project/{id}/reviews':
+    delete:
+      description: |
+        Remove all 'reviews' from a `Project`.
+      operationId: deleteProjectReviews
+      parameters:
+        - description: The `id` of the `Project` to retrieve
+          in: path
+          name: id
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The `project_id` associated with the `Project`
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - Project
+        - Review
+    post:
+      description: |
+        Set reviews of a `Project`.
+      operationId: setAllProjectReviews
+      parameters:
+        - description: The `id` of the `Project` to retrieve
+          in: path
+          name: id
+          required: true
+          type: string
+        - collectionFormat: csv
+          description: The `ids` of the reviews
+          in: formData
+          items:
+            type: string
+          name: reviews
+          required: true
+          type: array
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The `id` associated with the `Project`
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - Project
+        - Review
+    put:
+      description: |
+        Add to reviews of a `Project`.
+      operationId: addProjectReviews
+      parameters:
+        - description: The `id` of the `Project` to retrieve
+          in: path
+          name: id
+          required: true
+          type: string
+        - collectionFormat: csv
+          description: The `ids` of the reviews
+          in: formData
+          items:
+            type: string
+          name: reviews
+          required: true
+          type: array
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The `id` associated with the `Project`
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - Project
+        - Review
+  '/Project/{id}/reviews/{review_id}':
+    delete:
+      description: |
+        Remove a 'review' from a `Project`.
+      operationId: deleteProjectReview
+      parameters:
+        - description: The `id` of the `Project` to retrieve
+          in: path
+          name: id
+          required: true
+          type: string
+        - description: The `ids` of the review
+          in: path
+          name: review_id
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The `project_id` associated with the `Project`
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - Project
+        - Review
+    put:
+      description: |
+        Add `Review`to a `Project`.
+      operationId: addProjectReview
+      parameters:
+        - description: The `id` of the `Project` to retrieve
+          in: path
+          name: id
+          required: true
+          type: string
+        - description: The `id` of the review
+          in: path
+          name: review_id
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The `project_id` associated with the `Project`
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - Project
+        - Review
+  '/Project/{id}/uni':
+    delete:
+      description: |
+        Delete all universities from a project
+      operationId: deleteProjecUniversities
+      parameters:
+        - description: The `id` of the `Project` to retrieve
+          in: path
+          name: id
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The `id` associated with the `Project`
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - Project
+        - University
+  '/Project/{id}/uni/{university_id}':
+    post:
+      description: |
+        Set university_id to a `Project`.
+      operationId: setProjectUniversity
+      parameters:
+        - description: The `id` of the `Project` to retrieve
+          in: path
+          name: id
+          required: true
+          type: string
+        - description: The university_id
+          in: path
+          name: university_id
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The id associated with the `Project`
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - Project
+        - University
+    put:
+      description: |
+        Modify university_id of a `Project`.
+      operationId: modifyProjectUniversity
+      parameters:
+        - description: The `id` of the `Project` to retrieve
+          in: path
+          name: id
+          required: true
+          type: string
+        - description: The university_id
+          in: path
+          name: university_id
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The id associated with the `Project`
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - Project
+        - University
+  '/Project/{id}/urls':
+    delete:
+      description: |
+        Remove all 'urls' from a `Project`.
+      operationId: deleteProjectUrls
+      parameters:
+        - description: The `id` of the `Project` to retrieve
+          in: path
+          name: id
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The `id` associated with the `Project`
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - Project
+    post:
+      description: |
+        Set urls of a `Project`.
+      operationId: setAllProjectUrls
+      parameters:
+        - description: The `id` of the `Project` to retrieve
+          in: path
+          name: id
+          required: true
+          type: string
+        - collectionFormat: csv
+          description: The `urls` of the project
+          in: formData
+          items:
+            type: string
+          name: urls
+          required: true
+          type: array
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The `id` associated with the `Project`
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - Project
+    put:
+      description: |
+        Add to urls of a `Project`.
+      operationId: addProjectUrls
+      parameters:
+        - description: The `id` of the `Project` to retrieve
+          in: path
+          name: id
+          required: true
+          type: string
+        - collectionFormat: csv
+          description: The `urls` of the `Project``
+          in: formData
+          items:
+            type: string
+          name: urls
+          required: true
+          type: array
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The `id` associated with the `Project`
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - Project
+  '/Review/{id}':
+    delete:
+      description: |
+        Deletes `Review` objects by **id**.
+      operationId: deleteReviewById
+      parameters:
+        - description: The `Review` name
+          in: path
+          name: id
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The `Review` id
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - Review
+    put:
+      consumes:
+        - application/json
+      description: |
+        Updates `Review` objects. **id** is required,
+        all others optional.
+      operationId: updateReviewById
+      parameters:
+        - description: The `Post` name
+          in: path
+          name: id
+          required: true
+          type: string
+        - description: body of `Review`
+          in: formData
+          name: review_body
+          required: false
+          type: string
+        - description: The `User`who wrote `Review`
+          in: formData
+          name: reviewer_id
+          required: false
+          type: string
+        - description: Rating (1 <= rating <= 5)
+          format: int32
+          in: formData
+          name: rating
+          required: false
+          type: number
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: A `Review` object
+          schema:
+            $ref: '#/definitions/Review'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - Review
+  '/Review/{id}/body':
+    delete:
+      description: |
+        Deletes `Review` body
+      operationId: deleteReviewBodyById
+      parameters:
+        - description: The `Review` name
+          in: path
+          name: id
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The `Review` id
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - Review
+    post:
+      consumes:
+        - application/json
+      description: |
+        Set `Review` body.
+      operationId: setReviewBodyById
+      parameters:
+        - description: The `Review` name
+          in: path
+          name: id
+          required: true
+          type: string
+        - in: formData
+          name: body
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: A `Review` id
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - Review
+    put:
+      consumes:
+        - application/json
+      description: |
+        Updates `Review` body.
+      operationId: updateReviewBodyById
+      parameters:
+        - description: The `Review` name
+          in: path
+          name: id
+          required: true
+          type: string
+        - in: formData
+          name: body
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: A `Review` id
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - Review
+  '/Review/{id}/created': {}
+  '/Review/{id}/rating':
+    delete:
+      description: |
+        Deletes `Review` rating
+      operationId: deleteReviewRating
+      parameters:
+        - description: The `Review` id
+          in: path
+          name: id
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The `Review` id
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - Review
+  '/Review/{id}/rating/{rating}':
+    post:
+      description: |
+        Sets `Review` rating
+      operationId: setReviewRating
+      parameters:
+        - description: The `Review` id
+          in: path
+          name: id
+          required: true
+          type: string
+        - description: The `Review` rating
+          in: path
+          name: rating
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The `Review` id
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - Review
+    put:
+      description: |
+        Updates `Review` rating
+      operationId: updateReviewRating
+      parameters:
+        - description: The `Review` id
+          in: path
+          name: id
+          required: true
+          type: string
+        - description: The `Review` rating
+          in: path
+          name: rating
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The `Review` id
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - Review
+  '/Review/{id}/reviewer':
+    delete:
+      description: |
+        Deletes `Review` reviewer
+      operationId: deleteReviewReviewer
+      parameters:
+        - description: The `Review` id
+          in: path
+          name: id
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The `Review` id
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - Review
+        - User
+  '/Review/{id}/reviewer/{user_id}':
+    delete:
+      description: |
+        Deletes `Review` reviewer
+      operationId: deleteReviewReviewerById
+      parameters:
+        - description: The `Review` id
+          in: path
+          name: id
+          required: true
+          type: string
+        - description: The `Review` reviewer id
+          in: path
+          name: user_id
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The `Review` id
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - Review
+        - User
+    post:
+      consumes:
+        - application/json
+      description: |
+        Set `Review` reviewer.
+      operationId: setReviewReviewerById
+      parameters:
+        - description: The `Review` name
+          in: path
+          name: id
+          required: true
+          type: string
+        - in: path
+          name: user_id
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: A `Review` id
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - Review
+        - User
+    put:
+      consumes:
+        - application/json
+      description: |
+        Updates `Review` reviewer.
+      operationId: updateReviewReviewerById
+      parameters:
+        - description: The `Review` name
+          in: path
+          name: id
+          required: true
+          type: string
+        - in: path
+          name: user_id
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: A `Review` id
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - Review
+        - User
+  '/Review/{id}/updated': {}
+  '/Review/{id}/url':
+    delete:
+      description: |
+        Deletes `Review` url
+      operationId: deleteReviewUrl
+      parameters:
+        - description: The `Review` id
+          in: path
+          name: id
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The `Review` id
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - Review
+    post:
+      description: |
+        Sets `Review` url
+      operationId: setReviewUrl
+      parameters:
+        - description: The `Review` id
+          in: path
+          name: id
+          required: true
+          type: string
+        - description: The `Review` url
+          in: formData
+          name: url
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The `Review` id
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - Review
+    put:
+      description: |
+        Updates `Review` url
+      operationId: updateReviewUrl
+      parameters:
+        - description: The `Review` id
+          in: path
+          name: id
+          required: true
+          type: string
+        - description: The `Review` url
+          in: formData
+          name: url
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The `Review` id
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - Review
+  /Skill:
+    put:
+      consumes:
+        - application/json
+      description: |
+        Creates `Skill` objects.
+        Required query param of **size** determines
+        max number of results per page, and **page** determines
+        which page in the pagination we are. Remaining params optional.
+      operationId: createSkills
+      parameters:
+        - description: description of `Skill`
+          in: formData
+          name: description
+          required: false
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: A `Skill` object
+          schema:
+            $ref: '#/definitions/Skill'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - Skill
+  '/Skill/{id}':
+    delete:
+      description: |
+        Deletes `Skill` objects by **id**.
+      operationId: deleteSkillwById
+      parameters:
+        - description: The `Skill` id
+          in: path
+          name: id
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The `Review` id
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - Skill
+    put:
+      consumes:
+        - application/json
+      description: |
+        Updates `Skill` objects. **id** is required,
+        all others optional.
+      operationId: updateSkillById
+      parameters:
+        - description: The `Post` name
+          in: path
+          name: id
+          required: true
+          type: string
+        - description: description of `Skill`
+          in: formData
+          name: description
+          required: false
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: A `Review` object
+          schema:
+            $ref: '#/definitions/Skill'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - Skill
+  '/Skill/{id}/created': {}
+  '/Skill/{id}/description':
+    delete:
+      description: |
+        Deletes `Skill` body
+      operationId: deleteSkillDescriptionByIdForn
+      parameters:
+        - description: The `Skill` name
+          in: path
+          name: id
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The `Skill` id
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - Skill
+    post:
+      consumes:
+        - application/json
+      description: |
+        Set `Skill` body.
+      operationId: setSkillDescriptionByIdForn
+      parameters:
+        - description: The `Skill` name
+          in: path
+          name: id
+          required: true
+          type: string
+        - description: The `Skill` description
+          in: formData
+          name: description
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: A `Skill` id
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - Skill
+    put:
+      consumes:
+        - application/json
+      description: |
+        Updates `Skill` description.
+      operationId: updateSkillDescriptionByIdForm
+      parameters:
+        - description: The `Skill` name
+          in: path
+          name: id
+          required: true
+          type: string
+        - in: formData
+          name: description
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: A `Skill` id
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - Skill
+  '/Skill/{id}/description/{description}':
+    post:
+      description: |
+        Set `Skill` body.
+      operationId: setSkillDescriptionById
+      parameters:
+        - description: The `Skill` id
+          in: path
+          name: id
+          required: true
+          type: string
+        - description: The `Skill` description
+          in: path
+          name: description
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: A `Skill` id
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - Skill
+    put:
+      description: |
+        Updates `Skill` description.
+      operationId: updateSkillDescriptionById
+      parameters:
+        - description: The `Skill` name
+          in: path
+          name: id
+          required: true
+          type: string
+        - in: path
+          name: description
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: A `Skill` id
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - Skill
+  '/Skill/{id}/updated': {}
+  /University:
+    post:
+      consumes:
+        - application/json
+      description: >
+        Creates `University` objects. **name**, **city**, and **state** are
+        required, all others optional.
+      operationId: createUniversity
+      parameters:
+        - description: Name of `University`
+          in: formData
+          name: name
+          required: true
+          type: string
+        - description: City of `University`
+          in: formData
+          name: city
+          required: true
+          type: string
+        - description: state of `University`
+          in: formData
+          name: state
+          required: true
+          type: string
+        - description: >-
+            2 item tuple representing lat/long of `University`; if not provided
+            will be calculated based on city/state
+          in: formData
+          name: geolocation
+          required: false
+          type: string
+        - description: ids of `Project` items at `University`
+          in: formData
+          items:
+            type: string
+          name: project_ids
+          required: false
+          type: array
+        - description: paths to profile images for `University`
+          in: formData
+          items:
+            type: string
+          name: profile_images
+          required: false
+          type: array
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: A `University` object
+          schema:
+            items:
+              $ref: '#/definitions/University'
+            type: array
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - University
+  '/University/{id}':
+    delete:
+      description: |
+        Deletes `University` objects by **id**.
+      operationId: deleteUniversityById
+      parameters:
+        - description: The `University` id
+          in: path
+          name: id
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The `University` id
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - University
+    put:
+      consumes:
+        - application/json
+      description: |
+        Updates `University` objects. **id** is required,
+        all others optional.
+      operationId: updateUniversityById
+      parameters:
+        - description: The `University` id
+          in: path
+          name: id
+          required: true
+          type: string
+        - description: Name of `University`
+          in: formData
+          name: name
+          required: true
+          type: string
+        - description: City of `University`
+          in: formData
+          name: city
+          required: true
+          type: string
+        - description: state of `University`
+          in: formData
+          name: state
+          required: true
+          type: string
+        - description: >-
+            2 item tuple representing lat/long of `University`; if not provided
+            will be calculated based on city/state
+          in: formData
+          name: geolocation
+          required: false
+          type: string
+        - description: ids of `Project` items at `University`
+          in: formData
+          items:
+            type: string
+          name: project_ids
+          required: false
+          type: array
+        - description: paths to profile images for `University`
+          in: formData
+          items:
+            type: string
+          name: profile_images
+          required: false
+          type: array
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: A `University` object
+          schema:
+            $ref: '#/definitions/University'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - University
+  '/University/{id}/city':
+    delete:
+      description: |
+        Deletes `University` city
+      operationId: deleteUniversityCityById
+      parameters:
+        - description: The `University` id
+          in: path
+          name: id
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The `University` id
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - University
+  '/University/{id}/city/{city}':
+    post:
+      description: |
+        Sets `University` city
+      operationId: setUniversityCityById
+      parameters:
+        - description: The `University` id
+          in: path
+          name: id
+          required: true
+          type: string
+        - description: The `University` city
+          in: path
+          name: city
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The `University` id
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - University
+    put:
+      description: |
+        Updates `University` city
+      operationId: updateUniversityCityById
+      parameters:
+        - description: The `University` id
+          in: path
+          name: id
+          required: true
+          type: string
+        - description: The `University` city
+          in: path
+          name: city
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The `University` id
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - University
+  '/University/{id}/geolocation':
+    delete:
+      description: |
+        Deletes `University` geolocation
+      operationId: deleteUniversityGeolocationById
+      parameters:
+        - description: The `University` id
+          in: path
+          name: id
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The `University` id
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - University
+    post:
+      consumes:
+        - application/json
+      description: |
+        Sets `University` geolocation
+      operationId: setUniversityGeolocationByIdForm
+      parameters:
+        - description: The `University` id
+          in: path
+          name: id
+          required: true
+          type: string
+        - description: The `University` latitude
+          format: float
+          in: formData
+          name: lat
+          required: true
+          type: number
+        - description: The `University` longitude
+          format: float
+          in: formData
+          name: long
+          required: true
+          type: number
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The `University` id
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - University
+    put:
+      consumes:
+        - application/json
+      description: |
+        Updates `University` geolocation
+      operationId: updateUniversityGeolocationByIdForm
+      parameters:
+        - description: The `University` id
+          in: path
+          name: id
+          required: true
+          type: string
+        - description: The `University` latitude
+          format: float
+          in: formData
+          name: lat
+          required: true
+          type: number
+        - description: The `University` longitude
+          format: float
+          in: formData
+          name: long
+          required: true
+          type: number
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The `University` id
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - University
+  '/University/{id}/geolocation/{lat}/{long}':
+    post:
+      description: |
+        Sets `University` state
+      operationId: setUniversityGeolocationById
+      parameters:
+        - description: The `University` id
+          in: path
+          name: id
+          required: true
+          type: string
+        - description: The `University` latitude
+          format: float
+          in: path
+          name: lat
+          required: true
+          type: number
+        - description: The `University` longitude
+          format: float
+          in: path
+          name: long
+          required: true
+          type: number
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The `University` id
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - University
+    put:
+      description: |
+        Updates `University` geolocation
+      operationId: updateUniversityGeolocationById
+      parameters:
+        - description: The `University` id
+          in: path
+          name: id
+          required: true
+          type: string
+        - description: The `University` latitude
+          format: float
+          in: path
+          name: lat
+          required: true
+          type: number
+        - description: The `University` longitude
+          format: float
+          in: path
+          name: long
+          required: true
+          type: number
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The `University` id
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - University
+  '/University/{id}/images':
+    delete:
+      description: |
+        Deletes `University` images
+      operationId: deleteUniversityImagesById
+      parameters:
+        - description: The `University` id
+          in: path
+          name: id
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The `University` id
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - University
+    post:
+      consumes:
+        - application/json
+      description: |
+        Sets `University` profile image paths
+      operationId: setUniversityImagesById
+      parameters:
+        - description: The `University` id
+          in: path
+          name: id
+          required: true
+          type: string
+        - description: The `University` profile image paths
+          in: formData
+          items:
+            type: string
+          name: profile_image_paths
+          required: true
+          type: array
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The `University` id
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - University
+    put:
+      consumes:
+        - application/json
+      description: |
+        Adds `University` projects
+      operationId: addUniversityProfileImagesById
+      parameters:
+        - description: The `University` id
+          in: path
+          name: id
+          required: true
+          type: string
+        - description: The `University` profile image paths
+          in: formData
+          items:
+            type: string
+          name: profile_image_paths
+          required: true
+          type: array
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The `University` id
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - University
+        - Project
+  '/University/{id}/name':
+    delete:
+      description: |
+        Deletes `University` name
+      operationId: deleteUniversityNameById
+      parameters:
+        - description: The `University` id
+          in: path
+          name: id
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The `University` id
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - University
+  '/University/{id}/name/{name}':
+    post:
+      description: |
+        Sets `University` name
+      operationId: setUniversityNameById
+      parameters:
+        - description: The `University` id
+          in: path
+          name: id
+          required: true
+          type: string
+        - description: The `University` name
+          in: path
+          name: name
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The `University` id
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - University
+    put:
+      description: |
+        Updates `University` name
+      operationId: updateUniversityNameById
+      parameters:
+        - description: The `University` id
+          in: path
+          name: id
+          required: true
+          type: string
+        - description: The `University` name
+          in: path
+          name: name
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The `University` id
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - University
+  '/University/{id}/projects':
+    delete:
+      description: |
+        Deletes `University` projects
+      operationId: deleteUniversityProjectsById
+      parameters:
+        - description: The `University` id
+          in: path
+          name: id
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The `University` id
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - University
+        - Project
+    post:
+      consumes:
+        - application/json
+      description: |
+        Sets `University` projects
+      operationId: setUniversityProjectsById
+      parameters:
+        - description: The `University` id
+          in: path
+          name: id
+          required: true
+          type: string
+        - description: The `Project` ids
+          in: formData
+          items:
+            type: string
+          name: project_ids
+          required: true
+          type: array
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The `University` id
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - University
+        - Project
+    put:
+      consumes:
+        - application/json
+      description: |
+        Adds `University` projects
+      operationId: addUniversityProjectsById
+      parameters:
+        - description: The `University` id
+          in: path
+          name: id
+          required: true
+          type: string
+        - description: The `Project` ids
+          in: formData
+          items:
+            type: string
+          name: project_ids
+          required: true
+          type: array
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The `University` id
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - University
+        - Project
+  '/University/{id}/projects/{project_id}':
+    delete:
+      description: |
+        Deletes `Project` from `University`
+      operationId: deleteUniversityProjectById
+      parameters:
+        - description: The `University` id
+          in: path
+          name: id
+          required: true
+          type: string
+        - description: The `Project` id
+          in: path
+          name: project_id
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The `University` id
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - University
+        - Project
+    post:
+      description: >
+        Sets `University` projects to this single `Project`(probably will never
+        use this)
+      operationId: setUniversityProjectById
+      parameters:
+        - description: The `University` id
+          in: path
+          name: id
+          required: true
+          type: string
+        - description: The `Project` id
+          in: path
+          name: project_id
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The `University` id
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - University
+        - Project
+    put:
+      description: |
+        Adds `University` project
+      operationId: addUniversityProjectById
+      parameters:
+        - description: The `University` id
+          in: path
+          name: id
+          required: true
+          type: string
+        - description: The `Project` ids
+          in: path
+          name: project_id
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The `University` id
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - University
+        - Project
+  '/University/{id}/state':
+    delete:
+      description: |
+        Deletes `University` state
+      operationId: deleteUniversityStateById
+      parameters:
+        - description: The `University` id
+          in: path
+          name: id
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The `University` id
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - University
+  '/University/{id}/state/{state}':
+    post:
+      description: |
+        Sets `University` state
+      operationId: setUniversityStateById
+      parameters:
+        - description: The `University` id
+          in: path
+          name: id
+          required: true
+          type: string
+        - description: The `University` state
+          in: path
+          name: state
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The `University` id
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - University
+    put:
+      description: |
+        Updates `University` state
+      operationId: updateUniversityStateById
+      parameters:
+        - description: The `University` id
+          in: path
+          name: id
+          required: true
+          type: string
+        - description: The `University` state
+          in: path
+          name: state
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The `University` id
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - University
+  /User:
+    post:
+      consumes:
+        - application/json
+      description: >
+        Creates `User` objects. `University` and `Project` are optional (user
+        may not yet have affiliations)
+
+        `Keywords` also optional. All other fields required.
+      operationId: createUser
+      parameters:
+        - description: first name of `User`
+          in: formData
+          name: first_name
+          required: true
+          type: string
+        - description: last name of `User`
+          in: formData
+          name: last_name
+          required: true
+          type: string
+        - description: is `User` a collaborator?
+          in: formData
+          name: is_collaborator
+          required: true
+          type: boolean
+        - description: is `User` a creator?
+          in: formData
+          name: is_creator
+          required: true
+          type: boolean
+        - description: city location of `User`
+          in: formData
+          name: city
+          required: true
+          type: string
+        - description: state location of `User`
+          in: formData
+          name: state
+          required: true
+          type: string
+        - collectionFormat: csv
+          description: The `University`a `User` is associated with
+          in: formData
+          items:
+            type: string
+          name: university_ids
+          required: false
+          type: array
+        - description: project_id the `User` is associated with
+          in: formData
+          name: project_id
+          required: false
+          type: string
+        - collectionFormat: csv
+          description: keyword
+          in: formData
+          items:
+            type: string
+          name: keywords
+          required: false
+          type: array
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The `id` of the created user
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - User
+  '/User/{id}':
+    delete:
+      description: |
+        Delete a 'User' by their id.
+      operationId: deleteUserById
+      parameters:
+        - description: the `id` of the `User` to delete
+          in: path
+          name: id
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The `id` of the deleted `User`
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - User
+    put:
+      consumes:
+        - application/json
+      description: |
+        Updates a `User` object. All fields other than `id` optional.
+      operationId: updateUser
+      parameters:
+        - description: ID of `User` to fetch
+          in: path
+          name: id
+          required: true
+          type: string
+        - description: first name of `User`
+          in: formData
+          name: first_name
+          required: false
+          type: string
+        - description: last name of `User`
+          in: formData
+          name: last_name
+          required: false
+          type: string
+        - description: is `User` a collaborator?
+          in: formData
+          name: is_collaborator
+          required: false
+          type: boolean
+        - description: is `User` a creator?
+          in: formData
+          name: is_creator
+          required: false
+          type: boolean
+        - description: city location of `User`
+          in: formData
+          name: city
+          required: false
+          type: string
+        - description: state location of `User`
+          in: formData
+          name: state
+          required: false
+          type: string
+        - description: The `University`a `User` is associated with
+          in: formData
+          name: university
+          required: false
+          type: string
+        - description: project_id the `User` is associated with
+          in: formData
+          name: project_id
+          required: false
+          type: string
+        - collectionFormat: csv
+          description: keyword
+          in: formData
+          items:
+            type: string
+          name: keywords
+          required: false
+          type: array
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The `id` of the updatee `User`
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - User
+  '/User/{id}/city':
+    delete:
+      description: |
+        Delete city from a user
+      operationId: deleteUserCity
+      parameters:
+        - description: The `id` of the `User` to retrieve
+          in: path
+          name: id
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The `user_id` associated with the `User`
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - User
+  '/User/{id}/city/{city}':
+    post:
+      description: |
+        Add city to a `User`.
+      operationId: addUserCity
+      parameters:
+        - description: The `id` of the `User` to retrieve
+          in: path
+          name: id
+          required: true
+          type: string
+        - description: The city
+          in: path
+          name: city
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The user_id associated with the `User`
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - User
+    put:
+      description: |
+        Modify city of a `User`.
+      operationId: modifyUserCity
+      parameters:
+        - description: The `id` of the `User` to retrieve
+          in: path
+          name: id
+          required: true
+          type: string
+        - description: The city
+          in: path
+          name: city
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The user_id associated with the `User`
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - User
+  '/User/{id}/collaborator':
+    post:
+      consumes:
+        - application/json
+      description: |
+        set if `User` is a collaborator.
+      operationId: setIsUserCollaboratorById
+      parameters:
+        - description: The `id` of the `User` to retrieve
+          in: path
+          name: id
+          required: true
+          type: string
+        - description: Is `User`a collaborator?
+          in: formData
+          name: isCollaborator
+          required: true
+          type: boolean
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The `user_id` associated with the `User`
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - User
+    put:
+      consumes:
+        - application/json
+      description: |
+        set if `User` is a collaborator.
+      operationId: setIsUserCollaboratorByIdPut
+      parameters:
+        - description: The `id` of the `User` to retrieve
+          in: path
+          name: id
+          required: true
+          type: string
+        - description: Is `User`a collaborator?
+          in: formData
+          name: isCollaborator
+          required: true
+          type: boolean
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The `user_id` associated with the `User`
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - User
+  '/User/{id}/created': {}
+  '/User/{id}/creator':
+    post:
+      consumes:
+        - application/json
+      description: |
+        set if `User` is a creator.
+      operationId: setIsUserCreatorById
+      parameters:
+        - description: The `id` of the `User` to retrieve
+          in: path
+          name: id
+          required: true
+          type: string
+        - description: Is `User`a creator?
+          in: formData
+          name: isCreator
+          required: true
+          type: boolean
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The `user_id` associated with the `User`
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - User
+    put:
+      consumes:
+        - application/json
+      description: |
+        set if `User` is a creator.
+      operationId: setIsUserCreatorByIdPut
+      parameters:
+        - description: The `id` of the `User` to retrieve
+          in: path
+          name: id
+          required: true
+          type: string
+        - description: Is `User`a creator?
+          in: formData
+          name: isCollaborator
+          required: true
+          type: boolean
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The `user_id` associated with the `User`
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - User
+  '/User/{id}/first_name':
+    delete:
+      description: |
+        Delete first_name from a user
+      operationId: deleteUserFirstName
+      parameters:
+        - description: The `id` of the `User` to retrieve
+          in: path
+          name: id
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The `user_id` associated with the `User`
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - User
+        - Review
+  '/User/{id}/first_name/{first_name}':
+    post:
+      description: |
+        Add first name to a `User`.
+      operationId: addUserFirstName
+      parameters:
+        - description: The `id` of the `User` to retrieve
+          in: path
+          name: id
+          required: true
+          type: string
+        - description: The keywords
+          in: path
+          name: first_name
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The user_id associated with the `User`
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - User
+    put:
+      description: |
+        Modify first name of a `User`.
+      operationId: modifyUserFirstName
+      parameters:
+        - description: The `id` of the `User` to retrieve
+          in: path
+          name: id
+          required: true
+          type: string
+        - description: The keywords
+          in: path
+          name: first_name
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The user_id associated with the `User`
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - User
+  '/User/{id}/images':
+    delete:
+      consumes:
+        - application/json
+      description: |
+        Remove an image, or multiple images, from a `User`.
+      operationId: deleteImagesFromUserById
+      parameters:
+        - description: The `id` of the `User` to retrieve
+          in: path
+          name: id
+          required: true
+          type: string
+        - collectionFormat: csv
+          description: The paths of the images
+          in: formData
+          items:
+            type: string
+          name: images
+          required: true
+          type: array
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The `user_id` associated with the `User`
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - User
+    post:
+      consumes:
+        - application/json
+      description: |
+        Add images to a `User`.
+      operationId: setUserImages
+      parameters:
+        - description: The `id` of the `User` to retrieve
+          in: path
+          name: id
+          required: true
+          type: string
+        - collectionFormat: csv
+          description: The paths of the images
+          in: formData
+          items:
+            type: string
+          name: images
+          required: true
+          type: array
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The user_id associated with the `User`
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - User
+  '/User/{id}/keys':
+    delete:
+      description: |
+        Delete keywords from a user
+      operationId: deleteKeywordsFromUserById
+      parameters:
+        - description: The `id` of the `User` to retrieve
+          in: path
+          name: id
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The `user_id` associated with the `User`
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - User
+    post:
+      description: |
+        Add keywords to a `User`.
+      operationId: setUserKeywords
+      parameters:
+        - description: The `id` of the `User` to retrieve
+          in: path
+          name: id
+          required: true
+          type: string
+        - collectionFormat: csv
+          description: The keywords
+          in: formData
+          items:
+            type: string
+          name: keywords
+          required: true
+          type: array
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The user_id associated with the `User`
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - User
+  '/User/{id}/keys/{keyword}':
+    delete:
+      description: |
+        Delete keyword from a user
+      operationId: deleteKeywordFromUserById
+      parameters:
+        - description: The `id` of the `User` to retrieve
+          in: path
+          name: id
+          required: true
+          type: string
+        - description: The keyword
+          in: path
+          name: keyword
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The `user_id` associated with the `User`
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - User
+    post:
+      description: |
+        Add a keyword to a `User`.
+      operationId: setUserKeyword
+      parameters:
+        - description: The `id` of the `User` to retrieve
+          in: path
+          name: id
+          required: true
+          type: string
+        - description: The keyword
+          in: path
+          name: keyword
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The user_id associated with the `User`
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - User
+  '/User/{id}/last_name':
+    delete:
+      description: |
+        Delete last_name from a user
+      operationId: deleteUserLastName
+      parameters:
+        - description: The `id` of the `User` to retrieve
+          in: path
+          name: id
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The `user_id` associated with the `User`
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - User
+  '/User/{id}/last_name/{last_name}':
+    post:
+      description: |
+        Add last name to a `User`.
+      operationId: addUserLastName
+      parameters:
+        - description: The `id` of the `User` to retrieve
+          in: path
+          name: id
+          required: true
+          type: string
+        - description: The keywords
+          in: path
+          name: last_name
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The user_id associated with the `User`
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - User
+    put:
+      description: |
+        Modify last name of a `User`.
+      operationId: modifyUserLastName
+      parameters:
+        - description: The `id` of the `User` to retrieve
+          in: path
+          name: id
+          required: true
+          type: string
+        - description: The keywords
+          in: path
+          name: last_name
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The user_id associated with the `User`
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - User
+  '/User/{id}/modified': {}
+  '/User/{id}/project':
+    delete:
+      description: |
+        Remove all 'Project' ojects from a `User`.
+      operationId: deleteAllUserProjectById
+      parameters:
+        - description: The `id` of the `User` to retrieve
+          in: path
+          name: id
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The `user_id` associated with the `User`
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - User
+        - Project
+  '/User/{id}/project/{project_id}':
+    delete:
+      description: |
+        Remove a 'Project' from a `User`.
+      operationId: deleteUserProjectById
+      parameters:
+        - description: The `id` of the `User` to retrieve
+          in: path
+          name: id
+          required: true
+          type: string
+        - description: The `project_id` of the `Project` to retrieve
+          in: path
+          name: project_id
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The `project_id` associated with the `Project`
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - User
+        - Project
+    post:
+      description: |
+        Add a 'Project' to a `User`.
+      operationId: settUserProjectById
+      parameters:
+        - description: The `id` of the `User` to retrieve
+          in: path
+          name: id
+          required: true
+          type: string
+        - description: The `project_id` of the `Project` to retrieve
+          in: path
+          name: project_id
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The `project_id` associated with the `Project`
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - User
+        - Project
+  '/User/{id}/review':
+    delete:
+      description: |
+        Remove all 'Review' ojects from a `User`.
+      operationId: deleteAllUserReviewById
+      parameters:
+        - description: The `id` of the `User` to retrieve
+          in: path
+          name: id
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The `user_id` associated with the `User`
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - User
+        - Review
+  '/User/{id}/review/{review_id}':
+    delete:
+      description: |
+        Remove a 'Review' from a `User`.
+      operationId: deleteUserReviewById
+      parameters:
+        - description: The `id` of the `User` to retrieve
+          in: path
+          name: id
+          required: true
+          type: string
+        - description: The `review_id` of the `Review` to retrieve
+          in: path
+          name: review_id
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The `review_id` associated with the `Review`
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - User
+        - Review
+    post:
+      description: |
+        Add a 'Review' to a `User`.
+      operationId: setUserReviewById
+      parameters:
+        - description: The `id` of the `User` to retrieve
+          in: path
+          name: id
+          required: true
+          type: string
+        - description: The `review_id` of the `Review` to retrieve
+          in: path
+          name: review_id
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The `review_id` associated with the `Project`
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - User
+        - Review
+  '/User/{id}/skills':
+    delete:
+      description: |
+        Delete skills from a user
+      operationId: deleteSkillsFromUserById
+      parameters:
+        - description: The `id` of the `User` to retrieve
+          in: path
+          name: id
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The `user_id` associated with the `User`
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - User
+        - Skill
+    post:
+      description: |
+        Set skills on a `User`.
+      operationId: setUserSkills
+      parameters:
+        - description: The `id` of the `User` to retrieve
+          in: path
+          name: id
+          required: true
+          type: string
+        - collectionFormat: csv
+          description: The skills ids
+          in: formData
+          items:
+            type: string
+          name: keywords
+          required: true
+          type: array
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The user_id associated with the `User`
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - User
+        - Skill
+    put:
+      description: |
+        Add skills to a `User`.
+      operationId: addUserSkills
+      parameters:
+        - description: The `id` of the `User` to retrieve
+          in: path
+          name: id
+          required: true
+          type: string
+        - collectionFormat: csv
+          description: The skills ids
+          in: formData
+          items:
+            type: string
+          name: keywords
+          required: true
+          type: array
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The user_id associated with the `User`
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - User
+        - Skill
+  '/User/{id}/skills/{skill_id}':
+    delete:
+      description: |
+        Delete `Skill`from a user
+      operationId: deleteSkillFromUserById
+      parameters:
+        - description: The `id` of the `User` to retrieve
+          in: path
+          name: id
+          required: true
+          type: string
+        - description: The `id` of the `Skill` to delete
+          in: path
+          name: skill_id
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The `user_id` associated with the `User`
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - User
+        - Skill
+    post:
+      description: |
+        Set `Skill`on a `User`.
+      operationId: setUserSkill
+      parameters:
+        - description: The `id` of the `User` to retrieve
+          in: path
+          name: id
+          required: true
+          type: string
+        - collectionFormat: csv
+          description: The skills is
+          in: path
+          name: skill_id
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The user_id associated with the `User`
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - User
+        - Skill
+    put:
+      description: |
+        Add `Skill`to a `User`.
+      operationId: addUserSkill
+      parameters:
+        - description: The `id` of the `User` to retrieve
+          in: path
+          name: id
+          required: true
+          type: string
+        - description: The skills id
+          in: path
+          name: skill_id
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The user_id associated with the `User`
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - User
+        - Skill
+  '/User/{id}/state':
+    delete:
+      description: |
+        Delete state from a user
+      operationId: deleteUserState
+      parameters:
+        - description: The `id` of the `User` to retrieve
+          in: path
+          name: id
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The `user_id` associated with the `User`
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - User
+  '/User/{id}/state/{state}':
+    post:
+      description: |
+        Add state to a `User`.
+      operationId: addUserState
+      parameters:
+        - description: The `id` of the `User` to retrieve
+          in: path
+          name: id
+          required: true
+          type: string
+        - description: The state
+          in: path
+          name: state
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The user_id associated with the `User`
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - User
+    put:
+      description: |
+        Modify state of a `User`.
+      operationId: modifyUserState
+      parameters:
+        - description: The `id` of the `User` to retrieve
+          in: path
+          name: id
+          required: true
+          type: string
+        - description: The state
+          in: path
+          name: state
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The user_id associated with the `User`
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - User
+  '/User/{id}/uni/{university_id}':
+    delete:
+      description: |
+        Remove a 'University' fromo a `User`.
+      operationId: deleteUserUniversityById
+      parameters:
+        - description: The `id` of the `User` to retrieve
+          in: path
+          name: id
+          required: true
+          type: string
+        - description: The `university_id` of the `Project` to retrieve
+          in: path
+          name: university_id
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The `project_id` associated with the `Project`
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - User
+        - University
+    post:
+      description: |
+        Add a 'University' to a `User`.
+      operationId: settUserUniversityById
+      parameters:
+        - description: The `id` of the `User` to retrieve
+          in: path
+          name: id
+          required: true
+          type: string
+        - description: The `university_id` of the `Project` to retrieve
+          in: path
+          name: university_id
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The `university_id` associated with the `Project`
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - User
+        - University
+  /UserSkill:
+    post:
+      consumes:
+        - application/json
+      description: >
+        Creates `UserSkill` objects. **user_id** and **skill_id** are required,
+        **endorsements** optional.
+      operationId: createUserSkill
+      parameters:
+        - description: >-
+            Unique identifier representing a specific `User` that has a
+            `UserSkill` represents
+          in: formData
+          name: user_id
+          required: false
+          type: string
+        - description: >-
+            Unique identifier representing a specific `Skill` that a `UserSkill`
+            represents
+          in: formData
+          name: skill_id
+          required: false
+          type: string
+        - description: id of `User` endorser
+          in: formData
+          items:
+            type: string
+          name: endorsement_ids
+          required: false
+          type: array
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: A `UserSkill` object
+          schema:
+            $ref: '#/definitions/UserSkill'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - Skill
+        - UserSkill
+        - User
+  '/UserSkill/{id}':
+    delete:
+      description: |
+        Deletes `UserSkill` objects by **id**.
+      operationId: deleteUserSkillwById
+      parameters:
+        - description: The `UserSkill` id
+          in: path
+          name: id
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The `UserSkill` id
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - Skill
+        - UserSkill
+        - User
+    put:
+      consumes:
+        - application/json
+      description: |
+        Updates `UserSkill` objects. **id** is required,
+        all others optional.
+      operationId: updateUserSkillById
+      parameters:
+        - description: The `Post` name
+          in: path
+          name: id
+          required: true
+          type: string
+        - description: id of `User` that has skill
+          in: formData
+          name: user_id
+          required: false
+          type: string
+        - description: id of `Skill` that this `UserSkill` represents
+          in: formData
+          name: skill_id
+          required: false
+          type: string
+        - description: The `User` objects who gave endorsement to `Skill`
+          in: formData
+          items:
+            type: string
+          name: endorsement_ids
+          required: false
+          type: array
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: A `Review` object
+          schema:
+            $ref: '#/definitions/Skill'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - UserSkill
+        - Skill
+        - User
+  '/UserSkill/{id}/created': {}
+  '/UserSkill/{id}/endorsement':
+    delete:
+      consumes:
+        - application/json
+      description: |
+        Remove all `User` endorsement on `UserSkill` .
+      operationId: removeUserSkillEndorsementsById
+      parameters:
+        - description: The `UserSkill` name
+          in: path
+          name: id
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: A `Skill` id
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - Skill
+        - UserSkill
+        - User
+    post:
+      consumes:
+        - application/json
+      description: |
+        Set `User` on `UserSkill` .
+      operationId: setUserSkillEndorsementsById
+      parameters:
+        - description: The `UserSkill` name
+          in: path
+          name: id
+          required: true
+          type: string
+        - description: The `User` id
+          in: formData
+          items:
+            type: string
+          name: user_id
+          required: true
+          type: array
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: A `Skill` id
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - Skill
+        - UserSkill
+        - User
+    put:
+      consumes:
+        - application/json
+      description: |
+        Add `User` objects on `UserSkill` .
+      operationId: addUserSkillEndorsementsById
+      parameters:
+        - description: The `UserSkill` name
+          in: path
+          name: id
+          required: true
+          type: string
+        - description: The `User` ids
+          in: formData
+          items:
+            type: string
+          name: user_id
+          required: true
+          type: array
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: A `Skill` id
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - Skill
+        - UserSkill
+        - User
+  '/UserSkill/{id}/endorsement/{user_id}':
+    delete:
+      consumes:
+        - application/json
+      description: |
+        Remove `User` endorsement on `UserSkill` .
+      operationId: removeUserSkillEndorsementById
+      parameters:
+        - description: The `UserSkill` name
+          in: path
+          name: id
+          required: true
+          type: string
+        - description: The `User` id
+          in: path
+          name: user_id
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: A `Skill` id
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - Skill
+        - UserSkill
+        - User
+    post:
+      consumes:
+        - application/json
+      description: |
+        Set `User` on `UserSkill` .
+      operationId: setUserSkillEndorsementById
+      parameters:
+        - description: The `UserSkill` name
+          in: path
+          name: id
+          required: true
+          type: string
+        - description: The `User` id
+          in: path
+          name: user_id
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: A `Skill` id
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - Skill
+        - UserSkill
+        - User
+    put:
+      consumes:
+        - application/json
+      description: |
+        Adds `User` to endorsements in `UserSkill` .
+      operationId: addUserSkillEndorsementById
+      parameters:
+        - description: The `UserSkill` id
+          in: path
+          name: id
+          required: true
+          type: string
+        - description: The `User` id
+          in: path
+          name: user_id
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: A `UserSkill` id
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - Skill
+        - UserSkill
+        - User
+  '/UserSkill/{id}/skill':
+    delete:
+      description: |
+        Deletes `Skill` body
+      operationId: deleteUserSkillSkilById
+      parameters:
+        - description: The `UserSkill` id
+          in: path
+          name: id
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The `UserSkill` id
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - Skill
+        - UserSkill
+        - User
+  '/UserSkill/{id}/skill/{skill_id}':
+    post:
+      consumes:
+        - application/json
+      description: |
+        Set `UserSkill` body.
+      operationId: setUserSkillSkillDescriptionById
+      parameters:
+        - description: The `UserSkill` name
+          in: path
+          name: id
+          required: true
+          type: string
+        - description: The `Skill` id
+          in: path
+          name: skill_id
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: A `Skill` id
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - Skill
+        - UserSkill
+        - User
+    put:
+      consumes:
+        - application/json
+      description: |
+        Updates `Skill` contained in `UserSkill` .
+      operationId: updateUserSkillSkill
+      parameters:
+        - description: The `UserSkill` name
+          in: path
+          name: id
+          required: true
+          type: string
+        - description: The `Skill` id
+          in: path
+          name: skill_id
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: A `UserSkill` id
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - Skill
+        - UserSkill
+        - User
+  '/UserSkill/{id}/updated': {}
+  '/UserSkill/{id}/user':
+    delete:
+      description: |
+        Deletes `Skill` body
+      operationId: deleteUserSkillUserById
+      parameters:
+        - description: The `UserSkill` id
+          in: path
+          name: id
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: The `UserSkill` id
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - Skill
+  '/UserSkill/{id}/user/{user_id}':
+    post:
+      consumes:
+        - application/json
+      description: |
+        Set `User` on `UserSkill` .
+      operationId: setUserSkillUserById
+      parameters:
+        - description: The `UserSkill` name
+          in: path
+          name: id
+          required: true
+          type: string
+        - description: The `Skill` id
+          in: path
+          name: user_id
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: A `Skill` id
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - Skill
+        - UserSkill
+        - User
+    put:
+      consumes:
+        - application/json
+      description: |
+        Updates `User` contained in `UserSkill` .
+      operationId: updateUserSkillUserById
+      parameters:
+        - description: The `UserSkill` name
+          in: path
+          name: id
+          required: true
+          type: string
+        - description: The `User` id
+          in: path
+          name: user_id
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: A `UserSkill` id
+          schema:
+            type: string
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+      tags:
+        - Skill
+        - UserSkill
+        - User
+
+
+
+definitions:
+  Error:
+    properties:
+      code:
+        format: int32
+        type: integer
+      fields:
+        type: string
+      message:
+        type: string
+    type: object
+  Grant:
+    properties:
+      created_date:
+        description: datetime stamp of `Grant`creation
+        format: date-time
+        type: string
+      grant_amount:
+        description: Amount of grant
+        format: double
+        type: number
+      grant_description:
+        description: The `Grant`description
+        type: string
+      grant_id:
+        description: id of grant
+        type: string
+      grant_keywords:
+        description: The `Grant`keywords
+        items:
+          type: string
+        type: array
+      grant_type:
+        description: The `Grant` type
+        type: string
+      grant_url:
+        description: URL of grants
+        items:
+          type: string
+        type: array
+      updated_date:
+        description: datetime stamp of `Grant`update
+        format: date-time
+        type: string
+    type: object
+  Grants:
+    properties:
+      count:
+        description: Total number of items available.
+        format: int32
+        type: integer
+      history:
+        items:
+          $ref: '#/definitions/Grant'
+        type: array
+      limit:
+        description: Number of items to retrieve (100 max).
+        format: int32
+        type: integer
+      offset:
+        description: Position in pagination.
+        format: int32
+        type: integer
+    type: object
+  Post:
+    properties:
+      created_date:
+        description: datetime stamp of `Post`creation
+        format: date-time
+        type: string
+      is_post_private:
+        description: is `Post`private?
+        type: boolean
+      post_author:
+        $ref: '#/definitions/User'
+        description: author of post
+      post_author_id:
+        description: id of author of post
+        type: string
+      post_id:
+        description: id of post
+        type: string
+      post_keywords:
+        description: keywords for post
+        items:
+          type: string
+        type: array
+      post_tags:
+        description: tagged users
+        items:
+          $ref: '#/definitions/User'
+        type: array
+      post_tags_id:
+        description: tagged `User`ids
+        items:
+          type: string
+        type: array
+      post_text:
+        description: text of post
+        type: string
+      post_title:
+        description: title of post
+        type: string
+      updated_date:
+        description: datetime stamp of `Post`update
+        format: date-time
+        type: string
+    type: object
+  Posts:
+    properties:
+      count:
+        description: Total number of items available.
+        format: int32
+        type: integer
+      history:
+        items:
+          $ref: '#/definitions/Post'
+        type: array
+      limit:
+        description: Number of items to retrieve (100 max).
+        format: int32
+        type: integer
+      offset:
+        description: Position in pagination.
+        format: int32
+        type: integer
+    type: object
+  Project:
+    properties:
+      created_date:
+        description: datetime stamp of `Project`creation
+        format: date-time
+        type: string
+      grant_facilitator:
+        description: Name of individual fascilitating `Grant` funding
+        type: string
+      grant_ids:
+        description: Array of `Grant` IDs associated with the `Project`
+        items:
+          type: string
+        type: array
+      is_project_private:
+        description: is `Project`private?
+        type: boolean
+      posts:
+        description: posts related to project
+        items:
+          type: string
+        type: array
+      project_collaborators_id:
+        description: array of `Project`collaborator ids
+        items:
+          type: string
+        type: array
+      project_creator_id:
+        description: array of `Project`creator ids
+        items:
+          type: string
+        type: array
+      project_description:
+        description: Description of project
+        type: string
+      project_file:
+        description: Paths to files for `Grant`
+        items:
+          type: string
+        type: array
+      project_id:
+        description: Unique identifier representing a specific project
+        type: string
+      project_keywords:
+        description: array of `Project`keywords
+        items:
+          type: string
+        type: array
+      project_name:
+        description: Project's name
+        type: string
+      project_urls:
+        description: array of `Project`URLs
+        items:
+          type: string
+        type: array
+      reviews:
+        description: reviews
+        items:
+          type: string
+        type: array
+      university_id:
+        description: ID of `University`hosting research
+        type: string
+      updated_date:
+        description: datetime stamp of `Project`update
+        format: date-time
+        type: string
+    type: object
+  Projects:
+    properties:
+      count:
+        description: Total number of items available.
+        format: int32
+        type: integer
+      history:
+        items:
+          $ref: '#/definitions/Project'
+        type: array
+      limit:
+        description: Number of items to retrieve (100 max).
+        format: int32
+        type: integer
+      offset:
+        description: Position in pagination.
+        format: int32
+        type: integer
+    type: object
+  Review:
+    properties:
+      created_date:
+        description: datetime stamp of `Review`creation
+        format: date-time
+        type: string
+      rating:
+        description: 'rating, must be 1-5'
+        format: int32
+        type: integer
+      review_body:
+        description: text body of review
+        type: string
+      review_id:
+        description: id of review
+        type: string
+      reviewer:
+        $ref: '#/definitions/User'
+        description: reviewer user
+      reviewer_id:
+        description: reviewer `User`id
+        type: string
+      updated_date:
+        description: datetime stamp of `Review`update
+        format: date-time
+        type: string
+    type: object
+  Reviews:
+    properties:
+      count:
+        description: Total number of items available.
+        format: int32
+        type: integer
+      history:
+        items:
+          $ref: '#/definitions/Review'
+        type: array
+      limit:
+        description: Number of items to retrieve (100 max).
+        format: int32
+        type: integer
+      offset:
+        description: Position in pagination.
+        format: int32
+        type: integer
+    type: object
+  Skill:
+    properties:
+      created_date:
+        description: datetime stamp of `Skill`creation
+        format: date-time
+        type: string
+      description:
+        description: Description of `Skill`
+        type: string
+      review_id:
+        description: id of skill
+        type: string
+      updated_date:
+        description: datetime stamp of `Skill`update
+        format: date-time
+        type: string
+    type: object
+  Skills:
+    properties:
+      count:
+        description: Total number of items available.
+        format: int32
+        type: integer
+      history:
+        items:
+          $ref: '#/definitions/Skill'
+        type: array
+      limit:
+        description: Number of items to retrieve (100 max).
+        format: int32
+        type: integer
+      offset:
+        description: Position in pagination.
+        format: int32
+        type: integer
+    type: object
+  Universities:
+    properties:
+      count:
+        description: Total number of items available.
+        format: int32
+        type: integer
+      history:
+        items:
+          $ref: '#/definitions/University'
+        type: array
+      limit:
+        description: Number of items to retrieve (100 max).
+        format: int32
+        type: integer
+      offset:
+        description: Position in pagination.
+        format: int32
+        type: integer
+    type: object
+  University:
+    properties:
+      city:
+        description: City of `University` location
+        type: string
+      created_date:
+        description: datetime stamp of `University` creation
+        format: date-time
+        type: string
+      geolocation:
+        description: Tuple representing latitude/longitude of user
+        items:
+          format: double
+          type: number
+        type: array
+      profile_images:
+        description: Array of file system paths to profile images
+        items:
+          type: string
+        type: array
+      project_ids:
+        description: ids of `Project`s based at this `University`
+        items:
+          type: string
+        type: array
+      state:
+        description: State of `University` location
+        type: string
+      uni_id:
+        description: id of `University`
+        type: string
+      university_name:
+        description: text body of `University`
+        type: string
+      updated_date:
+        description: datetime stamp of `University` update
+        format: date-time
+        type: string
+    type: object
+  User:
+    properties:
+      city:
+        description: City of `User`location
+        type: string
+      created_date:
+        description: datetime stamp of `User`creation
+        format: date-time
+        type: string
+      first_name:
+        description: User's first name.
+        type: string
+      geolocation:
+        description: Tuple representing latitude/longitude of user
+        items:
+          format: double
+          type: number
+        type: array
+      is_collaborator:
+        description: Is `User`a `Project`collaborator?
+        type: boolean
+      is_creator:
+        description: Is `User`a `Project`creator?
+        type: boolean
+      is_user_private:
+        description: is `User`profile public or private?
+        type: boolean
+      keywords:
+        description: array of keywords associated with the user
+        items:
+          type: string
+        type: array
+      last_name:
+        description: User's last name
+        type: string
+      profile_images:
+        description: Array of file system paths to profile images
+        items:
+          type: string
+        type: array
+      project_ids:
+        description: array of `User`projects
+        items:
+          type: string
+        type: array
+      recent_collaborators_id:
+        description: array of user_ids of recent collaborators
+        items:
+          type: string
+        type: array
+      review_ids:
+        description: array of `Review`ids
+        items:
+          type: string
+        type: array
+      state:
+        description: State of `User`location
+        type: string
+      university_ids:
+        description: array of universities the `User`is associated with
+        items:
+          type: string
+        type: array
+      updated_date:
+        description: datetime stamp of `User`update
+        format: date-time
+        type: string
+      user_id:
+        description: Unique identifier representing a specific user
+        type: string
+      user_skill_ids:
+        description: array of `UserSkill`ids
+        items:
+          type: string
+        type: array
+    type: object
+  UserSkill:
+    properties:
+      created_date:
+        description: datetime stamp of `Endorsement` creation
+        format: date-time
+        type: string
+      endorsements:
+        description: Array of ids of `User` who give `Endorsement` to `User`for skill
+        items:
+          type: string
+        type: array
+      review_id:
+        description: id of `Endorsement`
+        type: string
+      skill_id:
+        description: id of `Skill` that `User`is claiming
+        type: string
+      updated_date:
+        description: datetime stamp of `Endorsement` update
+        format: date-time
+        type: string
+      user_id:
+        description: Id of `User` who added this skill
+        type: string
+    type: object
+  UserSkills:
+    properties:
+      count:
+        description: Total number of items available.
+        format: int32
+        type: integer
+      history:
+        items:
+          $ref: '#/definitions/UserSkill'
+        type: array
+      limit:
+        description: Number of items to retrieve (100 max).
+        format: int32
+        type: integer
+      offset:
+        description: Position in pagination.
+        format: int32
+        type: integer
+    type: object
+  Users:
+    properties:
+      count:
+        description: Total number of items available.
+        format: int32
+        type: integer
+      history:
+        items:
+          $ref: '#/definitions/User'
+        type: array
+      limit:
+        description: Number of items to retrieve (100 max).
+        format: int32
+        type: integer
+      offset:
+        description: Position in pagination.
+        format: int32
+        type: integer
+    type: object
+
