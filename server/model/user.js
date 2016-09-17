@@ -2,6 +2,9 @@
  * Created by colin on 8/24/16.
  */
 var mongoose = require('mongoose');
+var bcrypt = require('bcrypt');
+
+
 var userSchema = new mongoose.Schema({
 
     user_id: String,
@@ -24,5 +27,8 @@ var userSchema = new mongoose.Schema({
     is_user_private: Boolean
 
 });
+
+
+
 
 mongoose.model('User', userSchema);
