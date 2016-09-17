@@ -2,7 +2,7 @@
  * Created by colin on 9/17/16.
  */
 var mongoose = require('mongoose');
-var skillScheme = new mongoose.Schema({
+var skillSchema = new mongoose.Schema({
 
         skill_id: String,
         description: String,
@@ -10,4 +10,4 @@ var skillScheme = new mongoose.Schema({
         updated_date: String
 });
 
-mongoose.model('Post', postSchema);
+mongoose.model('Skill', skillSchema);
