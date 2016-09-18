@@ -5,6 +5,25 @@
  * @param {Number} options.amount Amount of grant
  * @param {Function} callback
  */
+
+
+import models from '../../../../../model';
+import bcrypt from 'bcrypt';
+
+const Grant = models.grant;
+const Post = models.post;
+const Project = models.project;
+const Review = models.review;
+const Skill = models.skill;
+const University = models.University;
+const User = models.User;
+const UserSkill = models.userkSkill;
+
+
+
+
+
+ 
 export function createGrant (options, callback) {
   // Implement you business logic here...
 }
