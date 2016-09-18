@@ -18,18 +18,20 @@ const Oauthstrategy = require('passport-oauth').Strategy;
 const log = logger(config.logger);
 
 
-passport.use(new facebookstrategy({},function(accessToken, refreshToken, profile, done) {
+/*passport.use(new facebookstrategy({},function(accessToken, refreshToken, profile, done) {
     // asynchronous verification, for effect...
     process.nextTick(function () {
       return done(null, profile);
     });
-});
+});*/
 passport.use(new localstrategy({},function(accessToken, refreshToken, profile, done) {
     // asynchronous verification, for effect...
     process.nextTick(function () {
       return done(null, profile);
     });
 }));
+
+/*
 passport.use(new twitterstrategy({},function(accessToken, refreshToken, profile, done) {
     // asynchronous verification, for effect...
     process.nextTick(function () {
@@ -44,7 +46,7 @@ passport.use(new Oauthstrategy({},function(accessToken, refreshToken, profile, d
       return done(null, profile);
     });
 }));
-
+*/
 
 /**
  * Get port from environment and store in Express.
