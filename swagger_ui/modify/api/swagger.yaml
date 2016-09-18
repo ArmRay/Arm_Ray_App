@@ -1,0 +1,6817 @@
+---
+swagger: "2.0"
+info:
+  description: "Definition of ArmRay backend data-modification API"
+  version: "0.0.1"
+  title: "ArmRay API"
+host: "ec2-52-36-38-196.us-west-2.compute.amazonaws.com:1152"
+basePath: "/armray/api/0.1/rest/modify"
+schemes:
+- "http"
+consumes:
+- "application/json"
+produces:
+- "application/json"
+paths:
+  /Grant:
+    post:
+      tags:
+      - "Grant"
+      description: "Creates `Grant` objects. All fields required.\n"
+      operationId: "createGrant"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "grant_url"
+        in: "formData"
+        description: "array of URLs for `Grant`"
+        required: true
+        type: "string"
+      - name: "grant_description"
+        in: "formData"
+        description: "Description of grant"
+        required: true
+        type: "string"
+      - name: "amount"
+        in: "formData"
+        description: "Amount of grant"
+        required: true
+        type: "number"
+      responses:
+        200:
+          description: "the id of the created `Grant`"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Grant"
+  /Grant/{id}:
+    put:
+      tags:
+      - "Grant"
+      description: "Updates `Grant` objects. **id** is required,\nall others optional.\n"
+      operationId: "updateGrantById"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `Post` name"
+        required: true
+        type: "string"
+      - name: "grant_url"
+        in: "formData"
+        description: "array of URLs for `Grant`"
+        required: false
+        type: "array"
+        items:
+          type: "string"
+        collectionFormat: "multi"
+      - name: "grant_description"
+        in: "formData"
+        description: "Description of `Grant`"
+        required: false
+        type: "string"
+      - name: "amount"
+        in: "formData"
+        description: "Amount of `Grant`"
+        required: false
+        type: "number"
+        format: "float"
+      responses:
+        200:
+          description: "A `Grant` object"
+          schema:
+            $ref: "#/definitions/Grant"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Grant"
+    delete:
+      tags:
+      - "Grant"
+      description: "Deletes `Grant` objects by **id**.\n"
+      operationId: "deleteGrantById"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `Grant` name"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The `Grant` id"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Grant"
+  /Grant/{id}/amount:
+    post:
+      tags:
+      - "Grant"
+      description: "Set `Grant` amount\n"
+      operationId: "setGrantAmount"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `Grant` name"
+        required: true
+        type: "string"
+      - name: "amount"
+        in: "formData"
+        description: "the `Grant` amount"
+        required: true
+        type: "number"
+        format: "float"
+      responses:
+        200:
+          description: "The `Grant` id"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Grant"
+    put:
+      tags:
+      - "Grant"
+      description: "Modify `Grant` amount\n"
+      operationId: "modifyGrantAmount"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `Grant` name"
+        required: true
+        type: "string"
+      - name: "amount"
+        in: "formData"
+        description: "the `Grant` amount"
+        required: true
+        type: "number"
+        format: "float"
+      responses:
+        200:
+          description: "The `Grant` id"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Grant"
+    delete:
+      tags:
+      - "Grant"
+      description: "Clear `Grant` amount\n"
+      operationId: "clearGrantAmount"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `Grant` name"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The `Grant` id"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Grant"
+  /Grant/{id}/amount/{amount}:
+    post:
+      tags:
+      - "Grant"
+      description: "Set `Grant` amount\n"
+      operationId: "setGrantAmountPath"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `Grant` name"
+        required: true
+        type: "string"
+      - name: "amount"
+        in: "path"
+        description: "the `Grant` amount"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The `Grant` id"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Grant"
+    put:
+      tags:
+      - "Grant"
+      description: "Modify `Grant` amount\n"
+      operationId: "modifyGrantAmountPath"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `Grant` name"
+        required: true
+        type: "string"
+      - name: "amount"
+        in: "path"
+        description: "the `Grant` amount"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The `Grant` id"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Grant"
+  /Grant/{id}/created: {}
+  /Grant/{id}/description:
+    post:
+      tags:
+      - "Grant"
+      description: "Set `Grant` description\n"
+      operationId: "setGrantDescription"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `Grant` name"
+        required: true
+        type: "string"
+      - name: "description"
+        in: "formData"
+        description: "the `Grant` description"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The `Grant` url array"
+          schema:
+            type: "array"
+            items:
+              type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Grant"
+    put:
+      tags:
+      - "Grant"
+      description: "Modify `Grant` description\n"
+      operationId: "modifyGrantDescription"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `Grant` name"
+        required: true
+        type: "string"
+      - name: "description"
+        in: "formData"
+        description: "the `Grant` description"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The `Grant` url array"
+          schema:
+            type: "array"
+            items:
+              type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Grant"
+    delete:
+      tags:
+      - "Grant"
+      description: "Clear `Grant` description\n"
+      operationId: "clearGrantDescription"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `Grant` name"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The `Grant` id"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Grant"
+  /Grant/{id}/keys:
+    post:
+      tags:
+      - "Grant"
+      description: "Set `Grant` keywords\n"
+      operationId: "setGrantKeywords"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `Grant` name"
+        required: true
+        type: "string"
+      - name: "keywords"
+        in: "formData"
+        description: "the `Grant` keywords"
+        required: true
+        type: "array"
+        items:
+          type: "string"
+        collectionFormat: "multi"
+      responses:
+        200:
+          description: "The `Grant` id"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Grant"
+    put:
+      tags:
+      - "Grant"
+      description: "Modify `Grant` keywords\n"
+      operationId: "addGrantKeywords"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `Grant` name"
+        required: true
+        type: "string"
+      - name: "keywords"
+        in: "formData"
+        description: "the `Grant` keywords"
+        required: true
+        type: "array"
+        items:
+          type: "string"
+        collectionFormat: "multi"
+      responses:
+        200:
+          description: "The `Grant` id"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Grant"
+    delete:
+      tags:
+      - "Grant"
+      description: "Clear `Grant` keywords\n"
+      operationId: "clearGrantKeywords"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `Grant` id"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The `Grant` id"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Grant"
+  /Grant/{id}/keys/{keyword}:
+    post:
+      tags:
+      - "Grant"
+      description: "Set `Grant` keyword\n"
+      operationId: "setGrantKeywordPath"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `Grant` name"
+        required: true
+        type: "string"
+      - name: "keyword"
+        in: "path"
+        description: "the `Grant` keyword"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The `Grant` id"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Grant"
+    put:
+      tags:
+      - "Grant"
+      description: "Add `Grant` keyword\n"
+      operationId: "addGrantKeyword"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `Grant` name"
+        required: true
+        type: "string"
+      - name: "keyword"
+        in: "path"
+        description: "the `Grant` keyword"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The `Grant` id"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Grant"
+    delete:
+      tags:
+      - "Grant"
+      description: "Set `Grant` keyword\n"
+      operationId: "deleteGrantKeyword"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `Grant` name"
+        required: true
+        type: "string"
+      - name: "keyword"
+        in: "path"
+        description: "the `Grant` keyword"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The `Grant` id"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Grant"
+  /Grant/{id}/modified: {}
+  /Grant/{id}/type:
+    post:
+      tags:
+      - "Grant"
+      description: "Set `Grant` amount\n"
+      operationId: "setGrantType"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `Grant` name"
+        required: true
+        type: "string"
+      - name: "type"
+        in: "formData"
+        description: "the `Grant` type"
+        required: true
+        type: "number"
+        format: "float"
+      responses:
+        200:
+          description: "The `Grant` id"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Grant"
+    put:
+      tags:
+      - "Grant"
+      description: "Modify `Grant` amount\n"
+      operationId: "modifyGrantType"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `Grant` name"
+        required: true
+        type: "string"
+      - name: "type"
+        in: "formData"
+        description: "the `Grant` type"
+        required: true
+        type: "number"
+        format: "float"
+      responses:
+        200:
+          description: "The `Grant` id"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Grant"
+    delete:
+      tags:
+      - "Grant"
+      description: "Clear `Grant` type\n"
+      operationId: "clearGrantType"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `Grant` name"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The `Grant` id"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Grant"
+  /Grant/{id}/type/{type}:
+    post:
+      tags:
+      - "Grant"
+      description: "Set `Grant` type\n"
+      operationId: "setGrantTypePath"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `Grant` name"
+        required: true
+        type: "string"
+      - name: "type"
+        in: "path"
+        description: "the `Grant` type"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The `Grant` id"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Grant"
+    put:
+      tags:
+      - "Grant"
+      description: "Modify `Grant` amount\n"
+      operationId: "modifyGrantTypePath"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `Grant` name"
+        required: true
+        type: "string"
+      - name: "type"
+        in: "path"
+        description: "the `Grant` type"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The `Grant` id"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Grant"
+  /Grant/{id}/url:
+    post:
+      tags:
+      - "Grant"
+      description: "Replace `Grant` url array\n"
+      operationId: "setGrantUrls"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `Grant` name"
+        required: true
+        type: "string"
+      - name: "urls"
+        in: "formData"
+        description: "The `Grant` urls"
+        required: true
+        type: "array"
+        items:
+          type: "string"
+        collectionFormat: "multi"
+      responses:
+        200:
+          description: "The `Grant` id"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Grant"
+    put:
+      tags:
+      - "Grant"
+      description: "Add `Grant` url\n"
+      operationId: "addGrantUrl"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `Grant` name"
+        required: true
+        type: "string"
+      - name: "url"
+        in: "formData"
+        description: "The `Grant` url"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The `Grant` id"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Grant"
+    delete:
+      tags:
+      - "Grant"
+      description: "Clear `Grant` url array\n"
+      operationId: "clearGrantUrls"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `Grant` name"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The `Grant` id"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Grant"
+  /Post:
+    post:
+      tags:
+      - "Post"
+      description: "Creates `Post` objects.  **post_tags_id** and **post_keywords**\
+        \ optional, all others required.\n"
+      operationId: "createPost"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "post_title"
+        in: "formData"
+        description: "ID of `User` author of post"
+        required: true
+        type: "string"
+      - name: "post_text"
+        in: "formData"
+        description: "ID of `User` author of `Post`"
+        required: true
+        type: "string"
+      - name: "post_creator_id"
+        in: "formData"
+        description: "ID of `User` author of post"
+        required: true
+        type: "string"
+      - name: "post_tags_id"
+        in: "formData"
+        description: "array of `User`s tagged in `Post`"
+        required: false
+        type: "array"
+        items:
+          type: "string"
+        collectionFormat: "multi"
+      - name: "post_keywords"
+        in: "formData"
+        description: "array of keywords for `Post`"
+        required: false
+        type: "array"
+        items:
+          type: "string"
+        collectionFormat: "multi"
+      - name: "is_post_private"
+        in: "formData"
+        description: "is `Post` private?"
+        required: true
+        type: "boolean"
+      responses:
+        200:
+          description: "the id of the created `Post`"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Post"
+  /Post/{id}:
+    put:
+      tags:
+      - "Post"
+      description: "Updates `Post` objects. **id** is required,\nall others optional.\n"
+      operationId: "updatePosttById"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `Post` name"
+        required: true
+        type: "string"
+      - name: "post_title"
+        in: "formData"
+        description: "The `Post` name"
+        required: false
+        type: "string"
+      - name: "post_text"
+        in: "formData"
+        description: "The `Post` body"
+        required: false
+        type: "string"
+      - name: "post_creator_id"
+        in: "formData"
+        description: "ID of `User` author of post"
+        required: false
+        type: "string"
+      - name: "post_tags_id"
+        in: "formData"
+        description: "array of `User`s tagged in `Post`"
+        required: false
+        type: "array"
+        items:
+          type: "string"
+        collectionFormat: "multi"
+      - name: "post_keywords"
+        in: "formData"
+        description: "array of keywords for `Post`"
+        required: false
+        type: "array"
+        items:
+          type: "string"
+        collectionFormat: "multi"
+      - name: "is_post_private"
+        in: "formData"
+        description: "Is `Post`private?"
+        required: false
+        type: "boolean"
+      responses:
+        200:
+          description: "A `Post` object"
+          schema:
+            $ref: "#/definitions/Post"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Post"
+    delete:
+      tags:
+      - "Post"
+      description: "Deletes `Post` objects by **id**.\n"
+      operationId: "deletePostById"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `Post` name"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The `Post` id"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Post"
+  /Post/{id}/author:
+    post:
+      tags:
+      - "Post"
+      description: "Sets the `Post`author.  **id** and **author** both required.\n"
+      operationId: "updatePostAuthorByIdPost"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `Post` id"
+        required: true
+        type: "string"
+      - name: "text"
+        in: "formData"
+        description: "new author"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The `id` of the `Post`"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Post"
+    put:
+      tags:
+      - "Post"
+      description: "Sets the `Post`author.  **id** and **author** both required.\n"
+      operationId: "updatePostAuthorById"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `Post` id"
+        required: true
+        type: "string"
+      - name: "author"
+        in: "formData"
+        description: "new author"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The `id` of the `Post`"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Post"
+    delete:
+      tags:
+      - "Post"
+      description: "Deletes text of a `Post` author by **id**.\n"
+      operationId: "deletePostAuthorById"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `Post` id"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The `Post` id"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Post"
+  /Post/{id}/keys:
+    post:
+      tags:
+      - "Post"
+      description: "Replaces keywords on `Post` objects. **id** and **keywords* both\
+        \ required.\n"
+      operationId: "replacePostKeywordsById"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `Post` name"
+        required: true
+        type: "string"
+      - name: "keywords"
+        in: "formData"
+        description: "new tags"
+        required: true
+        type: "array"
+        items:
+          type: "string"
+        collectionFormat: "multi"
+      responses:
+        200:
+          description: "The `id` of the `Post`"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Post"
+    put:
+      tags:
+      - "Post"
+      description: "Adds keywords to `Post` objects. **id** and **keywords** both\
+        \ required.\n"
+      operationId: "updateProjectKeywordsById"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `Post` name"
+        required: true
+        type: "string"
+      - name: "keywords"
+        in: "formData"
+        description: "new keywords"
+        required: true
+        type: "array"
+        items:
+          type: "string"
+        collectionFormat: "multi"
+      responses:
+        200:
+          description: "The `id` of the `Post`"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Post"
+    delete:
+      tags:
+      - "Post"
+      description: "Deletes all tags on a `Post` objects by **id**.\n"
+      operationId: "deletePostKeywordsById"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `Post` name"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The `Post` id"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Post"
+  /Post/{id}/keys/{keyword}:
+    post:
+      tags:
+      - "Post"
+      description: "Adds keyword to `Post` objects. **id** and **user_id* both required.\n"
+      operationId: "addPostKeywordByIdPost"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `Post` name"
+        required: true
+        type: "string"
+      - name: "keyword"
+        in: "path"
+        description: "The `User` id"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The `id` of the `Post`"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Post"
+    put:
+      tags:
+      - "Post"
+      description: "Adds tags to `Post` objects. **id** and **keyword** both required.\n"
+      operationId: "addPostKeywordById"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `Post's name"
+        required: true
+        type: "string"
+      - name: "keyword"
+        in: "path"
+        description: "the keyword"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The `id` of the `Post`"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Post"
+    delete:
+      tags:
+      - "Post"
+      description: "Deletes a keyword on a `Post` objects by **id** and **keyword**\n"
+      operationId: "deletePostKeywordById"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `Post` name"
+        required: true
+        type: "string"
+      - name: "keyword"
+        in: "path"
+        description: "The keyword"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The `Post` id"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Post"
+  /Post/{id}/private:
+    post:
+      tags:
+      - "Post"
+      description: "Sets the `Post`privacy.  **id** and **is_private** both required.\n"
+      operationId: "updatePostPrivacyByIdPost"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `Post` id"
+        required: true
+        type: "string"
+      - name: "is_private"
+        in: "formData"
+        description: "is `Post`private?"
+        required: true
+        type: "boolean"
+      responses:
+        200:
+          description: "The `id` of the `Post`"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Post"
+    put:
+      tags:
+      - "Post"
+      description: "Sets the `Post`privacy.  **id** and **is_private** both required.\n"
+      operationId: "updatePostPrivacyById"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `Post` id"
+        required: true
+        type: "string"
+      - name: "is_private"
+        in: "formData"
+        description: "is `Post`private?"
+        required: true
+        type: "boolean"
+      responses:
+        200:
+          description: "The `id` of the `Post`"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Post"
+  /Post/{id}/tags:
+    post:
+      tags:
+      - "Post"
+      description: "Replaces tags on `Post` objects. **id** and **tagged_users* both\
+        \ required.\n"
+      operationId: "replacePostTagsById"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `Post` name"
+        required: true
+        type: "string"
+      - name: "tagged_users"
+        in: "formData"
+        description: "new tags"
+        required: true
+        type: "array"
+        items:
+          type: "string"
+        collectionFormat: "multi"
+      responses:
+        200:
+          description: "The `id` of the `Post`"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Post"
+    delete:
+      tags:
+      - "Post"
+      description: "Deletes all tags on a `Post` objects by **id**.\n"
+      operationId: "deleteProjectTagsById"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `Post` name"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The `Post` id"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Post"
+  /Post/{id}/tags/{user_id}:
+    post:
+      tags:
+      - "Post"
+      - "User"
+      description: "Adds tag to `Post` objects. **id** and **user_id** both required.\n"
+      operationId: "addPostTagsByIdPost"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `Post` name"
+        required: true
+        type: "string"
+      - name: "user_id"
+        in: "path"
+        description: "The `User` id"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The `id` of the `Post`"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Post"
+    put:
+      tags:
+      - "Post"
+      - "User"
+      description: "Adds tags to `Post` objects. **id** and **user_id** both required.\n"
+      operationId: "updatePostTagsById"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `Post` name"
+        required: true
+        type: "string"
+      - name: "user_id"
+        in: "path"
+        description: "new tags"
+        required: true
+        type: "array"
+        items:
+          type: "string"
+        collectionFormat: "csv"
+      responses:
+        200:
+          description: "The `id` of the `Post`"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Post"
+    delete:
+      tags:
+      - "Post"
+      - "User"
+      description: "Deletes the tags on a `Post` objects by **id** and **user_id**\n"
+      operationId: "deletePostTagsById"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `Post` name"
+        required: true
+        type: "string"
+      - name: "user_id"
+        in: "path"
+        description: "The `User` id"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The `Post` id"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Post"
+  /Post/{id}/text:
+    post:
+      tags:
+      - "Post"
+      description: "Sets the `Post`text.  **id** and **text** both required.\n"
+      operationId: "updatePostTextByIdPost"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `Post` id"
+        required: true
+        type: "string"
+      - name: "text"
+        in: "formData"
+        description: "new title"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The `id` of the `Post`"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Post"
+    put:
+      tags:
+      - "Post"
+      description: "Sets the `Post`title.  **id** and **text** both required.\n"
+      operationId: "updatePostTextById"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `Post` name"
+        required: true
+        type: "string"
+      - name: "text"
+        in: "formData"
+        description: "new text"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The `id` of the `Post`"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Post"
+    delete:
+      tags:
+      - "Post"
+      description: "Deletes text of a `Post` objects by **id**.\n"
+      operationId: "deletePostTextById"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `Post` id"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The `Post` id"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Post"
+  /Post/{id}/title:
+    post:
+      tags:
+      - "Post"
+      description: "Sets the `Post`title.  **id** and **title** both required.\n"
+      operationId: "updatePostTitleByIdPost"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `Post` name"
+        required: true
+        type: "string"
+      - name: "title"
+        in: "formData"
+        description: "new title"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The `id` of the `Post`"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Post"
+    put:
+      tags:
+      - "Post"
+      description: "Sets the `Post`title.  **id** and **title** both required.\n"
+      operationId: "updatePostTitleById"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `Post` name"
+        required: true
+        type: "string"
+      - name: "title"
+        in: "formData"
+        description: "new title"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The `id` of the `Post`"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Post"
+    delete:
+      tags:
+      - "Post"
+      description: "Deletes title of a `Post` objects by **id**.\n"
+      operationId: "deletePosTitleById"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `Post` id"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The `Post` id"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Post"
+  /Project:
+    post:
+      tags:
+      - "Project"
+      description: "Creates `Project` objects. **project_name**, **project_description**,\n\
+        **project_creator_id**, and **is_project_private** are required,\nall others\
+        \ optional.\n"
+      operationId: "createProject"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "project_name"
+        in: "formData"
+        description: "Project's name"
+        required: true
+        type: "string"
+      - name: "project_main_grant_type"
+        in: "formData"
+        description: "Project's `Grant`type"
+        required: false
+        type: "string"
+      - name: "project_description"
+        in: "formData"
+        description: "Description of project"
+        required: true
+        type: "string"
+      - name: "project_creator_id"
+        in: "formData"
+        description: "array of `Project`creator ids"
+        required: true
+        type: "array"
+        items:
+          type: "string"
+        collectionFormat: "multi"
+      - name: "project_collaborators_id"
+        in: "formData"
+        description: "array of `Project`collaborator ids"
+        required: false
+        type: "array"
+        items:
+          type: "string"
+        collectionFormat: "multi"
+      - name: "project_keywords"
+        in: "formData"
+        description: "array of `Project`keywords"
+        required: false
+        type: "array"
+        items:
+          type: "string"
+        collectionFormat: "multi"
+      - name: "project_urls"
+        in: "formData"
+        description: "array of `Project`URLs"
+        required: false
+        type: "array"
+        items:
+          type: "string"
+        collectionFormat: "multi"
+      - name: "grant_ids"
+        in: "formData"
+        description: "The `Grant` IDs"
+        required: false
+        type: "array"
+        items:
+          type: "string"
+        collectionFormat: "multi"
+      - name: "university_id"
+        in: "formData"
+        description: "ID of `University`hosting research"
+        required: false
+        type: "string"
+      - name: "grant_facilitator"
+        in: "formData"
+        description: "Name of individual fascilitating `Grant`funding"
+        required: false
+        type: "string"
+      - name: "project_file"
+        in: "formData"
+        description: "files for grant"
+        required: false
+        type: "array"
+        items:
+          type: "string"
+        collectionFormat: "multi"
+      - name: "reviews"
+        in: "formData"
+        description: "reviews"
+        required: false
+        type: "array"
+        items:
+          type: "string"
+        collectionFormat: "multi"
+      - name: "posts"
+        in: "formData"
+        description: "posts related to project"
+        required: false
+        type: "array"
+        items:
+          type: "string"
+        collectionFormat: "multi"
+      - name: "is_project_private"
+        in: "formData"
+        description: "is `Project`private?"
+        required: true
+        type: "boolean"
+      responses:
+        200:
+          description: "The `id` of the created user"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Project"
+  /Project/{id}:
+    put:
+      tags:
+      - "Project"
+      description: "Updates a `Project` object. All fields other than `id` optional.\n"
+      operationId: "updateProject"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `Project`id"
+        required: true
+        type: "string"
+      - name: "project_name"
+        in: "formData"
+        description: "Project's name"
+        required: false
+        type: "string"
+      - name: "project_main_grant_type"
+        in: "formData"
+        description: "Project's `Grant`type"
+        required: false
+        type: "string"
+      - name: "project_description"
+        in: "formData"
+        description: "Description of project"
+        required: false
+        type: "string"
+      - name: "project_creator_id"
+        in: "formData"
+        description: "array of `Project`creator ids"
+        required: false
+        type: "array"
+        items:
+          type: "string"
+        collectionFormat: "multi"
+      - name: "project_collaborators_id"
+        in: "formData"
+        description: "array of `Project`collaborator ids"
+        required: false
+        type: "array"
+        items:
+          type: "string"
+        collectionFormat: "multi"
+      - name: "project_keywords"
+        in: "formData"
+        description: "array of `Project`keywords"
+        required: false
+        type: "array"
+        items:
+          type: "string"
+        collectionFormat: "multi"
+      - name: "project_urls"
+        in: "formData"
+        description: "array of `Project`URLs"
+        required: false
+        type: "array"
+        items:
+          type: "string"
+        collectionFormat: "multi"
+      - name: "grant_id"
+        in: "formData"
+        description: "The `Grant` IDs"
+        required: false
+        type: "array"
+        items:
+          type: "string"
+        collectionFormat: "multi"
+      - name: "university_id"
+        in: "formData"
+        description: "ID of `University`hosting research"
+        required: false
+        type: "string"
+      - name: "grant_facilitator"
+        in: "formData"
+        description: "Name of individual fascilitating `Grant`funding"
+        required: false
+        type: "string"
+      - name: "project_file"
+        in: "formData"
+        description: "files for grant"
+        required: false
+        type: "array"
+        items:
+          type: "string"
+        collectionFormat: "multi"
+      - name: "reviews"
+        in: "formData"
+        description: "reviews"
+        required: false
+        type: "array"
+        items:
+          type: "string"
+        collectionFormat: "multi"
+      - name: "posts"
+        in: "formData"
+        description: "posts related to project"
+        required: false
+        type: "array"
+        items:
+          type: "string"
+        collectionFormat: "multi"
+      - name: "is_project_private"
+        in: "formData"
+        description: "is `Project`private?"
+        required: false
+        type: "boolean"
+      responses:
+        200:
+          description: "The `id` of the updatee `Project`"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Project"
+    delete:
+      tags:
+      - "Project"
+      description: "Delete a 'Project' by their id.\n"
+      operationId: "deleteProjectById"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "the `id` of the `Project` to delete"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The `id` of the deleted `Project`"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Project"
+  /Project/{id}/collaborators:
+    post:
+      tags:
+      - "Project"
+      - "User"
+      description: "Set creators of a `Project`.\n"
+      operationId: "setAllProjectCollaborators"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `id` of the `Project` to retrieve"
+        required: true
+        type: "string"
+      - name: "collaborators"
+        in: "formData"
+        description: "The `ids` of the ollaborators"
+        required: true
+        type: "array"
+        items:
+          type: "string"
+        collectionFormat: "multi"
+      responses:
+        200:
+          description: "The `id` associated with the `Project`"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Project"
+    put:
+      tags:
+      - "Project"
+      - "User"
+      description: "Add to collaborators of a `Project`.\n"
+      operationId: "addProjectCollaborators"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `id` of the `Project` to retrieve"
+        required: true
+        type: "string"
+      - name: "collaborators"
+        in: "formData"
+        description: "The `ids` of the collaborators"
+        required: true
+        type: "array"
+        items:
+          type: "string"
+        collectionFormat: "multi"
+      responses:
+        200:
+          description: "The `id` associated with the `Project`"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Project"
+    delete:
+      tags:
+      - "Project"
+      - "User"
+      description: "Remove all 'project_collaborators' from a `Project`.\n"
+      operationId: "deleteProjectCollaborators"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `id` of the `Project` to retrieve"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The `project_id` associated with the `Project`"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Project"
+  /Project/{id}/collaborators/{user_id}:
+    post:
+      tags:
+      - "Project"
+      - "User"
+      description: "Set collaborators of a `Project`.\n"
+      operationId: "setProjectCollaborators"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `id` of the `Project` to retrieve"
+        required: true
+        type: "string"
+      - name: "user_id"
+        in: "path"
+        description: "The `id` of the collaborator"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The `id` associated with the `Project`"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Project"
+    put:
+      tags:
+      - "Project"
+      - "User"
+      description: "Add to collaborator of a `Project`.\n"
+      operationId: "addProjectCollaborator"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `id` of the `Project` to retrieve"
+        required: true
+        type: "string"
+      - name: "user_id"
+        in: "path"
+        description: "The `ids` of the collaborator"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The `id` associated with the `Project`"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Project"
+    delete:
+      tags:
+      - "Project"
+      - "User"
+      description: "Remove a 'project_collaborator' from a `Project`.\n"
+      operationId: "deleteProjectCollaborator"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `id` of the `Project` to retrieve"
+        required: true
+        type: "string"
+      - name: "user_id"
+        in: "path"
+        description: "The `ids` of the collaborator"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The `project_id` associated with the `Project`"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Project"
+  /Project/{id}/creators:
+    post:
+      tags:
+      - "Project"
+      - "User"
+      description: "Set creators of a `Project`.\n"
+      operationId: "setAllProjectCreators"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `id` of the `Project` to retrieve"
+        required: true
+        type: "string"
+      - name: "creators"
+        in: "formData"
+        description: "The `ids` of the creators"
+        required: true
+        type: "array"
+        items:
+          type: "string"
+        collectionFormat: "multi"
+      responses:
+        200:
+          description: "The `id` associated with the `Project`"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Project"
+    put:
+      tags:
+      - "Project"
+      - "User"
+      description: "Add to creators of a `Project`.\n"
+      operationId: "addProjectCreators"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `id` of the `Project` to retrieve"
+        required: true
+        type: "string"
+      - name: "creators"
+        in: "formData"
+        description: "The `ids` of the creators"
+        required: true
+        type: "array"
+        items:
+          type: "string"
+        collectionFormat: "multi"
+      responses:
+        200:
+          description: "The `id` associated with the `Project`"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Project"
+    delete:
+      tags:
+      - "Project"
+      - "User"
+      description: "Remove all 'project_creators' from a `Project`.\n"
+      operationId: "deleteProjectCreators"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `id` of the `Project` to retrieve"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The `project_id` associated with the `Project`"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Project"
+  /Project/{id}/creators/{user_id}:
+    post:
+      tags:
+      - "Project"
+      - "User"
+      description: "Set creator of a `Project`.\n"
+      operationId: "setProjectCreator"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `id` of the `Project` to retrieve"
+        required: true
+        type: "string"
+      - name: "user_id"
+        in: "path"
+        description: "The `id` of the creator"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The `id` associated with the `Project`"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Project"
+    put:
+      tags:
+      - "Project"
+      - "User"
+      description: "Add to creators of a `Project`.\n"
+      operationId: "addProjectCreator"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `id` of the `Project` to retrieve"
+        required: true
+        type: "string"
+      - name: "user_id"
+        in: "path"
+        description: "The `ids` of the creators"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The `id` associated with the `Project`"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Project"
+    delete:
+      tags:
+      - "Project"
+      - "User"
+      description: "Remove a 'project_creator' from a `Project`.\n"
+      operationId: "deleteProjectCreator"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `id` of the `Project` to retrieve"
+        required: true
+        type: "string"
+      - name: "user_id"
+        in: "path"
+        description: "The `ids` of the creators"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The `project_id` associated with the `Project`"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Project"
+  /Project/{id}/description:
+    delete:
+      tags:
+      - "Project"
+      description: "Delete project_description from a project\n"
+      operationId: "deleteProjectDescription"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `id` of the `Project` to retrieve"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The `project_description` associated with the `Project`"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Project"
+  /Project/{id}/description/{project_description}:
+    post:
+      tags:
+      - "Project"
+      description: "Add project_description to a `Project`.\n"
+      operationId: "setProjectDescription"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `id` of the `Project` to retrieve"
+        required: true
+        type: "string"
+      - name: "project_description"
+        in: "path"
+        description: "The project_description"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The id associated with the `Project`"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Project"
+    put:
+      tags:
+      - "Project"
+      description: "Modify project_description of a `Project`.\n"
+      operationId: "modifyProjectDescription"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `id` of the `Project` to retrieve"
+        required: true
+        type: "string"
+      - name: "project_description"
+        in: "path"
+        description: "The project_description"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The id associated with the `Project`"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Project"
+  /Project/{id}/files:
+    post:
+      tags:
+      - "Project"
+      description: "Set files of a `Project`.\n"
+      operationId: "setAllProjectFiles"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `id` of the `Project` to retrieve"
+        required: true
+        type: "string"
+      - name: "files"
+        in: "formData"
+        description: "The `files` of the project"
+        required: true
+        type: "array"
+        items:
+          type: "string"
+        collectionFormat: "multi"
+      responses:
+        200:
+          description: "The `id` associated with the `Project`"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Project"
+    put:
+      tags:
+      - "Project"
+      description: "Add to files of a `Project`.\n"
+      operationId: "addProjectFiles"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `id` of the `Project` to retrieve"
+        required: true
+        type: "string"
+      - name: "urls"
+        in: "formData"
+        description: "The `files` of the `Project``"
+        required: true
+        type: "array"
+        items:
+          type: "string"
+        collectionFormat: "multi"
+      responses:
+        200:
+          description: "The `id` associated with the `Project`"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Project"
+    delete:
+      tags:
+      - "Project"
+      description: "Remove all 'files' from a `Project`.\n"
+      operationId: "deleteProjectFiles"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `id` of the `Project` to retrieve"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The `id` associated with the `Project`"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Project"
+  /Project/{id}/grant:
+    delete:
+      tags:
+      - "Project"
+      - "Grant"
+      description: "Delete `Grant`from a project\n"
+      operationId: "deleteProjectGrant"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `id` of the `Project` to retrieve"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The `grant` associated with the `Project`"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Project"
+  /Project/{id}/grant/{grant_id}:
+    post:
+      tags:
+      - "Project"
+      - "Grant"
+      description: "Add `Grant`to a `Project`.\n"
+      operationId: "setProjectGrant"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `id` of the `Project` to retrieve"
+        required: true
+        type: "string"
+      - name: "grant_id"
+        in: "path"
+        description: "The grant_id"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The id associated with the `Project`"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Project"
+    put:
+      tags:
+      - "Project"
+      - "Grant"
+      description: "Modify `Grant`of a `Project`.\n"
+      operationId: "modifyProjectGrant"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `id` of the `Project` to retrieve"
+        required: true
+        type: "string"
+      - name: "grant_id"
+        in: "path"
+        description: "The grant_id"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The id associated with the `Project`"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Project"
+  /Project/{id}/keys:
+    post:
+      tags:
+      - "Project"
+      description: "Set keywords of a `Project`.\n"
+      operationId: "setAllProjectKeywords"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `id` of the `Project` to retrieve"
+        required: true
+        type: "string"
+      - name: "keywords"
+        in: "formData"
+        description: "The `keywords` of the `Project``"
+        required: true
+        type: "array"
+        items:
+          type: "string"
+        collectionFormat: "multi"
+      responses:
+        200:
+          description: "The `id` associated with the `Project`"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Project"
+    put:
+      tags:
+      - "Project"
+      description: "Add to keywords of a `Project`.\n"
+      operationId: "addProjectKeywords"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `id` of the `Project` to retrieve"
+        required: true
+        type: "string"
+      - name: "keywords"
+        in: "formData"
+        description: "The `ids` of the collaborators"
+        required: true
+        type: "array"
+        items:
+          type: "string"
+        collectionFormat: "multi"
+      responses:
+        200:
+          description: "The `id` associated with the `Project`"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Project"
+    delete:
+      tags:
+      - "Project"
+      description: "Remove all 'keywords' from a `Project`.\n"
+      operationId: "deleteProjectKeywords"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `id` of the `Project` to retrieve"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The `project_id` associated with the `Project`"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Project"
+  /Project/{id}/keys/{keyword}:
+    post:
+      tags:
+      - "Project"
+      description: "Set keyword of a `Project`.\n"
+      operationId: "setProjectKeyword"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `id` of the `Project` to retrieve"
+        required: true
+        type: "string"
+      - name: "keyword"
+        in: "path"
+        description: "The `keyword`"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The `id` associated with the `Project`"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Project"
+    put:
+      tags:
+      - "Project"
+      description: "Add to keyword of a `Project`.\n"
+      operationId: "addProjectKeyword"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `id` of the `Project` to retrieve"
+        required: true
+        type: "string"
+      - name: "keyword"
+        in: "path"
+        description: "The keyword"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The `id` associated with the `Project`"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Project"
+    delete:
+      tags:
+      - "Project"
+      description: "Remove a 'keyword' from a `Project`.\n"
+      operationId: "deleteProjectKeyword"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `id` of the `Project` to retrieve"
+        required: true
+        type: "string"
+      - name: "keyword"
+        in: "path"
+        description: "The keyword"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The `project_id` associated with the `Project`"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Project"
+  /Project/{id}/name/{project_name}:
+    post:
+      tags:
+      - "Project"
+      description: "Add project_name to a `Project`.\n"
+      operationId: "addProjectName"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `id` of the `Project` to retrieve"
+        required: true
+        type: "string"
+      - name: "project_name"
+        in: "path"
+        description: "The project_name"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The id associated with the `Project`"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Project"
+    put:
+      tags:
+      - "Project"
+      description: "Modify project_name of a `Project`.\n"
+      operationId: "modifyProjectName"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `id` of the `Project` to retrieve"
+        required: true
+        type: "string"
+      - name: "project_name"
+        in: "path"
+        description: "The project_name"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The id associated with the `Project`"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Project"
+  /Project/{id}/posts:
+    post:
+      tags:
+      - "Project"
+      - "Post"
+      description: "Set posts of a `Project`.\n"
+      operationId: "setAllProjectPosts"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `id` of the `Project` to retrieve"
+        required: true
+        type: "string"
+      - name: "posts"
+        in: "formData"
+        description: "The `ids` of the posts"
+        required: true
+        type: "array"
+        items:
+          type: "string"
+        collectionFormat: "multi"
+      responses:
+        200:
+          description: "The `id` associated with the `Project`"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Project"
+    put:
+      tags:
+      - "Project"
+      - "Post"
+      description: "Add to posts of a `Project`.\n"
+      operationId: "addProjectPosts"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `id` of the `Project` to retrieve"
+        required: true
+        type: "string"
+      - name: "reviews"
+        in: "formData"
+        description: "The `ids` of the posts"
+        required: true
+        type: "array"
+        items:
+          type: "string"
+        collectionFormat: "multi"
+      responses:
+        200:
+          description: "The `id` associated with the `Project`"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Project"
+    delete:
+      tags:
+      - "Project"
+      - "Post"
+      description: "Remove all 'posts' from a `Project`.\n"
+      operationId: "deleteProjectPosts"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `id` of the `Project` to retrieve"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The `project_id` associated with the `Project`"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Project"
+  /Project/{id}/posts/{post_id}:
+    put:
+      tags:
+      - "Project"
+      - "Post"
+      description: "Add `Post`to a `Project`.\n"
+      operationId: "addProjectPost"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `id` of the `Project` to retrieve"
+        required: true
+        type: "string"
+      - name: "post_id"
+        in: "path"
+        description: "The `id` of the post"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The `project_id` associated with the `Project`"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Project"
+    delete:
+      tags:
+      - "Project"
+      - "Post"
+      description: "Remove a 'post' from a `Project`.\n"
+      operationId: "deleteProjectPost"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `id` of the `Project` to retrieve"
+        required: true
+        type: "string"
+      - name: "post_id"
+        in: "path"
+        description: "The `ids` of the post"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The `project_id` associated with the `Project`"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Project"
+  /Project/{id}/private:
+    put:
+      tags:
+      - "Project"
+      description: "Set is_private from a  `Project`.\n"
+      operationId: "setIsProjectPrivate"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `id` of the `Project` to retrieve"
+        required: true
+        type: "string"
+      - name: "is_private"
+        in: "formData"
+        description: "is `Project`private?"
+        required: true
+        type: "boolean"
+      responses:
+        200:
+          description: "The boolean"
+          schema:
+            type: "boolean"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Project"
+  /Project/{id}/project_name:
+    delete:
+      tags:
+      - "Project"
+      description: "Delete project_name from a project\n"
+      operationId: "deleteUserProjectName"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `id` of the `Project` to retrieve"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The `project_name` associated with the `Project`"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Project"
+  /Project/{id}/reviews:
+    post:
+      tags:
+      - "Project"
+      - "Review"
+      description: "Set reviews of a `Project`.\n"
+      operationId: "setAllProjectReviews"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `id` of the `Project` to retrieve"
+        required: true
+        type: "string"
+      - name: "reviews"
+        in: "formData"
+        description: "The `ids` of the reviews"
+        required: true
+        type: "array"
+        items:
+          type: "string"
+        collectionFormat: "multi"
+      responses:
+        200:
+          description: "The `id` associated with the `Project`"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Project"
+    put:
+      tags:
+      - "Project"
+      - "Review"
+      description: "Add to reviews of a `Project`.\n"
+      operationId: "addProjectReviews"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `id` of the `Project` to retrieve"
+        required: true
+        type: "string"
+      - name: "reviews"
+        in: "formData"
+        description: "The `ids` of the reviews"
+        required: true
+        type: "array"
+        items:
+          type: "string"
+        collectionFormat: "multi"
+      responses:
+        200:
+          description: "The `id` associated with the `Project`"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Project"
+    delete:
+      tags:
+      - "Project"
+      - "Review"
+      description: "Remove all 'reviews' from a `Project`.\n"
+      operationId: "deleteProjectReviews"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `id` of the `Project` to retrieve"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The `project_id` associated with the `Project`"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Project"
+  /Project/{id}/reviews/{review_id}:
+    put:
+      tags:
+      - "Project"
+      - "Review"
+      description: "Add `Review`to a `Project`.\n"
+      operationId: "addProjectReview"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `id` of the `Project` to retrieve"
+        required: true
+        type: "string"
+      - name: "review_id"
+        in: "path"
+        description: "The `id` of the review"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The `project_id` associated with the `Project`"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Project"
+    delete:
+      tags:
+      - "Project"
+      - "Review"
+      description: "Remove a 'review' from a `Project`.\n"
+      operationId: "deleteProjectReview"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `id` of the `Project` to retrieve"
+        required: true
+        type: "string"
+      - name: "review_id"
+        in: "path"
+        description: "The `ids` of the review"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The `project_id` associated with the `Project`"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Project"
+  /Project/{id}/uni:
+    delete:
+      tags:
+      - "Project"
+      - "University"
+      description: "Delete all universities from a project\n"
+      operationId: "deleteProjecUniversities"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `id` of the `Project` to retrieve"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The `id` associated with the `Project`"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Project"
+  /Project/{id}/uni/{university_id}:
+    post:
+      tags:
+      - "Project"
+      - "University"
+      description: "Set university_id to a `Project`.\n"
+      operationId: "setProjectUniversity"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `id` of the `Project` to retrieve"
+        required: true
+        type: "string"
+      - name: "university_id"
+        in: "path"
+        description: "The university_id"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The id associated with the `Project`"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Project"
+    put:
+      tags:
+      - "Project"
+      - "University"
+      description: "Modify university_id of a `Project`.\n"
+      operationId: "modifyProjectUniversity"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `id` of the `Project` to retrieve"
+        required: true
+        type: "string"
+      - name: "university_id"
+        in: "path"
+        description: "The university_id"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The id associated with the `Project`"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Project"
+  /Project/{id}/urls:
+    post:
+      tags:
+      - "Project"
+      description: "Set urls of a `Project`.\n"
+      operationId: "setAllProjectUrls"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `id` of the `Project` to retrieve"
+        required: true
+        type: "string"
+      - name: "urls"
+        in: "formData"
+        description: "The `urls` of the project"
+        required: true
+        type: "array"
+        items:
+          type: "string"
+        collectionFormat: "multi"
+      responses:
+        200:
+          description: "The `id` associated with the `Project`"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Project"
+    put:
+      tags:
+      - "Project"
+      description: "Add to urls of a `Project`.\n"
+      operationId: "addProjectUrls"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `id` of the `Project` to retrieve"
+        required: true
+        type: "string"
+      - name: "urls"
+        in: "formData"
+        description: "The `urls` of the `Project``"
+        required: true
+        type: "array"
+        items:
+          type: "string"
+        collectionFormat: "multi"
+      responses:
+        200:
+          description: "The `id` associated with the `Project`"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Project"
+    delete:
+      tags:
+      - "Project"
+      description: "Remove all 'urls' from a `Project`.\n"
+      operationId: "deleteProjectUrls"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `id` of the `Project` to retrieve"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The `id` associated with the `Project`"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Project"
+  /Review/{id}:
+    put:
+      tags:
+      - "Review"
+      description: "Updates `Review` objects. **id** is required,\nall others optional.\n"
+      operationId: "updateReviewById"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `Post` name"
+        required: true
+        type: "string"
+      - name: "review_body"
+        in: "formData"
+        description: "body of `Review`"
+        required: false
+        type: "string"
+      - name: "reviewer_id"
+        in: "formData"
+        description: "The `User`who wrote `Review`"
+        required: false
+        type: "string"
+      - name: "rating"
+        in: "formData"
+        description: "Rating (1 <= rating <= 5)"
+        required: false
+        type: "number"
+        format: "int32"
+      responses:
+        200:
+          description: "A `Review` object"
+          schema:
+            $ref: "#/definitions/Review"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Review"
+    delete:
+      tags:
+      - "Review"
+      description: "Deletes `Review` objects by **id**.\n"
+      operationId: "deleteReviewById"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `Review` name"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The `Review` id"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Review"
+  /Review/{id}/body:
+    post:
+      tags:
+      - "Review"
+      description: "Set `Review` body.\n"
+      operationId: "setReviewBodyById"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `Review` name"
+        required: true
+        type: "string"
+      - name: "body"
+        in: "formData"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "A `Review` id"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Review"
+    put:
+      tags:
+      - "Review"
+      description: "Updates `Review` body.\n"
+      operationId: "updateReviewBodyById"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `Review` name"
+        required: true
+        type: "string"
+      - name: "body"
+        in: "formData"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "A `Review` id"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Review"
+    delete:
+      tags:
+      - "Review"
+      description: "Deletes `Review` body\n"
+      operationId: "deleteReviewBodyById"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `Review` name"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The `Review` id"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Review"
+  /Review/{id}/created: {}
+  /Review/{id}/rating:
+    delete:
+      tags:
+      - "Review"
+      description: "Deletes `Review` rating\n"
+      operationId: "deleteReviewRating"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `Review` id"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The `Review` id"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Review"
+  /Review/{id}/rating/{rating}:
+    post:
+      tags:
+      - "Review"
+      description: "Sets `Review` rating\n"
+      operationId: "setReviewRating"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `Review` id"
+        required: true
+        type: "string"
+      - name: "rating"
+        in: "path"
+        description: "The `Review` rating"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The `Review` id"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Review"
+    put:
+      tags:
+      - "Review"
+      description: "Updates `Review` rating\n"
+      operationId: "updateReviewRating"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `Review` id"
+        required: true
+        type: "string"
+      - name: "rating"
+        in: "path"
+        description: "The `Review` rating"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The `Review` id"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Review"
+  /Review/{id}/reviewer:
+    delete:
+      tags:
+      - "Review"
+      - "User"
+      description: "Deletes `Review` reviewer\n"
+      operationId: "deleteReviewReviewer"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `Review` id"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The `Review` id"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Review"
+  /Review/{id}/reviewer/{user_id}:
+    post:
+      tags:
+      - "Review"
+      - "User"
+      description: "Set `Review` reviewer.\n"
+      operationId: "setReviewReviewerById"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `Review` name"
+        required: true
+        type: "string"
+      - name: "user_id"
+        in: "path"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "A `Review` id"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Review"
+    put:
+      tags:
+      - "Review"
+      - "User"
+      description: "Updates `Review` reviewer.\n"
+      operationId: "updateReviewReviewerById"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `Review` name"
+        required: true
+        type: "string"
+      - name: "user_id"
+        in: "path"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "A `Review` id"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Review"
+    delete:
+      tags:
+      - "Review"
+      - "User"
+      description: "Deletes `Review` reviewer\n"
+      operationId: "deleteReviewReviewerById"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `Review` id"
+        required: true
+        type: "string"
+      - name: "user_id"
+        in: "path"
+        description: "The `Review` reviewer id"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The `Review` id"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Review"
+  /Review/{id}/updated: {}
+  /Review/{id}/url:
+    post:
+      tags:
+      - "Review"
+      description: "Sets `Review` url\n"
+      operationId: "setReviewUrl"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `Review` id"
+        required: true
+        type: "string"
+      - name: "url"
+        in: "formData"
+        description: "The `Review` url"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The `Review` id"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Review"
+    put:
+      tags:
+      - "Review"
+      description: "Updates `Review` url\n"
+      operationId: "updateReviewUrl"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `Review` id"
+        required: true
+        type: "string"
+      - name: "url"
+        in: "formData"
+        description: "The `Review` url"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The `Review` id"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Review"
+    delete:
+      tags:
+      - "Review"
+      description: "Deletes `Review` url\n"
+      operationId: "deleteReviewUrl"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `Review` id"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The `Review` id"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Review"
+  /Skill:
+    put:
+      tags:
+      - "Skill"
+      description: "Creates `Skill` objects.\nRequired query param of **size** determines\n\
+        max number of results per page, and **page** determines\nwhich page in the\
+        \ pagination we are. Remaining params optional.\n"
+      operationId: "createSkills"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "description"
+        in: "formData"
+        description: "description of `Skill`"
+        required: false
+        type: "string"
+      responses:
+        200:
+          description: "A `Skill` object"
+          schema:
+            $ref: "#/definitions/Skill"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Skill"
+  /Skill/{id}:
+    put:
+      tags:
+      - "Skill"
+      description: "Updates `Skill` objects. **id** is required,\nall others optional.\n"
+      operationId: "updateSkillById"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `Post` name"
+        required: true
+        type: "string"
+      - name: "description"
+        in: "formData"
+        description: "description of `Skill`"
+        required: false
+        type: "string"
+      responses:
+        200:
+          description: "A `Review` object"
+          schema:
+            $ref: "#/definitions/Skill"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Skill"
+    delete:
+      tags:
+      - "Skill"
+      description: "Deletes `Skill` objects by **id**.\n"
+      operationId: "deleteSkillwById"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `Skill` id"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The `Review` id"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Skill"
+  /Skill/{id}/created: {}
+  /Skill/{id}/description:
+    post:
+      tags:
+      - "Skill"
+      description: "Set `Skill` body.\n"
+      operationId: "setSkillDescriptionByIdForn"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `Skill` name"
+        required: true
+        type: "string"
+      - name: "description"
+        in: "formData"
+        description: "The `Skill` description"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "A `Skill` id"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Skill"
+    put:
+      tags:
+      - "Skill"
+      description: "Updates `Skill` description.\n"
+      operationId: "updateSkillDescriptionByIdForm"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `Skill` name"
+        required: true
+        type: "string"
+      - name: "description"
+        in: "formData"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "A `Skill` id"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Skill"
+    delete:
+      tags:
+      - "Skill"
+      description: "Deletes `Skill` body\n"
+      operationId: "deleteSkillDescriptionByIdForn"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `Skill` name"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The `Skill` id"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Skill"
+  /Skill/{id}/description/{description}:
+    post:
+      tags:
+      - "Skill"
+      description: "Set `Skill` body.\n"
+      operationId: "setSkillDescriptionById"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `Skill` id"
+        required: true
+        type: "string"
+      - name: "description"
+        in: "path"
+        description: "The `Skill` description"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "A `Skill` id"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Skill"
+    put:
+      tags:
+      - "Skill"
+      description: "Updates `Skill` description.\n"
+      operationId: "updateSkillDescriptionById"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `Skill` name"
+        required: true
+        type: "string"
+      - name: "description"
+        in: "path"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "A `Skill` id"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Skill"
+  /Skill/{id}/updated: {}
+  /University:
+    post:
+      tags:
+      - "University"
+      description: "Creates `University` objects. **name**, **city**, and **state**\
+        \ are required, all others optional.\n"
+      operationId: "createUniversity"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "name"
+        in: "formData"
+        description: "Name of `University`"
+        required: true
+        type: "string"
+      - name: "city"
+        in: "formData"
+        description: "City of `University`"
+        required: true
+        type: "string"
+      - name: "state"
+        in: "formData"
+        description: "state of `University`"
+        required: true
+        type: "string"
+      - name: "geolocation"
+        in: "formData"
+        description: "2 item tuple representing lat/long of `University`; if not provided\
+          \ will be calculated based on city/state"
+        required: false
+        type: "string"
+      - name: "project_ids"
+        in: "formData"
+        description: "ids of `Project` items at `University`"
+        required: false
+        type: "array"
+        items:
+          type: "string"
+        collectionFormat: "multi"
+      - name: "profile_images"
+        in: "formData"
+        description: "paths to profile images for `University`"
+        required: false
+        type: "array"
+        items:
+          type: "string"
+        collectionFormat: "multi"
+      responses:
+        200:
+          description: "A `University` object"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/University"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "University"
+  /University/{id}:
+    put:
+      tags:
+      - "University"
+      description: "Updates `University` objects. **id** is required,\nall others\
+        \ optional.\n"
+      operationId: "updateUniversityById"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `University` id"
+        required: true
+        type: "string"
+      - name: "name"
+        in: "formData"
+        description: "Name of `University`"
+        required: true
+        type: "string"
+      - name: "city"
+        in: "formData"
+        description: "City of `University`"
+        required: true
+        type: "string"
+      - name: "state"
+        in: "formData"
+        description: "state of `University`"
+        required: true
+        type: "string"
+      - name: "geolocation"
+        in: "formData"
+        description: "2 item tuple representing lat/long of `University`; if not provided\
+          \ will be calculated based on city/state"
+        required: false
+        type: "string"
+      - name: "project_ids"
+        in: "formData"
+        description: "ids of `Project` items at `University`"
+        required: false
+        type: "array"
+        items:
+          type: "string"
+        collectionFormat: "multi"
+      - name: "profile_images"
+        in: "formData"
+        description: "paths to profile images for `University`"
+        required: false
+        type: "array"
+        items:
+          type: "string"
+        collectionFormat: "multi"
+      responses:
+        200:
+          description: "A `University` object"
+          schema:
+            $ref: "#/definitions/University"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "University"
+    delete:
+      tags:
+      - "University"
+      description: "Deletes `University` objects by **id**.\n"
+      operationId: "deleteUniversityById"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `University` id"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The `University` id"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "University"
+  /University/{id}/city:
+    delete:
+      tags:
+      - "University"
+      description: "Deletes `University` city\n"
+      operationId: "deleteUniversityCityById"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `University` id"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The `University` id"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "University"
+  /University/{id}/city/{city}:
+    post:
+      tags:
+      - "University"
+      description: "Sets `University` city\n"
+      operationId: "setUniversityCityById"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `University` id"
+        required: true
+        type: "string"
+      - name: "city"
+        in: "path"
+        description: "The `University` city"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The `University` id"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "University"
+    put:
+      tags:
+      - "University"
+      description: "Updates `University` city\n"
+      operationId: "updateUniversityCityById"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `University` id"
+        required: true
+        type: "string"
+      - name: "city"
+        in: "path"
+        description: "The `University` city"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The `University` id"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "University"
+  /University/{id}/geolocation:
+    post:
+      tags:
+      - "University"
+      description: "Sets `University` geolocation\n"
+      operationId: "setUniversityGeolocationByIdForm"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `University` id"
+        required: true
+        type: "string"
+      - name: "lat"
+        in: "formData"
+        description: "The `University` latitude"
+        required: true
+        type: "number"
+        format: "float"
+      - name: "long"
+        in: "formData"
+        description: "The `University` longitude"
+        required: true
+        type: "number"
+        format: "float"
+      responses:
+        200:
+          description: "The `University` id"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "University"
+    put:
+      tags:
+      - "University"
+      description: "Updates `University` geolocation\n"
+      operationId: "updateUniversityGeolocationByIdForm"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `University` id"
+        required: true
+        type: "string"
+      - name: "lat"
+        in: "formData"
+        description: "The `University` latitude"
+        required: true
+        type: "number"
+        format: "float"
+      - name: "long"
+        in: "formData"
+        description: "The `University` longitude"
+        required: true
+        type: "number"
+        format: "float"
+      responses:
+        200:
+          description: "The `University` id"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "University"
+    delete:
+      tags:
+      - "University"
+      description: "Deletes `University` geolocation\n"
+      operationId: "deleteUniversityGeolocationById"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `University` id"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The `University` id"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "University"
+  /University/{id}/geolocation/{lat}/{long}:
+    post:
+      tags:
+      - "University"
+      description: "Sets `University` state\n"
+      operationId: "setUniversityGeolocationById"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `University` id"
+        required: true
+        type: "string"
+      - name: "lat"
+        in: "path"
+        description: "The `University` latitude"
+        required: true
+        type: "number"
+        format: "float"
+      - name: "long"
+        in: "path"
+        description: "The `University` longitude"
+        required: true
+        type: "number"
+        format: "float"
+      responses:
+        200:
+          description: "The `University` id"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "University"
+    put:
+      tags:
+      - "University"
+      description: "Updates `University` geolocation\n"
+      operationId: "updateUniversityGeolocationById"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `University` id"
+        required: true
+        type: "string"
+      - name: "lat"
+        in: "path"
+        description: "The `University` latitude"
+        required: true
+        type: "number"
+        format: "float"
+      - name: "long"
+        in: "path"
+        description: "The `University` longitude"
+        required: true
+        type: "number"
+        format: "float"
+      responses:
+        200:
+          description: "The `University` id"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "University"
+  /University/{id}/images:
+    post:
+      tags:
+      - "University"
+      description: "Sets `University` profile image paths\n"
+      operationId: "setUniversityImagesById"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `University` id"
+        required: true
+        type: "string"
+      - name: "profile_image_paths"
+        in: "formData"
+        description: "The `University` profile image paths"
+        required: true
+        type: "array"
+        items:
+          type: "string"
+        collectionFormat: "multi"
+      responses:
+        200:
+          description: "The `University` id"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "University"
+    put:
+      tags:
+      - "University"
+      - "Project"
+      description: "Adds `University` projects\n"
+      operationId: "addUniversityProfileImagesById"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `University` id"
+        required: true
+        type: "string"
+      - name: "profile_image_paths"
+        in: "formData"
+        description: "The `University` profile image paths"
+        required: true
+        type: "array"
+        items:
+          type: "string"
+        collectionFormat: "multi"
+      responses:
+        200:
+          description: "The `University` id"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "University"
+    delete:
+      tags:
+      - "University"
+      description: "Deletes `University` images\n"
+      operationId: "deleteUniversityImagesById"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `University` id"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The `University` id"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "University"
+  /University/{id}/name:
+    delete:
+      tags:
+      - "University"
+      description: "Deletes `University` name\n"
+      operationId: "deleteUniversityNameById"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `University` id"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The `University` id"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "University"
+  /University/{id}/name/{name}:
+    post:
+      tags:
+      - "University"
+      description: "Sets `University` name\n"
+      operationId: "setUniversityNameById"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `University` id"
+        required: true
+        type: "string"
+      - name: "name"
+        in: "path"
+        description: "The `University` name"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The `University` id"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "University"
+    put:
+      tags:
+      - "University"
+      description: "Updates `University` name\n"
+      operationId: "updateUniversityNameById"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `University` id"
+        required: true
+        type: "string"
+      - name: "name"
+        in: "path"
+        description: "The `University` name"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The `University` id"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "University"
+  /University/{id}/projects:
+    post:
+      tags:
+      - "University"
+      - "Project"
+      description: "Sets `University` projects\n"
+      operationId: "setUniversityProjectsById"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `University` id"
+        required: true
+        type: "string"
+      - name: "project_ids"
+        in: "formData"
+        description: "The `Project` ids"
+        required: true
+        type: "array"
+        items:
+          type: "string"
+        collectionFormat: "multi"
+      responses:
+        200:
+          description: "The `University` id"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "University"
+    put:
+      tags:
+      - "University"
+      - "Project"
+      description: "Adds `University` projects\n"
+      operationId: "addUniversityProjectsById"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `University` id"
+        required: true
+        type: "string"
+      - name: "project_ids"
+        in: "formData"
+        description: "The `Project` ids"
+        required: true
+        type: "array"
+        items:
+          type: "string"
+        collectionFormat: "multi"
+      responses:
+        200:
+          description: "The `University` id"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "University"
+    delete:
+      tags:
+      - "University"
+      - "Project"
+      description: "Deletes `University` projects\n"
+      operationId: "deleteUniversityProjectsById"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `University` id"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The `University` id"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "University"
+  /University/{id}/projects/{project_id}:
+    post:
+      tags:
+      - "University"
+      - "Project"
+      description: "Sets `University` projects to this single `Project`(probably will\
+        \ never use this)\n"
+      operationId: "setUniversityProjectById"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `University` id"
+        required: true
+        type: "string"
+      - name: "project_id"
+        in: "path"
+        description: "The `Project` id"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The `University` id"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "University"
+    put:
+      tags:
+      - "University"
+      - "Project"
+      description: "Adds `University` project\n"
+      operationId: "addUniversityProjectById"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `University` id"
+        required: true
+        type: "string"
+      - name: "project_id"
+        in: "path"
+        description: "The `Project` ids"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The `University` id"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "University"
+    delete:
+      tags:
+      - "University"
+      - "Project"
+      description: "Deletes `Project` from `University`\n"
+      operationId: "deleteUniversityProjectById"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `University` id"
+        required: true
+        type: "string"
+      - name: "project_id"
+        in: "path"
+        description: "The `Project` id"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The `University` id"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "University"
+  /University/{id}/state:
+    delete:
+      tags:
+      - "University"
+      description: "Deletes `University` state\n"
+      operationId: "deleteUniversityStateById"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `University` id"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The `University` id"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "University"
+  /University/{id}/state/{state}:
+    post:
+      tags:
+      - "University"
+      description: "Sets `University` state\n"
+      operationId: "setUniversityStateById"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `University` id"
+        required: true
+        type: "string"
+      - name: "state"
+        in: "path"
+        description: "The `University` state"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The `University` id"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "University"
+    put:
+      tags:
+      - "University"
+      description: "Updates `University` state\n"
+      operationId: "updateUniversityStateById"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `University` id"
+        required: true
+        type: "string"
+      - name: "state"
+        in: "path"
+        description: "The `University` state"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The `University` id"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "University"
+  /User:
+    post:
+      tags:
+      - "User"
+      description: "Creates `User` objects. `University` and `Project` are optional\
+        \ (user may not yet have affiliations)\n`Keywords` also optional. All other\
+        \ fields required.\n"
+      operationId: "createUser"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "first_name"
+        in: "formData"
+        description: "first name of `User`"
+        required: true
+        type: "string"
+      - name: "last_name"
+        in: "formData"
+        description: "last name of `User`"
+        required: true
+        type: "string"
+      - name: "is_collaborator"
+        in: "formData"
+        description: "is `User` a collaborator?"
+        required: true
+        type: "boolean"
+      - name: "is_creator"
+        in: "formData"
+        description: "is `User` a creator?"
+        required: true
+        type: "boolean"
+      - name: "city"
+        in: "formData"
+        description: "city location of `User`"
+        required: true
+        type: "string"
+      - name: "state"
+        in: "formData"
+        description: "state location of `User`"
+        required: true
+        type: "string"
+      - name: "university_ids"
+        in: "formData"
+        description: "The `University`a `User` is associated with"
+        required: false
+        type: "array"
+        items:
+          type: "string"
+        collectionFormat: "multi"
+      - name: "project_id"
+        in: "formData"
+        description: "project_id the `User` is associated with"
+        required: false
+        type: "string"
+      - name: "keywords"
+        in: "formData"
+        description: "keyword"
+        required: false
+        type: "array"
+        items:
+          type: "string"
+        collectionFormat: "multi"
+      responses:
+        200:
+          description: "The `id` of the created user"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "User"
+  /User/{id}:
+    put:
+      tags:
+      - "User"
+      description: "Updates a `User` object. All fields other than `id` optional.\n"
+      operationId: "updateUser"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "ID of `User` to fetch"
+        required: true
+        type: "string"
+      - name: "first_name"
+        in: "formData"
+        description: "first name of `User`"
+        required: false
+        type: "string"
+      - name: "last_name"
+        in: "formData"
+        description: "last name of `User`"
+        required: false
+        type: "string"
+      - name: "is_collaborator"
+        in: "formData"
+        description: "is `User` a collaborator?"
+        required: false
+        type: "boolean"
+      - name: "is_creator"
+        in: "formData"
+        description: "is `User` a creator?"
+        required: false
+        type: "boolean"
+      - name: "city"
+        in: "formData"
+        description: "city location of `User`"
+        required: false
+        type: "string"
+      - name: "state"
+        in: "formData"
+        description: "state location of `User`"
+        required: false
+        type: "string"
+      - name: "university"
+        in: "formData"
+        description: "The `University`a `User` is associated with"
+        required: false
+        type: "string"
+      - name: "project_id"
+        in: "formData"
+        description: "project_id the `User` is associated with"
+        required: false
+        type: "string"
+      - name: "keywords"
+        in: "formData"
+        description: "keyword"
+        required: false
+        type: "array"
+        items:
+          type: "string"
+        collectionFormat: "multi"
+      responses:
+        200:
+          description: "The `id` of the updatee `User`"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "User"
+    delete:
+      tags:
+      - "User"
+      description: "Delete a 'User' by their id.\n"
+      operationId: "deleteUserById"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "the `id` of the `User` to delete"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The `id` of the deleted `User`"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "User"
+  /User/{id}/city:
+    delete:
+      tags:
+      - "User"
+      description: "Delete city from a user\n"
+      operationId: "deleteUserCity"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `id` of the `User` to retrieve"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The `user_id` associated with the `User`"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "User"
+  /User/{id}/city/{city}:
+    post:
+      tags:
+      - "User"
+      description: "Add city to a `User`.\n"
+      operationId: "addUserCity"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `id` of the `User` to retrieve"
+        required: true
+        type: "string"
+      - name: "city"
+        in: "path"
+        description: "The city"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The user_id associated with the `User`"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "User"
+    put:
+      tags:
+      - "User"
+      description: "Modify city of a `User`.\n"
+      operationId: "modifyUserCity"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `id` of the `User` to retrieve"
+        required: true
+        type: "string"
+      - name: "city"
+        in: "path"
+        description: "The city"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The user_id associated with the `User`"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "User"
+  /User/{id}/collaborator:
+    post:
+      tags:
+      - "User"
+      description: "set if `User` is a collaborator.\n"
+      operationId: "setIsUserCollaboratorById"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `id` of the `User` to retrieve"
+        required: true
+        type: "string"
+      - name: "isCollaborator"
+        in: "formData"
+        description: "Is `User`a collaborator?"
+        required: true
+        type: "boolean"
+      responses:
+        200:
+          description: "The `user_id` associated with the `User`"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "User"
+    put:
+      tags:
+      - "User"
+      description: "set if `User` is a collaborator.\n"
+      operationId: "setIsUserCollaboratorByIdPut"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `id` of the `User` to retrieve"
+        required: true
+        type: "string"
+      - name: "isCollaborator"
+        in: "formData"
+        description: "Is `User`a collaborator?"
+        required: true
+        type: "boolean"
+      responses:
+        200:
+          description: "The `user_id` associated with the `User`"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "User"
+  /User/{id}/created: {}
+  /User/{id}/creator:
+    post:
+      tags:
+      - "User"
+      description: "set if `User` is a creator.\n"
+      operationId: "setIsUserCreatorById"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `id` of the `User` to retrieve"
+        required: true
+        type: "string"
+      - name: "isCreator"
+        in: "formData"
+        description: "Is `User`a creator?"
+        required: true
+        type: "boolean"
+      responses:
+        200:
+          description: "The `user_id` associated with the `User`"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "User"
+    put:
+      tags:
+      - "User"
+      description: "set if `User` is a creator.\n"
+      operationId: "setIsUserCreatorByIdPut"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `id` of the `User` to retrieve"
+        required: true
+        type: "string"
+      - name: "isCollaborator"
+        in: "formData"
+        description: "Is `User`a creator?"
+        required: true
+        type: "boolean"
+      responses:
+        200:
+          description: "The `user_id` associated with the `User`"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "User"
+  /User/{id}/first_name:
+    delete:
+      tags:
+      - "User"
+      - "Review"
+      description: "Delete first_name from a user\n"
+      operationId: "deleteUserFirstName"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `id` of the `User` to retrieve"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The `user_id` associated with the `User`"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "User"
+  /User/{id}/first_name/{first_name}:
+    post:
+      tags:
+      - "User"
+      description: "Add first name to a `User`.\n"
+      operationId: "addUserFirstName"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `id` of the `User` to retrieve"
+        required: true
+        type: "string"
+      - name: "first_name"
+        in: "path"
+        description: "The keywords"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The user_id associated with the `User`"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "User"
+    put:
+      tags:
+      - "User"
+      description: "Modify first name of a `User`.\n"
+      operationId: "modifyUserFirstName"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `id` of the `User` to retrieve"
+        required: true
+        type: "string"
+      - name: "first_name"
+        in: "path"
+        description: "The keywords"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The user_id associated with the `User`"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "User"
+  /User/{id}/images:
+    post:
+      tags:
+      - "User"
+      description: "Add images to a `User`.\n"
+      operationId: "setUserImages"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `id` of the `User` to retrieve"
+        required: true
+        type: "string"
+      - name: "images"
+        in: "formData"
+        description: "The paths of the images"
+        required: true
+        type: "array"
+        items:
+          type: "string"
+        collectionFormat: "multi"
+      responses:
+        200:
+          description: "The user_id associated with the `User`"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "User"
+    delete:
+      tags:
+      - "User"
+      description: "Remove an image, or multiple images, from a `User`.\n"
+      operationId: "deleteImagesFromUserById"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `id` of the `User` to retrieve"
+        required: true
+        type: "string"
+      - name: "images"
+        in: "formData"
+        description: "The paths of the images"
+        required: true
+        type: "array"
+        items:
+          type: "string"
+        collectionFormat: "multi"
+      responses:
+        200:
+          description: "The `user_id` associated with the `User`"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "User"
+  /User/{id}/keys:
+    post:
+      tags:
+      - "User"
+      description: "Add keywords to a `User`.\n"
+      operationId: "setUserKeywords"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `id` of the `User` to retrieve"
+        required: true
+        type: "string"
+      - name: "keywords"
+        in: "formData"
+        description: "The keywords"
+        required: true
+        type: "array"
+        items:
+          type: "string"
+        collectionFormat: "multi"
+      responses:
+        200:
+          description: "The user_id associated with the `User`"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "User"
+    delete:
+      tags:
+      - "User"
+      description: "Delete keywords from a user\n"
+      operationId: "deleteKeywordsFromUserById"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `id` of the `User` to retrieve"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The `user_id` associated with the `User`"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "User"
+  /User/{id}/keys/{keyword}:
+    post:
+      tags:
+      - "User"
+      description: "Add a keyword to a `User`.\n"
+      operationId: "setUserKeyword"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `id` of the `User` to retrieve"
+        required: true
+        type: "string"
+      - name: "keyword"
+        in: "path"
+        description: "The keyword"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The user_id associated with the `User`"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "User"
+    delete:
+      tags:
+      - "User"
+      description: "Delete keyword from a user\n"
+      operationId: "deleteKeywordFromUserById"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `id` of the `User` to retrieve"
+        required: true
+        type: "string"
+      - name: "keyword"
+        in: "path"
+        description: "The keyword"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The `user_id` associated with the `User`"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "User"
+  /User/{id}/last_name:
+    delete:
+      tags:
+      - "User"
+      description: "Delete last_name from a user\n"
+      operationId: "deleteUserLastName"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `id` of the `User` to retrieve"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The `user_id` associated with the `User`"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "User"
+  /User/{id}/last_name/{last_name}:
+    post:
+      tags:
+      - "User"
+      description: "Add last name to a `User`.\n"
+      operationId: "addUserLastName"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `id` of the `User` to retrieve"
+        required: true
+        type: "string"
+      - name: "last_name"
+        in: "path"
+        description: "The keywords"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The user_id associated with the `User`"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "User"
+    put:
+      tags:
+      - "User"
+      description: "Modify last name of a `User`.\n"
+      operationId: "modifyUserLastName"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `id` of the `User` to retrieve"
+        required: true
+        type: "string"
+      - name: "last_name"
+        in: "path"
+        description: "The keywords"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The user_id associated with the `User`"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "User"
+  /User/{id}/modified: {}
+  /User/{id}/project:
+    delete:
+      tags:
+      - "User"
+      - "Project"
+      description: "Remove all 'Project' ojects from a `User`.\n"
+      operationId: "deleteAllUserProjectById"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `id` of the `User` to retrieve"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The `user_id` associated with the `User`"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "User"
+  /User/{id}/project/{project_id}:
+    post:
+      tags:
+      - "User"
+      - "Project"
+      description: "Add a 'Project' to a `User`.\n"
+      operationId: "settUserProjectById"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `id` of the `User` to retrieve"
+        required: true
+        type: "string"
+      - name: "project_id"
+        in: "path"
+        description: "The `project_id` of the `Project` to retrieve"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The `project_id` associated with the `Project`"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "User"
+    delete:
+      tags:
+      - "User"
+      - "Project"
+      description: "Remove a 'Project' from a `User`.\n"
+      operationId: "deleteUserProjectById"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `id` of the `User` to retrieve"
+        required: true
+        type: "string"
+      - name: "project_id"
+        in: "path"
+        description: "The `project_id` of the `Project` to retrieve"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The `project_id` associated with the `Project`"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "User"
+  /User/{id}/review:
+    delete:
+      tags:
+      - "User"
+      - "Review"
+      description: "Remove all 'Review' ojects from a `User`.\n"
+      operationId: "deleteAllUserReviewById"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `id` of the `User` to retrieve"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The `user_id` associated with the `User`"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "User"
+  /User/{id}/review/{review_id}:
+    post:
+      tags:
+      - "User"
+      - "Review"
+      description: "Add a 'Review' to a `User`.\n"
+      operationId: "setUserReviewById"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `id` of the `User` to retrieve"
+        required: true
+        type: "string"
+      - name: "review_id"
+        in: "path"
+        description: "The `review_id` of the `Review` to retrieve"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The `review_id` associated with the `Project`"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "User"
+    delete:
+      tags:
+      - "User"
+      - "Review"
+      description: "Remove a 'Review' from a `User`.\n"
+      operationId: "deleteUserReviewById"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `id` of the `User` to retrieve"
+        required: true
+        type: "string"
+      - name: "review_id"
+        in: "path"
+        description: "The `review_id` of the `Review` to retrieve"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The `review_id` associated with the `Review`"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "User"
+  /User/{id}/skills:
+    post:
+      tags:
+      - "User"
+      - "Skill"
+      description: "Set skills on a `User`.\n"
+      operationId: "setUserSkills"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `id` of the `User` to retrieve"
+        required: true
+        type: "string"
+      - name: "keywords"
+        in: "formData"
+        description: "The skills ids"
+        required: true
+        type: "array"
+        items:
+          type: "string"
+        collectionFormat: "multi"
+      responses:
+        200:
+          description: "The user_id associated with the `User`"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "User"
+    put:
+      tags:
+      - "User"
+      - "Skill"
+      description: "Add skills to a `User`.\n"
+      operationId: "addUserSkills"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `id` of the `User` to retrieve"
+        required: true
+        type: "string"
+      - name: "keywords"
+        in: "formData"
+        description: "The skills ids"
+        required: true
+        type: "array"
+        items:
+          type: "string"
+        collectionFormat: "multi"
+      responses:
+        200:
+          description: "The user_id associated with the `User`"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "User"
+    delete:
+      tags:
+      - "User"
+      - "Skill"
+      description: "Delete skills from a user\n"
+      operationId: "deleteSkillsFromUserById"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `id` of the `User` to retrieve"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The `user_id` associated with the `User`"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "User"
+  /User/{id}/skills/{skill_id}:
+    post:
+      tags:
+      - "User"
+      - "Skill"
+      description: "Set `Skill`on a `User`.\n"
+      operationId: "setUserSkill"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `id` of the `User` to retrieve"
+        required: true
+        type: "string"
+      - name: "skill_id"
+        in: "path"
+        description: "The skills is"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The user_id associated with the `User`"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "User"
+    put:
+      tags:
+      - "User"
+      - "Skill"
+      description: "Add `Skill`to a `User`.\n"
+      operationId: "addUserSkill"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `id` of the `User` to retrieve"
+        required: true
+        type: "string"
+      - name: "skill_id"
+        in: "path"
+        description: "The skills id"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The user_id associated with the `User`"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "User"
+    delete:
+      tags:
+      - "User"
+      - "Skill"
+      description: "Delete `Skill`from a user\n"
+      operationId: "deleteSkillFromUserById"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `id` of the `User` to retrieve"
+        required: true
+        type: "string"
+      - name: "skill_id"
+        in: "path"
+        description: "The `id` of the `Skill` to delete"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The `user_id` associated with the `User`"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "User"
+  /User/{id}/state:
+    delete:
+      tags:
+      - "User"
+      description: "Delete state from a user\n"
+      operationId: "deleteUserState"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `id` of the `User` to retrieve"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The `user_id` associated with the `User`"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "User"
+  /User/{id}/state/{state}:
+    post:
+      tags:
+      - "User"
+      description: "Add state to a `User`.\n"
+      operationId: "addUserState"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `id` of the `User` to retrieve"
+        required: true
+        type: "string"
+      - name: "state"
+        in: "path"
+        description: "The state"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The user_id associated with the `User`"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "User"
+    put:
+      tags:
+      - "User"
+      description: "Modify state of a `User`.\n"
+      operationId: "modifyUserState"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `id` of the `User` to retrieve"
+        required: true
+        type: "string"
+      - name: "state"
+        in: "path"
+        description: "The state"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The user_id associated with the `User`"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "User"
+  /User/{id}/uni/{university_id}:
+    post:
+      tags:
+      - "User"
+      - "University"
+      description: "Add a 'University' to a `User`.\n"
+      operationId: "settUserUniversityById"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `id` of the `User` to retrieve"
+        required: true
+        type: "string"
+      - name: "university_id"
+        in: "path"
+        description: "The `university_id` of the `Project` to retrieve"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The `university_id` associated with the `Project`"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "User"
+    delete:
+      tags:
+      - "User"
+      - "University"
+      description: "Remove a 'University' fromo a `User`.\n"
+      operationId: "deleteUserUniversityById"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `id` of the `User` to retrieve"
+        required: true
+        type: "string"
+      - name: "university_id"
+        in: "path"
+        description: "The `university_id` of the `Project` to retrieve"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The `project_id` associated with the `Project`"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "User"
+  /UserSkill:
+    post:
+      tags:
+      - "Skill"
+      - "UserSkill"
+      - "User"
+      description: "Creates `UserSkill` objects. **user_id** and **skill_id** are\
+        \ required, **endorsements** optional.\n"
+      operationId: "createUserSkill"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "user_id"
+        in: "formData"
+        description: "Unique identifier representing a specific `User` that has a\
+          \ `UserSkill` represents"
+        required: false
+        type: "string"
+      - name: "skill_id"
+        in: "formData"
+        description: "Unique identifier representing a specific `Skill` that a `UserSkill`\
+          \ represents"
+        required: false
+        type: "string"
+      - name: "endorsement_ids"
+        in: "formData"
+        description: "id of `User` endorser"
+        required: false
+        type: "array"
+        items:
+          type: "string"
+        collectionFormat: "multi"
+      responses:
+        200:
+          description: "A `UserSkill` object"
+          schema:
+            $ref: "#/definitions/UserSkill"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Skill"
+  /UserSkill/{id}:
+    put:
+      tags:
+      - "UserSkill"
+      - "Skill"
+      - "User"
+      description: "Updates `UserSkill` objects. **id** is required,\nall others optional.\n"
+      operationId: "updateUserSkillById"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `Post` name"
+        required: true
+        type: "string"
+      - name: "user_id"
+        in: "formData"
+        description: "id of `User` that has skill"
+        required: false
+        type: "string"
+      - name: "skill_id"
+        in: "formData"
+        description: "id of `Skill` that this `UserSkill` represents"
+        required: false
+        type: "string"
+      - name: "endorsement_ids"
+        in: "formData"
+        description: "The `User` objects who gave endorsement to `Skill`"
+        required: false
+        type: "array"
+        items:
+          type: "string"
+        collectionFormat: "multi"
+      responses:
+        200:
+          description: "A `Review` object"
+          schema:
+            $ref: "#/definitions/Skill"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "UserSkill"
+    delete:
+      tags:
+      - "Skill"
+      - "UserSkill"
+      - "User"
+      description: "Deletes `UserSkill` objects by **id**.\n"
+      operationId: "deleteUserSkillwById"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `UserSkill` id"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The `UserSkill` id"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Skill"
+  /UserSkill/{id}/created: {}
+  /UserSkill/{id}/endorsement:
+    post:
+      tags:
+      - "Skill"
+      - "UserSkill"
+      - "User"
+      description: "Set `User` on `UserSkill` .\n"
+      operationId: "setUserSkillEndorsementsById"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `UserSkill` name"
+        required: true
+        type: "string"
+      - name: "user_id"
+        in: "formData"
+        description: "The `User` id"
+        required: true
+        type: "array"
+        items:
+          type: "string"
+        collectionFormat: "multi"
+      responses:
+        200:
+          description: "A `Skill` id"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Skill"
+    put:
+      tags:
+      - "Skill"
+      - "UserSkill"
+      - "User"
+      description: "Add `User` objects on `UserSkill` .\n"
+      operationId: "addUserSkillEndorsementsById"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `UserSkill` name"
+        required: true
+        type: "string"
+      - name: "user_id"
+        in: "formData"
+        description: "The `User` ids"
+        required: true
+        type: "array"
+        items:
+          type: "string"
+        collectionFormat: "multi"
+      responses:
+        200:
+          description: "A `Skill` id"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Skill"
+    delete:
+      tags:
+      - "Skill"
+      - "UserSkill"
+      - "User"
+      description: "Remove all `User` endorsement on `UserSkill` .\n"
+      operationId: "removeUserSkillEndorsementsById"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `UserSkill` name"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "A `Skill` id"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Skill"
+  /UserSkill/{id}/endorsement/{user_id}:
+    post:
+      tags:
+      - "Skill"
+      - "UserSkill"
+      - "User"
+      description: "Set `User` on `UserSkill` .\n"
+      operationId: "setUserSkillEndorsementById"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `UserSkill` name"
+        required: true
+        type: "string"
+      - name: "user_id"
+        in: "path"
+        description: "The `User` id"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "A `Skill` id"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Skill"
+    put:
+      tags:
+      - "Skill"
+      - "UserSkill"
+      - "User"
+      description: "Adds `User` to endorsements in `UserSkill` .\n"
+      operationId: "addUserSkillEndorsementById"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `UserSkill` id"
+        required: true
+        type: "string"
+      - name: "user_id"
+        in: "path"
+        description: "The `User` id"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "A `UserSkill` id"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Skill"
+    delete:
+      tags:
+      - "Skill"
+      - "UserSkill"
+      - "User"
+      description: "Remove `User` endorsement on `UserSkill` .\n"
+      operationId: "removeUserSkillEndorsementById"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `UserSkill` name"
+        required: true
+        type: "string"
+      - name: "user_id"
+        in: "path"
+        description: "The `User` id"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "A `Skill` id"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Skill"
+  /UserSkill/{id}/skill:
+    delete:
+      tags:
+      - "Skill"
+      - "UserSkill"
+      - "User"
+      description: "Deletes `Skill` body\n"
+      operationId: "deleteUserSkillSkilById"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `UserSkill` id"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The `UserSkill` id"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Skill"
+  /UserSkill/{id}/skill/{skill_id}:
+    post:
+      tags:
+      - "Skill"
+      - "UserSkill"
+      - "User"
+      description: "Set `UserSkill` body.\n"
+      operationId: "setUserSkillSkillDescriptionById"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `UserSkill` name"
+        required: true
+        type: "string"
+      - name: "skill_id"
+        in: "path"
+        description: "The `Skill` id"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "A `Skill` id"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Skill"
+    put:
+      tags:
+      - "Skill"
+      - "UserSkill"
+      - "User"
+      description: "Updates `Skill` contained in `UserSkill` .\n"
+      operationId: "updateUserSkillSkill"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `UserSkill` name"
+        required: true
+        type: "string"
+      - name: "skill_id"
+        in: "path"
+        description: "The `Skill` id"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "A `UserSkill` id"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Skill"
+  /UserSkill/{id}/updated: {}
+  /UserSkill/{id}/user:
+    delete:
+      tags:
+      - "Skill"
+      description: "Deletes `Skill` body\n"
+      operationId: "deleteUserSkillUserById"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `UserSkill` id"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The `UserSkill` id"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Skill"
+  /UserSkill/{id}/user/{user_id}:
+    post:
+      tags:
+      - "Skill"
+      - "UserSkill"
+      - "User"
+      description: "Set `User` on `UserSkill` .\n"
+      operationId: "setUserSkillUserById"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `UserSkill` name"
+        required: true
+        type: "string"
+      - name: "user_id"
+        in: "path"
+        description: "The `Skill` id"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "A `Skill` id"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Skill"
+    put:
+      tags:
+      - "Skill"
+      - "UserSkill"
+      - "User"
+      description: "Updates `User` contained in `UserSkill` .\n"
+      operationId: "updateUserSkillUserById"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `UserSkill` name"
+        required: true
+        type: "string"
+      - name: "user_id"
+        in: "path"
+        description: "The `User` id"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "A `UserSkill` id"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Skill"
+definitions:
+  Error:
+    type: "object"
+    properties:
+      code:
+        type: "integer"
+        format: "int32"
+      fields:
+        type: "string"
+      message:
+        type: "string"
+  Grant:
+    type: "object"
+    properties:
+      created_date:
+        type: "string"
+        format: "date-time"
+        description: "datetime stamp of `Grant`creation"
+      grant_amount:
+        type: "number"
+        format: "double"
+        description: "Amount of grant"
+      grant_description:
+        type: "string"
+        description: "The `Grant`description"
+      grant_id:
+        type: "string"
+        description: "id of grant"
+      grant_keywords:
+        type: "array"
+        description: "The `Grant`keywords"
+        items:
+          type: "string"
+      grant_type:
+        type: "string"
+        description: "The `Grant` type"
+      grant_url:
+        type: "array"
+        description: "URL of grants"
+        items:
+          type: "string"
+      updated_date:
+        type: "string"
+        format: "date-time"
+        description: "datetime stamp of `Grant`update"
+  Grants:
+    type: "object"
+    properties:
+      count:
+        type: "integer"
+        format: "int32"
+        description: "Total number of items available."
+      history:
+        type: "array"
+        items:
+          $ref: "#/definitions/Grant"
+      limit:
+        type: "integer"
+        format: "int32"
+        description: "Number of items to retrieve (100 max)."
+      offset:
+        type: "integer"
+        format: "int32"
+        description: "Position in pagination."
+  Post:
+    type: "object"
+    properties:
+      created_date:
+        type: "string"
+        format: "date-time"
+        description: "datetime stamp of `Post`creation"
+      is_post_private:
+        type: "boolean"
+        description: "is `Post`private?"
+      post_author:
+        description: "author of post"
+        $ref: "#/definitions/User"
+      post_author_id:
+        type: "string"
+        description: "id of author of post"
+      post_id:
+        type: "string"
+        description: "id of post"
+      post_keywords:
+        type: "array"
+        description: "keywords for post"
+        items:
+          type: "string"
+      post_tags:
+        type: "array"
+        description: "tagged users"
+        items:
+          $ref: "#/definitions/User"
+      post_tags_id:
+        type: "array"
+        description: "tagged `User`ids"
+        items:
+          type: "string"
+      post_text:
+        type: "string"
+        description: "text of post"
+      post_title:
+        type: "string"
+        description: "title of post"
+      updated_date:
+        type: "string"
+        format: "date-time"
+        description: "datetime stamp of `Post`update"
+  Posts:
+    type: "object"
+    properties:
+      count:
+        type: "integer"
+        format: "int32"
+        description: "Total number of items available."
+      history:
+        type: "array"
+        items:
+          $ref: "#/definitions/Post"
+      limit:
+        type: "integer"
+        format: "int32"
+        description: "Number of items to retrieve (100 max)."
+      offset:
+        type: "integer"
+        format: "int32"
+        description: "Position in pagination."
+  Project:
+    type: "object"
+    properties:
+      created_date:
+        type: "string"
+        format: "date-time"
+        description: "datetime stamp of `Project`creation"
+      grant_facilitator:
+        type: "string"
+        description: "Name of individual fascilitating `Grant` funding"
+      grant_ids:
+        type: "array"
+        description: "Array of `Grant` IDs associated with the `Project`"
+        items:
+          type: "string"
+      is_project_private:
+        type: "boolean"
+        description: "is `Project`private?"
+      posts:
+        type: "array"
+        description: "posts related to project"
+        items:
+          type: "string"
+      project_collaborators_id:
+        type: "array"
+        description: "array of `Project`collaborator ids"
+        items:
+          type: "string"
+      project_creator_id:
+        type: "array"
+        description: "array of `Project`creator ids"
+        items:
+          type: "string"
+      project_description:
+        type: "string"
+        description: "Description of project"
+      project_file:
+        type: "array"
+        description: "Paths to files for `Grant`"
+        items:
+          type: "string"
+      project_id:
+        type: "string"
+        description: "Unique identifier representing a specific project"
+      project_keywords:
+        type: "array"
+        description: "array of `Project`keywords"
+        items:
+          type: "string"
+      project_name:
+        type: "string"
+        description: "Project's name"
+      project_urls:
+        type: "array"
+        description: "array of `Project`URLs"
+        items:
+          type: "string"
+      reviews:
+        type: "array"
+        description: "reviews"
+        items:
+          type: "string"
+      university_id:
+        type: "string"
+        description: "ID of `University`hosting research"
+      updated_date:
+        type: "string"
+        format: "date-time"
+        description: "datetime stamp of `Project`update"
+  Projects:
+    type: "object"
+    properties:
+      count:
+        type: "integer"
+        format: "int32"
+        description: "Total number of items available."
+      history:
+        type: "array"
+        items:
+          $ref: "#/definitions/Project"
+      limit:
+        type: "integer"
+        format: "int32"
+        description: "Number of items to retrieve (100 max)."
+      offset:
+        type: "integer"
+        format: "int32"
+        description: "Position in pagination."
+  Review:
+    type: "object"
+    properties:
+      created_date:
+        type: "string"
+        format: "date-time"
+        description: "datetime stamp of `Review`creation"
+      rating:
+        type: "integer"
+        format: "int32"
+        description: "rating, must be 1-5"
+      review_body:
+        type: "string"
+        description: "text body of review"
+      review_id:
+        type: "string"
+        description: "id of review"
+      reviewer:
+        description: "reviewer user"
+        $ref: "#/definitions/User"
+      reviewer_id:
+        type: "string"
+        description: "reviewer `User`id"
+      updated_date:
+        type: "string"
+        format: "date-time"
+        description: "datetime stamp of `Review`update"
+  Reviews:
+    type: "object"
+    properties:
+      count:
+        type: "integer"
+        format: "int32"
+        description: "Total number of items available."
+      history:
+        type: "array"
+        items:
+          $ref: "#/definitions/Review"
+      limit:
+        type: "integer"
+        format: "int32"
+        description: "Number of items to retrieve (100 max)."
+      offset:
+        type: "integer"
+        format: "int32"
+        description: "Position in pagination."
+  Skill:
+    type: "object"
+    properties:
+      created_date:
+        type: "string"
+        format: "date-time"
+        description: "datetime stamp of `Skill`creation"
+      description:
+        type: "string"
+        description: "Description of `Skill`"
+      review_id:
+        type: "string"
+        description: "id of skill"
+      updated_date:
+        type: "string"
+        format: "date-time"
+        description: "datetime stamp of `Skill`update"
+  Skills:
+    type: "object"
+    properties:
+      count:
+        type: "integer"
+        format: "int32"
+        description: "Total number of items available."
+      history:
+        type: "array"
+        items:
+          $ref: "#/definitions/Skill"
+      limit:
+        type: "integer"
+        format: "int32"
+        description: "Number of items to retrieve (100 max)."
+      offset:
+        type: "integer"
+        format: "int32"
+        description: "Position in pagination."
+  Universities:
+    type: "object"
+    properties:
+      count:
+        type: "integer"
+        format: "int32"
+        description: "Total number of items available."
+      history:
+        type: "array"
+        items:
+          $ref: "#/definitions/University"
+      limit:
+        type: "integer"
+        format: "int32"
+        description: "Number of items to retrieve (100 max)."
+      offset:
+        type: "integer"
+        format: "int32"
+        description: "Position in pagination."
+  University:
+    type: "object"
+    properties:
+      city:
+        type: "string"
+        description: "City of `University` location"
+      created_date:
+        type: "string"
+        format: "date-time"
+        description: "datetime stamp of `University` creation"
+      geolocation:
+        type: "array"
+        description: "Tuple representing latitude/longitude of user"
+        items:
+          type: "number"
+          format: "double"
+      profile_images:
+        type: "array"
+        description: "Array of file system paths to profile images"
+        items:
+          type: "string"
+      project_ids:
+        type: "array"
+        description: "ids of `Project`s based at this `University`"
+        items:
+          type: "string"
+      state:
+        type: "string"
+        description: "State of `University` location"
+      uni_id:
+        type: "string"
+        description: "id of `University`"
+      university_name:
+        type: "string"
+        description: "text body of `University`"
+      updated_date:
+        type: "string"
+        format: "date-time"
+        description: "datetime stamp of `University` update"
+  User:
+    type: "object"
+    properties:
+      city:
+        type: "string"
+        description: "City of `User`location"
+      created_date:
+        type: "string"
+        format: "date-time"
+        description: "datetime stamp of `User`creation"
+      first_name:
+        type: "string"
+        description: "User's first name."
+      geolocation:
+        type: "array"
+        description: "Tuple representing latitude/longitude of user"
+        items:
+          type: "number"
+          format: "double"
+      is_collaborator:
+        type: "boolean"
+        description: "Is `User`a `Project`collaborator?"
+      is_creator:
+        type: "boolean"
+        description: "Is `User`a `Project`creator?"
+      is_user_private:
+        type: "boolean"
+        description: "is `User`profile public or private?"
+      keywords:
+        type: "array"
+        description: "array of keywords associated with the user"
+        items:
+          type: "string"
+      last_name:
+        type: "string"
+        description: "User's last name"
+      profile_images:
+        type: "array"
+        description: "Array of file system paths to profile images"
+        items:
+          type: "string"
+      project_ids:
+        type: "array"
+        description: "array of `User`projects"
+        items:
+          type: "string"
+      recent_collaborators_id:
+        type: "array"
+        description: "array of user_ids of recent collaborators"
+        items:
+          type: "string"
+      review_ids:
+        type: "array"
+        description: "array of `Review`ids"
+        items:
+          type: "string"
+      state:
+        type: "string"
+        description: "State of `User`location"
+      university_ids:
+        type: "array"
+        description: "array of universities the `User`is associated with"
+        items:
+          type: "string"
+      updated_date:
+        type: "string"
+        format: "date-time"
+        description: "datetime stamp of `User`update"
+      user_id:
+        type: "string"
+        description: "Unique identifier representing a specific user"
+      user_skill_ids:
+        type: "array"
+        description: "array of `UserSkill`ids"
+        items:
+          type: "string"
+  UserSkill:
+    type: "object"
+    properties:
+      created_date:
+        type: "string"
+        format: "date-time"
+        description: "datetime stamp of `Endorsement` creation"
+      endorsements:
+        type: "array"
+        description: "Array of ids of `User` who give `Endorsement` to `User`for skill"
+        items:
+          type: "string"
+      review_id:
+        type: "string"
+        description: "id of `Endorsement`"
+      skill_id:
+        type: "string"
+        description: "id of `Skill` that `User`is claiming"
+      updated_date:
+        type: "string"
+        format: "date-time"
+        description: "datetime stamp of `Endorsement` update"
+      user_id:
+        type: "string"
+        description: "Id of `User` who added this skill"
+  UserSkills:
+    type: "object"
+    properties:
+      count:
+        type: "integer"
+        format: "int32"
+        description: "Total number of items available."
+      history:
+        type: "array"
+        items:
+          $ref: "#/definitions/UserSkill"
+      limit:
+        type: "integer"
+        format: "int32"
+        description: "Number of items to retrieve (100 max)."
+      offset:
+        type: "integer"
+        format: "int32"
+        description: "Position in pagination."
+  Users:
+    type: "object"
+    properties:
+      count:
+        type: "integer"
+        format: "int32"
+        description: "Total number of items available."
+      history:
+        type: "array"
+        items:
+          $ref: "#/definitions/User"
+      limit:
+        type: "integer"
+        format: "int32"
+        description: "Number of items to retrieve (100 max)."
+      offset:
+        type: "integer"
+        format: "int32"
+        description: "Position in pagination."
