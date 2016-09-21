@@ -4,6 +4,7 @@
  * @param {String} options.grant_description Description of grant
  * @param {Number} options.amount Amount of grant
  * @param {Function} callback
+ * @param {Object} options.req The entire req object is available in this variable
  */
 
 
@@ -26,15 +27,35 @@ const UserSkill = models.userkSkill;
  
 export function createGrant (options, callback) {
   // Implement you business logic here...
-}
+      let grant = new Grant();
+
+
+      grant.save(function(err){
+
+        if(err){
+          console.error(err);
+        }
+
+      })
+    }
 
 /**
  * @param {Object} options
  * @param {String} options.id The &#x60;Grant&#x60; name
+ * @param {Object} options.req The entire req object is available in this variable
  * @param {Function} callback
  */
 export function deleteGrantById (options, callback) {
   // Implement you business logic here...
+      Grant.remove({_id:options.id}, function(err,grant){
+        if(err){
+          console.error(err);
+        }
+
+        res.json({message: 'This Grant has been deleted'});
+
+      })
+
 }
 
 /**
@@ -47,6 +68,24 @@ export function deleteGrantById (options, callback) {
  */
 export function updateGrantById (options, callback) {
   // Implement you business logic here...
+
+    Grant.findById(options.id, function(err, grant){
+      if(err){
+        console.error(err);
+      }
+
+      //Change grant values here
+
+      grant.save(function(err){
+        if(err){
+          console.error(err);
+        }
+        res.json({message: 'This Grant has been updated'});
+      })
+      
+    })
+
+
 }
 
 /**

@@ -1,6 +1,7 @@
 import express from 'express';
 import cookieParser from 'cookie-parser';
 import bodyParser from 'body-parser';
+import env-config from '../lib/env-config';
 import config from '../lib/config';
 import logger from '../lib/logger';
 
@@ -10,6 +11,7 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
+
 
 /*
  * Routes

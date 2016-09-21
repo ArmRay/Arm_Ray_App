@@ -9,6 +9,7 @@ const router = express.Router();
  */
 router.post('/', (req, res, next) => {
   const options = {
+    req : req
   };
 
   Grant.createGrant(options, (err, data) => {
@@ -27,7 +28,8 @@ router.post('/', (req, res, next) => {
  */
 router.delete('/:id', (req, res, next) => {
   const options = {
-    id: req.params.id
+    id: req.params.id,
+    req : req
   };
 
   Grant.deleteGrantById(options, (err, data) => {
@@ -49,6 +51,7 @@ router.delete('/:id', (req, res, next) => {
 router.put('/:id', (req, res, next) => {
   const options = {
     id: req.params.id,
+    req : req
   };
 
   Grant.updateGrantById(options, (err, data) => {
@@ -67,7 +70,8 @@ router.put('/:id', (req, res, next) => {
  */
 router.delete('/:id/amount', (req, res, next) => {
   const options = {
-    id: req.params.id
+    id: req.params.id,
+    req : req
   };
 
   Grant.clearGrantAmount(options, (err, data) => {
@@ -87,6 +91,7 @@ router.delete('/:id/amount', (req, res, next) => {
 router.post('/:id/amount', (req, res, next) => {
   const options = {
     id: req.params.id,
+    req : req
   };
 
   Grant.setGrantAmount(options, (err, data) => {
@@ -106,6 +111,7 @@ router.post('/:id/amount', (req, res, next) => {
 router.put('/:id/amount', (req, res, next) => {
   const options = {
     id: req.params.id,
+    req : req
   };
 
   Grant.modifyGrantAmount(options, (err, data) => {
@@ -125,7 +131,8 @@ router.put('/:id/amount', (req, res, next) => {
 router.post('/:id/amount/{amount}', (req, res, next) => {
   const options = {
     id: req.params.id,
-    amount: req.params.amount
+    amount: req.params.amount,
+    req : req
   };
 
   Grant.setGrantAmountPath(options, (err, data) => {
@@ -145,7 +152,8 @@ router.post('/:id/amount/{amount}', (req, res, next) => {
 router.put('/:id/amount/{amount}', (req, res, next) => {
   const options = {
     id: req.params.id,
-    amount: req.params.amount
+    amount: req.params.amount,
+    req : req
   };
 
   Grant.modifyGrantAmountPath(options, (err, data) => {
@@ -164,7 +172,8 @@ router.put('/:id/amount/{amount}', (req, res, next) => {
  */
 router.delete('/:id/description', (req, res, next) => {
   const options = {
-    id: req.params.id
+    id: req.params.id,
+    req : req
   };
 
   Grant.clearGrantDescription(options, (err, data) => {
@@ -184,6 +193,7 @@ router.delete('/:id/description', (req, res, next) => {
 router.post('/:id/description', (req, res, next) => {
   const options = {
     id: req.params.id,
+    req : req
   };
 
   Grant.setGrantDescription(options, (err, data) => {
@@ -203,6 +213,7 @@ router.post('/:id/description', (req, res, next) => {
 router.put('/:id/description', (req, res, next) => {
   const options = {
     id: req.params.id,
+    req : req
   };
 
   Grant.modifyGrantDescription(options, (err, data) => {
@@ -221,7 +232,8 @@ router.put('/:id/description', (req, res, next) => {
  */
 router.delete('/:id/keys', (req, res, next) => {
   const options = {
-    id: req.params.id
+    id: req.params.id,
+    req : req
   };
 
   Grant.clearGrantKeywords(options, (err, data) => {
@@ -241,6 +253,7 @@ router.delete('/:id/keys', (req, res, next) => {
 router.post('/:id/keys', (req, res, next) => {
   const options = {
     id: req.params.id,
+    req : req
   };
 
   Grant.setGrantKeywords(options, (err, data) => {
@@ -260,6 +273,7 @@ router.post('/:id/keys', (req, res, next) => {
 router.put('/:id/keys', (req, res, next) => {
   const options = {
     id: req.params.id,
+    req : req
   };
 
   Grant.addGrantKeywords(options, (err, data) => {
@@ -279,7 +293,8 @@ router.put('/:id/keys', (req, res, next) => {
 router.delete('/:id/keys/{keyword}', (req, res, next) => {
   const options = {
     id: req.params.id,
-    keyword: req.params.keyword
+    keyword: req.params.keyword,
+    req : req
   };
 
   Grant.deleteGrantKeyword(options, (err, data) => {
@@ -299,7 +314,8 @@ router.delete('/:id/keys/{keyword}', (req, res, next) => {
 router.post('/:id/keys/{keyword}', (req, res, next) => {
   const options = {
     id: req.params.id,
-    keyword: req.params.keyword
+    keyword: req.params.keyword,
+    req : req
   };
 
   Grant.setGrantKeywordPath(options, (err, data) => {
@@ -319,7 +335,8 @@ router.post('/:id/keys/{keyword}', (req, res, next) => {
 router.put('/:id/keys/{keyword}', (req, res, next) => {
   const options = {
     id: req.params.id,
-    keyword: req.params.keyword
+    keyword: req.params.keyword,
+    req : req
   };
 
   Grant.addGrantKeyword(options, (err, data) => {
@@ -338,7 +355,8 @@ router.put('/:id/keys/{keyword}', (req, res, next) => {
  */
 router.delete('/:id/type', (req, res, next) => {
   const options = {
-    id: req.params.id
+    id: req.params.id,
+    req : req
   };
 
   Grant.clearGrantType(options, (err, data) => {
@@ -358,6 +376,7 @@ router.delete('/:id/type', (req, res, next) => {
 router.post('/:id/type', (req, res, next) => {
   const options = {
     id: req.params.id,
+    req : req
   };
 
   Grant.setGrantType(options, (err, data) => {
@@ -377,6 +396,7 @@ router.post('/:id/type', (req, res, next) => {
 router.put('/:id/type', (req, res, next) => {
   const options = {
     id: req.params.id,
+    req : req
   };
 
   Grant.modifyGrantType(options, (err, data) => {
@@ -396,7 +416,8 @@ router.put('/:id/type', (req, res, next) => {
 router.post('/:id/type/{type}', (req, res, next) => {
   const options = {
     id: req.params.id,
-    type: req.params.type
+    type: req.params.type,
+    req : req
   };
 
   Grant.setGrantTypePath(options, (err, data) => {
@@ -416,7 +437,8 @@ router.post('/:id/type/{type}', (req, res, next) => {
 router.put('/:id/type/{type}', (req, res, next) => {
   const options = {
     id: req.params.id,
-    type: req.params.type
+    type: req.params.type,
+    req : req
   };
 
   Grant.modifyGrantTypePath(options, (err, data) => {
@@ -435,7 +457,8 @@ router.put('/:id/type/{type}', (req, res, next) => {
  */
 router.delete('/:id/url', (req, res, next) => {
   const options = {
-    id: req.params.id
+    id: req.params.id,
+    req : req
   };
 
   Grant.clearGrantUrls(options, (err, data) => {
@@ -455,6 +478,7 @@ router.delete('/:id/url', (req, res, next) => {
 router.post('/:id/url', (req, res, next) => {
   const options = {
     id: req.params.id,
+    req : req
   };
 
   Grant.setGrantUrls(options, (err, data) => {
@@ -474,6 +498,7 @@ router.post('/:id/url', (req, res, next) => {
 router.put('/:id/url', (req, res, next) => {
   const options = {
     id: req.params.id,
+    req : req
   };
 
   Grant.addGrantUrl(options, (err, data) => {
