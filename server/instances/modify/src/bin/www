@@ -6,6 +6,7 @@
 import app from '../api';
 import http from 'http';
 import config from '../lib/config';
+import env-config from '../lib/env-config';
 import logger from '../lib/logger';
 import passport from 'passport';
 const localstrategy = require('passport-local').Strategy;
