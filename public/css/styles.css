@@ -1,0 +1,34 @@
+.rectangle {
+  width: 516px;
+  height: 370px;
+  border-radius: 5px;
+  background-color: #f5f7fa;
+  background-color: var(--lightGray1);
+  box-shadow: 0 3px 8px 0 rgba(60, 59, 60, 0.24), 0 3px 6px 0 rgba(60, 59, 60, 0.19);
+  border: solid 1px #e6e9ed;
+  border: solid 1px var(--lightGray2);
+}
+
+.inputlabel {
+  width: 276px;
+  height: 14px;
+  font-family: Roboto;
+  font-size: 12px;
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+  text-align: left;
+}
+
+.logintextbox {
+  width: 275.2px;
+  height: 42px;
+}
+
+#loginbutton {
+  width: 222px;
+  height: 48px;
+  border-radius: 5px;
+  background-color: #4a89dc;
+  background-color: var(--stateAction);
+}
