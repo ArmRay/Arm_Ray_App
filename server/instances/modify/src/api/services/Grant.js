@@ -29,6 +29,14 @@ export function createGrant (options, callback) {
   // Implement you business logic here...
       let grant = new Grant();
 
+      grant.grant_type = options.req.body.grant_type;
+      grant.grant_description = options.req.body.grant_description;
+      grant.grant_amount = options.req.body.grant_amount;
+      grant.grant_url = options.req.body.grant_url;
+      grant.grant_keywords = options.req.body.grant_keywords;
+      grant.created_date = new Date();
+
+
 
       grant.save(function(err){
 
@@ -74,7 +82,14 @@ export function updateGrantById (options, callback) {
         console.error(err);
       }
 
-      //Change grant values here
+      //Change grant values here  
+      grant.grant_type = options.req.body.grant_type;
+      grant.grant_description = options.req.body.grant_description;
+      grant.grant_amount = options.req.body.grant_amount;
+      grant.grant_url = options.req.body.grant_url;
+      grant.grant_keywords = options.req.body.grant_keywords;
+      grant.modified_date = new Date();
+
 
       grant.save(function(err){
         if(err){
@@ -95,6 +110,24 @@ export function updateGrantById (options, callback) {
  */
 export function clearGrantAmount (options, callback) {
   // Implement you business logic here...
+  Grant.findById(options.id, function(err, grant){
+      if(err){
+        console.error(err);
+      }
+
+      //Change grant values here  
+      grant.grant_amount = 0;
+      grant.modified_date = new Date();
+
+
+      grant.save(function(err){
+        if(err){
+          console.error(err);
+        }
+        res.json({message: 'This Grant has been updated'});
+      })
+      
+    })
 }
 
 /**
@@ -115,6 +148,25 @@ export function setGrantAmount (options, callback) {
  */
 export function modifyGrantAmount (options, callback) {
   // Implement you business logic here...
+
+   Grant.findById(options.id, function(err, grant){
+      if(err){
+        console.error(err);
+      }
+
+      //Change grant values here  
+      grant.grant_amount = options.req.body.grant_amount;
+      grant.modified_date = new Date();
+
+
+      grant.save(function(err){
+        if(err){
+          console.error(err);
+        }
+        res.json({message: 'This Grant has been updated'});
+      })
+      
+    })
 }
 
 /**
@@ -144,6 +196,25 @@ export function modifyGrantAmountPath (options, callback) {
  */
 export function clearGrantDescription (options, callback) {
   // Implement you business logic here...
+
+   Grant.findById(options.id, function(err, grant){
+      if(err){
+        console.error(err);
+      }
+
+      //Change grant values here  
+      grant.grant_description = '';
+      grant.modified_date = new Date();
+
+
+      grant.save(function(err){
+        if(err){
+          console.error(err);
+        }
+        res.json({message: 'This Grant has been updated'});
+      })
+      
+    })
 }
 
 /**
@@ -154,6 +225,7 @@ export function clearGrantDescription (options, callback) {
  */
 export function setGrantDescription (options, callback) {
   // Implement you business logic here...
+
 }
 
 /**
@@ -164,6 +236,25 @@ export function setGrantDescription (options, callback) {
  */
 export function modifyGrantDescription (options, callback) {
   // Implement you business logic here...
+
+  Grant.findById(options.id, function(err, grant){
+      if(err){
+        console.error(err);
+      }
+
+      //Change grant values here  
+      grant.grant_description = options.req.body.grant_description;
+      grant.modified_date = new Date();
+
+
+      grant.save(function(err){
+        if(err){
+          console.error(err);
+        }
+        res.json({message: 'This Grant has been updated'});
+      })
+      
+    })
 }
 
 /**
@@ -173,6 +264,25 @@ export function modifyGrantDescription (options, callback) {
  */
 export function clearGrantKeywords (options, callback) {
   // Implement you business logic here...
+
+   Grant.findById(options.id, function(err, grant){
+      if(err){
+        console.error(err);
+      }
+
+      //Change grant values here  
+      grant.grant_keywords = [];
+      grant.modified_date = new Date();
+
+
+      grant.save(function(err){
+        if(err){
+          console.error(err);
+        }
+        res.json({message: 'This Grant has been updated'});
+      })
+      
+    })
 }
 
 /**
@@ -193,6 +303,31 @@ export function setGrantKeywords (options, callback) {
  */
 export function addGrantKeywords (options, callback) {
   // Implement you business logic here...
+
+
+  Grant.findById(options.id, function(err, grant){
+      if(err){
+        console.error(err);
+      }
+
+      //Change grant values here  
+
+      for(var i = 0, i<options.req.body.grant_keywords.length; i++){
+        grant.grant_keywords.push(options.req.body.grant_keywords[i]);
+      }
+
+
+      grant.modified_date = new Date();
+
+
+      grant.save(function(err){
+        if(err){
+          console.error(err);
+        }
+        res.json({message: 'This Grant has been updated'});
+      })
+      
+    })
 }
 
 /**
@@ -232,6 +367,26 @@ export function addGrantKeyword (options, callback) {
  */
 export function clearGrantType (options, callback) {
   // Implement you business logic here...
+
+
+  Grant.findById(options.id, function(err, grant){
+      if(err){
+        console.error(err);
+      }
+
+      //Change grant values here  
+      grant.grant_type = '';
+      grant.modified_date = new Date();
+
+
+      grant.save(function(err){
+        if(err){
+          console.error(err);
+        }
+        res.json({message: 'This Grant has been updated'});
+      })
+      
+    })
 }
 
 /**
@@ -252,6 +407,26 @@ export function setGrantType (options, callback) {
  */
 export function modifyGrantType (options, callback) {
   // Implement you business logic here...
+
+
+  Grant.findById(options.id, function(err, grant){
+      if(err){
+        console.error(err);
+      }
+
+      //Change grant values here  
+      grant.grant_type= options.req.body.grant_type;
+      grant.modified_date = new Date();
+
+
+      grant.save(function(err){
+        if(err){
+          console.error(err);
+        }
+        res.json({message: 'This Grant has been updated'});
+      })
+      
+    })
 }
 
 /**
@@ -281,6 +456,26 @@ export function modifyGrantTypePath (options, callback) {
  */
 export function clearGrantUrls (options, callback) {
   // Implement you business logic here...
+
+
+  Grant.findById(options.id, function(err, grant){
+      if(err){
+        console.error(err);
+      }
+
+      //Change grant values here  
+      grant.grant_url = [];
+      grant.modified_date = new Date();
+
+
+      grant.save(function(err){
+        if(err){
+          console.error(err);
+        }
+        res.json({message: 'This Grant has been updated'});
+      })
+      
+    })
 }
 
 /**
@@ -301,5 +496,29 @@ export function setGrantUrls (options, callback) {
  */
 export function addGrantUrl (options, callback) {
   // Implement you business logic here...
+
+
+  Grant.findById(options.id, function(err, grant){
+      if(err){
+        console.error(err);
+      }
+
+      //Change grant values here  
+
+      for(var i = 0, i<options.req.body.grant_url.length; i++){
+          grant.grant_url.push(options.req.body.grant_url[i]);
+      }
+
+      grant.modified_date = new Date();
+
+
+      grant.save(function(err){
+        if(err){
+          console.error(err);
+        }
+        res.json({message: 'This Grant has been updated'});
+      })
+      
+    })
 }
 
