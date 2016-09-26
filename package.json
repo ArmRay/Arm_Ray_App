@@ -72,7 +72,8 @@
   },
   "scripts": {
     "start": "node public/javascript/app.js",
-    "test": "grunt test"
+    "test": "grunt test",
+    "build": "babel public/sourcejavascript -d public/javascript"
   },
   "private": true
 }

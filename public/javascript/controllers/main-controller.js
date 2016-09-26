@@ -1,1 +1,2 @@
 //js
+"use strict";

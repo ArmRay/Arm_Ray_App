@@ -1,79 +1,80 @@
+'use strict';
+
+var _express = require('express');
+
+var _express2 = _interopRequireDefault(_express);
+
+var _expressValidator = require('express-validator');
+
+var _expressValidator2 = _interopRequireDefault(_expressValidator);
+
+var _bodyParser = require('body-parser');
+
+var _bodyParser2 = _interopRequireDefault(_bodyParser);
+
+var _expressSession = require('express-session');
+
+var _expressSession2 = _interopRequireDefault(_expressSession);
+
+var _path = require('path');
+
+var _path2 = _interopRequireDefault(_path);
+
+var _connectTimeout = require('connect-timeout');
+
+var _connectTimeout2 = _interopRequireDefault(_connectTimeout);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 //IMPORT STATEMENTS
-import express from 'express';
-import validator from 'express-validator';
-import body-parser from 'body-parser';
-import session from 'express-session';
-import path from 'path';
-import timeout from 'connect-timeout';
+var app = (0, _express2.default)();
 
-let app = express();
-
-app.use(timeout(120000));
+app.use((0, _connectTimeout2.default)(120000));
 app.use(haltOnTimedout);
-function haltOnTimedout(req, res, next){
+function haltOnTimedout(req, res, next) {
   if (!req.timedout) next();
 }
-
 
 process.on('uncaughtException', function (err) {
   console.log('Caught exception: ' + err);
 });
 
-
-
-
-
 // APP USE STATEMENTS
-app.use(validator({
-  errorFormatter: function(param, msg, value) {
-      var namespace = param.split('.')
-      , root    = namespace.shift()
-      , formParam = root;
+app.use((0, _expressValidator2.default)({
+  errorFormatter: function errorFormatter(param, msg, value) {
+    var namespace = param.split('.'),
+        root = namespace.shift(),
+        formParam = root;
 
-    while(namespace.length) {
+    while (namespace.length) {
       formParam += '[' + namespace.shift() + ']';
     }
     return {
-      param : formParam,
-      msg   : msg,
-      value : value
+      param: formParam,
+      msg: msg,
+      value: value
     };
   }
 }));
 
-
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
+app.use(_bodyParser2.default.urlencoded({ extended: true }));
+app.use(_bodyParser2.default.json());
 
 //Generic JS route, i.e. for route and etc
-app.use('/js', express.static(__dirname+'/public/javascript'));
+app.use('/js', _express2.default.static(__dirname + '/public/javascript'));
 // End of Generic JS route
 
-app.use('/css', express.static(__dirname+'/public/css'));
-app.use('/controllers', express.static(__dirname+'/public/javascript/controllers'));
-app.use('/services', express.statuc(__dirname+'/public/javascript/services'));
-
-
-
-
-
-
+app.use('/css', _express2.default.static(__dirname + '/public/css'));
+app.use('/controllers', _express2.default.static(__dirname + '/public/javascript/controllers'));
+app.use('/services', _express2.default.static(__dirname + '/public/javascript/services'));
 
 // BASIC ROUTE STATEMENTS FOR SERVING ANGULAR INDEXES
 app.get('/', function (req, res) {
-  res.sendFile('./index.html', {"root": __dirname});
+  res.sendFile('./index.html', { "root": "public/views" });
 });
-
-
-
-
-
-
-
-
 
 // START THE SERVER
 // =============================================================================
 
-let port = process.env.PORT || 8080;
+var port = process.env.PORT || 8080;
 app.listen(port);
