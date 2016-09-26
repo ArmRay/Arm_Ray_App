@@ -2,6 +2,9 @@
   "name": "arm-ray",
   "version": "0.0.0",
   "dependencies": {
+    "babel": "6.1.18",
+    "babel-cli": "6.1.18",
+    "babel-preset-es2015": "6.1.18",
     "body-parser": "^1.5.2",
     "composable-middleware": "^0.3.0",
     "compression": "~1.0.1",
