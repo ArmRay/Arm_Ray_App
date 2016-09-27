@@ -71,7 +71,7 @@
     "node": ">=0.10.0"
   },
   "scripts": {
-    "start": "node public/javascript/app.js",
+    "start": "node public/javascript/server.js",
     "test": "grunt test",
     "build": "babel public/sourcejavascript -d public/javascript"
   },
