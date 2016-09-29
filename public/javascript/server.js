@@ -69,11 +69,7 @@ app.use('/controllers', _express2.default.static(__dirname + '/controllers'));
 app.use('/services', _express2.default.static(__dirname + '/services'));
 app.use('/views', _express2.default.static(__dirname + '/../views/templates'));
 
-// BASIC ROUTE STATEMENTS FOR SERVING ANGULAR INDEXES
-/*app.get('/', function (req, res) {
-  res.sendFile('./index.html', {"root": "public/views"});
-});*/
-
+// BASE ROUTE
 app.use(function (req, res) {
   res.sendFile('./index.html', { "root": "public/views/" });
 });
