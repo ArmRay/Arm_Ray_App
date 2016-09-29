@@ -40,16 +40,17 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 //Generic JS route, i.e. for route and etc
-app.use('/js', express.static(__dirname+'/public/javascript'));
+app.use('/js', express.static(__dirname));
 // End of Generic JS route
 
-app.use('/css', express.static(__dirname+'/public/css'));
-app.use('/controllers', express.static(__dirname+'/public/javascript/controllers'));
-app.use('/services', express.static(__dirname+'/public/javascript/services'));
+app.use('/css', express.static(__dirname + '/../css'));
+app.use('/controllers', express.static(__dirname + '/controllers'));
+app.use('/services', express.static(__dirname + '/services'));
+app.use('/views', express.static(__dirname + '/../views/templates'));
 
-// BASIC ROUTE STATEMENTS FOR SERVING ANGULAR INDEXES
-app.get('/', function (req, res) {
-  res.sendFile('./index.html', {"root": "public/views"});
+// BASE ROUTE
+app.use(function(req, res) {
+  res.sendFile('./index.html', {"root": "public/views/"});
 });
 
 // START THE SERVER
