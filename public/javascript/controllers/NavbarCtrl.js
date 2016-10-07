@@ -4,19 +4,20 @@
     angular.module('app').controller('NavbarCtrl', function ($scope,$http) {
         console.log("NavbarCtrl functional!");
 
-       
-        //get profile image from profile information
+        //Get profile information from profile service
+        //profile service stores pre-queried information into
+        //a promise object and returns it into any view that then calls that
+        //promise service
 
-	        /* $http.get('/profile/:id', function(data){
-	        $scope.avatar = '';
 
-	        //http placeholder for avatar img request
+       	var profileInfo = {};
+       	ProfileService.getProfileInfo().then(
+        	function(data){profileInfo = data};
+        )
+        
+       	$scope.avatar = profileinfo.avatar;
 
-	       	//data.avatar contains img url
-
-	        	$scope.avatar = data.avatar;
-
-	        })*/
+        
 
 
     });

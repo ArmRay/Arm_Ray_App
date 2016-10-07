@@ -35,15 +35,25 @@
 
 
 .nav-brand {
-  width:32px;
-  height:32px;
+  width:30px;
+  height:30px;
   margin-top:16px;
   margin-left:32px;
 }
 
+nav{
+  position:fixed;
+  height:59px;
+}
+
+
 
 .float-left{
   float:left;
+}
+
+.float-right{
+  float:right;
 }
 
 .navbar-search{
@@ -57,10 +67,12 @@
 }
 
 
-
-
-nav:after {
-  width: 1024px;
-  height: 1px;
-  background-color: #ccd1d9;
+.navbar-right-icons{
+  margin-left:868px;
+  padding:19px;
 }
+
+
+
+
+

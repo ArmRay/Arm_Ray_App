@@ -66,6 +66,7 @@ app.use('/js', _express2.default.static(__dirname));
 app.use('/branding', _express2.default.static(__dirname + '/../assets/images'));
 app.use('/css', _express2.default.static(__dirname + '/../css'));
 app.use('/controllers', _express2.default.static(__dirname + '/controllers'));
+app.use('/factories', _express2.default.static(__dirname + '/factories'));
 app.use('/services', _express2.default.static(__dirname + '/services'));
 app.use('/views', _express2.default.static(__dirname + '/../views/templates'));
 app.use('/directives', _express2.default.static(__dirname + '/directives'));

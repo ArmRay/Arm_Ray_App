@@ -22,6 +22,11 @@
 
 /* Text styles */
 
+body {
+    background-color:#f5f7fa;
+}
+
+
 h1
 {
     font-family: Roboto;
@@ -185,7 +190,7 @@ form input
 }
 
 nav {
-    width:100vw;
+    background-color:#ffffff;
 }
 
 nav input
@@ -278,6 +283,72 @@ form input .disabled
 }
 
 
+input[type='text']{
+    background:url(/branding/group.png);
+    background-repeat: no-repeat;
+    background-position:98% 10px;
+    color: #aab2bd;
+}
+
+
+
+.graph-icon {
+    display:inline-block;
+    background:url(/branding/group-24.png) center;
+    background-repeat: no-repeat;
+    height:24px;
+    width:24px;
+}
+
+
+.plus-icon {
+    display:inline-block;
+    background:url(/branding/group-26.png);
+    background-repeat: no-repeat;
+    height:24px;
+    width:24px;
+}
+
+.down-caret-icon {
+    display:inline-block;
+    background:url(/branding/group-2.png) center;
+    background-repeat: no-repeat;
+    height:24px;
+    width:24px;
+}
+
+.search-icon {
+    display:inline-block;
+    background:url(/branding/group.png) center;
+    background-repeat: no-repeat;
+    height:24px;
+    width:24px;
+}
+
+
+.lock-icon {
+    display:inline-block;
+    background:url(/branding/group-29.png) center;
+    background-repeat: no-repeat;
+    height:24px;
+    width:24px;
+}
+
+.bell-icon {
+    display:inline-block;
+    background:url(/branding/group-9-copy.png) 0px 1px;
+    background-repeat: no-repeat;
+    height:24px;
+    width:24px;
+}
+
+.bell-active-icon {
+    display:inline-block;
+    background:url(/branding/group-9.png) center;
+    background-repeat: no-repeat;
+    height:24px;
+    width:24px;
+}
 
 
 
