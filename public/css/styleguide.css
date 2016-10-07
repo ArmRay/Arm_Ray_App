@@ -262,8 +262,11 @@ form input .disabled
   color: #3c3b3d;
 }
 
-
-
+/*nav{
+    border-bottom:1px solid #ccd1d9;
+    margin-top:16px;
+}
+*/
 
 
 .project-list .img {

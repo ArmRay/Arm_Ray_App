@@ -6,7 +6,7 @@
         .module('app')
         .config(function ($stateProvider, $urlRouterProvider,$locationProvider) {
             console.log("inside router");
-            $urlRouterProvider.otherwise("/login");
+            $urlRouterProvider.otherwise("/");
             
             $locationProvider.html5Mode({
                  enabled: true,

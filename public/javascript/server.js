@@ -63,16 +63,17 @@ app.use(_bodyParser2.default.json());
 //Generic JS route, i.e. for route and etc
 app.use('/js', _express2.default.static(__dirname));
 // End of Generic JS route
-
+app.use('/branding', _express2.default.static(__dirname + '/../assets/images'));
 app.use('/css', _express2.default.static(__dirname + '/../css'));
 app.use('/controllers', _express2.default.static(__dirname + '/controllers'));
 app.use('/services', _express2.default.static(__dirname + '/services'));
 app.use('/views', _express2.default.static(__dirname + '/../views/templates'));
 app.use('/directives', _express2.default.static(__dirname + '/directives'));
 // BASE ROUTE
-app.use(function (req, res) {
+
+app.all('/', function (req, res) {
   res.sendFile('./index.html', { "root": "public/views/" });
-});
+})
 
 // START THE SERVER
 // =============================================================================

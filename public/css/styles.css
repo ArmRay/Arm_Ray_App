@@ -32,3 +32,35 @@
   background-color: #4a89dc;
   background-color: var(--stateAction);
 }
+
+
+.nav-brand {
+  width:32px;
+  height:32px;
+  margin-top:16px;
+  margin-left:32px;
+}
+
+
+.float-left{
+  float:left;
+}
+
+.navbar-search{
+  margin-top:12px;
+  margin-left:24px;
+  font-family: Roboto;
+  font-size: 13.3px;
+  font-style: italic;
+  color: #aab2bd;
+  padding-left:12px;
+}
+
+
+
+
+nav:after {
+  width: 1024px;
+  height: 1px;
+  background-color: #ccd1d9;
+}

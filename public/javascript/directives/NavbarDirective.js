@@ -2,7 +2,7 @@
 (function () {
     'use strict';
 
-    angular.module('app').directive('navBar', function($scope) {
+    angular.module('app').directive('navbar', function() {
         console.log("navBar directive!");
 
         	return{
