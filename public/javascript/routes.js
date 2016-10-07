@@ -1,23 +1,43 @@
-'use strict';
 
 (function () {
     'use strict';
 
-    angular.module('app').config(['$routeProvider', function ($routeProvider) {
-        $routeProvider.when('/', {
-            controller: 'MainController',
-            templateUrl: '/views/login.html'
-        }).when('/dashboard', {
-            controller: 'DashboardController',
-            templateUrl: '/views/dashboard.html'
-        }).when('/profile', {
-            controller: 'ProfileController',
-            templateUrl: '/views/profile.html'
-        }).when('/project', {
-            controller: 'ProjectController',
-            templateUrl: '/views/project.html'
-        }).otherwise({
-            redirectTo: '/'
+    angular
+        .module('app')
+        .config(function ($stateProvider, $urlRouterProvider,$locationProvider) {
+            console.log("inside router");
+            $urlRouterProvider.otherwise("/login");
+            
+            $locationProvider.html5Mode({
+                 enabled: true,
+                 requireBase: false
+            });
+            
+            $stateProvider
+              .state('login', {
+                  url: "/login",
+                  templateUrl: "/views/login.html",
+                  controller:"loginCtrl"   
+              }, function(){
+                console.log("Inside of login route");
+              })
+
+              .state('dashboard', {
+                  url: "/dashboard",
+                  templateUrl: "/views/dashboard.html",
+                  controller:"DashboardCtrl"   
+              })
+              .state('project', {
+                  url: "/project",
+                  templateUrl: "/views/project.html",
+                  controller:"ProjectCtrl"   
+              })
+              .state('profile', {
+                  url: "/profile",
+                  templateUrl: "/views/profile.html",
+                  controller:"ProfileCtrl"   
+              })
+
+
         });
-    }]);
 })();

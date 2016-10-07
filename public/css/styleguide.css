@@ -12,7 +12,7 @@
     --lightGray1: #f5f7fa;
     --white: #fff;
     --stateAction: #4a89dc;
-    --stateError: #bf263c;
+    --stateError: #bf263c;  
     --stateWarning: #e9573f;
     --stateSuccess: #37bc9b;
     --test: rgba(233, 30, 99, .5);
@@ -183,6 +183,39 @@ form input
     border-radius: 5px;
     background-color: #fff;
 }
+
+nav {
+    width:100vw;
+}
+
+nav input
+{
+    width: 458px;
+    height: 36px;
+    border: solid 1px #ccd1d9;
+    border-radius: 5px;
+    background-color: #fff;
+}
+
+nav input:focus 
+{
+    border: solid 1px #4a89dc;
+    box-shadow: 0 0 5px 0 rgba(73, 137, 220, .24), 0 0 5px 0 rgba(0, 0, 0, .19);
+}
+
+
+nav input .error
+{
+    border: solid 1px #bf263c;
+    box-shadow: 0 0 5px 0 rgba(191, 38, 60, .24), 0 0 5px 0 rgba(191, 38, 60, .19);
+}
+
+nav input .disabled
+{
+    border: solid 1px #ccd1d9;
+}
+
+
 
 
 form input:focus

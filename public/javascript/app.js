@@ -2,5 +2,5 @@
 
 (function () {
 	//Declare module dependencies.
-	angular.module('app', ['ngRoute']);
+	angular.module('app', ['ui.router']);
 })();

@@ -2,12 +2,12 @@
 (function () {
     'use strict';
 
-    angular.module('app').directive('navBar', function ($scope) {
+    angular.module('app').directive('navBar', function($scope) {
         console.log("navBar directive!");
 
         	return{
         		restrict: 'E',
-        		templateUrl: '',
+        		templateUrl: '/views/NavbarTemplate.html',
         		controller:'NavbarCtrl'
         	}
 

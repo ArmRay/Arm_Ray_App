@@ -68,7 +68,7 @@ app.use('/css', _express2.default.static(__dirname + '/../css'));
 app.use('/controllers', _express2.default.static(__dirname + '/controllers'));
 app.use('/services', _express2.default.static(__dirname + '/services'));
 app.use('/views', _express2.default.static(__dirname + '/../views/templates'));
-
+app.use('/directives', _express2.default.static(__dirname + '/directives'));
 // BASE ROUTE
 app.use(function (req, res) {
   res.sendFile('./index.html', { "root": "public/views/" });
