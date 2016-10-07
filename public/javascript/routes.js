@@ -17,7 +17,7 @@
               .state('login', {
                   url: "/login",
                   templateUrl: "/views/login.html",
-                  controller:"loginCtrl"   
+                  controller:"LoginCtrl"   
               }, function(){
                 console.log("Inside of login route");
               })
