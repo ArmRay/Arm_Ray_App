@@ -49,7 +49,7 @@ app.use((0, _expressValidator2.default)({
     while (namespace.length) {
       formParam += '[' + namespace.shift() + ']';
     }
-    return {
+    return {  
       param: formParam,
       msg: msg,
       value: value
