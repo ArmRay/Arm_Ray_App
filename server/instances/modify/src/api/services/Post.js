@@ -25,9 +25,27 @@ const UserSkill = models.userkSkill;
 
 
 
- 
+
 export function createPost (options, callback) {
-  // Implement you business logic here...
+  let post = new Post();
+
+
+  post.created_date = new Date();
+  post.updated_date = post.created_date;
+  post.post_title = options.req.body.post_title;
+  post.post_text = options.req.body.post_text;
+  post.post_keywords = options.req.body.post_keywords;
+  post.post_author_id = options.req.body.post_author_id;
+  post.post_tags = options.req.body.post_tags;
+  post.post_tags_id = options.req.body.post_tags_id;
+  post.is_post_private = options.req.body.is_post_private;
+
+  post.save(function(err){
+    if(err){
+      console.error(err);
+    }
+  })
+}
 }
 
 /**
@@ -36,7 +54,13 @@ export function createPost (options, callback) {
  * @param {Function} callback
  */
 export function deletePostById (options, callback) {
-  // Implement you business logic here...
+  Post.remove({_id:options.id}, function(err,grant){
+    if(err){
+      console.error(err);
+    }
+    res.json({message: 'This Post has been deleted'});
+  })
+
 }
 
 /**
@@ -51,7 +75,32 @@ export function deletePostById (options, callback) {
  * @param {Function} callback
  */
 export function updatePosttById (options, callback) {
-  // Implement you business logic here...
+
+  Post.findById(options.id, function(err, post){
+    if(err){
+      console.error(err);
+    }
+
+    post.updated_date = new Date();
+    post.post_title = options.req.body.post_title ? options.req.body.post_title : post.post_title ;
+    post.post_text = options.req.body.post_text ? options.req.body.post_text : post.post_text ;
+    post.post_keywords = options.req.body.post_keywords  ? options.req.body.post_keywords : post.post_keywords;
+    post.post_author_id = options.req.body.post_author_id ? options.req.body.post_author_id : post.post_author_id;
+    post.post_tags = options.req.body.post_tags ? options.req.body.post_tags : post.post_tags;
+    post.post_tags_id = options.req.body.post_tags_id ? options.req.body.post_tags_id : post.post_tags_id;
+    post.is_post_private = options.req.body.is_post_private ? options.req.body.is_post_private : post.is_post_private;
+
+    post.save(function(err){
+      if(err){
+        console.error(err);
+      }
+      res.json({message: 'This Post has been updated'});
+    })
+
+  })
+
+
+
 }
 
 /**
@@ -60,7 +109,21 @@ export function updatePosttById (options, callback) {
  * @param {Function} callback
  */
 export function deletePostAuthorById (options, callback) {
-  // Implement you business logic here...
+  Post.findById(options.id, function(err, post){
+    if(err){
+      console.error(err);
+    }
+
+    post.updated_date = new Date();
+    post.post_author_id = options.req.body.post_author_id;
+
+    post.save(function(err){
+      if(err){
+        console.error(err);
+      }
+      res.json({message: 'This Post has been updated'});
+    })
+  })
 }
 
 /**
@@ -70,7 +133,21 @@ export function deletePostAuthorById (options, callback) {
  * @param {Function} callback
  */
 export function updatePostAuthorByIdPost (options, callback) {
-  // Implement you business logic here...
+  Post.findById(options.id, function(err, post){
+    if(err){
+      console.error(err);
+    }
+
+    post.updated_date = new Date();
+    post.post_author_id = null;
+
+    post.save(function(err){
+      if(err){
+        console.error(err);
+      }
+      res.json({message: 'This Post has been updated'});
+    })
+  })
 }
 
 /**
@@ -80,7 +157,21 @@ export function updatePostAuthorByIdPost (options, callback) {
  * @param {Function} callback
  */
 export function updatePostAuthorById (options, callback) {
-  // Implement you business logic here...
+  Post.findById(options.id, function(err, post){
+    if(err){
+      console.error(err);
+    }
+
+    post.updated_date = new Date();
+    post.post_author_id = null;
+
+    post.save(function(err){
+      if(err){
+        console.error(err);
+      }
+      res.json({message: 'This Post has been updated'});
+    })
+  })
 }
 
 /**
@@ -89,7 +180,21 @@ export function updatePostAuthorById (options, callback) {
  * @param {Function} callback
  */
 export function deletePostKeywordsById (options, callback) {
-  // Implement you business logic here...
+  Post.findById(options.id, function(err, post){
+    if(err){
+      console.error(err);
+    }
+
+    post.updated_date = new Date();
+    post.post_keywords = null;
+
+    post.save(function(err){
+      if(err){
+        console.error(err);
+      }
+      res.json({message: 'This Post has been updated'});
+    })
+  })
 }
 
 /**
@@ -99,7 +204,21 @@ export function deletePostKeywordsById (options, callback) {
  * @param {Function} callback
  */
 export function replacePostKeywordsById (options, callback) {
-  // Implement you business logic here...
+  Post.findById(options.id, function(err, post){
+    if(err){
+      console.error(err);
+    }
+
+    post.updated_date = new Date();
+    post.post_keywords = options.req.body.post_keywords;
+
+    post.save(function(err){
+      if(err){
+        console.error(err);
+      }
+      res.json({message: 'This Post has been updated'});
+    })
+  })
 }
 
 /**
@@ -109,7 +228,21 @@ export function replacePostKeywordsById (options, callback) {
  * @param {Function} callback
  */
 export function updateProjectKeywordsById (options, callback) {
-  // Implement you business logic here...
+  Post.findById(options.id, function(err, post){
+    if(err){
+      console.error(err);
+    }
+
+    post.updated_date = new Date();
+    post.post_keywords.push(options.req.body.post_keywords);
+
+    post.save(function(err){
+      if(err){
+        console.error(err);
+      }
+      res.json({message: 'This Post has been updated'});
+    })
+  })
 }
 
 /**
@@ -119,7 +252,21 @@ export function updateProjectKeywordsById (options, callback) {
  * @param {Function} callback
  */
 export function deletePostKeywordById (options, callback) {
-  // Implement you business logic here...
+  Post.findById(options.id, function(err, post){
+    if(err){
+      console.error(err);
+    }
+
+    post.updated_date = new Date();
+    post.post_keywords = null;
+
+    post.save(function(err){
+      if(err){
+        console.error(err);
+      }
+      res.json({message: 'This Post has been updated'});
+    })
+  })
 }
 
 /**
@@ -129,7 +276,7 @@ export function deletePostKeywordById (options, callback) {
  * @param {Function} callback
  */
 export function addPostKeywordByIdPost (options, callback) {
-  // Implement you business logic here...
+    updateProjectKeywordsById (options, callback);
 }
 
 /**
@@ -139,7 +286,7 @@ export function addPostKeywordByIdPost (options, callback) {
  * @param {Function} callback
  */
 export function addPostKeywordById (options, callback) {
-  // Implement you business logic here...
+    updateProjectKeywordsById (options, callback);
 }
 
 /**
@@ -149,7 +296,7 @@ export function addPostKeywordById (options, callback) {
  * @param {Function} callback
  */
 export function updatePostPrivacyByIdPost (options, callback) {
-  // Implement you business logic here...
+  updatePostPrivacyById (options, callback)
 }
 
 /**
@@ -159,7 +306,21 @@ export function updatePostPrivacyByIdPost (options, callback) {
  * @param {Function} callback
  */
 export function updatePostPrivacyById (options, callback) {
-  // Implement you business logic here...
+  Post.findById(options.id, function(err, post){
+    if(err){
+      console.error(err);
+    }
+
+    post.updated_date = new Date();
+    post.is_post_private = options.req.body.is_post_private;
+
+    post.save(function(err){
+      if(err){
+        console.error(err);
+      }
+      res.json({message: 'This Post has been updated'});
+    })
+  })
 }
 
 /**
@@ -168,7 +329,21 @@ export function updatePostPrivacyById (options, callback) {
  * @param {Function} callback
  */
 export function deleteProjectTagsById (options, callback) {
-  // Implement you business logic here...
+  Post.findById(options.id, function(err, post){
+    if(err){
+      console.error(err);
+    }
+
+    post.updated_date = new Date();
+    post.post_tags_id = null;
+
+    post.save(function(err){
+      if(err){
+        console.error(err);
+      }
+      res.json({message: 'This Post has been updated'});
+    })
+  })
 }
 
 /**
@@ -178,7 +353,21 @@ export function deleteProjectTagsById (options, callback) {
  * @param {Function} callback
  */
 export function replacePostTagsById (options, callback) {
-  // Implement you business logic here...
+  Post.findById(options.id, function(err, post){
+    if(err){
+      console.error(err);
+    }
+
+    post.updated_date = new Date();
+    post.post_tags_id = options.req.body.post_tags_id;
+
+    post.save(function(err){
+      if(err){
+        console.error(err);
+      }
+      res.json({message: 'This Post has been updated'});
+    })
+  })
 }
 
 /**
@@ -188,7 +377,21 @@ export function replacePostTagsById (options, callback) {
  * @param {Function} callback
  */
 export function deletePostTagsById (options, callback) {
-  // Implement you business logic here...
+  Post.findById(options.id, function(err, post){
+    if(err){
+      console.error(err);
+    }
+
+    post.updated_date = new Date();
+    post.post_tags_id = null;
+
+    post.save(function(err){
+      if(err){
+        console.error(err);
+      }
+      res.json({message: 'This Post has been updated'});
+    })
+  })
 }
 
 /**
@@ -198,7 +401,21 @@ export function deletePostTagsById (options, callback) {
  * @param {Function} callback
  */
 export function addPostTagsByIdPost (options, callback) {
-  // Implement you business logic here...
+  Post.findById(options.id, function(err, post){
+    if(err){
+      console.error(err);
+    }
+
+    post.updated_date = new Date();
+    post.post_tags_id.push(options.req.body.post_tags_id);
+
+    post.save(function(err){
+      if(err){
+        console.error(err);
+      }
+      res.json({message: 'This Post has been updated'});
+    })
+  })
 }
 
 /**
@@ -208,7 +425,7 @@ export function addPostTagsByIdPost (options, callback) {
  * @param {Function} callback
  */
 export function updatePostTagsById (options, callback) {
-  // Implement you business logic here...
+  addPostTagsByIdPost (options, callback);
 }
 
 /**
@@ -217,7 +434,21 @@ export function updatePostTagsById (options, callback) {
  * @param {Function} callback
  */
 export function deletePostTextById (options, callback) {
-  // Implement you business logic here...
+  Post.findById(options.id, function(err, post){
+    if(err){
+      console.error(err);
+    }
+
+    post.updated_date = new Date();
+    post.post_text = null;
+
+    post.save(function(err){
+      if(err){
+        console.error(err);
+      }
+      res.json({message: 'This Post has been updated'});
+    })
+  })
 }
 
 /**
@@ -227,7 +458,7 @@ export function deletePostTextById (options, callback) {
  * @param {Function} callback
  */
 export function updatePostTextByIdPost (options, callback) {
-  // Implement you business logic here...
+  updatePostTextById (options, callback);
 }
 
 /**
@@ -237,7 +468,21 @@ export function updatePostTextByIdPost (options, callback) {
  * @param {Function} callback
  */
 export function updatePostTextById (options, callback) {
-  // Implement you business logic here...
+  Post.findById(options.id, function(err, post){
+    if(err){
+      console.error(err);
+    }
+
+    post.updated_date = new Date();
+    post.post_text = options.req.body.post_text;
+
+    post.save(function(err){
+      if(err){
+        console.error(err);
+      }
+      res.json({message: 'This Post has been updated'});
+    })
+  })
 }
 
 /**
@@ -246,7 +491,21 @@ export function updatePostTextById (options, callback) {
  * @param {Function} callback
  */
 export function deletePosTitleById (options, callback) {
-  // Implement you business logic here...
+  Post.findById(options.id, function(err, post){
+    if(err){
+      console.error(err);
+    }
+
+    post.updated_date = new Date();
+    post.post_title = null;
+
+    post.save(function(err){
+      if(err){
+        console.error(err);
+      }
+      res.json({message: 'This Post has been updated'});
+    })
+  })
 }
 
 /**
@@ -256,7 +515,7 @@ export function deletePosTitleById (options, callback) {
  * @param {Function} callback
  */
 export function updatePostTitleByIdPost (options, callback) {
-  // Implement you business logic here...
+  updatePostTitleById (options, callback);
 }
 
 /**
@@ -266,6 +525,19 @@ export function updatePostTitleByIdPost (options, callback) {
  * @param {Function} callback
  */
 export function updatePostTitleById (options, callback) {
-  // Implement you business logic here...
-}
+  Post.findById(options.id, function(err, post){
+    if(err){
+      console.error(err);
+    }
 
+    post.updated_date = new Date();
+    post.post_title = options.req.body.post_title;
+
+    post.save(function(err){
+      if(err){
+        console.error(err);
+      }
+      res.json({message: 'This Post has been updated'});
+    })
+  })
+}
