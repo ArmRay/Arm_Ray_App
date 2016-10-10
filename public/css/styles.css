@@ -1,12 +1,18 @@
-.rectangle {
-  width: 516px;
-  height: 370px;
-  border-radius: 5px;
-  background-color: #f5f7fa;
-  background-color: var(--lightGray1);
-  box-shadow: 0 3px 8px 0 rgba(60, 59, 60, 0.24), 0 3px 6px 0 rgba(60, 59, 60, 0.19);
-  border: solid 1px #e6e9ed;
-  border: solid 1px var(--lightGray2);
+.loginrectangle 
+{
+    width: 516px;
+    height: 370px;
+    border-radius: 5px;
+    background-color: #f5f7fa;
+    background-color: var(--lightGray1);
+    box-shadow: 0 3px 8px 0 rgba(60, 59, 60, 0.24), 0 3px 6px 0 rgba(60, 59, 60, 0.19);
+    border: solid 1px #e6e9ed;
+    border: solid 1px var(--lightGray2);
+    position: absolute;
+    top:50%;
+    left:50%;
+    margin-top: -185px;
+    margin-left: -258px;
 }
 
 .inputlabel {
@@ -32,7 +38,6 @@
   background-color: #4a89dc;
   background-color: var(--stateAction);
 }
-
 
 .nav-brand {
   width:30px;
@@ -75,4 +80,8 @@ nav{
 
 
 
-
+.loginlogo
+{
+  width: 103px;
+  height: 103px;
+}
