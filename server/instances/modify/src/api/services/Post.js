@@ -23,12 +23,8 @@ const UserSkill = models.userkSkill;
 
 
 
-
-
-
 export function createPost(options, callback) {
   let post = new Post();
-
 
   post.created_date = new Date();
   post.updated_date = post.created_date;
@@ -89,7 +85,7 @@ export function updatePosttById(options, callback) {
     post.post_title = options.req.body.post_title ? options.req.body.post_title : post.post_title;
     post.post_text = options.req.body.post_text ? options.req.body.post_text : post.post_text;
     post.post_keywords = options.req.body.post_keywords ? options.req.body.post_keywords : post.post_keywords;
-    post.post_author_id = options.req.body.post_author_id ? options.req.body.post_author_id : post.post_author_id;
+    post.post_author_id = options.req.body.post_creator_id ? options.req.body.post_creator_id : post.post_author_id;
     post.post_tags = options.req.body.post_tags ? options.req.body.post_tags : post.post_tags;
     post.post_tags_id = options.req.body.post_tags_id ? options.req.body.post_tags_id : post.post_tags_id;
     post.is_post_private = options.req.body.is_post_private ? options.req.body.is_post_private : post.is_post_private;
@@ -147,7 +143,7 @@ export function updatePostAuthorByIdPost(options, callback) {
     }
 
     post.updated_date = new Date();
-    post.post_author_id = null;
+    post.post_author_id = options.req.body.text;
 
     post.save(function(err) {
       if (err) {
@@ -173,7 +169,7 @@ export function updatePostAuthorById(options, callback) {
     }
 
     post.updated_date = new Date();
-    post.post_author_id = null;
+    post.post_author_id = options.req.body.author;
 
     post.save(function(err) {
       if (err) {
@@ -224,7 +220,7 @@ export function replacePostKeywordsById(options, callback) {
     }
 
     post.updated_date = new Date();
-    post.post_keywords = options.req.body.post_keywords;
+    post.post_keywords = options.req.body.keywords;
 
     post.save(function(err) {
       if (err) {
@@ -250,7 +246,7 @@ export function updateProjectKeywordsById(options, callback) {
     }
 
     post.updated_date = new Date();
-    post.post_keywords.push(options.req.body.post_keywords);
+    post.post_keywords.push(options.req.body.keywords);
 
     post.save(function(err) {
       if (err) {
@@ -276,7 +272,11 @@ export function deletePostKeywordById(options, callback) {
     }
 
     post.updated_date = new Date();
-    post.post_keywords = null;
+
+    let ndx = post.keywords.indexOf(options.req.body.keyword);
+    if(ndx > -1){
+      post.post_keywords.splice(ndx, 1);
+    }
 
     post.save(function(err) {
       if (err) {
@@ -332,7 +332,7 @@ export function updatePostPrivacyById(options, callback) {
     }
 
     post.updated_date = new Date();
-    post.is_post_private = options.req.body.is_post_private;
+    post.is_post_private = options.req.body.is_private;
 
     post.save(function(err) {
       if (err) {
@@ -383,7 +383,7 @@ export function replacePostTagsById(options, callback) {
     }
 
     post.updated_date = new Date();
-    post.post_tags_id = options.req.body.post_tags_id;
+    post.post_tags_id = options.req.body.tagged_users;
 
     post.save(function(err) {
       if (err) {
@@ -409,7 +409,10 @@ export function deletePostTagsById(options, callback) {
     }
 
     post.updated_date = new Date();
-    post.post_tags_id = null;
+    let ndx = post.post_tags_id.indexOf(options.req.body.user_id);
+    if(ndx > -1){
+      post.post_tags_id.splice(ndx, 1);
+    }
 
     post.save(function(err) {
       if (err) {
@@ -435,7 +438,7 @@ export function addPostTagsByIdPost(options, callback) {
     }
 
     post.updated_date = new Date();
-    post.post_tags_id.push(options.req.body.post_tags_id);
+    post.post_tags_id.push(options.req.body.user_id);
 
     post.save(function(err) {
       if (err) {
@@ -506,7 +509,7 @@ export function updatePostTextById(options, callback) {
     }
 
     post.updated_date = new Date();
-    post.post_text = options.req.body.post_text;
+    post.post_text = options.req.body.text;
 
     post.save(function(err) {
       if (err) {

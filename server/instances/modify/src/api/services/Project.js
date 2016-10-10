@@ -30,13 +30,31 @@ const User = models.User;
 const UserSkill = models.userkSkill;
 
 
-
-
-
-
- 
 export function createProject (options, callback) {
-  // Implement you business logic here...
+  let project = new Project();
+
+  project.project_name = options.req.body.project_name;
+  project.project_description = options.req.body.project_description;
+  project.university_id = options.req.body.university_id;
+  project.grant_facilitator = options.req.body.grant_facilitator;
+  project.posts_id = options.req.body.posts_id;
+  project.project_collaborators_id = options.req.body.project_collaborators_id;
+  project.grants_id = options.req.body.grants_id;
+  project.project_file = options.req.body.project_file;
+  project.reviews_id = options.req.body.reviews_id;
+  project.project_keywords = options.req.body.project_keywords;
+  project.project_creator_id = options.req.body.project_creator_id;
+  project.project_urls = options.req.body.project_urls;
+  project.created_date: new Date();
+  project.updated_date: project.created_date;
+  project.is_project_private = options.req.body.is_project_private;
+
+  project.save(function(err) {
+    if (err) {
+      console.error(err);
+    }
+  })
+
 }
 
 /**
@@ -45,7 +63,16 @@ export function createProject (options, callback) {
  * @param {Function} callback
  */
 export function deleteProjectById (options, callback) {
-  // Implement you business logic here...
+  Project.remove({
+    _id: options.id
+  }, function(err, grant) {
+    if (err) {
+      console.error(err);
+    }
+    res.json({
+      message: 'This Project has been deleted'
+    });
+  })
 }
 
 /**
@@ -68,7 +95,36 @@ export function deleteProjectById (options, callback) {
  * @param {Function} callback
  */
 export function updateProject (options, callback) {
-  // Implement you business logic here...
+  Project.findById(options.id, function(err, post) {
+    if (err) {
+      console.error(err);
+    }
+
+    project.project_name = options.req.body.project_name ? options.req.body.project_name : project.project_name;
+    project.project_description = options.req.body.project_description ? options.req.body.project_description : project.project_description;
+    project.university_id = options.req.body.university_id ? options.req.body.university_id : project.university_id;
+    project.grant_facilitator = options.req.body.grant_facilitator ? options.req.body.grant_facilitator : project.grant_facilitator;
+    project.posts_id = options.req.body.posts ? options.req.body.posts : project.posts_id;
+    project.project_collaborators_id = options.req.body.project_collaborators_id ? options.req.body.project_collaborators_id : project.project_collaborators_id;
+    project.grants_id = options.req.body.grant_id ? options.req.body.grants_id : project.grants_id;
+    project.project_file = options.req.body.project_file ? options.req.body.project_file : project.project_file;
+    project.reviews_id = options.req.body.reviews ? options.req.body.reviews : project.reviews_id;
+    project.project_keywords = options.req.body.project_keywords ? options.req.body.project_keywords : project.project_keywords;
+    project.project_creator_id = options.req.body.project_creator_id ? options.req.body.project_creator_id : project.project_creator_id;
+    project.project_urls = options.req.body.project_urls ? options.req.body.project_urls : project.project_urls;
+    project.updated_date: new Date();
+    project.is_project_private = options.req.body.is_project_private ? options.req.body.is_project_private : project.is_project_private;
+
+    project.save(function(err) {
+      if (err) {
+        console.error(err);
+      }
+      res.json({
+        message: 'This Project has been updated'
+      });
+    })
+
+  })
 }
 
 /**
@@ -77,7 +133,23 @@ export function updateProject (options, callback) {
  * @param {Function} callback
  */
 export function deleteProjectCollaborators (options, callback) {
-  // Implement you business logic here...
+  Project.findById(options.id, function(err, project) {
+    if (err) {
+      console.error(err);
+    }
+
+    project.updated_date = new Date();
+    project.project_collaborators_id = null;
+
+    project.save(function(err) {
+      if (err) {
+        console.error(err);
+      }
+      res.json({
+        message: 'This Project has been updated'
+      });
+    })
+  })
 }
 
 /**
@@ -87,7 +159,23 @@ export function deleteProjectCollaborators (options, callback) {
  * @param {Function} callback
  */
 export function setAllProjectCollaborators (options, callback) {
-  // Implement you business logic here...
+  Project.findById(options.id, function(err, project) {
+    if (err) {
+      console.error(err);
+    }
+
+    project.updated_date = new Date();
+    project.project_collaborators_id = options.req.body.collaborators;
+
+    project.save(function(err) {
+      if (err) {
+        console.error(err);
+      }
+      res.json({
+        message: 'This Project has been updated'
+      });
+    })
+  })
 }
 
 /**
@@ -97,7 +185,23 @@ export function setAllProjectCollaborators (options, callback) {
  * @param {Function} callback
  */
 export function addProjectCollaborators (options, callback) {
-  // Implement you business logic here...
+  Project.findById(options.id, function(err, project) {
+    if (err) {
+      console.error(err);
+    }
+
+    project.updated_date = new Date();
+    project.project_collaborators_id.push(options.req.body.collaborators);
+
+    project.save(function(err) {
+      if (err) {
+        console.error(err);
+      }
+      res.json({
+        message: 'This Project has been updated'
+      });
+    })
+  })
 }
 
 /**
@@ -107,7 +211,26 @@ export function addProjectCollaborators (options, callback) {
  * @param {Function} callback
  */
 export function deleteProjectCollaborator (options, callback) {
-  // Implement you business logic here...
+  Project.findById(options.id, function(err, project) {
+    if (err) {
+      console.error(err);
+    }
+
+    project.updated_date = new Date();
+    let ndx = project.project_collaborators_id.indexOf(options.req.body.id);
+    if(ndx > -1){
+      project.project_collaborators_id.splice(ndx, 1);
+    }
+
+    project.save(function(err) {
+      if (err) {
+        console.error(err);
+      }
+      res.json({
+        message: 'This Project has been updated'
+      });
+    })
+  })
 }
 
 /**
@@ -117,7 +240,23 @@ export function deleteProjectCollaborator (options, callback) {
  * @param {Function} callback
  */
 export function setProjectCollaborators (options, callback) {
-  // Implement you business logic here...
+  Project.findById(options.id, function(err, project) {
+    if (err) {
+      console.error(err);
+    }
+
+    project.updated_date = new Date();
+    project.project_collaborators_id = options.req.body.user_id;
+
+    project.save(function(err) {
+      if (err) {
+        console.error(err);
+      }
+      res.json({
+        message: 'This Project has been updated'
+      });
+    })
+  })
 }
 
 /**
@@ -127,7 +266,23 @@ export function setProjectCollaborators (options, callback) {
  * @param {Function} callback
  */
 export function addProjectCollaborator (options, callback) {
-  // Implement you business logic here...
+  Project.findById(options.id, function(err, project) {
+    if (err) {
+      console.error(err);
+    }
+
+    project.updated_date = new Date();
+    project.project_collaborators_id.push(options.req.body.user_id);
+
+    project.save(function(err) {
+      if (err) {
+        console.error(err);
+      }
+      res.json({
+        message: 'This Project has been updated'
+      });
+    })
+  })
 }
 
 /**
@@ -529,4 +684,3 @@ export function setAllProjectUrls (options, callback) {
 export function addProjectUrls (options, callback) {
   // Implement you business logic here...
 }
-
