@@ -13,6 +13,6 @@
 #fi
 
 if [ `docker ps | grep armray-api | wc -l` == 0 ]; then
-    docker run -p 1150:8080 armray-search &
+    docker run -p 1150:1150 armray-api &
 fi
 
