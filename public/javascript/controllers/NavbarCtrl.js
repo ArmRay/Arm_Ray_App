@@ -11,11 +11,12 @@
 
 
        	var profileInfo = {};
-       	ProfileService.getProfileInfo().then(
-        	function(data){profileInfo = data};
-        )
+       	// ProfileService.getProfileInfo().then(
+        // 	function(data){
+        //     profileInfo = data
+        //   });
         
-       	$scope.avatar = profileinfo.avatar;
+       	// $scope.avatar = profileinfo.avatar;
 
         
 
