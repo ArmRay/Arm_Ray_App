@@ -2,10 +2,14 @@
   "name": "armray-codegen",
   "version": "0.0.1",
   "description": "",
-  "main": "index.js",
+  "main": "armray-api.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node armray-api.js"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "swagger-node-codegen": "0.0.9"
+  }
 }
