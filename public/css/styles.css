@@ -24,11 +24,16 @@
   font-style: normal;
   font-stretch: normal;
   text-align: left;
+  margin-top: 17.7px;
+  margin-left: 120.3px;
 }
 
 .logintextbox {
   width: 275.2px;
   height: 42px;
+  margin-top: 6.3px;
+  margin-left: 120.3px;
+  margin-right: 120.5px;
 }
 
 #loginbutton {
@@ -37,6 +42,9 @@
   border-radius: 5px;
   background-color: #4a89dc;
   background-color: var(--stateAction);
+  margin-left: 270px;
+  margin-bottom: 36px;
+  margin-top: 29.7px;
 }
 
 .nav-brand {
@@ -82,6 +90,8 @@ nav{
 
 .loginlogo
 {
-  width: 103px;
-  height: 103px;
+  width: 72px;
+  height: 72px;
+  margin-top: 24px;
+  margin-left: 222px;
 }
