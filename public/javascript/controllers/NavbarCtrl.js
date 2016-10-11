@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    angular.module('app').controller('NavbarCtrl', function ($scope,$http) {
+    angular.module('app').controller('NavbarCtrl', function ($scope,$http,ProfileService) {
         console.log("NavbarCtrl functional!");
 
         //Get profile information from profile service
@@ -11,12 +11,11 @@
 
 
        	var profileInfo = {};
-       	// ProfileService.getProfileInfo().then(
-        // 	function(data){
-        //     profileInfo = data
-        //   });
+       	ProfileService.getProfileInfo().then(
+        	function(data){
+            let profileInfo = data
+          });
         
-       	// $scope.avatar = profileinfo.avatar;
 
         
 
