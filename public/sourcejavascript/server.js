@@ -61,7 +61,7 @@ app.use(_bodyParser2.default.urlencoded({ extended: true }));
 app.use(_bodyParser2.default.json());
 
 //Generic JS route, i.e. for route and etc
-app.use('/js', _express2.default.static(__dirname));
+app.use('/js', _express2.default.static(__dirname + '/../javascript'));
 // End of Generic JS route
 app.use('/branding', _express2.default.static(__dirname + '/../assets/images'));
 app.use('/css', _express2.default.static(__dirname + '/../css'));

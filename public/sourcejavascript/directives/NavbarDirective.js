@@ -8,7 +8,7 @@
         	return{
         		restrict: 'E',
         		templateUrl: '/views/NavbarTemplate.html',
-        		controller:'NavbarCtrl'
+        		controller: 'NavbarCtrl'
         	}
 
 

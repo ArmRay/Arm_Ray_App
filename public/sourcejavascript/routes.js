@@ -4,7 +4,7 @@
 
     angular
         .module('app')
-        .config(function ($stateProvider, $urlRouterProvider,$locationProvider) {
+        .config(['$stateProvider', '$urlRouterProvider', '$locationProvider', function ($stateProvider, $urlRouterProvider,$locationProvider) {
             console.log("inside router");
             $urlRouterProvider.otherwise("/");
             
@@ -39,5 +39,5 @@
               })
 
 
-        });
+        }]);
 })();

@@ -36,6 +36,7 @@
     "grunt-contrib-clean": "~0.5.0",
     "grunt-contrib-concat": "~0.4.0",
     "grunt-contrib-copy": "~0.5.0",
+    "grunt-contrib-uglify": "^2.0.0",
     "grunt-contrib-watch": "~0.6.1",
     "grunt-dom-munger": "^3.4.0",
     "grunt-env": "~0.4.1",
@@ -72,7 +73,7 @@
     "node": ">=0.10.0"
   },
   "scripts": {
-    "start": "node public/javascript/server.js",
+    "start": "grunt",
     "test": "grunt test",
     "build": "babel public/sourcejavascript -d public/javascript"
   },
