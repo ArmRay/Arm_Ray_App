@@ -16,8 +16,63 @@
  * @param {Boolean} options.is_project_private is &#x60;Project&#x60;private?
  * @param {Function} callback
  */
+
+import models from '../../../../../model';
+import bcrypt from 'bcrypt';
+
+const Grant = models.grant;
+const Post = models.post;
+const Project = models.project;
+const Review = models.review;
+const Skill = models.skill;
+const University = models.University;
+const User = models.User;
+const UserSkill = models.userkSkill;
+
+
 export function createProject (options, callback) {
-  // Implement you business logic here...
+  let project = new Project();
+
+  project.project_name = options.req.body.project_name;
+  project.project_description = options.req.body.project_description;
+  project.university_id = options.req.body.university_id;
+  project.grant_facilitator = options.req.body.grant_facilitator;
+  project.posts_id = options.req.body.posts_id;
+  project.project_collaborators_id = options.req.body.project_collaborators_id;
+  project.grants_id = options.req.body.grants_id;
+  project.project_file = options.req.body.project_file;
+  project.reviews_id = options.req.body.reviews_id;
+  project.project_keywords = options.req.body.project_keywords;
+  project.project_creator_id = options.req.body.project_creator_id;
+  project.project_urls = options.req.body.project_urls;
+  project.created_date: new Date();
+  project.updated_date: project.created_date;
+  project.is_project_private = options.req.body.is_project_private;
+
+  project.save(function(err) {
+    if (err) {
+      console.error(err);
+    }
+  })
+
+}
+
+/**
+ * @param {Object} options
+ * @param {String} options.id the &#x60;id&#x60; of the &#x60;Project&#x60; to delete
+ * @param {Function} callback
+ */
+export function deleteProjectById (options, callback) {
+  Project.remove({
+    _id: options.id
+  }, function(err, grant) {
+    if (err) {
+      console.error(err);
+    }
+    res.json({
+      message: 'This Project has been deleted'
+    });
+  })
 }
 
 /**
@@ -40,25 +95,36 @@ export function createProject (options, callback) {
  * @param {Function} callback
  */
 export function updateProject (options, callback) {
-  // Implement you business logic here...
-}
+  Project.findById(options.id, function(err, post) {
+    if (err) {
+      console.error(err);
+    }
 
-/**
- * @param {Object} options
- * @param {String} options.id the &#x60;id&#x60; of the &#x60;Project&#x60; to delete
- * @param {Function} callback
- */
-export function deleteProjectById (options, callback) {
-  // Implement you business logic here...
-}
+    project.project_name = options.req.body.project_name ? options.req.body.project_name : project.project_name;
+    project.project_description = options.req.body.project_description ? options.req.body.project_description : project.project_description;
+    project.university_id = options.req.body.university_id ? options.req.body.university_id : project.university_id;
+    project.grant_facilitator = options.req.body.grant_facilitator ? options.req.body.grant_facilitator : project.grant_facilitator;
+    project.posts_id = options.req.body.posts ? options.req.body.posts : project.posts_id;
+    project.project_collaborators_id = options.req.body.project_collaborators_id ? options.req.body.project_collaborators_id : project.project_collaborators_id;
+    project.grants_id = options.req.body.grant_id ? options.req.body.grants_id : project.grants_id;
+    project.project_file = options.req.body.project_file ? options.req.body.project_file : project.project_file;
+    project.reviews_id = options.req.body.reviews ? options.req.body.reviews : project.reviews_id;
+    project.project_keywords = options.req.body.project_keywords ? options.req.body.project_keywords : project.project_keywords;
+    project.project_creator_id = options.req.body.project_creator_id ? options.req.body.project_creator_id : project.project_creator_id;
+    project.project_urls = options.req.body.project_urls ? options.req.body.project_urls : project.project_urls;
+    project.updated_date: new Date();
+    project.is_project_private = options.req.body.is_project_private ? options.req.body.is_project_private : project.is_project_private;
 
-/**
- * @param {Object} options
- * @param {String} options.id the &#x60;id&#x60; of the &#x60;Project&#x60; to delete
- * @param {Function} callback
- */
-export function getProjectById (options, callback) {
-  // Implement you business logic here...
+    project.save(function(err) {
+      if (err) {
+        console.error(err);
+      }
+      res.json({
+        message: 'This Project has been updated'
+      });
+    })
+
+  })
 }
 
 /**
@@ -66,7 +132,165 @@ export function getProjectById (options, callback) {
  * @param {String} options.id The &#x60;id&#x60; of the &#x60;Project&#x60; to retrieve
  * @param {Function} callback
  */
-export function getAllProjectCreators (options, callback) {
+export function deleteProjectCollaborators (options, callback) {
+  Project.findById(options.id, function(err, project) {
+    if (err) {
+      console.error(err);
+    }
+
+    project.updated_date = new Date();
+    project.project_collaborators_id = null;
+
+    project.save(function(err) {
+      if (err) {
+        console.error(err);
+      }
+      res.json({
+        message: 'This Project has been updated'
+      });
+    })
+  })
+}
+
+/**
+ * @param {Object} options
+ * @param {String} options.id The &#x60;id&#x60; of the &#x60;Project&#x60; to retrieve
+ * @param {Array} options.collaborators The &#x60;ids&#x60; of the ollaborators
+ * @param {Function} callback
+ */
+export function setAllProjectCollaborators (options, callback) {
+  Project.findById(options.id, function(err, project) {
+    if (err) {
+      console.error(err);
+    }
+
+    project.updated_date = new Date();
+    project.project_collaborators_id = options.req.body.collaborators;
+
+    project.save(function(err) {
+      if (err) {
+        console.error(err);
+      }
+      res.json({
+        message: 'This Project has been updated'
+      });
+    })
+  })
+}
+
+/**
+ * @param {Object} options
+ * @param {String} options.id The &#x60;id&#x60; of the &#x60;Project&#x60; to retrieve
+ * @param {Array} options.collaborators The &#x60;ids&#x60; of the collaborators
+ * @param {Function} callback
+ */
+export function addProjectCollaborators (options, callback) {
+  Project.findById(options.id, function(err, project) {
+    if (err) {
+      console.error(err);
+    }
+
+    project.updated_date = new Date();
+    project.project_collaborators_id.push(options.req.body.collaborators);
+
+    project.save(function(err) {
+      if (err) {
+        console.error(err);
+      }
+      res.json({
+        message: 'This Project has been updated'
+      });
+    })
+  })
+}
+
+/**
+ * @param {Object} options
+ * @param {String} options.id The &#x60;id&#x60; of the &#x60;Project&#x60; to retrieve
+ * @param {String} options.user_id The &#x60;ids&#x60; of the collaborator
+ * @param {Function} callback
+ */
+export function deleteProjectCollaborator (options, callback) {
+  Project.findById(options.id, function(err, project) {
+    if (err) {
+      console.error(err);
+    }
+
+    project.updated_date = new Date();
+    let ndx = project.project_collaborators_id.indexOf(options.req.body.id);
+    if(ndx > -1){
+      project.project_collaborators_id.splice(ndx, 1);
+    }
+
+    project.save(function(err) {
+      if (err) {
+        console.error(err);
+      }
+      res.json({
+        message: 'This Project has been updated'
+      });
+    })
+  })
+}
+
+/**
+ * @param {Object} options
+ * @param {String} options.id The &#x60;id&#x60; of the &#x60;Project&#x60; to retrieve
+ * @param {String} options.user_id The &#x60;id&#x60; of the collaborator
+ * @param {Function} callback
+ */
+export function setProjectCollaborators (options, callback) {
+  Project.findById(options.id, function(err, project) {
+    if (err) {
+      console.error(err);
+    }
+
+    project.updated_date = new Date();
+    project.project_collaborators_id = options.req.body.user_id;
+
+    project.save(function(err) {
+      if (err) {
+        console.error(err);
+      }
+      res.json({
+        message: 'This Project has been updated'
+      });
+    })
+  })
+}
+
+/**
+ * @param {Object} options
+ * @param {String} options.id The &#x60;id&#x60; of the &#x60;Project&#x60; to retrieve
+ * @param {String} options.user_id The &#x60;ids&#x60; of the collaborator
+ * @param {Function} callback
+ */
+export function addProjectCollaborator (options, callback) {
+  Project.findById(options.id, function(err, project) {
+    if (err) {
+      console.error(err);
+    }
+
+    project.updated_date = new Date();
+    project.project_collaborators_id.push(options.req.body.user_id);
+
+    project.save(function(err) {
+      if (err) {
+        console.error(err);
+      }
+      res.json({
+        message: 'This Project has been updated'
+      });
+    })
+  })
+}
+
+/**
+ * @param {Object} options
+ * @param {String} options.id The &#x60;id&#x60; of the &#x60;Project&#x60; to retrieve
+ * @param {Function} callback
+ */
+export function deleteProjectCreators (options, callback) {
   // Implement you business logic here...
 }
 
@@ -93,19 +317,10 @@ export function addProjectCreators (options, callback) {
 /**
  * @param {Object} options
  * @param {String} options.id The &#x60;id&#x60; of the &#x60;Project&#x60; to retrieve
+ * @param {String} options.user_id The &#x60;ids&#x60; of the creators
  * @param {Function} callback
  */
-export function deleteProjectCreators (options, callback) {
-  // Implement you business logic here...
-}
-
-/**
- * @param {Object} options
- * @param {String} options.id The &#x60;id&#x60; of the &#x60;User&#x60; to retrieve
- * @param {String} options.user_id The &#x60;User&#x60;id
- * @param {Function} callback
- */
-export function isUserCreatorOnProject (options, callback) {
+export function deleteProjectCreator (options, callback) {
   // Implement you business logic here...
 }
 
@@ -132,454 +347,9 @@ export function addProjectCreator (options, callback) {
 /**
  * @param {Object} options
  * @param {String} options.id The &#x60;id&#x60; of the &#x60;Project&#x60; to retrieve
- * @param {String} options.user_id The &#x60;ids&#x60; of the creators
- * @param {Function} callback
- */
-export function deleteProjectCreator (options, callback) {
-  // Implement you business logic here...
-}
-
-/**
- * @param {Object} options
- * @param {String} options.id The &#x60;id&#x60; of the &#x60;Project&#x60; to retrieve
- * @param {Function} callback
- */
-export function getAllProjectCollaborators (options, callback) {
-  // Implement you business logic here...
-}
-
-/**
- * @param {Object} options
- * @param {String} options.id The &#x60;id&#x60; of the &#x60;Project&#x60; to retrieve
- * @param {Array} options.collaborators The &#x60;ids&#x60; of the ollaborators
- * @param {Function} callback
- */
-export function setAllProjectCollaborators (options, callback) {
-  // Implement you business logic here...
-}
-
-/**
- * @param {Object} options
- * @param {String} options.id The &#x60;id&#x60; of the &#x60;Project&#x60; to retrieve
- * @param {Array} options.collaborators The &#x60;ids&#x60; of the collaborators
- * @param {Function} callback
- */
-export function addProjectCollaborators (options, callback) {
-  // Implement you business logic here...
-}
-
-/**
- * @param {Object} options
- * @param {String} options.id The &#x60;id&#x60; of the &#x60;Project&#x60; to retrieve
- * @param {Function} callback
- */
-export function deleteProjectCollaborators (options, callback) {
-  // Implement you business logic here...
-}
-
-/**
- * @param {Object} options
- * @param {String} options.id The &#x60;id&#x60; of the &#x60;User&#x60; to retrieve
- * @param {String} options.user_id The &#x60;User&#x60;id
- * @param {Function} callback
- */
-export function isUserCollaboratorOnProject (options, callback) {
-  // Implement you business logic here...
-}
-
-/**
- * @param {Object} options
- * @param {String} options.id The &#x60;id&#x60; of the &#x60;Project&#x60; to retrieve
- * @param {String} options.user_id The &#x60;id&#x60; of the collaborator
- * @param {Function} callback
- */
-export function setProjectCollaborators (options, callback) {
-  // Implement you business logic here...
-}
-
-/**
- * @param {Object} options
- * @param {String} options.id The &#x60;id&#x60; of the &#x60;Project&#x60; to retrieve
- * @param {String} options.user_id The &#x60;ids&#x60; of the collaborator
- * @param {Function} callback
- */
-export function addProjectCollaborator (options, callback) {
-  // Implement you business logic here...
-}
-
-/**
- * @param {Object} options
- * @param {String} options.id The &#x60;id&#x60; of the &#x60;Project&#x60; to retrieve
- * @param {String} options.user_id The &#x60;ids&#x60; of the collaborator
- * @param {Function} callback
- */
-export function deleteProjectCollaborator (options, callback) {
-  // Implement you business logic here...
-}
-
-/**
- * @param {Object} options
- * @param {String} options.id The &#x60;id&#x60; of the &#x60;Project&#x60; to retrieve
- * @param {Function} callback
- */
-export function getAllProjectUrls (options, callback) {
-  // Implement you business logic here...
-}
-
-/**
- * @param {Object} options
- * @param {String} options.id The &#x60;id&#x60; of the &#x60;Project&#x60; to retrieve
- * @param {Array} options.urls The &#x60;urls&#x60; of the project
- * @param {Function} callback
- */
-export function setAllProjectUrls (options, callback) {
-  // Implement you business logic here...
-}
-
-/**
- * @param {Object} options
- * @param {String} options.id The &#x60;id&#x60; of the &#x60;Project&#x60; to retrieve
- * @param {Array} options.urls The &#x60;urls&#x60; of the &#x60;Project&#x60;&#x60;
- * @param {Function} callback
- */
-export function addProjectUrls (options, callback) {
-  // Implement you business logic here...
-}
-
-/**
- * @param {Object} options
- * @param {String} options.id The &#x60;id&#x60; of the &#x60;Project&#x60; to retrieve
- * @param {Function} callback
- */
-export function deleteProjectUrls (options, callback) {
-  // Implement you business logic here...
-}
-
-/**
- * @param {Object} options
- * @param {String} options.id The &#x60;id&#x60; of the &#x60;Project&#x60; to retrieve
- * @param {Function} callback
- */
-export function getAllProjectKeywords (options, callback) {
-  // Implement you business logic here...
-}
-
-/**
- * @param {Object} options
- * @param {String} options.id The &#x60;id&#x60; of the &#x60;Project&#x60; to retrieve
- * @param {Array} options.keywords The &#x60;keywords&#x60; of the &#x60;Project&#x60;&#x60;
- * @param {Function} callback
- */
-export function setAllProjectKeywords (options, callback) {
-  // Implement you business logic here...
-}
-
-/**
- * @param {Object} options
- * @param {String} options.id The &#x60;id&#x60; of the &#x60;Project&#x60; to retrieve
- * @param {Array} options.keywords The &#x60;ids&#x60; of the collaborators
- * @param {Function} callback
- */
-export function addProjectKeywords (options, callback) {
-  // Implement you business logic here...
-}
-
-/**
- * @param {Object} options
- * @param {String} options.id The &#x60;id&#x60; of the &#x60;Project&#x60; to retrieve
- * @param {Function} callback
- */
-export function deleteProjectKeywords (options, callback) {
-  // Implement you business logic here...
-}
-
-/**
- * @param {Object} options
- * @param {String} options.id The &#x60;id&#x60; of the &#x60;User&#x60; to retrieve
- * @param {String} options.keyword The keyword
- * @param {Function} callback
- */
-export function isKeywordOnProject (options, callback) {
-  // Implement you business logic here...
-}
-
-/**
- * @param {Object} options
- * @param {String} options.id The &#x60;id&#x60; of the &#x60;Project&#x60; to retrieve
- * @param {String} options.keyword The &#x60;keyword&#x60;
- * @param {Function} callback
- */
-export function setProjectKeyword (options, callback) {
-  // Implement you business logic here...
-}
-
-/**
- * @param {Object} options
- * @param {String} options.id The &#x60;id&#x60; of the &#x60;Project&#x60; to retrieve
- * @param {String} options.keyword The keyword
- * @param {Function} callback
- */
-export function addProjectKeyword (options, callback) {
-  // Implement you business logic here...
-}
-
-/**
- * @param {Object} options
- * @param {String} options.id The &#x60;id&#x60; of the &#x60;Project&#x60; to retrieve
- * @param {String} options.keyword The keyword
- * @param {Function} callback
- */
-export function deleteProjectKeyword (options, callback) {
-  // Implement you business logic here...
-}
-
-/**
- * @param {Object} options
- * @param {String} options.id The &#x60;id&#x60; of the &#x60;Project&#x60; to retrieve
- * @param {Function} callback
- */
-export function getAllProjectFiles (options, callback) {
-  // Implement you business logic here...
-}
-
-/**
- * @param {Object} options
- * @param {String} options.id The &#x60;id&#x60; of the &#x60;Project&#x60; to retrieve
- * @param {Array} options.files The &#x60;files&#x60; of the project
- * @param {Function} callback
- */
-export function setAllProjectFiles (options, callback) {
-  // Implement you business logic here...
-}
-
-/**
- * @param {Object} options
- * @param {String} options.id The &#x60;id&#x60; of the &#x60;Project&#x60; to retrieve
- * @param {Array} options.urls The &#x60;files&#x60; of the &#x60;Project&#x60;&#x60;
- * @param {Function} callback
- */
-export function addProjectFiles (options, callback) {
-  // Implement you business logic here...
-}
-
-/**
- * @param {Object} options
- * @param {String} options.id The &#x60;id&#x60; of the &#x60;Project&#x60; to retrieve
- * @param {Function} callback
- */
-export function deleteProjectFiles (options, callback) {
-  // Implement you business logic here...
-}
-
-/**
- * @param {Object} options
- * @param {String} options.id The &#x60;id&#x60; of the &#x60;Project&#x60; to retrieve
- * @param {Function} callback
- */
-export function getAllProjectReviews (options, callback) {
-  // Implement you business logic here...
-}
-
-/**
- * @param {Object} options
- * @param {String} options.id The &#x60;id&#x60; of the &#x60;Project&#x60; to retrieve
- * @param {Array} options.reviews The &#x60;ids&#x60; of the reviews
- * @param {Function} callback
- */
-export function setAllProjectReviews (options, callback) {
-  // Implement you business logic here...
-}
-
-/**
- * @param {Object} options
- * @param {String} options.id The &#x60;id&#x60; of the &#x60;Project&#x60; to retrieve
- * @param {Array} options.reviews The &#x60;ids&#x60; of the reviews
- * @param {Function} callback
- */
-export function addProjectReviews (options, callback) {
-  // Implement you business logic here...
-}
-
-/**
- * @param {Object} options
- * @param {String} options.id The &#x60;id&#x60; of the &#x60;Project&#x60; to retrieve
- * @param {Function} callback
- */
-export function deleteProjectReviews (options, callback) {
-  // Implement you business logic here...
-}
-
-/**
- * @param {Object} options
- * @param {String} options.id The &#x60;id&#x60; of the &#x60;Project&#x60; to retrieve
- * @param {String} options.review_id The &#x60;id&#x60; of the review
- * @param {Function} callback
- */
-export function isReviewOnOProject (options, callback) {
-  // Implement you business logic here...
-}
-
-/**
- * @param {Object} options
- * @param {String} options.id The &#x60;id&#x60; of the &#x60;Project&#x60; to retrieve
- * @param {String} options.review_id The &#x60;id&#x60; of the review
- * @param {Function} callback
- */
-export function addProjectReview (options, callback) {
-  // Implement you business logic here...
-}
-
-/**
- * @param {Object} options
- * @param {String} options.id The &#x60;id&#x60; of the &#x60;Project&#x60; to retrieve
- * @param {String} options.review_id The &#x60;ids&#x60; of the review
- * @param {Function} callback
- */
-export function deleteProjectReview (options, callback) {
-  // Implement you business logic here...
-}
-
-/**
- * @param {Object} options
- * @param {String} options.id The &#x60;id&#x60; of the &#x60;Project&#x60; to retrieve
- * @param {Function} callback
- */
-export function getAllProjectPosts (options, callback) {
-  // Implement you business logic here...
-}
-
-/**
- * @param {Object} options
- * @param {String} options.id The &#x60;id&#x60; of the &#x60;Project&#x60; to retrieve
- * @param {Array} options.posts The &#x60;ids&#x60; of the posts
- * @param {Function} callback
- */
-export function setAllProjectPosts (options, callback) {
-  // Implement you business logic here...
-}
-
-/**
- * @param {Object} options
- * @param {String} options.id The &#x60;id&#x60; of the &#x60;Project&#x60; to retrieve
- * @param {Array} options.reviews The &#x60;ids&#x60; of the posts
- * @param {Function} callback
- */
-export function addProjectPosts (options, callback) {
-  // Implement you business logic here...
-}
-
-/**
- * @param {Object} options
- * @param {String} options.id The &#x60;id&#x60; of the &#x60;Project&#x60; to retrieve
- * @param {Function} callback
- */
-export function deleteProjectPosts (options, callback) {
-  // Implement you business logic here...
-}
-
-/**
- * @param {Object} options
- * @param {String} options.id The &#x60;id&#x60; of the &#x60;Project&#x60; to retrieve
- * @param {String} options.post_id The &#x60;id&#x60; of the post
- * @param {Function} callback
- */
-export function isPostOnProject (options, callback) {
-  // Implement you business logic here...
-}
-
-/**
- * @param {Object} options
- * @param {String} options.id The &#x60;id&#x60; of the &#x60;Project&#x60; to retrieve
- * @param {String} options.post_id The &#x60;id&#x60; of the post
- * @param {Function} callback
- */
-export function addProjectPost (options, callback) {
-  // Implement you business logic here...
-}
-
-/**
- * @param {Object} options
- * @param {String} options.id The &#x60;id&#x60; of the &#x60;Project&#x60; to retrieve
- * @param {String} options.post_id The &#x60;ids&#x60; of the post
- * @param {Function} callback
- */
-export function deleteProjectPost (options, callback) {
-  // Implement you business logic here...
-}
-
-/**
- * @param {Object} options
- * @param {String} options.id The &#x60;id&#x60; of the &#x60;Project&#x60; to retrieve
- * @param {Function} callback
- */
-export function getProjectNameById (options, callback) {
-  // Implement you business logic here...
-}
-
-/**
- * @param {Object} options
- * @param {String} options.id The &#x60;id&#x60; of the &#x60;Project&#x60; to retrieve
- * @param {Function} callback
- */
-export function deleteUserProjectName (options, callback) {
-  // Implement you business logic here...
-}
-
-/**
- * @param {Object} options
- * @param {String} options.id The &#x60;id&#x60; of the &#x60;Project&#x60; to retrieve
- * @param {String} options.project_name The &#x60;project_name&#x60; of the &#x60;Project&#x60;
- * @param {Function} callback
- */
-export function isNameOnProject (options, callback) {
-  // Implement you business logic here...
-}
-
-/**
- * @param {Object} options
- * @param {String} options.id The &#x60;id&#x60; of the &#x60;Project&#x60; to retrieve
- * @param {String} options.project_name The project_name
- * @param {Function} callback
- */
-export function addProjectName (options, callback) {
-  // Implement you business logic here...
-}
-
-/**
- * @param {Object} options
- * @param {String} options.id The &#x60;id&#x60; of the &#x60;Project&#x60; to retrieve
- * @param {String} options.project_name The project_name
- * @param {Function} callback
- */
-export function modifyProjectName (options, callback) {
-  // Implement you business logic here...
-}
-
-/**
- * @param {Object} options
- * @param {String} options.id The &#x60;id&#x60; of the &#x60;Project&#x60; to retrieve
- * @param {Function} callback
- */
-export function getProjectDescriptionById (options, callback) {
-  // Implement you business logic here...
-}
-
-/**
- * @param {Object} options
- * @param {String} options.id The &#x60;id&#x60; of the &#x60;Project&#x60; to retrieve
  * @param {Function} callback
  */
 export function deleteProjectDescription (options, callback) {
-  // Implement you business logic here...
-}
-
-/**
- * @param {Object} options
- * @param {String} options.id The &#x60;id&#x60; of the &#x60;Project&#x60; to retrieve
- * @param {String} options.project_description The &#x60;project_description&#x60; of the &#x60;Project&#x60;
- * @param {Function} callback
- */
-export function isProjectDescriptionOnProject (options, callback) {
   // Implement you business logic here...
 }
 
@@ -608,7 +378,27 @@ export function modifyProjectDescription (options, callback) {
  * @param {String} options.id The &#x60;id&#x60; of the &#x60;Project&#x60; to retrieve
  * @param {Function} callback
  */
-export function getProjectGrantById (options, callback) {
+export function deleteProjectFiles (options, callback) {
+  // Implement you business logic here...
+}
+
+/**
+ * @param {Object} options
+ * @param {String} options.id The &#x60;id&#x60; of the &#x60;Project&#x60; to retrieve
+ * @param {Array} options.files The &#x60;files&#x60; of the project
+ * @param {Function} callback
+ */
+export function setAllProjectFiles (options, callback) {
+  // Implement you business logic here...
+}
+
+/**
+ * @param {Object} options
+ * @param {String} options.id The &#x60;id&#x60; of the &#x60;Project&#x60; to retrieve
+ * @param {Array} options.urls The &#x60;files&#x60; of the &#x60;Project&#x60;&#x60;
+ * @param {Function} callback
+ */
+export function addProjectFiles (options, callback) {
   // Implement you business logic here...
 }
 
@@ -618,16 +408,6 @@ export function getProjectGrantById (options, callback) {
  * @param {Function} callback
  */
 export function deleteProjectGrant (options, callback) {
-  // Implement you business logic here...
-}
-
-/**
- * @param {Object} options
- * @param {String} options.id The &#x60;id&#x60; of the &#x60;Project&#x60; to retrieve
- * @param {String} options.grant_id The &#x60;grant_id&#x60; of the &#x60;Project&#x60;
- * @param {Function} callback
- */
-export function isGrantOnProject (options, callback) {
   // Implement you business logic here...
 }
 
@@ -656,7 +436,194 @@ export function modifyProjectGrant (options, callback) {
  * @param {String} options.id The &#x60;id&#x60; of the &#x60;Project&#x60; to retrieve
  * @param {Function} callback
  */
-export function getUniversitiesById (options, callback) {
+export function deleteProjectKeywords (options, callback) {
+  // Implement you business logic here...
+}
+
+/**
+ * @param {Object} options
+ * @param {String} options.id The &#x60;id&#x60; of the &#x60;Project&#x60; to retrieve
+ * @param {Array} options.keywords The &#x60;keywords&#x60; of the &#x60;Project&#x60;&#x60;
+ * @param {Function} callback
+ */
+export function setAllProjectKeywords (options, callback) {
+  // Implement you business logic here...
+}
+
+/**
+ * @param {Object} options
+ * @param {String} options.id The &#x60;id&#x60; of the &#x60;Project&#x60; to retrieve
+ * @param {Array} options.keywords The &#x60;ids&#x60; of the collaborators
+ * @param {Function} callback
+ */
+export function addProjectKeywords (options, callback) {
+  // Implement you business logic here...
+}
+
+/**
+ * @param {Object} options
+ * @param {String} options.id The &#x60;id&#x60; of the &#x60;Project&#x60; to retrieve
+ * @param {String} options.keyword The keyword
+ * @param {Function} callback
+ */
+export function deleteProjectKeyword (options, callback) {
+  // Implement you business logic here...
+}
+
+/**
+ * @param {Object} options
+ * @param {String} options.id The &#x60;id&#x60; of the &#x60;Project&#x60; to retrieve
+ * @param {String} options.keyword The &#x60;keyword&#x60;
+ * @param {Function} callback
+ */
+export function setProjectKeyword (options, callback) {
+  // Implement you business logic here...
+}
+
+/**
+ * @param {Object} options
+ * @param {String} options.id The &#x60;id&#x60; of the &#x60;Project&#x60; to retrieve
+ * @param {String} options.keyword The keyword
+ * @param {Function} callback
+ */
+export function addProjectKeyword (options, callback) {
+  // Implement you business logic here...
+}
+
+/**
+ * @param {Object} options
+ * @param {String} options.id The &#x60;id&#x60; of the &#x60;Project&#x60; to retrieve
+ * @param {String} options.project_name The project_name
+ * @param {Function} callback
+ */
+export function addProjectName (options, callback) {
+  // Implement you business logic here...
+}
+
+/**
+ * @param {Object} options
+ * @param {String} options.id The &#x60;id&#x60; of the &#x60;Project&#x60; to retrieve
+ * @param {String} options.project_name The project_name
+ * @param {Function} callback
+ */
+export function modifyProjectName (options, callback) {
+  // Implement you business logic here...
+}
+
+/**
+ * @param {Object} options
+ * @param {String} options.id The &#x60;id&#x60; of the &#x60;Project&#x60; to retrieve
+ * @param {Function} callback
+ */
+export function deleteProjectPosts (options, callback) {
+  // Implement you business logic here...
+}
+
+/**
+ * @param {Object} options
+ * @param {String} options.id The &#x60;id&#x60; of the &#x60;Project&#x60; to retrieve
+ * @param {Array} options.posts The &#x60;ids&#x60; of the posts
+ * @param {Function} callback
+ */
+export function setAllProjectPosts (options, callback) {
+  // Implement you business logic here...
+}
+
+/**
+ * @param {Object} options
+ * @param {String} options.id The &#x60;id&#x60; of the &#x60;Project&#x60; to retrieve
+ * @param {Array} options.reviews The &#x60;ids&#x60; of the posts
+ * @param {Function} callback
+ */
+export function addProjectPosts (options, callback) {
+  // Implement you business logic here...
+}
+
+/**
+ * @param {Object} options
+ * @param {String} options.id The &#x60;id&#x60; of the &#x60;Project&#x60; to retrieve
+ * @param {String} options.post_id The &#x60;ids&#x60; of the post
+ * @param {Function} callback
+ */
+export function deleteProjectPost (options, callback) {
+  // Implement you business logic here...
+}
+
+/**
+ * @param {Object} options
+ * @param {String} options.id The &#x60;id&#x60; of the &#x60;Project&#x60; to retrieve
+ * @param {String} options.post_id The &#x60;id&#x60; of the post
+ * @param {Function} callback
+ */
+export function addProjectPost (options, callback) {
+  // Implement you business logic here...
+}
+
+/**
+ * @param {Object} options
+ * @param {String} options.id The &#x60;id&#x60; of the &#x60;Project&#x60; to retrieve
+ * @param {Boolean} options.is_private is &#x60;Project&#x60;private?
+ * @param {Function} callback
+ */
+export function setIsProjectPrivate (options, callback) {
+  // Implement you business logic here...
+}
+
+/**
+ * @param {Object} options
+ * @param {String} options.id The &#x60;id&#x60; of the &#x60;Project&#x60; to retrieve
+ * @param {Function} callback
+ */
+export function deleteUserProjectName (options, callback) {
+  // Implement you business logic here...
+}
+
+/**
+ * @param {Object} options
+ * @param {String} options.id The &#x60;id&#x60; of the &#x60;Project&#x60; to retrieve
+ * @param {Function} callback
+ */
+export function deleteProjectReviews (options, callback) {
+  // Implement you business logic here...
+}
+
+/**
+ * @param {Object} options
+ * @param {String} options.id The &#x60;id&#x60; of the &#x60;Project&#x60; to retrieve
+ * @param {Array} options.reviews The &#x60;ids&#x60; of the reviews
+ * @param {Function} callback
+ */
+export function setAllProjectReviews (options, callback) {
+  // Implement you business logic here...
+}
+
+/**
+ * @param {Object} options
+ * @param {String} options.id The &#x60;id&#x60; of the &#x60;Project&#x60; to retrieve
+ * @param {Array} options.reviews The &#x60;ids&#x60; of the reviews
+ * @param {Function} callback
+ */
+export function addProjectReviews (options, callback) {
+  // Implement you business logic here...
+}
+
+/**
+ * @param {Object} options
+ * @param {String} options.id The &#x60;id&#x60; of the &#x60;Project&#x60; to retrieve
+ * @param {String} options.review_id The &#x60;ids&#x60; of the review
+ * @param {Function} callback
+ */
+export function deleteProjectReview (options, callback) {
+  // Implement you business logic here...
+}
+
+/**
+ * @param {Object} options
+ * @param {String} options.id The &#x60;id&#x60; of the &#x60;Project&#x60; to retrieve
+ * @param {String} options.review_id The &#x60;id&#x60; of the review
+ * @param {Function} callback
+ */
+export function addProjectReview (options, callback) {
   // Implement you business logic here...
 }
 
@@ -666,16 +633,6 @@ export function getUniversitiesById (options, callback) {
  * @param {Function} callback
  */
 export function deleteProjecUniversities (options, callback) {
-  // Implement you business logic here...
-}
-
-/**
- * @param {Object} options
- * @param {String} options.id The &#x60;id&#x60; of the &#x60;Project&#x60; to retrieve
- * @param {String} options.university_id The id of the &#x60;University&#x60;
- * @param {Function} callback
- */
-export function isUniversityOnProject (options, callback) {
   // Implement you business logic here...
 }
 
@@ -704,17 +661,305 @@ export function modifyProjectUniversity (options, callback) {
  * @param {String} options.id The &#x60;id&#x60; of the &#x60;Project&#x60; to retrieve
  * @param {Function} callback
  */
-export function isProjectPrivate (options, callback) {
+export function deleteProjectUrls (options, callback) {
   // Implement you business logic here...
 }
 
 /**
  * @param {Object} options
  * @param {String} options.id The &#x60;id&#x60; of the &#x60;Project&#x60; to retrieve
- * @param {Boolean} options.is_private is &#x60;Project&#x60;private?
+ * @param {Array} options.urls The &#x60;urls&#x60; of the project
  * @param {Function} callback
  */
-export function setIsProjectPrivate (options, callback) {
+export function setAllProjectUrls (options, callback) {
   // Implement you business logic here...
 }
 
+/**
+ * @param {Object} options
+ * @param {String} options.id The &#x60;id&#x60; of the &#x60;Project&#x60; to retrieve
+ * @param {Array} options.urls The &#x60;urls&#x60; of the &#x60;Project&#x60;&#x60;
+ * @param {Function} callback
+ */
+export function addProjectUrls (options, callback) {
+  // Implement you business logic here...
+}
+
+export function getProjectById (options, callback) {
+ // Implement you business logic here...
+}
+
+/**
+* @param {Object} options
+* @param {String} options.id The &#x60;id&#x60; of the &#x60;Project&#x60; to retrieve
+* @param {Function} callback
+*/
+export function getAllProjectCollaborators (options, callback) {
+ // Implement you business logic here...
+}
+
+/**
+* @param {Object} options
+* @param {String} options.id The &#x60;id&#x60; of the &#x60;User&#x60; to retrieve
+* @param {String} options.user_id The &#x60;User&#x60;id
+* @param {Function} callback
+*/
+export function isUserCollaboratorOnProject (options, callback) {
+ // Implement you business logic here...
+}
+
+/**
+* @param {Object} options
+* @param {String} options.id The &#x60;id&#x60; of the &#x60;Project&#x60; to retrieve
+* @param {Function} callback
+*/
+export function getAllProjectCreators (options, callback) {
+ // Implement you business logic here...
+}
+
+/**
+* @param {Object} options
+* @param {String} options.id The &#x60;id&#x60; of the &#x60;User&#x60; to retrieve
+* @param {String} options.user_id The &#x60;User&#x60;id
+* @param {Function} callback
+*/
+export function isUserCreatorOnProject (options, callback) {
+ // Implement you business logic here...
+}
+
+/**
+* @param {Object} options
+* @param {String} options.id The &#x60;id&#x60; of the &#x60;Project&#x60; to retrieve
+* @param {Function} callback
+*/
+export function getProjectDescriptionById (options, callback) {
+ // Implement you business logic here...
+}
+
+/**
+* @param {Object} options
+* @param {String} options.id The &#x60;id&#x60; of the &#x60;Project&#x60; to retrieve
+* @param {String} options.project_description The &#x60;project_description&#x60; of the &#x60;Project&#x60;
+* @param {Function} callback
+*/
+export function isProjectDescriptionOnProject (options, callback) {
+ // Implement you business logic here...
+}
+
+/**
+* @param {Object} options
+* @param {String} options.id The &#x60;id&#x60; of the &#x60;Project&#x60; to retrieve
+* @param {Function} callback
+*/
+export function getAllProjectFiles (options, callback) {
+ // Implement you business logic here...
+}
+
+/**
+* @param {Object} options
+* @param {String} options.id The &#x60;id&#x60; of the &#x60;Project&#x60; to retrieve
+* @param {Function} callback
+*/
+export function getProjectGrantById (options, callback) {
+ // Implement you business logic here...
+}
+
+/**
+* @param {Object} options
+* @param {String} options.id The &#x60;id&#x60; of the &#x60;Project&#x60; to retrieve
+* @param {String} options.grant_id The &#x60;grant_id&#x60; of the &#x60;Project&#x60;
+* @param {Function} callback
+*/
+export function isGrantOnProject (options, callback) {
+ // Implement you business logic here...
+}
+
+/**
+* @param {Object} options
+* @param {String} options.id The &#x60;id&#x60; of the &#x60;Project&#x60; to retrieve
+* @param {Function} callback
+*/
+export function getAllProjectKeywords (options, callback) {
+ // Implement you business logic here...
+}
+
+/**
+* @param {Object} options
+* @param {String} options.id The &#x60;id&#x60; of the &#x60;User&#x60; to retrieve
+* @param {String} options.keyword The keyword
+* @param {Function} callback
+*/
+export function isKeywordOnProject (options, callback) {
+ // Implement you business logic here...
+}
+
+/**
+* @param {Object} options
+* @param {String} options.id The &#x60;id&#x60; of the &#x60;Project&#x60; to retrieve
+* @param {String} options.project_name The &#x60;project_name&#x60; of the &#x60;Project&#x60;
+* @param {Function} callback
+*/
+export function isNameOnProject (options, callback) {
+ // Implement you business logic here...
+}
+
+/**
+* @param {Object} options
+* @param {String} options.id The &#x60;id&#x60; of the &#x60;Project&#x60; to retrieve
+* @param {Function} callback
+*/
+export function getAllProjectPosts (options, callback) {
+ // Implement you business logic here...
+}
+
+/**
+* @param {Object} options
+* @param {String} options.id The &#x60;id&#x60; of the &#x60;Project&#x60; to retrieve
+* @param {String} options.post_id The &#x60;id&#x60; of the post
+* @param {Function} callback
+*/
+export function isPostOnProject (options, callback) {
+ // Implement you business logic here...
+}
+
+/**
+* @param {Object} options
+* @param {String} options.id The &#x60;id&#x60; of the &#x60;Project&#x60; to retrieve
+* @param {Function} callback
+*/
+export function isProjectPrivate (options, callback) {
+ // Implement you business logic here...
+}
+
+/**
+* @param {Object} options
+* @param {String} options.id The &#x60;id&#x60; of the &#x60;Project&#x60; to retrieve
+* @param {Function} callback
+*/
+export function getProjectNameById (options, callback) {
+ // Implement you business logic here...
+}
+
+/**
+* @param {Object} options
+* @param {String} options.id The &#x60;id&#x60; of the &#x60;Project&#x60; to retrieve
+* @param {Function} callback
+*/
+export function getAllProjectReviews (options, callback) {
+ // Implement you business logic here...
+}
+
+/**
+* @param {Object} options
+* @param {String} options.id The &#x60;id&#x60; of the &#x60;Project&#x60; to retrieve
+* @param {String} options.review_id The &#x60;id&#x60; of the review
+* @param {Function} callback
+*/
+export function isReviewOnOProject (options, callback) {
+ // Implement you business logic here...
+}
+
+/**
+* @param {Object} options
+* @param {String} options.id The &#x60;id&#x60; of the &#x60;Project&#x60; to retrieve
+* @param {Function} callback
+*/
+export function getUniversitiesById (options, callback) {
+ // Implement you business logic here...
+}
+
+/**
+* @param {Object} options
+* @param {String} options.id The &#x60;id&#x60; of the &#x60;Project&#x60; to retrieve
+* @param {String} options.university_id The id of the &#x60;University&#x60;
+* @param {Function} callback
+*/
+export function isUniversityOnProject (options, callback) {
+ // Implement you business logic here...
+}
+
+/**
+* @param {Object} options
+* @param {String} options.id The &#x60;id&#x60; of the &#x60;Project&#x60; to retrieve
+* @param {Function} callback
+*/
+export function getAllProjectUrls (options, callback) {
+ // Implement you business logic here...
+}
+
+
+export function getProjects (options, callback) {
+ // Implement you business logic here...
+}
+
+/**
+* @param {Object} options
+* @param {String} options.university_id ID of &#x27;User&#x27; to fetch
+* @param {Function} callback
+*/
+export function getProjectsByUniversityId (options, callback) {
+ // Implement you business logic here...
+}
+
+/**
+* @param {Object} options
+* @param {String} options.user_id ID of &#x27;User&#x27; to fetch
+* @param {Function} callback
+*/
+export function getProjectsByCreatorId (options, callback) {
+ // Implement you business logic here...
+}
+
+/**
+* @param {Object} options
+* @param {String} options.user_id ID of &#x27;User&#x27; to fetch
+* @param {Function} callback
+*/
+export function getProjectsByCollaboratorId (options, callback) {
+ // Implement you business logic here...
+}
+
+/**
+* @param {Object} options
+* @param {String} options.grant_id ID of &#x27;User&#x27; to fetch
+* @param {Function} callback
+*/
+export function getProjectsByGrantId (options, callback) {
+ // Implement you business logic here...
+}
+
+/**
+* @param {Object} options
+* @param {String} options.created_date date of creation
+* @param {Function} callback
+*/
+export function getProjectsByCreatedDateForm (options, callback) {
+ // Implement you business logic here...
+}
+
+/**
+* @param {Object} options
+* @param {String} options.created_date date of creation
+* @param {Function} callback
+*/
+export function getProjectsByCreatedDate (options, callback) {
+ // Implement you business logic here...
+}
+
+/**
+* @param {Object} options
+* @param {String} options.modified_date date modified
+* @param {Function} callback
+*/
+export function getProjectsByModifiedDateForm (options, callback) {
+ // Implement you business logic here...
+}
+
+/**
+* @param {Object} options
+* @param {String} options.modified_date date modified
+* @param {Function} callback
+*/
+export function getProjectsByModifiedDate (options, callback) {
+ // Implement you business logic here...
+}
