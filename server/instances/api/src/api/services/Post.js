@@ -585,7 +585,12 @@ export function updatePostTitleById(options, callback) {
 
 
 export function getPostById (options, callback) {
- // Implement you business logic here...
+  Post.findById(options.id, function(err, post) {
+    if (err) {
+      console.error(err);
+    }
+      res.status(200).json(post);
+  })
 }
 
 /**
@@ -594,7 +599,12 @@ export function getPostById (options, callback) {
 * @param {Function} callback
 */
 export function getPostAuthorById (options, callback) {
- // Implement you business logic here...
+  Post.findById(options.id, function(err, post) {
+    if (err) {
+      console.error(err);
+    }
+      res.status(200).json(post.post_author_id);
+  })
 }
 
 /**
@@ -603,7 +613,12 @@ export function getPostAuthorById (options, callback) {
 * @param {Function} callback
 */
 export function getPostKeywordsById (options, callback) {
- // Implement you business logic here...
+  Post.findById(options.id, function(err, post) {
+    if (err) {
+      console.error(err);
+    }
+      res.status(200).json(post.post_keywords);
+  })
 }
 
 /**
@@ -613,7 +628,12 @@ export function getPostKeywordsById (options, callback) {
 * @param {Function} callback
 */
 export function isKeywordOnPost (options, callback) {
- // Implement you business logic here...
+    Post.findById(options.id, function(err, post) {
+      if (err) {
+        console.error(err);
+      }
+      res.status(200).json(post.post_keywords.indexOf(options.req.body.keyword) > -1);
+    })
 }
 
 /**
@@ -622,7 +642,12 @@ export function isKeywordOnPost (options, callback) {
 * @param {Function} callback
 */
 export function isPostPrivateById (options, callback) {
- // Implement you business logic here...
+  Post.findById(options.id, function(err, post) {
+    if (err) {
+      console.error(err);
+    }
+    res.status(200).json(post.is_post_private);
+  })
 }
 
 /**
@@ -631,7 +656,12 @@ export function isPostPrivateById (options, callback) {
 * @param {Function} callback
 */
 export function getPostTagsById (options, callback) {
- // Implement you business logic here...
+  Post.findById(options.id, function(err, post) {
+    if (err) {
+      console.error(err);
+    }
+    res.status(200).json(post.post_tags);
+  })
 }
 
 /**
@@ -641,7 +671,12 @@ export function getPostTagsById (options, callback) {
 * @param {Function} callback
 */
 export function getIsUserTagOnProject (options, callback) {
- // Implement you business logic here...
+  Post.findById(options.id, function(err, post) {
+    if (err) {
+      console.error(err);
+    }
+    res.status(200).json(post.post_tags.indexOf(options.req.body.user_id) > -1);
+  })
 }
 
 /**
@@ -650,7 +685,12 @@ export function getIsUserTagOnProject (options, callback) {
 * @param {Function} callback
 */
 export function getPostTextById (options, callback) {
- // Implement you business logic here...
+  Post.findById(options.id, function(err, post) {
+    if (err) {
+      console.error(err);
+    }
+    res.status(200).json(post.post_tags);
+  })
 }
 
 /**
@@ -659,7 +699,12 @@ export function getPostTextById (options, callback) {
 * @param {Function} callback
 */
 export function getPostTitleById (options, callback) {
- // Implement you business logic here...
+  Post.findById(options.id, function(err, post) {
+    if (err) {
+      console.error(err);
+    }
+    res.status(200).json(post.post_title;
+  })
 }
 
 export function getPosts (options, callback) {
