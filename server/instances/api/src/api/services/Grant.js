@@ -20,11 +20,6 @@ const University = models.University;
 const User = models.User;
 const UserSkill = models.userkSkill;
 
-
-
-
-
-
 export function createGrant (options, callback) {
   // Implement you business logic here...
       let grant = new Grant();
@@ -51,16 +46,13 @@ export function createGrant (options, callback) {
  * @param {Function} callback
  */
 export function deleteGrantById (options, callback) {
-  // Implement you business logic here...
-      Grant.remove({_id:options.id}, function(err,grant){
-        if(err){
-          console.error(err);
-        }
 
-        res.json({message: 'This Grant has been deleted'});
-
-      })
-
+  Grant.remove({_id:options.id}, function(err,grant){
+    if(err){
+      console.error(err);
+    }
+    res.json({message: 'This Grant has been deleted'});
+  })
 }
 
 /**
@@ -72,7 +64,6 @@ export function deleteGrantById (options, callback) {
  * @param {Function} callback
  */
 export function updateGrantById (options, callback) {
-  // Implement you business logic here...
 
     Grant.findById(options.id, function(err, grant){
       if(err){
@@ -80,7 +71,6 @@ export function updateGrantById (options, callback) {
       }
 
       //Change grant values here
-
       grant.grant_type = options.req.body.grant_type ? options.req.body.grant_type : grant.grant_type;
       grant.grant_description = options.req.body.grant_description ? options.req.body.grant_description : grant.grant_description;
       grant.grant_amount = options.req.body.grant_amount ? options.req.body.grant_amount : grant.grant_amount;
@@ -88,17 +78,13 @@ export function updateGrantById (options, callback) {
       grant.grant_keywords = options.req.body.grant_keywords ? options.req.body.grant_keywords : grant.grant_keywords;
       grant.modified_date = new Date();
 
-
       grant.save(function(err){
         if(err){
           console.error(err);
         }
         res.json({message: 'This Grant has been updated'});
       })
-
     })
-
-
 }
 
 /**
@@ -112,11 +98,9 @@ export function clearGrantAmount (options, callback) {
       if(err){
         console.error(err);
       }
-
       //Change grant values here
       grant.grant_amount = 0;
       grant.modified_date = new Date();
-
 
       grant.save(function(err){
         if(err){
@@ -124,7 +108,6 @@ export function clearGrantAmount (options, callback) {
         }
         res.json({message: 'This Grant has been updated'});
       })
-
     })
 }
 
@@ -135,7 +118,7 @@ export function clearGrantAmount (options, callback) {
  * @param {Function} callback
  */
 export function setGrantAmount (options, callback) {
-  // Implement you business logic here...
+  modifyGrantAmount (options, callback);
 }
 
 /**
@@ -145,17 +128,14 @@ export function setGrantAmount (options, callback) {
  * @param {Function} callback
  */
 export function modifyGrantAmount (options, callback) {
-  // Implement you business logic here...
 
    Grant.findById(options.id, function(err, grant){
       if(err){
         console.error(err);
       }
-
       //Change grant values here
       grant.grant_amount = options.req.body.grant_amount;
       grant.modified_date = new Date();
-
 
       grant.save(function(err){
         if(err){
@@ -174,7 +154,7 @@ export function modifyGrantAmount (options, callback) {
  * @param {Function} callback
  */
 export function setGrantAmountPath (options, callback) {
-  // Implement you business logic here...
+  modifyGrantAmount (options, callback);
 }
 
 /**
@@ -184,7 +164,7 @@ export function setGrantAmountPath (options, callback) {
  * @param {Function} callback
  */
 export function modifyGrantAmountPath (options, callback) {
-  // Implement you business logic here...
+  modifyGrantAmount (options, callback);
 }
 
 /**
@@ -222,8 +202,7 @@ export function clearGrantDescription (options, callback) {
  * @param {Function} callback
  */
 export function setGrantDescription (options, callback) {
-  // Implement you business logic here...
-
+    modifyGrantDescription (options, callback);
 }
 
 /**
@@ -290,7 +269,28 @@ export function clearGrantKeywords (options, callback) {
  * @param {Function} callback
  */
 export function setGrantKeywords (options, callback) {
-  // Implement you business logic here...
+
+    Grant.findById(options.id, function(err, grant){
+        if(err){
+          console.error(err);
+        }
+
+        grant.grant_keywords = [];
+
+        for(var i = 0, i<options.req.body.grant_keywords.length; i++){
+          grant.grant_keywords.push(options.req.body.grant_keywords[i]);
+        }
+
+        grant.modified_date = new Date();
+
+        grant.save(function(err){
+          if(err){
+            console.error(err);
+          }
+          res.json({message: 'This Grant has been updated'});
+        })
+
+      })
 }
 
 /**
@@ -301,22 +301,16 @@ export function setGrantKeywords (options, callback) {
  */
 export function addGrantKeywords (options, callback) {
   // Implement you business logic here...
-
-
   Grant.findById(options.id, function(err, grant){
       if(err){
         console.error(err);
       }
 
-      //Change grant values here
-
       for(var i = 0, i<options.req.body.grant_keywords.length; i++){
         grant.grant_keywords.push(options.req.body.grant_keywords[i]);
       }
 
-
       grant.modified_date = new Date();
-
 
       grant.save(function(err){
         if(err){
@@ -335,7 +329,27 @@ export function addGrantKeywords (options, callback) {
  * @param {Function} callback
  */
 export function deleteGrantKeyword (options, callback) {
-  // Implement you business logic here...
+  Grant.findById(options.id, function(err, grant) {
+    if (err) {
+      console.error(err);
+    }
+
+    grant.updated_date = new Date();
+
+    let ndx = grant.grant_keywords.indexOf(options.req.body.keyword);
+    if(ndx > -1){
+      grant.grant_keywords.splice(ndx, 1);
+    }
+
+    grant.save(function(err) {
+      if (err) {
+        console.error(err);
+      }
+      res.json({
+        message: 'This Grant has been updated'
+      });
+    })
+  })
 }
 
 /**
@@ -345,7 +359,23 @@ export function deleteGrantKeyword (options, callback) {
  * @param {Function} callback
  */
 export function setGrantKeywordPath (options, callback) {
-  // Implement you business logic here...
+  Grant.findById(options.id, function(err, grant) {
+    if (err) {
+      console.error(err);
+    }
+
+    grant.updated_date = new Date();
+    grant.grant_keywords = options.req.body.keyword;
+
+    grant.save(function(err) {
+      if (err) {
+        console.error(err);
+      }
+      res.json({
+        message: 'This Grant has been updated'
+      });
+    })
+  })
 }
 
 /**
@@ -355,7 +385,23 @@ export function setGrantKeywordPath (options, callback) {
  * @param {Function} callback
  */
 export function addGrantKeyword (options, callback) {
-  // Implement you business logic here...
+  Grant.findById(options.id, function(err, grant) {
+    if (err) {
+      console.error(err);
+    }
+
+    grant.updated_date = new Date();
+    grant.grant_keywords.push(options.req.body.keyword);
+
+    grant.save(function(err) {
+      if (err) {
+        console.error(err);
+      }
+      res.json({
+        message: 'This Grant has been updated'
+      });
+    })
+  })
 }
 
 /**
@@ -383,7 +429,6 @@ export function clearGrantType (options, callback) {
         }
         res.json({message: 'This Grant has been updated'});
       })
-
     })
 }
 
@@ -394,7 +439,7 @@ export function clearGrantType (options, callback) {
  * @param {Function} callback
  */
 export function setGrantType (options, callback) {
-  // Implement you business logic here...
+  modifyGrantType (options, callback);
 }
 
 /**
@@ -404,9 +449,6 @@ export function setGrantType (options, callback) {
  * @param {Function} callback
  */
 export function modifyGrantType (options, callback) {
-  // Implement you business logic here...
-
-
   Grant.findById(options.id, function(err, grant){
       if(err){
         console.error(err);
@@ -423,7 +465,6 @@ export function modifyGrantType (options, callback) {
         }
         res.json({message: 'This Grant has been updated'});
       })
-
     })
 }
 
@@ -434,7 +475,7 @@ export function modifyGrantType (options, callback) {
  * @param {Function} callback
  */
 export function setGrantTypePath (options, callback) {
-  // Implement you business logic here...
+  modifyGrantType (options, callback);
 }
 
 /**
@@ -444,7 +485,7 @@ export function setGrantTypePath (options, callback) {
  * @param {Function} callback
  */
 export function modifyGrantTypePath (options, callback) {
-  // Implement you business logic here...
+  modifyGrantType (options, callback);
 }
 
 /**
@@ -453,18 +494,14 @@ export function modifyGrantTypePath (options, callback) {
  * @param {Function} callback
  */
 export function clearGrantUrls (options, callback) {
-  // Implement you business logic here...
-
 
   Grant.findById(options.id, function(err, grant){
       if(err){
         console.error(err);
       }
 
-      //Change grant values here
       grant.grant_url = [];
       grant.modified_date = new Date();
-
 
       grant.save(function(err){
         if(err){
@@ -472,7 +509,6 @@ export function clearGrantUrls (options, callback) {
         }
         res.json({message: 'This Grant has been updated'});
       })
-
     })
 }
 
@@ -483,7 +519,22 @@ export function clearGrantUrls (options, callback) {
  * @param {Function} callback
  */
 export function setGrantUrls (options, callback) {
-  // Implement you business logic here...
+  Grant.findById(options.id, function(err, grant){
+      if(err){
+        console.error(err);
+      }
+
+      grant.grant_url = options.req.body.urls;
+      grant.modified_date = new Date();
+
+      grant.save(function(err){
+        if(err){
+          console.error(err);
+        }
+        res.json({message: 'This Grant has been updated'});
+      })
+    })
+
 }
 
 /**
@@ -495,13 +546,10 @@ export function setGrantUrls (options, callback) {
 export function addGrantUrl (options, callback) {
   // Implement you business logic here...
 
-
   Grant.findById(options.id, function(err, grant){
       if(err){
         console.error(err);
       }
-
-      //Change grant values here
 
       for(var i = 0, i<options.req.body.grant_url.length; i++){
           grant.grant_url.push(options.req.body.grant_url[i]);
@@ -516,12 +564,16 @@ export function addGrantUrl (options, callback) {
         }
         res.json({message: 'This Grant has been updated'});
       })
-
     })
 }
 
 export function getGrantById (options, callback) {
-  // Implement you business logic here...
+  Grant.findById(options.id, function(err, grant){
+      if(err){
+        console.error(err);
+      }
+      res.status(200).json(grant);
+    })
 }
 
 /**
@@ -530,7 +582,12 @@ export function getGrantById (options, callback) {
  * @param {Function} callback
  */
 export function getGrantAmount (options, callback) {
-  // Implement you business logic here...
+  Grant.findById(options.id, function(err, grant){
+      if(err){
+        console.error(err);
+      }
+      res.status(200).json(grant.grant_amount);
+    })
 }
 
 /**
@@ -540,7 +597,13 @@ export function getGrantAmount (options, callback) {
  * @param {Function} callback
  */
 export function isGrantAmount (options, callback) {
-  // Implement you business logic here...
+    Grant.findById(options.id, function(err, grant){
+        if(err){
+          console.error(err);
+        }
+        res.status(200).json(grant.grant_amount == options.req.body.amount);
+      })
+  }
 }
 
 /**
@@ -549,7 +612,12 @@ export function isGrantAmount (options, callback) {
  * @param {Function} callback
  */
 export function getGrantCreatedDate (options, callback) {
-  // Implement you business logic here...
+  Grant.findById(options.id, function(err, grant){
+      if(err){
+        console.error(err);
+      }
+      res.status(200).json(grant.created_date);
+    })
 }
 
 /**
@@ -558,7 +626,11 @@ export function getGrantCreatedDate (options, callback) {
  * @param {Function} callback
  */
 export function getGrantDescription (options, callback) {
-  // Implement you business logic here...
+  Grant.findById(options.id, function(err, grant){
+      if(err){
+        console.error(err);
+      }
+      res.status(200).json(grant.grant_description);
 }
 
 /**
@@ -567,7 +639,11 @@ export function getGrantDescription (options, callback) {
  * @param {Function} callback
  */
 export function getGrantKeywords (options, callback) {
-  // Implement you business logic here...
+  Grant.findById(options.id, function(err, grant){
+      if(err){
+        console.error(err);
+      }
+      res.status(200).json(grant.grant_keywords);
 }
 
 /**
@@ -577,7 +653,19 @@ export function getGrantKeywords (options, callback) {
  * @param {Function} callback
  */
 export function isGrantHaveKeyword (options, callback) {
-  // Implement you business logic here...
+  Grant.findById(options.id, function(err, grant) {
+    if (err) {
+      console.error(err);
+    }
+
+    grant.updated_date = new Date();
+
+    let ndx = grant.grant_keywords.indexOf(options.req.body.keyword);
+    if(ndx > -1){
+      res.status(200).json(true);
+    }else {
+      res.status(200).json(false);
+    }
 }
 
 /**
@@ -586,7 +674,12 @@ export function isGrantHaveKeyword (options, callback) {
  * @param {Function} callback
  */
 export function getGrantModifiedDate (options, callback) {
-  // Implement you business logic here...
+  Grant.findById(options.id, function(err, grant){
+      if(err){
+        console.error(err);
+      }
+      res.status(200).json(grant.modified_date);
+    })
 }
 
 /**
@@ -595,7 +688,12 @@ export function getGrantModifiedDate (options, callback) {
  * @param {Function} callback
  */
 export function getGrantType (options, callback) {
-  // Implement you business logic here...
+  Grant.findById(options.id, function(err, grant){
+      if(err){
+        console.error(err);
+      }
+      res.status(200).json(grant.grant_type);
+    })
 }
 
 /**
@@ -605,7 +703,12 @@ export function getGrantType (options, callback) {
  * @param {Function} callback
  */
 export function isGrantType (options, callback) {
-  // Implement you business logic here...
+  Grant.findById(options.id, function(err, grant){
+      if(err){
+        console.error(err);
+      }
+      res.status(200).json(grant.grant_type == options.req.body.type);
+    })
 }
 
 /**
@@ -614,7 +717,12 @@ export function isGrantType (options, callback) {
  * @param {Function} callback
  */
 export function getGrantUrl (options, callback) {
-  // Implement you business logic here...
+  Grant.findById(options.id, function(err, grant){
+      if(err){
+        console.error(err);
+      }
+      res.status(200).json(grant.grant_url);
+    })
 }
 
 
