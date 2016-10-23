@@ -657,15 +657,8 @@ export function isGrantHaveKeyword (options, callback) {
     if (err) {
       console.error(err);
     }
-
-    grant.updated_date = new Date();
-
-    let ndx = grant.grant_keywords.indexOf(options.req.body.keyword);
-    if(ndx > -1){
-      res.status(200).json(true);
-    }else {
-      res.status(200).json(false);
-    }
+    res.status(200).json(grant.grant_keywords.indexOf(options.req.body.keyword) > -1);
+  })
 }
 
 /**
