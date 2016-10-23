@@ -291,7 +291,23 @@ export function addProjectCollaborator (options, callback) {
  * @param {Function} callback
  */
 export function deleteProjectCreators (options, callback) {
-  // Implement you business logic here...
+  Project.findById(options.id, function(err, project) {
+    if (err) {
+      console.error(err);
+    }
+
+    project.updated_date = new Date();
+    project.project_creator_id = null;
+
+    project.save(function(err) {
+      if (err) {
+        console.error(err);
+      }
+      res.json({
+        message: 'This Project has been updated'
+      });
+    })
+  })
 }
 
 /**
@@ -301,7 +317,23 @@ export function deleteProjectCreators (options, callback) {
  * @param {Function} callback
  */
 export function setAllProjectCreators (options, callback) {
-  // Implement you business logic here...
+  Project.findById(options.id, function(err, project) {
+    if (err) {
+      console.error(err);
+    }
+
+    project.updated_date = new Date();
+    project.project_creator_id = options.req.body.creators;
+
+    project.save(function(err) {
+      if (err) {
+        console.error(err);
+      }
+      res.json({
+        message: 'This Project has been updated'
+      });
+    })
+  })
 }
 
 /**
@@ -311,7 +343,23 @@ export function setAllProjectCreators (options, callback) {
  * @param {Function} callback
  */
 export function addProjectCreators (options, callback) {
-  // Implement you business logic here...
+  Project.findById(options.id, function(err, project) {
+    if (err) {
+      console.error(err);
+    }
+
+    project.updated_date = new Date();
+    project.project_creator_id = project.project_creator_id.concat(options.req.body.creators)
+
+    project.save(function(err) {
+      if (err) {
+        console.error(err);
+      }
+      res.json({
+        message: 'This Project has been updated'
+      });
+    })
+  })
 }
 
 /**
@@ -321,7 +369,26 @@ export function addProjectCreators (options, callback) {
  * @param {Function} callback
  */
 export function deleteProjectCreator (options, callback) {
-  // Implement you business logic here...
+  Project.findById(options.id, function(err, project) {
+    if (err) {
+      console.error(err);
+    }
+
+    project.updated_date = new Date();
+    let ndx = project.project_creator_id.indexOf(options.req.body.user_id);
+    if(ndx > -1){
+      project.project_creator_id.splice(ndx, 1);
+    }
+
+    project.save(function(err) {
+      if (err) {
+        console.error(err);
+      }
+      res.json({
+        message: 'This Project has been updated'
+      });
+    })
+  })
 }
 
 /**
@@ -331,7 +398,29 @@ export function deleteProjectCreator (options, callback) {
  * @param {Function} callback
  */
 export function setProjectCreator (options, callback) {
-  // Implement you business logic here...
+  Project.findById(options.id, function(err, project) {
+    if (err) {
+      console.error(err);
+    }
+
+    project.updated_date = new Date();
+    if(user_id.constructor == Array){
+      project.project_creator_id = user_id;
+    }else {
+      project.project_creator_id = []
+      project.project_creator_id.push(user_id);
+
+    }
+
+    project.save(function(err) {
+      if (err) {
+        console.error(err);
+      }
+      res.json({
+        message: 'This Project has been updated'
+      });
+    })
+  })
 }
 
 /**
@@ -341,7 +430,23 @@ export function setProjectCreator (options, callback) {
  * @param {Function} callback
  */
 export function addProjectCreator (options, callback) {
-  // Implement you business logic here...
+  Project.findById(options.id, function(err, project) {
+    if (err) {
+      console.error(err);
+    }
+
+    project.updated_date = new Date();
+    project.project_creator_id.push(user_id);
+
+    project.save(function(err) {
+      if (err) {
+        console.error(err);
+      }
+      res.json({
+        message: 'This Project has been updated'
+      });
+    })
+  })
 }
 
 /**
@@ -350,7 +455,23 @@ export function addProjectCreator (options, callback) {
  * @param {Function} callback
  */
 export function deleteProjectDescription (options, callback) {
-  // Implement you business logic here...
+  Project.findById(options.id, function(err, project) {
+    if (err) {
+      console.error(err);
+    }
+
+    project.updated_date = new Date();
+    project.project_description = null;
+
+    project.save(function(err) {
+      if (err) {
+        console.error(err);
+      }
+      res.json({
+        message: 'This Project has been updated'
+      });
+    })
+  })
 }
 
 /**
@@ -360,7 +481,24 @@ export function deleteProjectDescription (options, callback) {
  * @param {Function} callback
  */
 export function setProjectDescription (options, callback) {
-  // Implement you business logic here...
+  Project.findById(options.id, function(err, project) {
+    if (err) {
+      console.error(err);
+    }
+
+    project.updated_date = new Date();
+    project.project_description = options.req.body.project_description;
+
+    project.save(function(err) {
+      if (err) {
+        console.error(err);
+      }
+      res.json({
+        message: 'This Project has been updated'
+      });
+    })
+  })
+
 }
 
 /**
@@ -370,7 +508,7 @@ export function setProjectDescription (options, callback) {
  * @param {Function} callback
  */
 export function modifyProjectDescription (options, callback) {
-  // Implement you business logic here...
+  setProjectDescription (options, callback);
 }
 
 /**
@@ -379,7 +517,23 @@ export function modifyProjectDescription (options, callback) {
  * @param {Function} callback
  */
 export function deleteProjectFiles (options, callback) {
-  // Implement you business logic here...
+  Project.findById(options.id, function(err, project) {
+    if (err) {
+      console.error(err);
+    }
+
+    project.updated_date = new Date();
+    project.project_files = null;
+
+    project.save(function(err) {
+      if (err) {
+        console.error(err);
+      }
+      res.json({
+        message: 'This Project has been updated'
+      });
+    })
+  })
 }
 
 /**
@@ -389,7 +543,23 @@ export function deleteProjectFiles (options, callback) {
  * @param {Function} callback
  */
 export function setAllProjectFiles (options, callback) {
-  // Implement you business logic here...
+  Project.findById(options.id, function(err, project) {
+    if (err) {
+      console.error(err);
+    }
+
+    project.updated_date = new Date();
+    project.project_files = options.req.body.files;
+
+    project.save(function(err) {
+      if (err) {
+        console.error(err);
+      }
+      res.json({
+        message: 'This Project has been updated'
+      });
+    })
+  })
 }
 
 /**
@@ -399,18 +569,60 @@ export function setAllProjectFiles (options, callback) {
  * @param {Function} callback
  */
 export function addProjectFiles (options, callback) {
-  // Implement you business logic here...
+  Project.findById(options.id, function(err, project) {
+    if (err) {
+      console.error(err);
+    }
+
+    project.updated_date = new Date();
+    if(project.project_files.constructor != Array) {
+      project.project_files = []
+    }
+    project.project_files = project.project_files.concat(options.req.body.files);
+
+    project.save(function(err) {
+      if (err) {
+        console.error(err);
+      }
+      res.json({
+        message: 'This Project has been updated'
+      });
+    })
+  })
 }
 
+
+/*TODO
+*This iis going to need to be revisted as it assumes a sungle grant per project
+*/
 /**
  * @param {Object} options
  * @param {String} options.id The &#x60;id&#x60; of the &#x60;Project&#x60; to retrieve
  * @param {Function} callback
  */
 export function deleteProjectGrant (options, callback) {
-  // Implement you business logic here...
+  Project.findById(options.id, function(err, project) {
+    if (err) {
+      console.error(err);
+    }
+
+    project.updated_date = new Date();
+    project.project_grant = null;
+
+    project.save(function(err) {
+      if (err) {
+        console.error(err);
+      }
+      res.json({
+        message: 'This Project has been updated'
+      });
+    })
+  })
 }
 
+/*TODO
+*This iis going to need to be revisted as it assumes a sungle grant per project
+*/
 /**
  * @param {Object} options
  * @param {String} options.id The &#x60;id&#x60; of the &#x60;Project&#x60; to retrieve
@@ -418,9 +630,27 @@ export function deleteProjectGrant (options, callback) {
  * @param {Function} callback
  */
 export function setProjectGrant (options, callback) {
-  // Implement you business logic here...
-}
+  Project.findById(options.id, function(err, project) {
+    if (err) {
+      console.error(err);
+    }
 
+    project.updated_date = new Date();
+    project.project_grant = options.req.body.grant_id;
+
+    project.save(function(err) {
+      if (err) {
+        console.error(err);
+      }
+      res.json({
+        message: 'This Project has been updated'
+      });
+    })
+  })
+}
+/*TODO
+*This iis going to need to be revisted as it assumes a sungle grant per project
+*/
 /**
  * @param {Object} options
  * @param {String} options.id The &#x60;id&#x60; of the &#x60;Project&#x60; to retrieve
@@ -428,7 +658,7 @@ export function setProjectGrant (options, callback) {
  * @param {Function} callback
  */
 export function modifyProjectGrant (options, callback) {
-  // Implement you business logic here...
+  setProjectGrant (options, callback);
 }
 
 /**
@@ -437,7 +667,23 @@ export function modifyProjectGrant (options, callback) {
  * @param {Function} callback
  */
 export function deleteProjectKeywords (options, callback) {
-  // Implement you business logic here...
+  Project.findById(options.id, function(err, project) {
+    if (err) {
+      console.error(err);
+    }
+
+    project.updated_date = new Date();
+    project.keywords = null;
+
+    project.save(function(err) {
+      if (err) {
+        console.error(err);
+      }
+      res.json({
+        message: 'This Project has been updated'
+      });
+    })
+  })
 }
 
 /**
@@ -447,7 +693,23 @@ export function deleteProjectKeywords (options, callback) {
  * @param {Function} callback
  */
 export function setAllProjectKeywords (options, callback) {
-  // Implement you business logic here...
+  Project.findById(options.id, function(err, project) {
+    if (err) {
+      console.error(err);
+    }
+
+    project.updated_date = new Date();
+    project.keywords = options.req.body.keywords;
+
+    project.save(function(err) {
+      if (err) {
+        console.error(err);
+      }
+      res.json({
+        message: 'This Project has been updated'
+      });
+    })
+  })
 }
 
 /**
@@ -457,7 +719,26 @@ export function setAllProjectKeywords (options, callback) {
  * @param {Function} callback
  */
 export function addProjectKeywords (options, callback) {
-  // Implement you business logic here...
+  Project.findById(options.id, function(err, project) {
+    if (err) {
+      console.error(err);
+    }
+
+    project.updated_date = new Date();
+    if(project.keywords.constructor != Array) {
+      project.keywords = []
+    }
+    project.keywords = project.keywords.concat(options.req.body.keywords);
+
+    project.save(function(err) {
+      if (err) {
+        console.error(err);
+      }
+      res.json({
+        message: 'This Project has been updated'
+      });
+    })
+  })
 }
 
 /**
@@ -467,7 +748,26 @@ export function addProjectKeywords (options, callback) {
  * @param {Function} callback
  */
 export function deleteProjectKeyword (options, callback) {
-  // Implement you business logic here...
+  Project.findById(options.id, function(err, project) {
+    if (err) {
+      console.error(err);
+    }
+
+    project.updated_date = new Date();
+    let ndx = project.keywords.indexOf(options.req.body.keyword);
+    if(ndx > -1){
+      project.keywords.splice(ndx, 1);
+    }
+
+    project.save(function(err) {
+      if (err) {
+        console.error(err);
+      }
+      res.json({
+        message: 'This Project has been updated'
+      });
+    })
+  })
 }
 
 /**
@@ -477,7 +777,29 @@ export function deleteProjectKeyword (options, callback) {
  * @param {Function} callback
  */
 export function setProjectKeyword (options, callback) {
-  // Implement you business logic here...
+  Project.findById(options.id, function(err, project) {
+    if (err) {
+      console.error(err);
+    }
+
+    project.updated_date = new Date();
+
+    if(options.req.body.keyword.constructor == Array) {
+      project.keywords = options.req.body.keyword
+    }else {
+      project.keywords = []
+      project.keywords.push(options.req.body.keyword);
+    }
+
+    project.save(function(err) {
+      if (err) {
+        console.error(err);
+      }
+      res.json({
+        message: 'This Project has been updated'
+      });
+    })
+  })
 }
 
 /**
@@ -487,7 +809,24 @@ export function setProjectKeyword (options, callback) {
  * @param {Function} callback
  */
 export function addProjectKeyword (options, callback) {
-  // Implement you business logic here...
+  Project.findById(options.id, function(err, project) {
+    if (err) {
+      console.error(err);
+    }
+
+    project.updated_date = new Date();
+    project.keywords.push(options.req.body.keyword);
+
+
+    project.save(function(err) {
+      if (err) {
+        console.error(err);
+      }
+      res.json({
+        message: 'This Project has been updated'
+      });
+    })
+  })
 }
 
 /**
@@ -497,7 +836,24 @@ export function addProjectKeyword (options, callback) {
  * @param {Function} callback
  */
 export function addProjectName (options, callback) {
-  // Implement you business logic here...
+  Project.findById(options.id, function(err, project) {
+    if (err) {
+      console.error(err);
+    }
+
+    project.updated_date = new Date();
+    project.project_name = options.req.body.project_name;
+
+
+    project.save(function(err) {
+      if (err) {
+        console.error(err);
+      }
+      res.json({
+        message: 'This Project has been updated'
+      });
+    })
+  })
 }
 
 /**
@@ -507,7 +863,7 @@ export function addProjectName (options, callback) {
  * @param {Function} callback
  */
 export function modifyProjectName (options, callback) {
-  // Implement you business logic here...
+  addProjectName (options, callback);
 }
 
 /**
@@ -516,7 +872,24 @@ export function modifyProjectName (options, callback) {
  * @param {Function} callback
  */
 export function deleteProjectPosts (options, callback) {
-  // Implement you business logic here...
+  Project.findById(options.id, function(err, project) {
+    if (err) {
+      console.error(err);
+    }
+
+    project.updated_date = new Date();
+    project.project_posts = [];
+
+
+    project.save(function(err) {
+      if (err) {
+        console.error(err);
+      }
+      res.json({
+        message: 'This Project has been updated'
+      });
+    })
+  })
 }
 
 /**
@@ -526,7 +899,23 @@ export function deleteProjectPosts (options, callback) {
  * @param {Function} callback
  */
 export function setAllProjectPosts (options, callback) {
-  // Implement you business logic here...
+  Project.findById(options.id, function(err, project) {
+    if (err) {
+      console.error(err);
+    }
+
+    project.updated_date = new Date();
+    project.project_posts = options.req.body.posts;
+
+    project.save(function(err) {
+      if (err) {
+        console.error(err);
+      }
+      res.json({
+        message: 'This Project has been updated'
+      });
+    })
+  })
 }
 
 /**
@@ -536,7 +925,23 @@ export function setAllProjectPosts (options, callback) {
  * @param {Function} callback
  */
 export function addProjectPosts (options, callback) {
-  // Implement you business logic here...
+  Project.findById(options.id, function(err, project) {
+    if (err) {
+      console.error(err);
+    }
+
+    project.updated_date = new Date();
+    project.project_posts = project.project_posts.concat(options.req.body.posts);
+
+    project.save(function(err) {
+      if (err) {
+        console.error(err);
+      }
+      res.json({
+        message: 'This Project has been updated'
+      });
+    })
+  })
 }
 
 /**
@@ -546,7 +951,26 @@ export function addProjectPosts (options, callback) {
  * @param {Function} callback
  */
 export function deleteProjectPost (options, callback) {
-  // Implement you business logic here...
+  Project.findById(options.id, function(err, project) {
+    if (err) {
+      console.error(err);
+    }
+
+    project.updated_date = new Date();
+    let ndx = project.posts_id.indexOf(options.req.body.post_id);
+    if(ndx > -1){
+      project.posts_id.splice(ndx, 1);
+    }
+
+    project.save(function(err) {
+      if (err) {
+        console.error(err);
+      }
+      res.json({
+        message: 'This Project has been updated'
+      });
+    })
+  })
 }
 
 /**
@@ -556,7 +980,23 @@ export function deleteProjectPost (options, callback) {
  * @param {Function} callback
  */
 export function addProjectPost (options, callback) {
-  // Implement you business logic here...
+  Project.findById(options.id, function(err, project) {
+    if (err) {
+      console.error(err);
+    }
+
+    project.updated_date = new Date();
+    project.posts_id.push(options.req.body.post_id);
+
+    project.save(function(err) {
+      if (err) {
+        console.error(err);
+      }
+      res.json({
+        message: 'This Project has been updated'
+      });
+    })
+  })
 }
 
 /**
@@ -566,7 +1006,23 @@ export function addProjectPost (options, callback) {
  * @param {Function} callback
  */
 export function setIsProjectPrivate (options, callback) {
-  // Implement you business logic here...
+  Project.findById(options.id, function(err, project) {
+    if (err) {
+      console.error(err);
+    }
+
+    project.updated_date = new Date();
+    project.is_post_private = options.req.body.is_private;
+
+    project.save(function(err) {
+      if (err) {
+        console.error(err);
+      }
+      res.json({
+        message: 'This Project has been updated'
+      });
+    })
+  })
 }
 
 /**
@@ -575,7 +1031,23 @@ export function setIsProjectPrivate (options, callback) {
  * @param {Function} callback
  */
 export function deleteUserProjectName (options, callback) {
-  // Implement you business logic here...
+  Project.findById(options.id, function(err, project) {
+    if (err) {
+      console.error(err);
+    }
+
+    project.updated_date = new Date();
+    project.project_name = null;
+
+    project.save(function(err) {
+      if (err) {
+        console.error(err);
+      }
+      res.json({
+        message: 'This Project has been updated'
+      });
+    })
+  })
 }
 
 /**
@@ -584,7 +1056,23 @@ export function deleteUserProjectName (options, callback) {
  * @param {Function} callback
  */
 export function deleteProjectReviews (options, callback) {
-  // Implement you business logic here...
+  Project.findById(options.id, function(err, project) {
+    if (err) {
+      console.error(err);
+    }
+
+    project.updated_date = new Date();
+    project.reviews_id = [];
+
+    project.save(function(err) {
+      if (err) {
+        console.error(err);
+      }
+      res.json({
+        message: 'This Project has been updated'
+      });
+    })
+  })
 }
 
 /**
@@ -594,7 +1082,23 @@ export function deleteProjectReviews (options, callback) {
  * @param {Function} callback
  */
 export function setAllProjectReviews (options, callback) {
-  // Implement you business logic here...
+  Project.findById(options.id, function(err, project) {
+    if (err) {
+      console.error(err);
+    }
+
+    project.updated_date = new Date();
+    project.reviews_id = options.req.body.reviews;
+
+    project.save(function(err) {
+      if (err) {
+        console.error(err);
+      }
+      res.json({
+        message: 'This Project has been updated'
+      });
+    })
+  })
 }
 
 /**
@@ -604,7 +1108,23 @@ export function setAllProjectReviews (options, callback) {
  * @param {Function} callback
  */
 export function addProjectReviews (options, callback) {
-  // Implement you business logic here...
+  Project.findById(options.id, function(err, project) {
+    if (err) {
+      console.error(err);
+    }
+
+    project.updated_date = new Date();
+    project.reviews_id = project.reviews_id.concat(options.req.body.reviews);
+
+    project.save(function(err) {
+      if (err) {
+        console.error(err);
+      }
+      res.json({
+        message: 'This Project has been updated'
+      });
+    })
+  })
 }
 
 /**
@@ -614,7 +1134,26 @@ export function addProjectReviews (options, callback) {
  * @param {Function} callback
  */
 export function deleteProjectReview (options, callback) {
-  // Implement you business logic here...
+  Project.findById(options.id, function(err, project) {
+    if (err) {
+      console.error(err);
+    }
+
+    project.updated_date = new Date();
+    let ndx = project.reviews_id.indexOf(options.req.body.review_id);
+    if(ndx > -1){
+      project.reviews_id.splice(ndx, 1);
+    }
+
+    project.save(function(err) {
+      if (err) {
+        console.error(err);
+      }
+      res.json({
+        message: 'This Project has been updated'
+      });
+    })
+  })
 }
 
 /**
@@ -624,8 +1163,29 @@ export function deleteProjectReview (options, callback) {
  * @param {Function} callback
  */
 export function addProjectReview (options, callback) {
-  // Implement you business logic here...
+  Project.findById(options.id, function(err, project) {
+    if (err) {
+      console.error(err);
+    }
+
+    project.updated_date = new Date();
+    let ndx = project.reviews_id.indexOf(options.req.body.review_id);
+    if(!(ndx > -1)){
+      project.reviews_id.push(options.req.body.review_id);
+    }
+
+    project.save(function(err) {
+      if (err) {
+        console.error(err);
+      }
+      res.json({
+        message: 'This Project has been updated'
+      });
+    })
+  })
 }
+
+
 
 /**
  * @param {Object} options
@@ -633,7 +1193,23 @@ export function addProjectReview (options, callback) {
  * @param {Function} callback
  */
 export function deleteProjecUniversities (options, callback) {
-  // Implement you business logic here...
+  Project.findById(options.id, function(err, project) {
+    if (err) {
+      console.error(err);
+    }
+
+    project.updated_date = new Date();
+    project.university_id = []
+
+    project.save(function(err) {
+      if (err) {
+        console.error(err);
+      }
+      res.json({
+        message: 'This Project has been updated'
+      });
+    })
+  })
 }
 
 /**
@@ -643,7 +1219,28 @@ export function deleteProjecUniversities (options, callback) {
  * @param {Function} callback
  */
 export function setProjectUniversity (options, callback) {
-  // Implement you business logic here...
+  Project.findById(options.id, function(err, project) {
+    if (err) {
+      console.error(err);
+    }
+
+    project.updated_date = new Date();
+    if(options.req.body.university_id.constructor == Array) {
+      project.university_id = options.req.body.university_id;
+    }else {
+      project.university_id = []
+      project.university_id.push(options.req.body.university_id);
+    }
+
+    project.save(function(err) {
+      if (err) {
+        console.error(err);
+      }
+      res.json({
+        message: 'This Project has been updated'
+      });
+    })
+  })
 }
 
 /**
@@ -653,7 +1250,28 @@ export function setProjectUniversity (options, callback) {
  * @param {Function} callback
  */
 export function modifyProjectUniversity (options, callback) {
-  // Implement you business logic here...
+  Project.findById(options.id, function(err, project) {
+    if (err) {
+      console.error(err);
+    }
+
+
+    project.updated_date = new Date();
+    if(options.req.body.university_id.constructor == Array) {
+      project.university_id = project.university_id.concat(options.req.body.university_id);
+    }else {
+      project.university_id.push(options.req.body.university_id);
+    }
+
+    project.save(function(err) {
+      if (err) {
+        console.error(err);
+      }
+      res.json({
+        message: 'This Project has been updated'
+      });
+    })
+  })
 }
 
 /**
@@ -662,7 +1280,23 @@ export function modifyProjectUniversity (options, callback) {
  * @param {Function} callback
  */
 export function deleteProjectUrls (options, callback) {
-  // Implement you business logic here...
+  Project.findById(options.id, function(err, project) {
+    if (err) {
+      console.error(err);
+    }
+
+    project.updated_date = new Date();
+    project.project_urls = [];
+
+    project.save(function(err) {
+      if (err) {
+        console.error(err);
+      }
+      res.json({
+        message: 'This Project has been updated'
+      });
+    })
+  })
 }
 
 /**
@@ -672,7 +1306,29 @@ export function deleteProjectUrls (options, callback) {
  * @param {Function} callback
  */
 export function setAllProjectUrls (options, callback) {
-  // Implement you business logic here...
+  Project.findById(options.id, function(err, project) {
+    if (err) {
+      console.error(err);
+    }
+
+    project.updated_date = new Date();
+
+    if(options.req.body.project_urls.constructor == Array) {
+      project.project_urls = options.req.body.project_urls;
+    }else {
+      project.project_urls = [];
+      project.project_urls.push(options.req.body.project_urls);
+    }
+
+    project.save(function(err) {
+      if (err) {
+        console.error(err);
+      }
+      res.json({
+        message: 'This Project has been updated'
+      });
+    })
+  })
 }
 
 /**
@@ -682,11 +1338,37 @@ export function setAllProjectUrls (options, callback) {
  * @param {Function} callback
  */
 export function addProjectUrls (options, callback) {
-  // Implement you business logic here...
+  Project.findById(options.id, function(err, project) {
+    if (err) {
+      console.error(err);
+    }
+
+    project.updated_date = new Date();
+
+    if(options.req.body.project_urls.constructor == Array) {
+      project.project_urls = project.project_urls.concat(options.req.body.project_urls);
+    }else {
+      project.project_urls.push(options.req.body.project_urls);
+    }
+
+    project.save(function(err) {
+      if (err) {
+        console.error(err);
+      }
+      res.json({
+        message: 'This Project has been updated'
+      });
+    })
+  })
 }
 
 export function getProjectById (options, callback) {
- // Implement you business logic here...
+  Project.findById(options.id, function(err, project){
+      if(err){
+        console.error(err);
+      }
+      res.status(200).json(project);
+    })
 }
 
 /**
@@ -695,7 +1377,12 @@ export function getProjectById (options, callback) {
 * @param {Function} callback
 */
 export function getAllProjectCollaborators (options, callback) {
- // Implement you business logic here...
+  Project.findById(options.id, function(err, project){
+      if(err){
+        console.error(err);
+      }
+      res.status(200).json(project.project_collaborators_id);
+    })
 }
 
 /**
@@ -705,7 +1392,12 @@ export function getAllProjectCollaborators (options, callback) {
 * @param {Function} callback
 */
 export function isUserCollaboratorOnProject (options, callback) {
- // Implement you business logic here...
+  Project.findById(options.id, function(err, project){
+      if(err){
+        console.error(err);
+      }
+      res.status(200).json(project.project_collaborators_id.indexOf(options.req.body.user_id) > -1);
+    })
 }
 
 /**
@@ -714,7 +1406,12 @@ export function isUserCollaboratorOnProject (options, callback) {
 * @param {Function} callback
 */
 export function getAllProjectCreators (options, callback) {
- // Implement you business logic here...
+  Project.findById(options.id, function(err, project){
+      if(err){
+        console.error(err);
+      }
+      res.status(200).json(project.project_collaborators_id);
+    })
 }
 
 /**
@@ -724,7 +1421,12 @@ export function getAllProjectCreators (options, callback) {
 * @param {Function} callback
 */
 export function isUserCreatorOnProject (options, callback) {
- // Implement you business logic here...
+  Project.findById(options.id, function(err, project){
+      if(err){
+        console.error(err);
+      }
+      res.status(200).json(project.project_creators_id.indexOf(options.req.body.user_id) > -1);
+    })
 }
 
 /**
@@ -733,7 +1435,12 @@ export function isUserCreatorOnProject (options, callback) {
 * @param {Function} callback
 */
 export function getProjectDescriptionById (options, callback) {
- // Implement you business logic here...
+  Project.findById(options.id, function(err, project){
+      if(err){
+        console.error(err);
+      }
+      res.status(200).json(project.project_description);
+    })
 }
 
 /**
@@ -743,7 +1450,12 @@ export function getProjectDescriptionById (options, callback) {
 * @param {Function} callback
 */
 export function isProjectDescriptionOnProject (options, callback) {
- // Implement you business logic here...
+  Project.findById(options.id, function(err, project){
+      if(err){
+        console.error(err);
+      }
+      res.status(200).json(project.project_description == options.req.body.project_description);
+    })
 }
 
 /**
@@ -752,7 +1464,12 @@ export function isProjectDescriptionOnProject (options, callback) {
 * @param {Function} callback
 */
 export function getAllProjectFiles (options, callback) {
- // Implement you business logic here...
+  Project.findById(options.id, function(err, project){
+      if(err){
+        console.error(err);
+      }
+      res.status(200).json(project.project_files);
+    })
 }
 
 /**
@@ -761,7 +1478,12 @@ export function getAllProjectFiles (options, callback) {
 * @param {Function} callback
 */
 export function getProjectGrantById (options, callback) {
- // Implement you business logic here...
+  Project.findById(options.id, function(err, project){
+      if(err){
+        console.error(err);
+      }
+      res.status(200).json(project.grants_id);
+    })
 }
 
 /**
@@ -771,7 +1493,12 @@ export function getProjectGrantById (options, callback) {
 * @param {Function} callback
 */
 export function isGrantOnProject (options, callback) {
- // Implement you business logic here...
+  Project.findById(options.id, function(err, project){
+      if(err){
+        console.error(err);
+      }
+      res.status(200).json(project.grants_id.indexOf(options.req.body.grant_id) > -1);
+    })
 }
 
 /**
@@ -780,7 +1507,12 @@ export function isGrantOnProject (options, callback) {
 * @param {Function} callback
 */
 export function getAllProjectKeywords (options, callback) {
- // Implement you business logic here...
+  Project.findById(options.id, function(err, project){
+      if(err){
+        console.error(err);
+      }
+      res.status(200).json(project.project_keywords);
+    })
 }
 
 /**
@@ -790,7 +1522,12 @@ export function getAllProjectKeywords (options, callback) {
 * @param {Function} callback
 */
 export function isKeywordOnProject (options, callback) {
- // Implement you business logic here...
+  Project.findById(options.id, function(err, project){
+      if(err){
+        console.error(err);
+      }
+      res.status(200).json(project.project_keywords.indexOf(options.req.body.keyword) > -1);
+    })
 }
 
 /**
@@ -800,7 +1537,12 @@ export function isKeywordOnProject (options, callback) {
 * @param {Function} callback
 */
 export function isNameOnProject (options, callback) {
- // Implement you business logic here...
+  Project.findById(options.id, function(err, project){
+      if(err){
+        console.error(err);
+      }
+      res.status(200).json(project.project_name == options.req.body.project_name);
+    })
 }
 
 /**
@@ -809,7 +1551,12 @@ export function isNameOnProject (options, callback) {
 * @param {Function} callback
 */
 export function getAllProjectPosts (options, callback) {
- // Implement you business logic here...
+  Project.findById(options.id, function(err, project){
+      if(err){
+        console.error(err);
+      }
+      res.status(200).json(project.posts_id);
+    })
 }
 
 /**
@@ -819,7 +1566,12 @@ export function getAllProjectPosts (options, callback) {
 * @param {Function} callback
 */
 export function isPostOnProject (options, callback) {
- // Implement you business logic here...
+  Project.findById(options.id, function(err, project){
+      if(err){
+        console.error(err);
+      }
+      res.status(200).json(project.posts_id.indexOf(options.req.body.post_id) > -1);
+    })
 }
 
 /**
@@ -828,7 +1580,12 @@ export function isPostOnProject (options, callback) {
 * @param {Function} callback
 */
 export function isProjectPrivate (options, callback) {
- // Implement you business logic here...
+  Project.findById(options.id, function(err, project){
+      if(err){
+        console.error(err);
+      }
+      res.status(200).json(project.is_project_private);
+    })
 }
 
 /**
@@ -837,7 +1594,12 @@ export function isProjectPrivate (options, callback) {
 * @param {Function} callback
 */
 export function getProjectNameById (options, callback) {
- // Implement you business logic here...
+  Project.findById(options.id, function(err, project){
+      if(err){
+        console.error(err);
+      }
+      res.status(200).json(project.project_name);
+    })
 }
 
 /**
@@ -846,7 +1608,12 @@ export function getProjectNameById (options, callback) {
 * @param {Function} callback
 */
 export function getAllProjectReviews (options, callback) {
- // Implement you business logic here...
+  Project.findById(options.id, function(err, project){
+      if(err){
+        console.error(err);
+      }
+      res.status(200).json(project.reviews_id);
+    })
 }
 
 /**
@@ -856,7 +1623,12 @@ export function getAllProjectReviews (options, callback) {
 * @param {Function} callback
 */
 export function isReviewOnOProject (options, callback) {
- // Implement you business logic here...
+  Project.findById(options.id, function(err, project){
+      if(err){
+        console.error(err);
+      }
+      res.status(200).json(project.reviews_id.indexOf(options.req.body.review_id) > -1);
+    })
 }
 
 /**
@@ -865,7 +1637,12 @@ export function isReviewOnOProject (options, callback) {
 * @param {Function} callback
 */
 export function getUniversitiesById (options, callback) {
- // Implement you business logic here...
+  Project.findById(options.id, function(err, project){
+      if(err){
+        console.error(err);
+      }
+      res.status(200).json(project.university_id);
+    })
 }
 
 /**
@@ -875,7 +1652,12 @@ export function getUniversitiesById (options, callback) {
 * @param {Function} callback
 */
 export function isUniversityOnProject (options, callback) {
- // Implement you business logic here...
+  Project.findById(options.id, function(err, project){
+      if(err){
+        console.error(err);
+      }
+      res.status(200).json(project.university_id.indexOf(options.req.body.university_id) > -1);
+    })
 }
 
 /**
@@ -884,7 +1666,12 @@ export function isUniversityOnProject (options, callback) {
 * @param {Function} callback
 */
 export function getAllProjectUrls (options, callback) {
- // Implement you business logic here...
+  Project.findById(options.id, function(err, project){
+      if(err){
+        console.error(err);
+      }
+      res.status(200).json(project.project_urls);
+    })
 }
 
 
