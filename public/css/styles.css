@@ -1,3 +1,9 @@
+.container
+{
+
+  background-color: #ffffff;
+
+}
 .loginrectangle 
 {
     width: 516px;
@@ -45,6 +51,15 @@
   margin-left: 270px;
   margin-bottom: 36px;
   margin-top: 29.7px;
+  font-stretch: normal;
+  font-family: Roboto;
+  text-align: center;
+  letter-spacing: 1px;
+  font-style: normal;
+  color: #ffffff;
+  color: var(--white);
+  font-size: 16px;
+  font-weight: bold;
 }
 
 .nav-brand {
