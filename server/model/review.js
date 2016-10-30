@@ -9,7 +9,8 @@ var reviewSchema = new mongoose.Schema({
         reviewer_id: String,
         created_date: String,
         updated_date: String,
-        review_body: String,        
+        review_body: String,
+        review_url : String,
         rating: Number
 
 });

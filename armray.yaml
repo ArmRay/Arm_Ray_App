@@ -267,7 +267,7 @@ paths:
           default:
             description: Unexpected error
             schema:
-              $ref: '#/definitions/Error'  
+              $ref: '#/definitions/Error'
   /Users/projects/{project_id}:
     get:
       tags:
@@ -338,7 +338,7 @@ paths:
           default:
             description: Unexpected error
             schema:
-              $ref: '#/definitions/Error'            
+              $ref: '#/definitions/Error'
   /Users/created:
       get:
         tags:
@@ -423,7 +423,7 @@ paths:
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/Error'              
+            $ref: '#/definitions/Error'
   /Users/keys:
     get:
       tags:
@@ -487,7 +487,7 @@ paths:
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/Error'            
+            $ref: '#/definitions/Error'
   ##/User routes
   /User:
     post:
@@ -499,7 +499,7 @@ paths:
         - application/json
       consumes:
         - application/json
-  
+
       # This is array of GET operation parameters:
       parameters:
         # An example parameter that is in query and is required
@@ -709,7 +709,7 @@ paths:
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/Error'            
+            $ref: '#/definitions/Error'
   /User/{id}/uni/{university_id}:
     get:
       tags:
@@ -805,7 +805,7 @@ paths:
           schema:
             $ref: '#/definitions/Error'
       #not going to add a PUT to modify a project, that should be done directly on the `Project`paths
-      #redundant paths are bad            
+      #redundant paths are bad
   /User/{id}/project:
     get:
       tags:
@@ -1393,10 +1393,10 @@ paths:
           in: path
           description: The `id` of the `Skill` to retrieve
           required: true
-          type: string          
+          type: string
       responses:
         '200':
-          description: An array of UserSkills ids 
+          description: An array of UserSkills ids
           schema:
             type: array
             items:
@@ -1469,7 +1469,7 @@ paths:
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/Error'            
+            $ref: '#/definitions/Error'
     delete:
       tags:
         - User
@@ -1521,7 +1521,7 @@ paths:
           type: string
       responses:
         '200':
-          description: An array of UserSkills ids 
+          description: An array of UserSkills ids
           schema:
             type: array
             items:
@@ -1599,7 +1599,7 @@ paths:
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/Error'            
+            $ref: '#/definitions/Error'
     delete:
       tags:
         - User
@@ -1708,7 +1708,7 @@ paths:
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/Error'  
+            $ref: '#/definitions/Error'
     post:
       tags:
         - User
@@ -2170,7 +2170,7 @@ paths:
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/Error'    
+            $ref: '#/definitions/Error'
     post:
       tags:
         - User
@@ -2311,7 +2311,7 @@ paths:
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/Error' 
+            $ref: '#/definitions/Error'
     post:
       tags:
         - User
@@ -2422,15 +2422,15 @@ paths:
           description: Unexpected error
           schema:
             $ref: '#/definitions/Error'
-  
-  
-  
+
+
+
       #not going to add a PUT to modify a project, that should be done directly on the `Project`paths
       #redundant paths are bad
       ######################################
       ###############Projects###############
       ######################################
-  
+
       #Projects searches, basically
       #/Projects
             #/Projects/creator/{user_id}
@@ -2447,7 +2447,7 @@ paths:
             #get use formdata ?
             #/Projects/modified
             #get use formdata
-  
+
             #/Project
             # get, put, post, delete
             #/Project/{id}
@@ -2459,15 +2459,15 @@ paths:
             # get put
             #/Project/{id}/creator/{user_id}
             # get put
-  
+
             #/Project/{id}/urls
             # get put, url needs to be in formbody or in url query I guess?
-  
+
             #/Project/collaborators/
             # get put `Post`delete
             #/Project/collaborators/{user_id}
             # get put `Post`delete
-  
+
             #keywords
             #/Project/{id}/keys
             # get put `Post`delete, either formBody or urlQuery
@@ -2479,12 +2479,12 @@ paths:
             #reviews
             #/Project/{id}/reviews/{review_id}
             # get put `Post`delete
-  
+
             #posts
             #/Project/{id}/posts/{post_id}
             # get put `Post`delete
-  
-  
+
+
             #other fields
             #/Project/{id}/project_name
             # get put
@@ -2498,9 +2498,9 @@ paths:
             # get put `Post`delete
             #/Project/{id}/private
             # get put
-  
-  
-  
+
+
+
       ######################################
       ################Posts#################
       ######################################
@@ -2524,9 +2524,9 @@ paths:
       #get delete
       #/Post/{id}/private
       #get put
-  
+
       #searches
-  
+
       #/Posts/author/{user_id}
       #get
       #/Posts/tags/{user_id}
@@ -2535,13 +2535,13 @@ paths:
       #get
       #/Posts/keys
       #get (multiple keywords, either formData or url query)
-  
+
       #/Posts/created
       #get, use formdata so we can just pass json I think
       #Posts/modified
       #get, use formdata so we can just pass json I think
-  
-  
+
+
   /Projects:
     # This is a HTTP operation
     get:
@@ -2705,10 +2705,10 @@ paths:
           description: Unexpected error
           schema:
             $ref: '#/definitions/Error'
-  
-  
-  
-  
+
+
+
+
       ######################################
       ##############Definitions#############
       ######################################
@@ -2975,7 +2975,7 @@ paths:
               #get use formdata ?
               #/Projects/modified
               #get use formdata
-  
+
   /Project:
     post:
       tags:
@@ -3435,7 +3435,7 @@ paths:
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/Error' 
+            $ref: '#/definitions/Error'
     post:
       tags:
         - Project
@@ -3682,7 +3682,7 @@ paths:
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/Error' 
+            $ref: '#/definitions/Error'
     post:
       tags:
         - Project
@@ -4041,7 +4041,7 @@ paths:
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/Error' 
+            $ref: '#/definitions/Error'
     post:
       tags:
         - Project
@@ -5424,13 +5424,13 @@ paths:
           in: formData
           required: false
           type: string
-          description: ID of `User` author of `Post`                   
+          description: ID of `User` author of `Post`
         -
           name: post_creator_id
           in: formData
           required: false
           type: string
-          description: ID of `User` author of `Post`         
+          description: ID of `User` author of `Post`
         -
           name: is_post_private
           in: formData
@@ -5658,7 +5658,7 @@ paths:
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/Error'    
+            $ref: '#/definitions/Error'
 
   /Post:
     post:
@@ -5683,7 +5683,7 @@ paths:
         in: formData
         required: true
         type: string
-        description: ID of `User` author of `Post` 
+        description: ID of `User` author of `Post`
       -
         name: post_creator_id
         in: formData
@@ -5721,7 +5721,7 @@ paths:
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/Error'    
+            $ref: '#/definitions/Error'
   /Post/{id}:
     get:
       tags:
@@ -5842,7 +5842,7 @@ paths:
           schema:
             $ref: '#/definitions/Error'
       #should only modify users using the user/{id} route to make sure we don't
-      # accidentally nike the wrong thing   
+      # accidentally nike the wrong thing
   /Post/{id}/tags:
     get:
       tags:
@@ -5891,7 +5891,7 @@ paths:
         in: formData
         required: true
         type: array
-        items: 
+        items:
           type: string
         description:  new tags
       tags:
@@ -6068,7 +6068,7 @@ paths:
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/Error'  
+            $ref: '#/definitions/Error'
   /Post/{id}/keys:
     get:
       tags:
@@ -6119,7 +6119,7 @@ paths:
         in: formData
         required: true
         type: array
-        items: 
+        items:
           type: string
         description:  new keywords
       # Expected responses for this operation:
@@ -6155,7 +6155,7 @@ paths:
         in: formData
         required: true
         type: array
-        items: 
+        items:
           type: string
         description:  new tags
       # Expected responses for this operation:
@@ -6778,9 +6778,9 @@ paths:
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/Error'   
-            
-            
+            $ref: '#/definitions/Error'
+
+
   ######################################
   ################Grants################
   ######################################
@@ -6889,7 +6889,7 @@ paths:
           in: formData
           required: false
           type: string
-          description: Maximum `Grant` amount to search          
+          description: Maximum `Grant` amount to search
       responses:
         # Response code
         '200':
@@ -7075,7 +7075,7 @@ paths:
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/Error'    
+            $ref: '#/definitions/Error'
   /Grants/amount:
     get:
       tags:
@@ -7101,7 +7101,7 @@ paths:
           description: maximum `Grant`amount
           required: true
           type: number
-          format: float          
+          format: float
       responses:
         '200':
           description: Array of `Grant` objects
@@ -7112,7 +7112,7 @@ paths:
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/Error'        
+            $ref: '#/definitions/Error'
   /Grants/type:
     get:
       tags:
@@ -7142,7 +7142,7 @@ paths:
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/Error'       
+            $ref: '#/definitions/Error'
   /Grants/type/{type}:
     get:
       tags:
@@ -7172,7 +7172,7 @@ paths:
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/Error'               
+            $ref: '#/definitions/Error'
   /Grants/amount/min/{amount}:
     get:
       tags:
@@ -7232,7 +7232,7 @@ paths:
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/Error'            
+            $ref: '#/definitions/Error'
   /Grants/amount/min/{min}/max/{max}:
     get:
       tags:
@@ -7269,7 +7269,7 @@ paths:
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/Error'     
+            $ref: '#/definitions/Error'
   /Grant:
     post:
       tags:
@@ -7308,7 +7308,7 @@ paths:
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/Error'    
+            $ref: '#/definitions/Error'
   /Grant/{id}:
     get:
       tags:
@@ -7409,7 +7409,7 @@ paths:
           schema:
             $ref: '#/definitions/Error'
       #should only modify users using the user/{id} route to make sure we don't
-      # accidentally nike the wrong thing   
+      # accidentally nike the wrong thing
   /Grant/{id}/created:
     get:
       tags:
@@ -7491,7 +7491,7 @@ paths:
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/Error'       
+            $ref: '#/definitions/Error'
     put:
       tags:
           - Grant
@@ -7524,7 +7524,7 @@ paths:
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/Error'     
+            $ref: '#/definitions/Error'
     post:
       tags:
           - Grant
@@ -7559,7 +7559,7 @@ paths:
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/Error'      
+            $ref: '#/definitions/Error'
     delete:
       tags:
           - Grant
@@ -7584,7 +7584,7 @@ paths:
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/Error'               
+            $ref: '#/definitions/Error'
   /Grant/{id}/description:
     get:
       tags:
@@ -7610,7 +7610,7 @@ paths:
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/Error'           
+            $ref: '#/definitions/Error'
     put:
       tags:
           - Grant
@@ -7643,7 +7643,7 @@ paths:
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/Error'                
+            $ref: '#/definitions/Error'
     post:
       tags:
           - Grant
@@ -7676,7 +7676,7 @@ paths:
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/Error'   
+            $ref: '#/definitions/Error'
     delete:
       tags:
           - Grant
@@ -7701,7 +7701,7 @@ paths:
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/Error'              
+            $ref: '#/definitions/Error'
   /Grant/{id}/amount:
     get:
       tags:
@@ -7727,7 +7727,7 @@ paths:
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/Error'           
+            $ref: '#/definitions/Error'
     put:
       tags:
           - Grant
@@ -7759,7 +7759,7 @@ paths:
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/Error'                
+            $ref: '#/definitions/Error'
     post:
       tags:
           - Grant
@@ -7791,7 +7791,7 @@ paths:
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/Error'   
+            $ref: '#/definitions/Error'
     delete:
       tags:
           - Grant
@@ -7816,7 +7816,7 @@ paths:
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/Error'   
+            $ref: '#/definitions/Error'
   /Grant/{id}/amount/{amount}:
     get:
       tags:
@@ -7850,7 +7850,7 @@ paths:
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/Error'           
+            $ref: '#/definitions/Error'
     put:
       tags:
           - Grant
@@ -7881,7 +7881,7 @@ paths:
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/Error'                
+            $ref: '#/definitions/Error'
     post:
       tags:
           - Grant
@@ -7912,7 +7912,7 @@ paths:
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/Error'   
+            $ref: '#/definitions/Error'
   /Grant/{id}/type:
     get:
       tags:
@@ -7938,7 +7938,7 @@ paths:
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/Error'           
+            $ref: '#/definitions/Error'
     put:
       tags:
           - Grant
@@ -7970,7 +7970,7 @@ paths:
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/Error'                
+            $ref: '#/definitions/Error'
     post:
       tags:
           - Grant
@@ -8002,7 +8002,7 @@ paths:
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/Error'   
+            $ref: '#/definitions/Error'
     delete:
       tags:
           - Grant
@@ -8027,7 +8027,7 @@ paths:
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/Error'   
+            $ref: '#/definitions/Error'
   /Grant/{id}/type/{type}:
     get:
       tags:
@@ -8061,7 +8061,7 @@ paths:
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/Error'           
+            $ref: '#/definitions/Error'
     put:
       tags:
           - Grant
@@ -8092,7 +8092,7 @@ paths:
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/Error'                
+            $ref: '#/definitions/Error'
     post:
       tags:
           - Grant
@@ -8123,7 +8123,7 @@ paths:
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/Error'              
+            $ref: '#/definitions/Error'
   /Grant/{id}/keys:
     get:
       tags:
@@ -8149,7 +8149,7 @@ paths:
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/Error'           
+            $ref: '#/definitions/Error'
     put:
       tags:
           - Grant
@@ -8170,7 +8170,7 @@ paths:
         in: formData
         required: true
         type: array
-        items: 
+        items:
           type: string
         description: the `Grant` keywords
       responses:
@@ -8182,7 +8182,7 @@ paths:
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/Error'                
+            $ref: '#/definitions/Error'
     post:
       tags:
           - Grant
@@ -8203,7 +8203,7 @@ paths:
         in: formData
         required: true
         type: array
-        items: 
+        items:
           type: string
         description: the `Grant` keywords
       responses:
@@ -8215,7 +8215,7 @@ paths:
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/Error'   
+            $ref: '#/definitions/Error'
     delete:
       tags:
           - Grant
@@ -8240,7 +8240,7 @@ paths:
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/Error'   
+            $ref: '#/definitions/Error'
   /Grant/{id}/keys/{keyword}:
     get:
       tags:
@@ -8274,7 +8274,7 @@ paths:
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/Error'           
+            $ref: '#/definitions/Error'
     put:
       tags:
           - Grant
@@ -8305,7 +8305,7 @@ paths:
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/Error'                
+            $ref: '#/definitions/Error'
     post:
       tags:
           - Grant
@@ -8336,7 +8336,7 @@ paths:
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/Error'   
+            $ref: '#/definitions/Error'
     delete:
       tags:
           - Grant
@@ -8367,7 +8367,7 @@ paths:
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/Error'   
+            $ref: '#/definitions/Error'
 
 
   ######################################
@@ -8592,7 +8592,7 @@ paths:
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/Error'      
+            $ref: '#/definitions/Error'
   /Reviews/reviewer/{user_id}:
     get:
       tags:
@@ -8620,7 +8620,7 @@ paths:
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/Error'      
+            $ref: '#/definitions/Error'
   /Reviews/rating:
     get:
       tags:
@@ -8631,7 +8631,7 @@ paths:
       produces:
         - application/json
       consumes:
-        - application/json        
+        - application/json
       parameters:
         -
           name: min
@@ -8668,7 +8668,7 @@ paths:
       produces:
         - application/json
       consumes:
-        - application/json        
+        - application/json
       parameters:
         -
           name: rating
@@ -8689,6 +8689,55 @@ paths:
           schema:
             $ref: '#/definitions/Error'
 
+
+  /Review:
+    post:
+      tags:
+        - Review
+      description: |
+        Creates `Review` object. **review_body** and **reviewer_id** is required,
+        all others optional.
+      operationId: createReview
+      produces:
+        -	application/json
+      consumes:
+        -	application/json
+      parameters:
+      -
+        name: review_body
+        in: formData
+        required: false
+        type: string
+        description: body of `Review`
+      -
+        name: reviewer_id
+        in: formData
+        required: false
+        type: string
+        description : The `User`who wrote `Review`
+      -
+        name: rating
+        in: formData
+        required: false
+        type: number
+        format: int32
+        description: Rating (1 <= rating <= 5)
+      -
+        name: review_url
+        in: formData
+        required: false
+        type: string
+        description : The url of the review
+      responses:
+        # Response code
+        '200':
+          description: A `Review` object
+          schema:
+            $ref: '#/definitions/Review'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
 
   /Review/{id}:
     get:
@@ -8788,7 +8837,7 @@ paths:
           schema:
             $ref: '#/definitions/Error'
       #should only modify users using the user/{id} route to make sure we don't
-      # accidentally nike the wrong thing   
+      # accidentally nike the wrong thing
   /Review/{id}/body:
     get:
       tags:
@@ -8819,7 +8868,7 @@ paths:
       tags:
         - Review
       description: |
-        Updates `Review` body. 
+        Updates `Review` body.
       operationId: updateReviewBodyById
       produces:
         -	application/json
@@ -8851,7 +8900,7 @@ paths:
       tags:
         - Review
       description: |
-        Set `Review` body. 
+        Set `Review` body.
       operationId: setReviewBodyById
       produces:
         -	application/json
@@ -8878,7 +8927,7 @@ paths:
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/Error'            
+            $ref: '#/definitions/Error'
     delete:
       tags:
         - Review
@@ -8904,7 +8953,7 @@ paths:
           schema:
             $ref: '#/definitions/Error'
       #should only modify users using the user/{id} route to make sure we don't
-      # accidentally nike the wrong thing   
+      # accidentally nike the wrong thing
   /Review/{id}/reviewer:
     get:
       tags:
@@ -8958,7 +9007,7 @@ paths:
           schema:
             $ref: '#/definitions/Error'
       #should only modify users using the user/{id} route to make sure we don't
-      # accidentally nike the wrong thing   
+      # accidentally nike the wrong thing
   /Review/{id}/reviewer/{user_id}:
     get:
       tags:
@@ -8997,7 +9046,7 @@ paths:
         - Review
         - User
       description: |
-        Updates `Review` reviewer. 
+        Updates `Review` reviewer.
       operationId: updateReviewReviewerById
       produces:
         -	application/json
@@ -9030,7 +9079,7 @@ paths:
         - Review
         - User
       description: |
-        Set `Review` reviewer. 
+        Set `Review` reviewer.
       operationId: setReviewReviewerById
       produces:
         -	application/json
@@ -9057,7 +9106,7 @@ paths:
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/Error'        
+            $ref: '#/definitions/Error'
     delete:
       tags:
         - Review
@@ -9141,7 +9190,7 @@ paths:
           schema:
             $ref: '#/definitions/Error'
       #should only modify users using the user/{id} route to make sure we don't
-      # accidentally nike the wrong thing               
+      # accidentally nike the wrong thing
   /Review/{id}/rating/{rating}:
     get:
       tags:
@@ -9193,7 +9242,7 @@ paths:
         in: path
         required: true
         type: string
-        description: The `Review` rating        
+        description: The `Review` rating
       responses:
         # Response code
         '200':
@@ -9213,7 +9262,7 @@ paths:
       produces:
         -	application/json
       parameters:
-      - 
+      -
         name: id
         in: path
         required: true
@@ -9224,7 +9273,7 @@ paths:
         in: path
         required: true
         type: string
-        description: The `Review` rating        
+        description: The `Review` rating
       responses:
         # Response code
         '200':
@@ -9234,7 +9283,7 @@ paths:
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/Error' 
+            $ref: '#/definitions/Error'
   /Review/{id}/url:
     get:
       tags:
@@ -9313,7 +9362,7 @@ paths:
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/Error'              
+            $ref: '#/definitions/Error'
     post:
       tags:
         - Review
@@ -9342,9 +9391,9 @@ paths:
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/Error'                          
+            $ref: '#/definitions/Error'
       #should only modify users using the user/{id} route to make sure we don't
-      # accidentally nike the wrong thing                          
+      # accidentally nike the wrong thing
   /Review/{id}/created:
     get:
       tags:
@@ -9398,7 +9447,7 @@ paths:
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/Error'            
+            $ref: '#/definitions/Error'
 
 
   ######################################
@@ -9604,7 +9653,7 @@ paths:
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/Error'      
+            $ref: '#/definitions/Error'
   #probably should avoid using this route if possible, but depends on descipriton format
   /Skills/description:
     get:
@@ -9632,7 +9681,7 @@ paths:
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/Error'    
+            $ref: '#/definitions/Error'
   /Skills/description/{description}:
     get:
       tags:
@@ -9657,9 +9706,9 @@ paths:
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/Error'      
-  
-      
+            $ref: '#/definitions/Error'
+
+
   /Skill:
     put:
       tags:
@@ -9690,7 +9739,7 @@ paths:
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/Error'      
+            $ref: '#/definitions/Error'
   /Skill/{id}:
     get:
       tags:
@@ -9740,7 +9789,7 @@ paths:
         in: formData
         required: false
         type: string
-        description: description of `Skill` 
+        description: description of `Skill`
       responses:
         # Response code
         '200':
@@ -9776,7 +9825,7 @@ paths:
           schema:
             $ref: '#/definitions/Error'
       #should only modify users using the user/{id} route to make sure we don't
-      # accidentally nike the wrong thing   
+      # accidentally nike the wrong thing
   /Skill/{id}/description:
     get:
       tags:
@@ -9807,7 +9856,7 @@ paths:
       tags:
         - Skill
       description: |
-        Updates `Skill` description. 
+        Updates `Skill` description.
       operationId: updateSkillDescriptionByIdForm
       produces:
         -	application/json
@@ -9839,7 +9888,7 @@ paths:
       tags:
         - Skill
       description: |
-        Set `Skill` body. 
+        Set `Skill` body.
       operationId: setSkillDescriptionByIdForn
       produces:
         -	application/json
@@ -9867,7 +9916,7 @@ paths:
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/Error'            
+            $ref: '#/definitions/Error'
     delete:
       tags:
         - Skill
@@ -9893,7 +9942,7 @@ paths:
           schema:
             $ref: '#/definitions/Error'
       #should only modify users using the user/{id} route to make sure we don't
-      # accidentally nike the wrong thing   
+      # accidentally nike the wrong thing
   /Skill/{id}/description/{description}:
     get:
       tags:
@@ -9930,7 +9979,7 @@ paths:
       tags:
         - Skill
       description: |
-        Updates `Skill` description. 
+        Updates `Skill` description.
       operationId: updateSkillDescriptionById
       produces:
         -	application/json
@@ -9960,7 +10009,7 @@ paths:
       tags:
         - Skill
       description: |
-        Set `Skill` body. 
+        Set `Skill` body.
       operationId: setSkillDescriptionById
       produces:
         -	application/json
@@ -9986,7 +10035,7 @@ paths:
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/Error'            
+            $ref: '#/definitions/Error'
   /Skill/{id}/created:
     get:
       tags:
@@ -10040,8 +10089,8 @@ paths:
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/Error'            
-      
+            $ref: '#/definitions/Error'
+
   ######################################
   ##############UserSkills##############
   ######################################
@@ -10273,7 +10322,7 @@ paths:
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/Error'      
+            $ref: '#/definitions/Error'
   #probably should avoid using this route if possible, but depends on descipriton format
   /UserSkills/user/{user_id}:
     get:
@@ -10303,7 +10352,7 @@ paths:
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/Error'    
+            $ref: '#/definitions/Error'
   /UserSkills/description/skill/{skill_id}:
     get:
       tags:
@@ -10355,7 +10404,7 @@ paths:
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/Error'            
+            $ref: '#/definitions/Error'
   /UserSkills/description/endorsements/{user_id}:
     get:
       tags:
@@ -10382,7 +10431,7 @@ paths:
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/Error'            
+            $ref: '#/definitions/Error'
   /UserSkills/description/endorsements:
     get:
       tags:
@@ -10411,8 +10460,8 @@ paths:
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/Error'              
-  
+            $ref: '#/definitions/Error'
+
   /UserSkill:
     post:
       tags:
@@ -10432,7 +10481,7 @@ paths:
           in: formData
           required: false
           type: string
-          description: Unique identifier representing a specific `User` that has a `UserSkill` represents      
+          description: Unique identifier representing a specific `User` that has a `UserSkill` represents
         -
           name: skill_id
           in: formData
@@ -10456,7 +10505,7 @@ paths:
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/Error'      
+            $ref: '#/definitions/Error'
   /UserSkill/{id}:
     get:
       tags:
@@ -10562,7 +10611,7 @@ paths:
           schema:
             $ref: '#/definitions/Error'
       #should only modify users using the user/{id} route to make sure we don't
-      # accidentally nike the wrong thing   
+      # accidentally nike the wrong thing
   /UserSkill/{id}/skill:
     get:
       tags:
@@ -10617,14 +10666,14 @@ paths:
           description: Unexpected error
           schema:
             $ref: '#/definitions/Error'
-  /UserSkill/{id}/skill/{skill_id}:            
+  /UserSkill/{id}/skill/{skill_id}:
     put:
       tags:
         - Skill
         - UserSkill
         - User
       description: |
-        Updates `Skill` contained in `UserSkill` . 
+        Updates `Skill` contained in `UserSkill` .
       operationId: updateUserSkillSkill
       produces:
         -	application/json
@@ -10659,7 +10708,7 @@ paths:
         - UserSkill
         - User
       description: |
-        Set `UserSkill` body. 
+        Set `UserSkill` body.
       operationId: setUserSkillSkillDescriptionById
       produces:
         -	application/json
@@ -10687,9 +10736,9 @@ paths:
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/Error'     
+            $ref: '#/definitions/Error'
       #should only modify users using the user/{id} route to make sure we don't
-      # accidentally nike the wrong thing   
+      # accidentally nike the wrong thing
   /UserSkill/{id}/user:
     get:
       tags:
@@ -10742,14 +10791,14 @@ paths:
           description: Unexpected error
           schema:
             $ref: '#/definitions/Error'
-  /UserSkill/{id}/user/{user_id}:            
+  /UserSkill/{id}/user/{user_id}:
     put:
       tags:
         - Skill
         - UserSkill
         - User
       description: |
-        Updates `User` contained in `UserSkill` . 
+        Updates `User` contained in `UserSkill` .
       operationId: updateUserSkillUserById
       produces:
         -	application/json
@@ -10784,7 +10833,7 @@ paths:
         - UserSkill
         - User
       description: |
-        Set `User` on `UserSkill` . 
+        Set `User` on `UserSkill` .
       operationId: setUserSkillUserById
       produces:
         -	application/json
@@ -10812,17 +10861,17 @@ paths:
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/Error'     
+            $ref: '#/definitions/Error'
       #should only modify users using the user/{id} route to make sure we don't
-      # accidentally nike the wrong thing         
-  /UserSkill/{id}/endorsement:            
+      # accidentally nike the wrong thing
+  /UserSkill/{id}/endorsement:
     get:
       tags:
         - Skill
         - UserSkill
         - User
       description: |
-        Gets `User` ndorsements in `UserSkill` . 
+        Gets `User` ndorsements in `UserSkill` .
       operationId: getUserSkillEndorsementById
       produces:
         -	application/json
@@ -10838,7 +10887,7 @@ paths:
       responses:
         # Response code
         '200':
-          description: The `UserSkill` 
+          description: The `UserSkill`
           schema:
             type: array
             items:
@@ -10853,7 +10902,7 @@ paths:
         - UserSkill
         - User
       description: |
-        Set `User` on `UserSkill` . 
+        Set `User` on `UserSkill` .
       operationId: setUserSkillEndorsementsById
       produces:
         -	application/json
@@ -10883,16 +10932,16 @@ paths:
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/Error'     
+            $ref: '#/definitions/Error'
       #should only modify users using the user/{id} route to make sure we don't
-      # accidentally nike the wrong thing   
+      # accidentally nike the wrong thing
     put:
       tags:
         - Skill
         - UserSkill
         - User
       description: |
-        Add `User` objects on `UserSkill` . 
+        Add `User` objects on `UserSkill` .
       operationId: addUserSkillEndorsementsById
       produces:
         -	application/json
@@ -10922,16 +10971,16 @@ paths:
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/Error'     
+            $ref: '#/definitions/Error'
       #should only modify users using the user/{id} route to make sure we don't
-      # accidentally nike the wrong thing         
+      # accidentally nike the wrong thing
     delete:
       tags:
         - Skill
         - UserSkill
         - User
       description: |
-        Remove all `User` endorsement on `UserSkill` . 
+        Remove all `User` endorsement on `UserSkill` .
       operationId: removeUserSkillEndorsementsById
       produces:
         -	application/json
@@ -10953,17 +11002,17 @@ paths:
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/Error'     
+            $ref: '#/definitions/Error'
       #should only modify users using the user/{id} route to make sure we don't
-      # accidentally nike the wrong thing         
-  /UserSkill/{id}/endorsement/{user_id}:            
+      # accidentally nike the wrong thing
+  /UserSkill/{id}/endorsement/{user_id}:
     put:
       tags:
         - Skill
         - UserSkill
         - User
       description: |
-        Adds `User` to endorsements in `UserSkill` . 
+        Adds `User` to endorsements in `UserSkill` .
       operationId: addUserSkillEndorsementById
       produces:
         -	application/json
@@ -10998,7 +11047,7 @@ paths:
         - UserSkill
         - User
       description: |
-        Set `User` on `UserSkill` . 
+        Set `User` on `UserSkill` .
       operationId: setUserSkillEndorsementById
       produces:
         -	application/json
@@ -11026,16 +11075,16 @@ paths:
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/Error'     
+            $ref: '#/definitions/Error'
       #should only modify users using the user/{id} route to make sure we don't
-      # accidentally nike the wrong thing   
+      # accidentally nike the wrong thing
     delete:
       tags:
         - Skill
         - UserSkill
         - User
       description: |
-        Remove `User` endorsement on `UserSkill` . 
+        Remove `User` endorsement on `UserSkill` .
       operationId: removeUserSkillEndorsementById
       produces:
         -	application/json
@@ -11063,9 +11112,9 @@ paths:
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/Error'     
+            $ref: '#/definitions/Error'
       #should only modify users using the user/{id} route to make sure we don't
-      # accidentally nike the wrong thing             
+      # accidentally nike the wrong thing
   /UserSkill/{id}/created:
     get:
       tags:
@@ -11121,7 +11170,7 @@ paths:
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/Error'            
+            $ref: '#/definitions/Error'
 
 
 ######################################
@@ -11150,7 +11199,7 @@ paths:
   #get put
   #/University/{id}/projects
   #/University/{id}/projects/{project}
-  
+
   #/Universities
   #/Universities/created
   #/Universities/created/{created_date}
@@ -11168,7 +11217,7 @@ paths:
   #/Universities/state/{state}
   #/Universities/projects/
   #/Universities/projects/{project_id}
-  
+
 
 
   /Universities:
@@ -11223,7 +11272,7 @@ paths:
           in: formData
           required: false
           type: string
-          description: City of `University`          
+          description: City of `University`
         -
           name: created_date
           in: formData
@@ -11371,7 +11420,7 @@ paths:
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/Error'      
+            $ref: '#/definitions/Error'
   #probably should avoid using this route if possible, but depends on descipriton format
   /Universities/name/{name}:
     get:
@@ -11399,7 +11448,7 @@ paths:
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/Error'    
+            $ref: '#/definitions/Error'
   /Universities/name:
     get:
       tags:
@@ -11428,7 +11477,7 @@ paths:
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/Error'    
+            $ref: '#/definitions/Error'
   /Universities/city/{city}:
     get:
       tags:
@@ -11455,7 +11504,7 @@ paths:
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/Error'    
+            $ref: '#/definitions/Error'
   /Universities/city:
     get:
       tags:
@@ -11466,7 +11515,7 @@ paths:
       produces:
         - application/json
       consumes:
-        - application/json        
+        - application/json
       parameters:
         -
           name: city
@@ -11484,7 +11533,7 @@ paths:
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/Error'    
+            $ref: '#/definitions/Error'
   /Universities/state/{state}:
     get:
       tags:
@@ -11511,7 +11560,7 @@ paths:
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/Error'    
+            $ref: '#/definitions/Error'
   /Universities/state:
     get:
       tags:
@@ -11522,7 +11571,7 @@ paths:
       produces:
         - application/json
       consumes:
-        - application/json        
+        - application/json
       parameters:
         -
           name: state
@@ -11540,7 +11589,7 @@ paths:
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/Error'    
+            $ref: '#/definitions/Error'
   /Universities/geolocation:
     get:
       tags:
@@ -11551,7 +11600,7 @@ paths:
       produces:
         - application/json
       consumes:
-        - application/json        
+        - application/json
       parameters:
         -
           name: lat
@@ -11584,7 +11633,7 @@ paths:
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/Error'    
+            $ref: '#/definitions/Error'
   /Universities/geolocation/{lat}/{long}:
     get:
       tags:
@@ -11626,7 +11675,7 @@ paths:
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/Error'    
+            $ref: '#/definitions/Error'
   /Universities/geolocation/{lat}/{long}/{radius}:
     get:
       tags:
@@ -11668,8 +11717,8 @@ paths:
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/Error'    
-  
+            $ref: '#/definitions/Error'
+
 
 
 
@@ -11705,7 +11754,7 @@ paths:
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/Error'    
+            $ref: '#/definitions/Error'
   /Universities/projects:
     get:
       tags:
@@ -11717,7 +11766,7 @@ paths:
       produces:
         - application/json
       consumes:
-        - application/json        
+        - application/json
       parameters:
         -
           name: projects
@@ -11737,7 +11786,7 @@ paths:
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/Error'    
+            $ref: '#/definitions/Error'
 
   /University:
     post:
@@ -11802,7 +11851,7 @@ paths:
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/Error'      
+            $ref: '#/definitions/Error'
   /University/{id}:
     get:
       tags:
@@ -11922,7 +11971,7 @@ paths:
           schema:
             $ref: '#/definitions/Error'
       #should only modify users using the user/{id} route to make sure we don't
-      # accidentally nike the wrong thing   
+      # accidentally nike the wrong thing
   /University/{id}/name:
     get:
       tags:
@@ -11994,7 +12043,7 @@ paths:
         in: path
         required: true
         type: string
-        description: The `University` name        
+        description: The `University` name
       responses:
         # Response code
         '200':
@@ -12062,7 +12111,7 @@ paths:
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/Error'            
+            $ref: '#/definitions/Error'
   /University/{id}/city:
     get:
       tags:
@@ -12134,7 +12183,7 @@ paths:
         in: path
         required: true
         type: string
-        description: The `University` city        
+        description: The `University` city
       responses:
         # Response code
         '200':
@@ -12202,7 +12251,7 @@ paths:
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/Error'            
+            $ref: '#/definitions/Error'
   /University/{id}/state:
     get:
       tags:
@@ -12274,7 +12323,7 @@ paths:
         in: path
         required: true
         type: string
-        description: The `University` state        
+        description: The `University` state
       responses:
         # Response code
         '200':
@@ -12342,7 +12391,7 @@ paths:
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/Error'            
+            $ref: '#/definitions/Error'
   /University/{id}/geolocation:
     get:
       tags:
@@ -12381,9 +12430,9 @@ paths:
       produces:
         -	application/json
       consumes:
-        -	application/json        
+        -	application/json
       parameters:
-      - 
+      -
         name: id
         in: path
         required: true
@@ -12402,7 +12451,7 @@ paths:
         required: true
         type: number
         format: float
-        description: The `University` longitude      
+        description: The `University` longitude
       responses:
         # Response code
         '200':
@@ -12422,9 +12471,9 @@ paths:
       produces:
         -	application/json
       consumes:
-        -	application/json        
+        -	application/json
       parameters:
-      - 
+      -
         name: id
         in: path
         required: true
@@ -12443,7 +12492,7 @@ paths:
         required: true
         type: number
         format: float
-        description: The `University` longitude    
+        description: The `University` longitude
       responses:
         # Response code
         '200':
@@ -12453,7 +12502,7 @@ paths:
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/Error'                      
+            $ref: '#/definitions/Error'
     delete:
       tags:
         - University
@@ -12507,7 +12556,7 @@ paths:
         required: true
         type: number
         format: float
-        description: The `University` longitude        
+        description: The `University` longitude
       responses:
         # Response code
         '200':
@@ -12527,7 +12576,7 @@ paths:
       produces:
         -	application/json
       parameters:
-      - 
+      -
         name: id
         in: path
         required: true
@@ -12546,7 +12595,7 @@ paths:
         required: true
         type: number
         format: float
-        description: The `University` longitude      
+        description: The `University` longitude
       responses:
         # Response code
         '200':
@@ -12566,7 +12615,7 @@ paths:
       produces:
         -	application/json
       parameters:
-      - 
+      -
         name: id
         in: path
         required: true
@@ -12585,7 +12634,7 @@ paths:
         required: true
         type: number
         format: float
-        description: The `University` longitude    
+        description: The `University` longitude
       responses:
         # Response code
         '200':
@@ -12595,7 +12644,7 @@ paths:
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/Error'            
+            $ref: '#/definitions/Error'
   /University/{id}/projects:
     get:
       tags:
@@ -12658,9 +12707,9 @@ paths:
       produces:
         -	application/json
       consumes:
-        -	application/json        
+        -	application/json
       parameters:
-      - 
+      -
         name: id
         in: path
         required: true
@@ -12670,10 +12719,10 @@ paths:
         name: project_ids
         in: formData
         required: true
-        description: The `Project` ids        
+        description: The `Project` ids
         type: array
         items:
-          type: string        
+          type: string
       responses:
         # Response code
         '200':
@@ -12694,9 +12743,9 @@ paths:
       produces:
         -	application/json
       consumes:
-        -	application/json        
+        -	application/json
       parameters:
-      - 
+      -
         name: id
         in: path
         required: true
@@ -12706,10 +12755,10 @@ paths:
         name: project_ids
         in: formData
         required: true
-        description: The `Project` ids        
+        description: The `Project` ids
         type: array
         items:
-          type: string        
+          type: string
       responses:
         # Response code
         '200':
@@ -12742,7 +12791,7 @@ paths:
         in: path
         required: true
         type: string
-        description: The `Project` id        
+        description: The `Project` id
       responses:
         # Response code
         '200':
@@ -12758,7 +12807,7 @@ paths:
         - University
         - Project
       description: |
-        Deletes `Project` from `University` 
+        Deletes `Project` from `University`
       operationId: deleteUniversityProjectById
       produces:
         -	application/json
@@ -12773,7 +12822,7 @@ paths:
         in: path
         required: true
         type: string
-        description: The `Project` id                
+        description: The `Project` id
       responses:
         # Response code
         '200':
@@ -12794,7 +12843,7 @@ paths:
       produces:
         -	application/json
       parameters:
-      - 
+      -
         name: id
         in: path
         required: true
@@ -12805,7 +12854,7 @@ paths:
         in: path
         required: true
         type: string
-        description: The `Project` id        
+        description: The `Project` id
       responses:
         # Response code
         '200':
@@ -12826,7 +12875,7 @@ paths:
       produces:
         -	application/json
       parameters:
-      - 
+      -
         name: id
         in: path
         required: true
@@ -12837,7 +12886,7 @@ paths:
         in: path
         required: true
         type: string
-        description: The `Project` ids      
+        description: The `Project` ids
       responses:
         # Response code
         '200':
@@ -12847,7 +12896,7 @@ paths:
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/Error'            
+            $ref: '#/definitions/Error'
   /University/{id}/images:
     get:
       tags:
@@ -12909,9 +12958,9 @@ paths:
       produces:
         -	application/json
       consumes:
-        -	application/json        
+        -	application/json
       parameters:
-      - 
+      -
         name: id
         in: path
         required: true
@@ -12924,7 +12973,7 @@ paths:
         description: The `University` profile image paths
         type: array
         items:
-          type: string        
+          type: string
       responses:
         # Response code
         '200':
@@ -12945,9 +12994,9 @@ paths:
       produces:
         -	application/json
       consumes:
-        -	application/json        
+        -	application/json
       parameters:
-      - 
+      -
         name: id
         in: path
         required: true
@@ -12960,7 +13009,7 @@ paths:
         description:  The `University` profile image paths
         type: array
         items:
-          type: string        
+          type: string
       responses:
         # Response code
         '200':
@@ -12971,7 +13020,7 @@ paths:
           description: Unexpected error
           schema:
             $ref: '#/definitions/Error'
-     
+
 
 definitions:
   User:
@@ -13403,7 +13452,7 @@ definitions:
       history:
         type: array
         items:
-          $ref: '#/definitions/UserSkill'          
+          $ref: '#/definitions/UserSkill'
   University:
     type: object
     properties:

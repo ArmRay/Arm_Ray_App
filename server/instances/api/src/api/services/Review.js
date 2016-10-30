@@ -1,10 +1,44 @@
+const Grant = models.grant;
+const Post = models.post;
+const Project = models.project;
+const Review = models.review;
+const Skill = models.skill;
+const University = models.University;
+const User = models.User;
+const UserSkill = models.userkSkill;
+
+export function createReview (options, callback) {
+  let review = new Review();
+
+  review.reviewer_id = options.req.body.project_name;
+  review.review_body = options.req.body.project_description;
+  review.review_url = options.req.body.grant_facilitator;
+  review.rating = options.req.body.posts_id;
+
+  review.created_date: new Date();
+  review.updated_date: project.created_date;
+  
+  review.save(function(err) {
+    if (err) {
+      console.error(err);
+    }
+  })
+
+}
+
+
 /**
  * @param {Object} options
  * @param {String} options.id The &#x60;Review&#x60; name
  * @param {Function} callback
  */
 export function getReviewById (options, callback) {
-  // Implement you business logic here...
+  Review.findById(options.id, function(err, review){
+    if(err){
+      console.error(err);
+    }
+    res.status(200).json(review);
+  })
 }
 
 /**
@@ -16,7 +50,25 @@ export function getReviewById (options, callback) {
  * @param {Function} callback
  */
 export function updateReviewById (options, callback) {
-  // Implement you business logic here...
+
+  Review.findById(options.id, function(err, review){
+    if(err){
+      console.error(err);
+    }
+    review.reviewer_id = options.req.body.reviewer_id ? options.req.body.reviewer_id : review.reviewer_id;
+    review.review_body = options.req.body.review_body ? options.req.body.review_body : review.review_body;
+    review.rating = options.req.body.rating ? options.req.body.rating : review.rating;
+    review.updated_date = new Date();
+
+    review.save(function(err) {
+      if (err) {
+        console.error(err);
+      }
+      res.json({
+        message: 'This Review has been updated'
+      });
+    })
+  })
 }
 
 /**
@@ -25,7 +77,16 @@ export function updateReviewById (options, callback) {
  * @param {Function} callback
  */
 export function deleteReviewById (options, callback) {
-  // Implement you business logic here...
+  Review.remove({
+    _id: options.id
+  }, function(err, review) {
+    if (err) {
+      console.error(err);
+    }
+    res.json({
+      message: 'This Review has been deleted'
+    });
+  })
 }
 
 /**
@@ -34,27 +95,48 @@ export function deleteReviewById (options, callback) {
  * @param {Function} callback
  */
 export function getReviewBodyById (options, callback) {
-  // Implement you business logic here...
+  Review.findById(options.id, function(err, review){
+    if(err){
+      console.error(err);
+    }
+    res.status(200).json(review.review_body);
+  })
 }
 
 /**
  * @param {Object} options
  * @param {String} options.id The &#x60;Review&#x60; name
- * @param {String} options.body 
+ * @param {String} options.body
  * @param {Function} callback
  */
 export function updateReviewBodyById (options, callback) {
-  // Implement you business logic here...
+  Review.findById(options.id, function(err, review) {
+    if (err) {
+      console.error(err);
+    }
+
+    review.updated_date = new Date();
+    review.review_body = options.req.body.body;
+
+  review.save(function(err) {
+    if (err) {
+      console.error(err);
+    }
+    res.json({
+      message: 'This Review has been updated'
+    });
+  })
+})
 }
 
 /**
  * @param {Object} options
  * @param {String} options.id The &#x60;Review&#x60; name
- * @param {String} options.body 
+ * @param {String} options.body
  * @param {Function} callback
  */
 export function setReviewBodyById (options, callback) {
-  // Implement you business logic here...
+  updateReviewBodyById (options, callback);
 }
 
 /**
@@ -63,7 +145,23 @@ export function setReviewBodyById (options, callback) {
  * @param {Function} callback
  */
 export function deleteReviewBodyById (options, callback) {
-  // Implement you business logic here...
+  Review.findById(options.id, function(err, review) {
+    if (err) {
+      console.error(err);
+    }
+
+    review.updated_date = new Date();
+    review.review_body = null;
+
+  review.save(function(err) {
+    if (err) {
+      console.error(err);
+    }
+    res.json({
+      message: 'This Review has been updated'
+    });
+  })
+})
 }
 
 /**
@@ -72,7 +170,12 @@ export function deleteReviewBodyById (options, callback) {
  * @param {Function} callback
  */
 export function getReviewReviewerById (options, callback) {
-  // Implement you business logic here...
+  Review.findById(options.id, function(err, review){
+    if(err){
+      console.error(err);
+    }
+    res.status(200).json(review.reviewer_id);
+  })
 }
 
 /**
@@ -81,8 +184,25 @@ export function getReviewReviewerById (options, callback) {
  * @param {Function} callback
  */
 export function deleteReviewReviewer (options, callback) {
-  // Implement you business logic here...
+  Review.findById(options.id, function(err, review) {
+    if (err) {
+      console.error(err);
+    }
+
+    review.updated_date = new Date();
+    review.reviewer_id = null;
+
+  review.save(function(err) {
+    if (err) {
+      console.error(err);
+    }
+    res.json({
+      message: 'This Review has been updated'
+    });
+  })
+})
 }
+
 
 /**
  * @param {Object} options
@@ -91,27 +211,48 @@ export function deleteReviewReviewer (options, callback) {
  * @param {Function} callback
  */
 export function isUserReviewReviewer (options, callback) {
-  // Implement you business logic here...
+  Review.findById(options.id, function(err, review){
+    if(err){
+      console.error(err);
+    }
+    res.status(200).json(review.reviewer_id == options.req.body.user_id);
+  })
 }
 
 /**
  * @param {Object} options
  * @param {String} options.id The &#x60;Review&#x60; name
- * @param {String} options.user_id 
+ * @param {String} options.user_id
  * @param {Function} callback
  */
 export function updateReviewReviewerById (options, callback) {
-  // Implement you business logic here...
+  Review.findById(options.id, function(err, review) {
+    if (err) {
+      console.error(err);
+    }
+
+    review.updated_date = new Date();
+    review.reviewer_id = options.req.body.user_id;
+
+  review.save(function(err) {
+    if (err) {
+      console.error(err);
+    }
+    res.json({
+      message: 'This Review has been updated'
+    });
+  })
+})
 }
 
 /**
  * @param {Object} options
  * @param {String} options.id The &#x60;Review&#x60; name
- * @param {String} options.user_id 
+ * @param {String} options.user_id
  * @param {Function} callback
  */
 export function setReviewReviewerById (options, callback) {
-  // Implement you business logic here...
+  updateReviewReviewerById (options, callback)
 }
 
 /**
@@ -121,7 +262,23 @@ export function setReviewReviewerById (options, callback) {
  * @param {Function} callback
  */
 export function deleteReviewReviewerById (options, callback) {
-  // Implement you business logic here...
+  Review.findById(options.id, function(err, review) {
+    if (err) {
+      console.error(err);
+    }
+
+    review.updated_date = new Date();
+    review.reviewer_id = null;
+
+  review.save(function(err) {
+    if (err) {
+      console.error(err);
+    }
+    res.json({
+      message: 'This Review has been updated'
+    });
+  })
+})
 }
 
 /**
@@ -130,7 +287,12 @@ export function deleteReviewReviewerById (options, callback) {
  * @param {Function} callback
  */
 export function getReviewRatingById (options, callback) {
-  // Implement you business logic here...
+  Review.findById(options.id, function(err, review){
+    if(err){
+      console.error(err);
+    }
+    res.status(200).json(review.rating);
+  })
 }
 
 /**
@@ -139,7 +301,23 @@ export function getReviewRatingById (options, callback) {
  * @param {Function} callback
  */
 export function deleteReviewRating (options, callback) {
-  // Implement you business logic here...
+  Review.findById(options.id, function(err, review) {
+    if (err) {
+      console.error(err);
+    }
+
+    review.updated_date = new Date();
+    review.rating = null;
+
+  review.save(function(err) {
+    if (err) {
+      console.error(err);
+    }
+    res.json({
+      message: 'This Review has been updated'
+    });
+  })
+})
 }
 
 /**
@@ -149,7 +327,12 @@ export function deleteReviewRating (options, callback) {
  * @param {Function} callback
  */
 export function isReviewRating (options, callback) {
-  // Implement you business logic here...
+  Review.findById(options.id, function(err, review){
+    if(err){
+      console.error(err);
+    }
+    res.status(200).json(review.rating == options.req.body.rating);
+  })
 }
 
 /**
@@ -159,7 +342,23 @@ export function isReviewRating (options, callback) {
  * @param {Function} callback
  */
 export function updateReviewRating (options, callback) {
-  // Implement you business logic here...
+  Review.findById(options.id, function(err, review) {
+    if (err) {
+      console.error(err);
+    }
+
+    review.updated_date = new Date();
+    review.rating = options.req.body.rating;
+
+  review.save(function(err) {
+    if (err) {
+      console.error(err);
+    }
+    res.json({
+      message: 'This Review has been updated'
+    });
+  })
+})
 }
 
 /**
@@ -169,7 +368,7 @@ export function updateReviewRating (options, callback) {
  * @param {Function} callback
  */
 export function setReviewRating (options, callback) {
-  // Implement you business logic here...
+  updateReviewRating (options, callback);
 }
 
 /**
@@ -178,7 +377,12 @@ export function setReviewRating (options, callback) {
  * @param {Function} callback
  */
 export function getReviewUrlById (options, callback) {
-  // Implement you business logic here...
+  Review.findById(options.id, function(err, review){
+    if(err){
+      console.error(err);
+    }
+    res.status(200).json(review.review_url);
+  })
 }
 
 /**
@@ -187,7 +391,23 @@ export function getReviewUrlById (options, callback) {
  * @param {Function} callback
  */
 export function deleteReviewUrl (options, callback) {
-  // Implement you business logic here...
+  Review.findById(options.id, function(err, review) {
+    if (err) {
+      console.error(err);
+    }
+
+    review.updated_date = new Date();
+    review.review_url = null;
+
+  review.save(function(err) {
+    if (err) {
+      console.error(err);
+    }
+    res.json({
+      message: 'This Review has been updated'
+    });
+  })
+})
 }
 
 /**
@@ -197,7 +417,23 @@ export function deleteReviewUrl (options, callback) {
  * @param {Function} callback
  */
 export function updateReviewUrl (options, callback) {
-  // Implement you business logic here...
+  Review.findById(options.id, function(err, review) {
+    if (err) {
+      console.error(err);
+    }
+
+    review.updated_date = new Date();
+    review.review_url = options.req.body.url;
+
+  review.save(function(err) {
+    if (err) {
+      console.error(err);
+    }
+    res.json({
+      message: 'This Review has been updated'
+    });
+  })
+})
 }
 
 /**
@@ -207,7 +443,7 @@ export function updateReviewUrl (options, callback) {
  * @param {Function} callback
  */
 export function setReviewUrl (options, callback) {
-  // Implement you business logic here...
+  updateReviewUrl (options, callback)
 }
 
 /**
@@ -216,7 +452,12 @@ export function setReviewUrl (options, callback) {
  * @param {Function} callback
  */
 export function getReviewCreatedDateById (options, callback) {
-  // Implement you business logic here...
+  Review.findById(options.id, function(err, review){
+    if(err){
+      console.error(err);
+    }
+    res.status(200).json(review.created_date);
+  })
 }
 
 /**
@@ -225,6 +466,10 @@ export function getReviewCreatedDateById (options, callback) {
  * @param {Function} callback
  */
 export function getReviewUpdatedDateById (options, callback) {
-  // Implement you business logic here...
+  Review.findById(options.id, function(err, review){
+    if(err){
+      console.error(err);
+    }
+    res.status(200).json(review.updated_date);
+  })
 }
-

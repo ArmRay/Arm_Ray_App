@@ -65,7 +65,7 @@ export function createProject (options, callback) {
 export function deleteProjectById (options, callback) {
   Project.remove({
     _id: options.id
-  }, function(err, grant) {
+  }, function(err, project) {
     if (err) {
       console.error(err);
     }
@@ -112,7 +112,7 @@ export function updateProject (options, callback) {
     project.project_keywords = options.req.body.project_keywords ? options.req.body.project_keywords : project.project_keywords;
     project.project_creator_id = options.req.body.project_creator_id ? options.req.body.project_creator_id : project.project_creator_id;
     project.project_urls = options.req.body.project_urls ? options.req.body.project_urls : project.project_urls;
-    project.updated_date: new Date();
+    project.updated_date = new Date();
     project.is_project_private = options.req.body.is_project_private ? options.req.body.is_project_private : project.is_project_private;
 
     project.save(function(err) {
