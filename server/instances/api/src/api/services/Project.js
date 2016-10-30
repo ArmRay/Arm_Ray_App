@@ -95,7 +95,7 @@ export function deleteProjectById (options, callback) {
  * @param {Function} callback
  */
 export function updateProject (options, callback) {
-  Project.findById(options.id, function(err, post) {
+  Project.findById(options.id, function(err, project) {
     if (err) {
       console.error(err);
     }
