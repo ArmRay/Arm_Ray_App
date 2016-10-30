@@ -1,3 +1,6 @@
+import models from '../../../../../model';
+import bcrypt from 'bcrypt';
+
 const Grant = models.grant;
 const Post = models.post;
 const Project = models.project;
@@ -17,7 +20,7 @@ export function createReview (options, callback) {
 
   review.created_date: new Date();
   review.updated_date: project.created_date;
-  
+
   review.save(function(err) {
     if (err) {
       console.error(err);
