@@ -1,3 +1,15 @@
+import models from '../../../../../model';
+import bcrypt from 'bcrypt';
+
+const Grant = models.grant;
+const Post = models.post;
+const Project = models.project;
+const Review = models.review;
+const Skill = models.skill;
+const University = models.University;
+const User = models.User;
+const UserSkill = models.userkSkill;
+
 /**
  * @param {Object} options
  * @param {String} options.first_name first name of &#x60;User&#x60;
@@ -609,4 +621,3 @@ export function getCreatedDateById (options, callback) {
 export function getModifiedDateById (options, callback) {
   // Implement you business logic here...
 }
-

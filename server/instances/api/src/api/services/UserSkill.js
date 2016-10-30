@@ -1,3 +1,15 @@
+import models from '../../../../../model';
+import bcrypt from 'bcrypt';
+
+const Grant = models.grant;
+const Post = models.post;
+const Project = models.project;
+const Review = models.review;
+const Skill = models.skill;
+const University = models.University;
+const User = models.User;
+const UserSkill = models.userkSkill;
+
 /**
  * @param {Object} options
  * @param {String} options.user_id Unique identifier representing a specific &#x60;User&#x60; that has a &#x60;UserSkill&#x60; represents
@@ -200,4 +212,3 @@ export function getUserSkillCreatedDateById (options, callback) {
 export function getUserSkillUpdatedDateById (options, callback) {
   // Implement you business logic here...
 }
-

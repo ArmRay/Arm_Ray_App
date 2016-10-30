@@ -1,3 +1,15 @@
+import models from '../../../../../model';
+import bcrypt from 'bcrypt';
+
+const Grant = models.grant;
+const Post = models.post;
+const Project = models.project;
+const Review = models.review;
+const Skill = models.skill;
+const University = models.University;
+const User = models.User;
+const UserSkill = models.userkSkill;
+
 /**
  * @param {Object} options
  * @param {Number} options.size Max size of array to return
@@ -79,4 +91,3 @@ export function getPostsByModifiedDateForm (options, callback) {
 export function getPostsByModifiedDate (options, callback) {
   // Implement you business logic here...
 }
-
