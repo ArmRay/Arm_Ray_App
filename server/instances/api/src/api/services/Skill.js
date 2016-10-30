@@ -18,7 +18,18 @@ const UserSkill = models.userkSkill;
  */
 export function createSkills (options, callback) {
   // Implement you business logic here...
-}
+  let skill = new Skill();
+
+  skill.description = options.req.body.description;
+  skill.created_date = new Date();
+  skill.updated_date = skill.created_date;
+
+  skill.save(function(err)) {
+    if(err) {
+      console.error(err);
+    }
+  })
+  }
 
 /**
  * @param {Object} options
@@ -26,7 +37,12 @@ export function createSkills (options, callback) {
  * @param {Function} callback
  */
 export function getSkillById (options, callback) {
-  // Implement you business logic here...
+  Skill.findById(options.id, function(err, skill){
+    if(err){
+      console.error(err);
+    }
+    res.status(200).json(skill);
+  })
 }
 
 /**
@@ -37,6 +53,23 @@ export function getSkillById (options, callback) {
  */
 export function updateSkillById (options, callback) {
   // Implement you business logic here...
+  Skill.findById(options.id, function(err, skill) {
+
+    if(err) {
+      console.error(err);
+    }
+    skill.description = options.req.body.description ? options.req.body.description : skill.description;
+    skill.updated_date = new Date();
+
+    skill.save(function(err)) {
+      if(err) {
+        console.error(err);
+      }
+      res.json({
+        message: 'This Skill has been updated';
+      });
+    })
+  })
 }
 
 /**
@@ -45,7 +78,16 @@ export function updateSkillById (options, callback) {
  * @param {Function} callback
  */
 export function deleteSkillwById (options, callback) {
-  // Implement you business logic here...
+  Skill.remove({
+    _id: options.id
+  }, function(err, project) {
+    if (err) {
+      console.error(err);
+    }
+    res.json({
+      message: 'This Skill has been deleted'
+    });
+  })
 }
 
 /**
@@ -54,7 +96,12 @@ export function deleteSkillwById (options, callback) {
  * @param {Function} callback
  */
 export function getSkillBodyById (options, callback) {
-  // Implement you business logic here...
+  Skill.findById(options.id, function(err, skill){
+    if(err){
+      console.error(err);
+    }
+    res.status(200).json(skill.description);
+  })
 }
 
 /**
@@ -64,7 +111,23 @@ export function getSkillBodyById (options, callback) {
  * @param {Function} callback
  */
 export function updateSkillDescriptionByIdForm (options, callback) {
-  // Implement you business logic here...
+  Skill.findById(options.id, function(err, skill) {
+
+    if(err) {
+      console.error(err);
+    }
+    skill.description = options.req.body.description;
+    skill.updated_date = new Date();
+
+    skill.save(function(err)) {
+      if(err) {
+        console.error(err);
+      }
+      res.json({
+        message: 'This Skill has been updated';
+      });
+    })
+  })
 }
 
 /**
@@ -74,7 +137,7 @@ export function updateSkillDescriptionByIdForm (options, callback) {
  * @param {Function} callback
  */
 export function setSkillDescriptionByIdForn (options, callback) {
-  // Implement you business logic here...
+  updateSkillDescriptionByIdForm (options, callback);
 }
 
 /**
@@ -83,7 +146,23 @@ export function setSkillDescriptionByIdForn (options, callback) {
  * @param {Function} callback
  */
 export function deleteSkillDescriptionByIdForn (options, callback) {
-  // Implement you business logic here...
+  Skill.findById(options.id, function(err, skill) {
+
+    if(err) {
+      console.error(err);
+    }
+    skill.description = null;
+    skill.updated_date = new Date();
+
+    skill.save(function(err)) {
+      if(err) {
+        console.error(err);
+      }
+      res.json({
+        message: 'This Skill has been updated';
+      });
+    })
+  })
 }
 
 /**
@@ -93,7 +172,12 @@ export function deleteSkillDescriptionByIdForn (options, callback) {
  * @param {Function} callback
  */
 export function getIsSkillBodyById (options, callback) {
-  // Implement you business logic here...
+  Skill.findById(options.id, function(err, skill){
+    if(err){
+      console.error(err);
+    }
+    res.status(200).json(skill.description == options.req.body.description);
+  })
 }
 
 /**
@@ -103,7 +187,7 @@ export function getIsSkillBodyById (options, callback) {
  * @param {Function} callback
  */
 export function updateSkillDescriptionById (options, callback) {
-  // Implement you business logic here...
+  updateSkillDescriptionByIdForm (options, callback);
 }
 
 /**
@@ -113,7 +197,7 @@ export function updateSkillDescriptionById (options, callback) {
  * @param {Function} callback
  */
 export function setSkillDescriptionById (options, callback) {
-  // Implement you business logic here...
+  updateSkillDescriptionByIdForm (options, callback);
 }
 
 /**
@@ -122,7 +206,12 @@ export function setSkillDescriptionById (options, callback) {
  * @param {Function} callback
  */
 export function getSkillCreatedDateById (options, callback) {
-  // Implement you business logic here...
+  Skill.findById(options.id, function(err, skill){
+    if(err){
+      console.error(err);
+    }
+    res.status(200).json(skill.created_date);
+  })
 }
 
 /**
@@ -131,5 +220,10 @@ export function getSkillCreatedDateById (options, callback) {
  * @param {Function} callback
  */
 export function getSkillUpdatedDateById (options, callback) {
-  // Implement you business logic here...
+  Skill.findById(options.id, function(err, skill){
+    if(err){
+      console.error(err);
+    }
+    res.status(200).json(skill.updated_date);
+  })
 }
