@@ -11,7 +11,6 @@ input::-webkit-input-placeholder {
   text-align: left;
   font-style: italic;
   color: #aab2bd;
-  color: var(--gray2);
   font-size: 13.3px;
   font-weight: normal; 
 }
@@ -23,7 +22,6 @@ input::-moz-placeholder {
   text-align: left;
   font-style: italic;
   color: #aab2bd;
-  color: var(--gray2);
   font-size: 13.3px;
   font-weight: normal; 
 }
@@ -35,7 +33,6 @@ input:-moz-placeholder {   /* Older versions of Firefox */
   text-align: left;
   font-style: italic;
   color: #aab2bd;
-  color: var(--gray2);
   font-size: 13.3px;
   font-weight: normal; 
 }
@@ -47,7 +44,6 @@ input:-ms-input-placeholder {
   text-align: left;
   font-style: italic;
   color: #aab2bd;
-  color: var(--gray2);
   font-size: 13.3px;
   font-weight: normal; 
 }
