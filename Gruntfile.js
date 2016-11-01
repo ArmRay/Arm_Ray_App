@@ -16,7 +16,7 @@ module.exports = function (grunt) {
     buildcontrol: 'grunt-build-control'
   });
 
-  // Time how long tasks take. Can help when optimizing build times
+  // Time how long tasks take. Can help  when optimizing build times
   require('time-grunt')(grunt);
 
   // Define the configuration for all the tasks
