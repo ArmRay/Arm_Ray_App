@@ -36,6 +36,12 @@
   margin-right: 120.5px;
 }
 
+input[type="text"], textarea {
+
+  background-color : #ffffff; 
+
+}
+
 #loginbutton {
   width: 222px;
   height: 48px;
