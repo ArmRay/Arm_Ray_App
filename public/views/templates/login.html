@@ -1,13 +1,13 @@
-<link rel="stylesheet" href="css/login.css">
-
 <form action="" class="loginrectangle">
   <img src="/branding/page-1.png" class="loginlogo" />
 
   <div class="inputlabel">User Name:</div>
-  <input type="text" class="logintextbox">
+  <input type="text" class="logintextbox" style="background-color:#fff;" ng-model="username">
 
   <div class="inputlabel">Password:</div>
-  <input type="text" class="logintextbox">
+  <input type="password" class="logintextbox" style="background-color:#fff;" ng-model="password">
 
-  <input type="submit" value="Log In" id="loginbutton">
+	<a class="login">
+	<button type="submit" class="btn-primary" ng-click="login()">Log In</button>
+	</a>
 </form>

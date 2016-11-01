@@ -12,7 +12,7 @@
         		username:$scope.username,
         		password:$scope.password
         	}
-
+        	console.log(user.username,user.password);
         	//login service sends the user object with username and password
         	// it expects a full user object back, and injects it into the next view
         	LoginFactory.save(user,function(data){

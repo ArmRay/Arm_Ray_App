@@ -27,6 +27,10 @@
                   templateUrl: "/views/dashboard.html",
                   controller:"DashboardCtrl"   
               })
+              .state('dashboard.rightProjects',{
+                 templateUrl:"/views/right_project_nav.html",
+                 controller:"rightProjectCtrl"
+              })
               .state('project', {
                   url: "/project",
                   templateUrl: "/views/project.html",

@@ -4,10 +4,8 @@
     height: 370px;
     border-radius: 5px;
     background-color: #f5f7fa;
-    background-color: var(--lightGray1);
     box-shadow: 0 3px 8px 0 rgba(60, 59, 60, 0.24), 0 3px 6px 0 rgba(60, 59, 60, 0.19);
     border: solid 1px #e6e9ed;
-    border: solid 1px var(--lightGray2);
     position: absolute;
     top:50%;
     left:50%;
@@ -34,33 +32,30 @@
   margin-top: 6.3px;
   margin-left: 120.3px;
   margin-right: 120.5px;
+  background-color : #ffffff !important;
 }
 
-input[type="text"], textarea {
-
-  background-color : #ffffff; 
-
+input[type="text"] {
+  background-color : #ffffff !important;
 }
 
-#loginbutton {
-  width: 222px;
-  height: 48px;
-  border-radius: 5px;
-  background-color: #4a89dc;
-  background-color: var(--stateAction);
+input[type="password"] {
+  background-color : #ffffff !important;
+}
+
+
+.login .btn-primary {
+  cursor:pointer;
   margin-left: 270px;
   margin-bottom: 36px;
   margin-top: 29.7px;
-  font-stretch: normal;
-  font-family: Roboto;
-  text-align: center;
-  letter-spacing: 1px;
-  font-style: normal;
-  color: #ffffff;
-  color: var(--white);
-  font-size: 16px;
-  font-weight: bold;
 }
+
+.login .btn-primary:hover
+{
+    background-color: #335f99;
+}
+
 
 .nav-brand {
   width:30px;
@@ -94,14 +89,10 @@ nav{
   padding-left:12px;
 }
 
-
 .navbar-right-icons{
   margin-left:868px;
   padding:19px;
 }
-
-
-
 
 .loginlogo
 {
@@ -110,3 +101,13 @@ nav{
   margin-top: 24px;
   margin-left: 222px;
 }
+
+.logintextbox {
+  background:none !important;
+  padding-left:13px;
+}
+
+.inputlabel {
+  color: #a6a8ab;
+}
+
