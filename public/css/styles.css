@@ -50,6 +50,9 @@ input[type="password"] {
   margin-bottom: 36px;
   margin-top: 29.7px;
 }
+.login .btn-primary p {
+  padding-top: 9px;
+}
 
 .login .btn-primary:hover
 {
