@@ -1,0 +1,4442 @@
+{
+    "info": {
+        "description": "Definition of ArmRay backend API for data retrieval operations",
+        "title": "ArmRay API",
+        "version": "0.0.1"
+    },
+    "basePath": "/armray/api/0.1/rest/retrieve",
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "schemes": [
+        "http"
+    ],
+    "swagger": "2.0",
+    "paths": {
+        "/Grant": {},
+        "/Grant/{id}": {
+            "get": {
+                "description": "Retrieves `Grant` objects by **id**.\n",
+                "operationId": "getGrantById",
+                "parameters": [
+                    {
+                        "description": "The `Grant` name",
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The `Grant`",
+                        "schema": {
+                            "$ref": "#/definitions/Grant"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "tags": [
+                    "Grant"
+                ]
+            }
+        },
+        "/Grant/{id}/amount": {
+            "get": {
+                "description": "Retrieves `Grant` amount\n",
+                "operationId": "getGrantAmount",
+                "parameters": [
+                    {
+                        "description": "The `Grant` name",
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The `Grant` amount",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "tags": [
+                    "Grant"
+                ]
+            }
+        },
+        "/Grant/{id}/amount/{amount}": {
+            "get": {
+                "consumes": [
+                    "application/json"
+                ],
+                "description": "Retrieves if `Grant` amount is equal to param\n",
+                "operationId": "isGrantAmount",
+                "parameters": [
+                    {
+                        "description": "The `Grant` name",
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "description": "The `Grant` amount",
+                        "in": "path",
+                        "name": "amount",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The `Grant` amount",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "tags": [
+                    "Grant"
+                ]
+            }
+        },
+        "/Grant/{id}/created": {
+            "get": {
+                "description": "Retrieves `Grant` object created date\n",
+                "operationId": "getGrantCreatedDate",
+                "parameters": [
+                    {
+                        "description": "The `Grant` name",
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The `Grant` creation date",
+                        "schema": {
+                            "format": "date-time",
+                            "type": "string"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "tags": [
+                    "Grant"
+                ]
+            }
+        },
+        "/Grant/{id}/description": {
+            "get": {
+                "description": "Retrieves `Grant` description\n",
+                "operationId": "getGrantDescription",
+                "parameters": [
+                    {
+                        "description": "The `Grant` name",
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The `Grant` id",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "tags": [
+                    "Grant"
+                ]
+            }
+        },
+        "/Grant/{id}/keys": {
+            "get": {
+                "description": "Retrieves `Grant` keywords\n",
+                "operationId": "getGrantKeywords",
+                "parameters": [
+                    {
+                        "description": "The `Grant` keywords",
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The `Grant` keywords",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "tags": [
+                    "Grant"
+                ]
+            }
+        },
+        "/Grant/{id}/keys/{keyword}": {
+            "get": {
+                "consumes": [
+                    "application/json"
+                ],
+                "description": "Retrieves if `Grant` amount is equal to param\n",
+                "operationId": "isGrantHaveKeyword",
+                "parameters": [
+                    {
+                        "description": "The `Grant` name",
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "description": "The `Grant` keyword",
+                        "in": "path",
+                        "name": "keyword",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The `Grant` id",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "tags": [
+                    "Grant"
+                ]
+            }
+        },
+        "/Grant/{id}/modified": {
+            "get": {
+                "description": "Retrieves `Grant` objects modified date\n",
+                "operationId": "getGrantModifiedDate",
+                "parameters": [
+                    {
+                        "description": "The `Grant` name",
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The `Grant` modified date",
+                        "schema": {
+                            "format": "date-time",
+                            "type": "string"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "tags": [
+                    "Grant"
+                ]
+            }
+        },
+        "/Grant/{id}/type": {
+            "get": {
+                "description": "Retrieves `Grant` amount\n",
+                "operationId": "getGrantType",
+                "parameters": [
+                    {
+                        "description": "The `Grant` id",
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The `Grant` type",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "tags": [
+                    "Grant"
+                ]
+            }
+        },
+        "/Grant/{id}/type/{type}": {
+            "get": {
+                "consumes": [
+                    "application/json"
+                ],
+                "description": "Retrieves if `Grant` amount is equal to param\n",
+                "operationId": "isGrantType",
+                "parameters": [
+                    {
+                        "description": "The `Grant` name",
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "description": "The `Grant` type",
+                        "in": "path",
+                        "name": "type",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The boolean",
+                        "schema": {
+                            "type": "boolean"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "tags": [
+                    "Grant"
+                ]
+            }
+        },
+        "/Grant/{id}/url": {
+            "get": {
+                "description": "Retrieves `Grant` url\n",
+                "operationId": "getGrantUrl",
+                "parameters": [
+                    {
+                        "description": "The `Grant` name",
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The `Grant` url array",
+                        "schema": {
+                            "items": {
+                                "type": "string"
+                            },
+                            "type": "array"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "tags": [
+                    "Grant"
+                ]
+            }
+        },
+        "/Post": {},
+        "/Post/{id}": {
+            "get": {
+                "description": "Retrieves `Post` objects by **id**.\n",
+                "operationId": "getPostById",
+                "parameters": [
+                    {
+                        "description": "The `Post` name",
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The `Post`",
+                        "schema": {
+                            "$ref": "#/definitions/Post"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "tags": [
+                    "Post"
+                ]
+            }
+        },
+        "/Post/{id}/author": {
+            "get": {
+                "description": "Retrieves `Post` author\n",
+                "operationId": "getPostAuthorById",
+                "parameters": [
+                    {
+                        "description": "The `Post` id",
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The author",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "tags": [
+                    "Post",
+                    "User"
+                ]
+            }
+        },
+        "/Post/{id}/keys": {
+            "get": {
+                "description": "Retrieves `Post` keywords\n",
+                "operationId": "getPostKeywordsById",
+                "parameters": [
+                    {
+                        "description": "The `Post` id",
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The keywords",
+                        "schema": {
+                            "items": {
+                                "type": "string"
+                            },
+                            "type": "array"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "tags": [
+                    "Post"
+                ]
+            }
+        },
+        "/Post/{id}/keys/{keyword}": {
+            "get": {
+                "description": "Retrieves whether keyword is on past\n",
+                "operationId": "isKeywordOnPost",
+                "parameters": [
+                    {
+                        "description": "The `Post` id",
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "description": "the keyword",
+                        "in": "path",
+                        "name": "keyword",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Boolean of whether the `User`is taged",
+                        "schema": {
+                            "type": "boolean"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "tags": [
+                    "Post"
+                ]
+            }
+        },
+        "/Post/{id}/private": {
+            "get": {
+                "description": "Retrieves whether `Post` is private\n",
+                "operationId": "isPostPrivateById",
+                "parameters": [
+                    {
+                        "description": "The `Post` id",
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The boolean",
+                        "schema": {
+                            "type": "boolean"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "tags": [
+                    "Post"
+                ]
+            }
+        },
+        "/Post/{id}/tags": {
+            "get": {
+                "description": "Retrieves `Post` tags\n",
+                "operationId": "getPostTagsById",
+                "parameters": [
+                    {
+                        "description": "The `Post` name",
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The ids of the tagged `User` ids",
+                        "schema": {
+                            "items": {
+                                "type": "string"
+                            },
+                            "type": "array"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "tags": [
+                    "Post"
+                ]
+            }
+        },
+        "/Post/{id}/tags/{user_id}": {
+            "get": {
+                "description": "Retrieves whether `User`is tagged on past\n",
+                "operationId": "getIsUserTagOnProject",
+                "parameters": [
+                    {
+                        "description": "The `Post` id",
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "description": "user_id to check for",
+                        "in": "path",
+                        "name": "user_id",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Boolean of whether the `User`is taged",
+                        "schema": {
+                            "type": "boolean"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "tags": [
+                    "Post",
+                    "User"
+                ]
+            }
+        },
+        "/Post/{id}/text": {
+            "get": {
+                "description": "Retrieves `Post` text\n",
+                "operationId": "getPostTextById",
+                "parameters": [
+                    {
+                        "description": "The `Post` id",
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The text",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "tags": [
+                    "Post"
+                ]
+            }
+        },
+        "/Post/{id}/title": {
+            "get": {
+                "description": "Retrieves `Post` title\n",
+                "operationId": "getPostTitleById",
+                "parameters": [
+                    {
+                        "description": "The `Post` id",
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The title",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "tags": [
+                    "Post"
+                ]
+            }
+        },
+        "/Project": {},
+        "/Project/{id}": {
+            "get": {
+                "description": "Retrieve a 'Project' by their id.\n",
+                "operationId": "getProjectById",
+                "parameters": [
+                    {
+                        "description": "the `id` of the `Project` to delete",
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The `id` of the deleted `Project`",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "tags": [
+                    "Project"
+                ]
+            }
+        },
+        "/Project/{id}/collaborators": {
+            "get": {
+                "description": "Get collaborators of a `Project`.\n",
+                "operationId": "getAllProjectCollaborators",
+                "parameters": [
+                    {
+                        "description": "The `id` of the `Project` to retrieve",
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The `collaborators` associated with the `Project`",
+                        "schema": {
+                            "items": {
+                                "type": "string"
+                            },
+                            "type": "array"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "tags": [
+                    "Project",
+                    "User"
+                ]
+            }
+        },
+        "/Project/{id}/collaborators/{user_id}": {
+            "get": {
+                "description": "Check if `User` is collaborator on `Project', return if true\n",
+                "operationId": "isUserCollaboratorOnProject",
+                "parameters": [
+                    {
+                        "description": "The `id` of the `User` to retrieve",
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "description": "The `User`id",
+                        "in": "path",
+                        "name": "user_id",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The user",
+                        "schema": {
+                            "$ref": "#/definitions/User"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "tags": [
+                    "Project",
+                    "User"
+                ]
+            }
+        },
+        "/Project/{id}/creators": {
+            "get": {
+                "description": "Get creators of a `Project`.\n",
+                "operationId": "getAllProjectCreators",
+                "parameters": [
+                    {
+                        "description": "The `id` of the `Project` to retrieve",
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The `creators` associated with the `Project`",
+                        "schema": {
+                            "items": {
+                                "type": "string"
+                            },
+                            "type": "array"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "tags": [
+                    "Project",
+                    "User"
+                ]
+            }
+        },
+        "/Project/{id}/creators/{user_id}": {
+            "get": {
+                "description": "Check if `User` is creator on `Project', return `User`if true.\n",
+                "operationId": "isUserCreatorOnProject",
+                "parameters": [
+                    {
+                        "description": "The `id` of the `User` to retrieve",
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "description": "The `User`id",
+                        "in": "path",
+                        "name": "user_id",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The boolean",
+                        "schema": {
+                            "type": "boolean"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "tags": [
+                    "Project",
+                    "User"
+                ]
+            }
+        },
+        "/Project/{id}/description": {
+            "get": {
+                "description": "Retrieve project_description associated with a `Project`.\n",
+                "operationId": "getProjectDescriptionById",
+                "parameters": [
+                    {
+                        "description": "The `id` of the `Project` to retrieve",
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The project_description",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "tags": [
+                    "Project"
+                ]
+            }
+        },
+        "/Project/{id}/description/{project_description}": {
+            "get": {
+                "description": "Check if `Project`descript of `Project` is some value\n",
+                "operationId": "isProjectDescriptionOnProject",
+                "parameters": [
+                    {
+                        "description": "The `id` of the `Project` to retrieve",
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "description": "The `project_description` of the `Project`",
+                        "in": "path",
+                        "name": "project_description",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The post",
+                        "schema": {
+                            "type": "boolean"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "tags": [
+                    "Project"
+                ]
+            }
+        },
+        "/Project/{id}/files": {
+            "get": {
+                "description": "Get files of a `Project`.\n",
+                "operationId": "getAllProjectFiles",
+                "parameters": [
+                    {
+                        "description": "The `id` of the `Project` to retrieve",
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The `files` associated with the `Project`",
+                        "schema": {
+                            "items": {
+                                "type": "string"
+                            },
+                            "type": "array"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "tags": [
+                    "Project"
+                ]
+            }
+        },
+        "/Project/{id}/grant": {
+            "get": {
+                "description": "Retrieve `Grant`associated with a `Project`.\n",
+                "operationId": "getProjectGrantById",
+                "parameters": [
+                    {
+                        "description": "The `id` of the `Project` to retrieve",
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The grant",
+                        "schema": {
+                            "$ref": "#/definitions/Grant"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "tags": [
+                    "Project",
+                    "Grant"
+                ]
+            }
+        },
+        "/Project/{id}/grant/{grant_id}": {
+            "get": {
+                "description": "Check if `Grant` is on `Project`\n",
+                "operationId": "isGrantOnProject",
+                "parameters": [
+                    {
+                        "description": "The `id` of the `Project` to retrieve",
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "description": "The `grant_id` of the `Project`",
+                        "in": "path",
+                        "name": "grant_id",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The post",
+                        "schema": {
+                            "type": "boolean"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "tags": [
+                    "Project",
+                    "Grant"
+                ]
+            }
+        },
+        "/Project/{id}/keys": {
+            "get": {
+                "description": "Get keywords of a `Project`.\n",
+                "operationId": "getAllProjectKeywords",
+                "parameters": [
+                    {
+                        "description": "The `id` of the `Project` to retrieve",
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The `keywords` associated with the `Project`",
+                        "schema": {
+                            "items": {
+                                "type": "string"
+                            },
+                            "type": "array"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "tags": [
+                    "Project"
+                ]
+            }
+        },
+        "/Project/{id}/keys/{keyword}": {
+            "get": {
+                "description": "Check if keyword is on `Project'.\n",
+                "operationId": "isKeywordOnProject",
+                "parameters": [
+                    {
+                        "description": "The `id` of the `User` to retrieve",
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "description": "The keyword",
+                        "in": "path",
+                        "name": "keyword",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The boolean",
+                        "schema": {
+                            "type": "boolean"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "tags": [
+                    "Project"
+                ]
+            }
+        },
+        "/Project/{id}/name/{project_name}": {
+            "get": {
+                "description": "Check if `Project`name of `Project` is some value\n",
+                "operationId": "isNameOnProject",
+                "parameters": [
+                    {
+                        "description": "The `id` of the `Project` to retrieve",
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "description": "The `project_name` of the `Project`",
+                        "in": "path",
+                        "name": "project_name",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The post",
+                        "schema": {
+                            "type": "boolean"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "tags": [
+                    "Project"
+                ]
+            }
+        },
+        "/Project/{id}/posts": {
+            "get": {
+                "description": "Get posts of a `Project`.\n",
+                "operationId": "getAllProjectPosts",
+                "parameters": [
+                    {
+                        "description": "The `id` of the `Project` to retrieve",
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The `reviews` associated with the `Project`",
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/Post"
+                            },
+                            "type": "array"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "tags": [
+                    "Project",
+                    "Post"
+                ]
+            }
+        },
+        "/Project/{id}/posts/{post_id}": {
+            "get": {
+                "description": "Check if `Post` is on a `Project`\n",
+                "operationId": "isPostOnProject",
+                "parameters": [
+                    {
+                        "description": "The `id` of the `Project` to retrieve",
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "description": "The `id` of the post",
+                        "in": "path",
+                        "name": "post_id",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The post",
+                        "schema": {
+                            "type": "boolean"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "tags": [
+                    "Project",
+                    "Post"
+                ]
+            }
+        },
+        "/Project/{id}/private": {
+            "get": {
+                "description": "Retrieve is_private from a  `Project`.\n",
+                "operationId": "isProjectPrivate",
+                "parameters": [
+                    {
+                        "description": "The `id` of the `Project` to retrieve",
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The boolean",
+                        "schema": {
+                            "type": "boolean"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "tags": [
+                    "Project"
+                ]
+            }
+        },
+        "/Project/{id}/project_name": {
+            "get": {
+                "description": "Retrieve project_name associated with a `Project`.\n",
+                "operationId": "getProjectNameById",
+                "parameters": [
+                    {
+                        "description": "The `id` of the `Project` to retrieve",
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The project_name",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "tags": [
+                    "Project"
+                ]
+            }
+        },
+        "/Project/{id}/reviews": {
+            "get": {
+                "description": "Get reviews of a `Project`.\n",
+                "operationId": "getAllProjectReviews",
+                "parameters": [
+                    {
+                        "description": "The `id` of the `Project` to retrieve",
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The `reviews` associated with the `Project`",
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/Review"
+                            },
+                            "type": "array"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "tags": [
+                    "Project",
+                    "Review"
+                ]
+            }
+        },
+        "/Project/{id}/reviews/{review_id}": {
+            "get": {
+                "description": "Check if `Review` of a `Project` if it is on project\n",
+                "operationId": "isReviewOnOProject",
+                "parameters": [
+                    {
+                        "description": "The `id` of the `Project` to retrieve",
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "description": "The `id` of the review",
+                        "in": "path",
+                        "name": "review_id",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The boolean",
+                        "schema": {
+                            "type": "boolean"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "tags": [
+                    "Project",
+                    "Review"
+                ]
+            }
+        },
+        "/Project/{id}/uni": {
+            "get": {
+                "description": "Retrieve universities associated with a `Project`.\n",
+                "operationId": "getUniversitiesById",
+                "parameters": [
+                    {
+                        "description": "The `id` of the `Project` to retrieve",
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The grant",
+                        "schema": {
+                            "$ref": "#/definitions/University"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "tags": [
+                    "Project",
+                    "University"
+                ]
+            }
+        },
+        "/Project/{id}/uni/{university_id}": {
+            "get": {
+                "description": "Check if `Project`descript of `Project` is some value\n",
+                "operationId": "isUniversityOnProject",
+                "parameters": [
+                    {
+                        "description": "The `id` of the `Project` to retrieve",
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "description": "The id of the `University`",
+                        "in": "path",
+                        "name": "university_id",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The post",
+                        "schema": {
+                            "type": "boolean"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "tags": [
+                    "Project",
+                    "University"
+                ]
+            }
+        },
+        "/Project/{id}/urls": {
+            "get": {
+                "description": "Get urls of a `Project`.\n",
+                "operationId": "getAllProjectUrls",
+                "parameters": [
+                    {
+                        "description": "The `id` of the `Project` to retrieve",
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The `urls` associated with the `Project`",
+                        "schema": {
+                            "items": {
+                                "type": "string"
+                            },
+                            "type": "array"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "tags": [
+                    "Project"
+                ]
+            }
+        },
+        "/Review/{id}": {
+            "get": {
+                "description": "Retrieves `Review` objects by **id**.\n",
+                "operationId": "getReviewById",
+                "parameters": [
+                    {
+                        "description": "The `Review` name",
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The `Review`",
+                        "schema": {
+                            "$ref": "#/definitions/Review"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "tags": [
+                    "Review"
+                ]
+            }
+        },
+        "/Review/{id}/body": {
+            "get": {
+                "description": "Sets body of review\n",
+                "operationId": "getReviewBodyById",
+                "parameters": [
+                    {
+                        "description": "The `Review` id",
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The `Review` body",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "tags": [
+                    "Review"
+                ]
+            }
+        },
+        "/Review/{id}/created": {
+            "get": {
+                "description": "Gets `Review`created date\n",
+                "operationId": "getReviewCreatedDateById",
+                "parameters": [
+                    {
+                        "description": "The `Review` id",
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The `Review` create date",
+                        "schema": {
+                            "format": "date-time",
+                            "type": "string"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "tags": [
+                    "Review"
+                ]
+            }
+        },
+        "/Review/{id}/rating": {
+            "get": {
+                "description": "Gets rating of review\n",
+                "operationId": "getReviewRatingById",
+                "parameters": [
+                    {
+                        "description": "The `Review` id",
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The `Review` rating",
+                        "schema": {
+                            "format": "int32",
+                            "type": "number"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "tags": [
+                    "Review"
+                ]
+            }
+        },
+        "/Review/{id}/rating/{rating}": {
+            "get": {
+                "description": "Is rating equal to what we pass in\n",
+                "operationId": "isReviewRating",
+                "parameters": [
+                    {
+                        "description": "The `Review` id",
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "description": "The `Review` rating",
+                        "in": "path",
+                        "name": "rating",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The boolean",
+                        "schema": {
+                            "type": "boolean"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "tags": [
+                    "Review"
+                ]
+            }
+        },
+        "/Review/{id}/reviewer": {
+            "get": {
+                "description": "Gets reviewer of review\n",
+                "operationId": "getReviewReviewerById",
+                "parameters": [
+                    {
+                        "description": "The `Review` id",
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The `Review` reviewer `User`id",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "tags": [
+                    "Review",
+                    "User"
+                ]
+            }
+        },
+        "/Review/{id}/reviewer/{user_id}": {
+            "get": {
+                "description": "Is `User`the reviewer?\n",
+                "operationId": "isUserReviewReviewer",
+                "parameters": [
+                    {
+                        "description": "The `Review` id",
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "description": "The `Review` id",
+                        "in": "path",
+                        "name": "user_id",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The boolean",
+                        "schema": {
+                            "type": "boolean"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "tags": [
+                    "Review",
+                    "User"
+                ]
+            }
+        },
+        "/Review/{id}/updated": {
+            "get": {
+                "description": "Gets `Review`updated date\n",
+                "operationId": "getReviewUpdatedDateById",
+                "parameters": [
+                    {
+                        "description": "The `Review` id",
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The `Review` update date",
+                        "schema": {
+                            "format": "date-time",
+                            "type": "string"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "tags": [
+                    "Review"
+                ]
+            }
+        },
+        "/Review/{id}/url": {
+            "get": {
+                "description": "Gets url of review\n",
+                "operationId": "getReviewUrlById",
+                "parameters": [
+                    {
+                        "description": "The `Review` id",
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The `Review` url",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "tags": [
+                    "Review"
+                ]
+            }
+        },
+        "/Skill": {},
+        "/Skill/{id}": {
+            "get": {
+                "description": "Retrieves `Skill` objects by **id**.\n",
+                "operationId": "getSkillById",
+                "parameters": [
+                    {
+                        "description": "The `Skill` id",
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The `Skill`",
+                        "schema": {
+                            "$ref": "#/definitions/Skill"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "tags": [
+                    "Skill"
+                ]
+            }
+        },
+        "/Skill/{id}/created": {
+            "get": {
+                "description": "Gets `Skill` created date\n",
+                "operationId": "getSkillCreatedDateById",
+                "parameters": [
+                    {
+                        "description": "The `Skill` id",
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The `Skill` create date",
+                        "schema": {
+                            "format": "date-time",
+                            "type": "string"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "tags": [
+                    "Skill"
+                ]
+            }
+        },
+        "/Skill/{id}/description": {
+            "get": {
+                "description": "Gets description of `Skill`\n",
+                "operationId": "getSkillBodyById",
+                "parameters": [
+                    {
+                        "description": "The `Skill` id",
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The `Skill` body",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "tags": [
+                    "Skill"
+                ]
+            }
+        },
+        "/Skill/{id}/description/{description}": {
+            "get": {
+                "description": "Gets if description of `Skill` is on `Skill`\n",
+                "operationId": "getIsSkillBodyById",
+                "parameters": [
+                    {
+                        "description": "The `Skill` id",
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "description": "The `Skill` description",
+                        "in": "path",
+                        "name": "description",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The boolean",
+                        "schema": {
+                            "type": "boolean"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "tags": [
+                    "Skill"
+                ]
+            }
+        },
+        "/Skill/{id}/updated": {
+            "get": {
+                "description": "Gets `Skill` updated date\n",
+                "operationId": "getSkillUpdatedDateById",
+                "parameters": [
+                    {
+                        "description": "The `Skill` id",
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The `Skill` update date",
+                        "schema": {
+                            "format": "date-time",
+                            "type": "string"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "tags": [
+                    "Skill"
+                ]
+            }
+        },
+        "/University": {},
+        "/University/{id}": {
+            "get": {
+                "description": "Retrieves `University` object by **id**.\n",
+                "operationId": "getUniversityById",
+                "parameters": [
+                    {
+                        "description": "The `UserSkill` id",
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The `University`",
+                        "schema": {
+                            "$ref": "#/definitions/University"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "tags": [
+                    "University"
+                ]
+            }
+        },
+        "/University/{id}/city": {
+            "get": {
+                "description": "Gets the `University` city\n",
+                "operationId": "getUniversityCityById",
+                "parameters": [
+                    {
+                        "description": "The `University` id",
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The `University` city",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "tags": [
+                    "University"
+                ]
+            }
+        },
+        "/University/{id}/city/{city}": {
+            "get": {
+                "description": "Gets if the `University` city matches the parameter\n",
+                "operationId": "isUniversityCityById",
+                "parameters": [
+                    {
+                        "description": "The `University` id",
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "description": "The `University` city",
+                        "in": "path",
+                        "name": "city",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The boolean",
+                        "schema": {
+                            "type": "boolean"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "tags": [
+                    "University"
+                ]
+            }
+        },
+        "/University/{id}/geolocation": {
+            "get": {
+                "description": "Gets the `University` geolocation\n",
+                "operationId": "getUniversityGeolocationById",
+                "parameters": [
+                    {
+                        "description": "The `University` id",
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The `University` geolocation as a tuple",
+                        "schema": {
+                            "items": {
+                                "format": "float",
+                                "type": "number"
+                            },
+                            "type": "array"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "tags": [
+                    "University"
+                ]
+            }
+        },
+        "/University/{id}/geolocation/{lat}/{long}": {
+            "get": {
+                "description": "Gets if the `University` geolocation the parameters\n",
+                "operationId": "isUniversityGeolocationById",
+                "parameters": [
+                    {
+                        "description": "The `University` id",
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "description": "The `University` latitude",
+                        "format": "float",
+                        "in": "path",
+                        "name": "lat",
+                        "required": true,
+                        "type": "number"
+                    },
+                    {
+                        "description": "The `University` longitude",
+                        "format": "float",
+                        "in": "path",
+                        "name": "long",
+                        "required": true,
+                        "type": "number"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The boolean",
+                        "schema": {
+                            "type": "boolean"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "tags": [
+                    "University"
+                ]
+            }
+        },
+        "/University/{id}/images": {
+            "get": {
+                "description": "Gets the `University` images\n",
+                "operationId": "getUniversityimagesById",
+                "parameters": [
+                    {
+                        "description": "The `University` id",
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The `University` image paths",
+                        "schema": {
+                            "items": {
+                                "type": "string"
+                            },
+                            "type": "array"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "tags": [
+                    "University"
+                ]
+            }
+        },
+        "/University/{id}/name": {
+            "get": {
+                "description": "Gets the `University` name\n",
+                "operationId": "getUniversityNameById",
+                "parameters": [
+                    {
+                        "description": "The `University` id",
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The `University` name",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "tags": [
+                    "University"
+                ]
+            }
+        },
+        "/University/{id}/name/{name}": {
+            "get": {
+                "description": "Gets if the `University` name matches the parameter\n",
+                "operationId": "isUniversityNameById",
+                "parameters": [
+                    {
+                        "description": "The `University` id",
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "description": "The `University` name",
+                        "in": "path",
+                        "name": "name",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The boolean",
+                        "schema": {
+                            "type": "boolean"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "tags": [
+                    "University"
+                ]
+            }
+        },
+        "/University/{id}/projects": {
+            "get": {
+                "description": "Gets the `University` projects\n",
+                "operationId": "getUniversityProjectsById",
+                "parameters": [
+                    {
+                        "description": "The `University` id",
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The `University` state",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "tags": [
+                    "University",
+                    "Project"
+                ]
+            }
+        },
+        "/University/{id}/projects/{project_id}": {
+            "get": {
+                "description": "Gets if the `University` has the `Project`\n",
+                "operationId": "isUniversityProjectsById",
+                "parameters": [
+                    {
+                        "description": "The `University` id",
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "description": "The `Project` id",
+                        "in": "path",
+                        "name": "project_id",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The boolean",
+                        "schema": {
+                            "type": "boolean"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "tags": [
+                    "University",
+                    "Project"
+                ]
+            }
+        },
+        "/University/{id}/state": {
+            "get": {
+                "description": "Gets the `University` state\n",
+                "operationId": "getUniversityStateById",
+                "parameters": [
+                    {
+                        "description": "The `University` id",
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The `University` state",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "tags": [
+                    "University"
+                ]
+            }
+        },
+        "/University/{id}/state/{state}": {
+            "get": {
+                "description": "Gets if the `University` state matches the parameter\n",
+                "operationId": "isUniversityStateById",
+                "parameters": [
+                    {
+                        "description": "The `University` id",
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "description": "The `University` state",
+                        "in": "path",
+                        "name": "state",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The boolean",
+                        "schema": {
+                            "type": "boolean"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "tags": [
+                    "University"
+                ]
+            }
+        },
+        "/User": {},
+        "/User/{id}": {
+            "get": {
+                "description": "Retrieve a 'User' by their id.\n",
+                "operationId": "getUserById",
+                "parameters": [
+                    {
+                        "description": "the `id` of the `User` to delete",
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The `id` of the deleted `User`",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "tags": [
+                    "User"
+                ]
+            }
+        },
+        "/User/{id}/city": {
+            "get": {
+                "description": "Retrieve city associated with a `User`.\n",
+                "operationId": "getCityNameById",
+                "parameters": [
+                    {
+                        "description": "The `id` of the `User` to retrieve",
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The city",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "tags": [
+                    "User"
+                ]
+            }
+        },
+        "/User/{id}/city/{city}": {
+            "get": {
+                "description": "Check if city is on `User`.\n",
+                "operationId": "isUserCity",
+                "parameters": [
+                    {
+                        "description": "The `id` of the `User` to retrieve",
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "description": "The city",
+                        "in": "path",
+                        "name": "city",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The boolean",
+                        "schema": {
+                            "type": "boolean"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "tags": [
+                    "User"
+                ]
+            }
+        },
+        "/User/{id}/collaborator": {
+            "get": {
+                "description": "Retrieve if `User` is a collaborator.\n",
+                "operationId": "isCollaboratorById",
+                "parameters": [
+                    {
+                        "description": "The `id` of the `User` to retrieve",
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "An array of keywords",
+                        "schema": {
+                            "type": "boolean"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "tags": [
+                    "User"
+                ]
+            }
+        },
+        "/User/{id}/created": {
+            "get": {
+                "description": "Retrieve creation date of a `User`.\n",
+                "operationId": "getCreatedDateById",
+                "parameters": [
+                    {
+                        "description": "The `id` of the `User` to retrieve",
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The date",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "tags": [
+                    "User"
+                ]
+            }
+        },
+        "/User/{id}/creator": {
+            "get": {
+                "description": "Retrieve if `User` is a creator.\n",
+                "operationId": "isCreatorById",
+                "parameters": [
+                    {
+                        "description": "The `id` of the `User` to retrieve",
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "An array of keywords",
+                        "schema": {
+                            "type": "boolean"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "tags": [
+                    "User"
+                ]
+            }
+        },
+        "/User/{id}/first_name": {
+            "get": {
+                "description": "Retrieve first name associated with a `User`.\n",
+                "operationId": "getFirstNameById",
+                "parameters": [
+                    {
+                        "description": "The `id` of the `User` to retrieve",
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "An array of keywords",
+                        "schema": {
+                            "items": {
+                                "type": "string"
+                            },
+                            "type": "array"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "tags": [
+                    "User"
+                ]
+            }
+        },
+        "/User/{id}/first_name/{first_name}": {
+            "get": {
+                "description": "Check if first name is on `User`\n",
+                "operationId": "isUserFirstName",
+                "parameters": [
+                    {
+                        "description": "The `id` of the `User` to retrieve",
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "description": "The keywords",
+                        "in": "path",
+                        "name": "first_name",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The boolean",
+                        "schema": {
+                            "type": "boolean"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "tags": [
+                    "User"
+                ]
+            }
+        },
+        "/User/{id}/images": {
+            "get": {
+                "description": "Retrieve all images associated with a `User`.\n",
+                "operationId": "getAllUserImages",
+                "parameters": [
+                    {
+                        "description": "The `id` of the `User` to retrieve",
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The image url associated with the `User`",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "tags": [
+                    "User",
+                    "TODO-create-images-object"
+                ]
+            }
+        },
+        "/User/{id}/keys": {
+            "get": {
+                "description": "Retrieve all keywords associated with a `User`.\n",
+                "operationId": "getAllUserKeywords",
+                "parameters": [
+                    {
+                        "description": "The `id` of the `User` to retrieve",
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "An array of keywords",
+                        "schema": {
+                            "items": {
+                                "type": "string"
+                            },
+                            "type": "array"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "tags": [
+                    "User"
+                ]
+            }
+        },
+        "/User/{id}/keys/{keyword}": {
+            "get": {
+                "description": "Check if a keyword is on a `User`.\n",
+                "operationId": "isUserHaveKeyword",
+                "parameters": [
+                    {
+                        "description": "The `id` of the `User` to retrieve",
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "description": "The keyword",
+                        "in": "path",
+                        "name": "keyword",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The boolean",
+                        "schema": {
+                            "type": "boolean"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "tags": [
+                    "User"
+                ]
+            }
+        },
+        "/User/{id}/last_name": {
+            "get": {
+                "description": "Retrieve first name associated with a `User`.\n",
+                "operationId": "getLastNameById",
+                "parameters": [
+                    {
+                        "description": "The `id` of the `User` to retrieve",
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "An array of keywords",
+                        "schema": {
+                            "items": {
+                                "type": "string"
+                            },
+                            "type": "array"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "tags": [
+                    "User"
+                ]
+            }
+        },
+        "/User/{id}/last_name/{last_name}": {
+            "get": {
+                "description": "Check if last name is on `User`.\n",
+                "operationId": "isUserLastName",
+                "parameters": [
+                    {
+                        "description": "The `id` of the `User` to retrieve",
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "description": "The keywords",
+                        "in": "path",
+                        "name": "last_name",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The boolean",
+                        "schema": {
+                            "type": "boolean"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "tags": [
+                    "User"
+                ]
+            }
+        },
+        "/User/{id}/modified": {
+            "get": {
+                "description": "Retrieve modified date of a `User`.\n",
+                "operationId": "getModifiedDateById",
+                "parameters": [
+                    {
+                        "description": "The `id` of the `User` to retrieve",
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The date",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "tags": [
+                    "User"
+                ]
+            }
+        },
+        "/User/{id}/project": {
+            "get": {
+                "description": "Retrieve all 'Project' associated with a `User`.\n",
+                "operationId": "getAllUserProjectById",
+                "parameters": [
+                    {
+                        "description": "The `id` of the `User` to retrieve",
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The `Project` associated with the `User`",
+                        "schema": {
+                            "$ref": "#/definitions/Project"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "tags": [
+                    "User",
+                    "Project"
+                ]
+            }
+        },
+        "/User/{id}/project/{project_id}": {
+            "get": {
+                "description": "Is 'Project' associated with a `User`?\n",
+                "operationId": "isUserOnProjectById",
+                "parameters": [
+                    {
+                        "description": "The `id` of the `User` to retrieve",
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "description": "The `project_id` of the `Project` to retrieve",
+                        "in": "path",
+                        "name": "project_id",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The boolean",
+                        "schema": {
+                            "type": "boolean"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "tags": [
+                    "User",
+                    "Project"
+                ]
+            }
+        },
+        "/User/{id}/review": {
+            "get": {
+                "description": "Retrieve all 'Review' associated with a `User`.\n",
+                "operationId": "getAllUserReviewById",
+                "parameters": [
+                    {
+                        "description": "The `id` of the `User` to retrieve",
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "An array of reviews",
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/Review"
+                            },
+                            "type": "array"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "tags": [
+                    "User",
+                    "Review"
+                ]
+            }
+        },
+        "/User/{id}/review/{review_id}": {
+            "get": {
+                "description": "Is a 'Review' associated with a `User`??\n",
+                "operationId": "isReviewOnUserById",
+                "parameters": [
+                    {
+                        "description": "The `id` of the `User` to retrieve",
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "description": "The `review_id` of the `Project` to retrieve",
+                        "in": "path",
+                        "name": "review_id",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The boolean",
+                        "schema": {
+                            "type": "boolean"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "tags": [
+                    "User",
+                    "Review"
+                ]
+            }
+        },
+        "/User/{id}/skills": {
+            "get": {
+                "description": "Retrieve all skills associated with a `User`.\n",
+                "operationId": "getAllUserSkills",
+                "parameters": [
+                    {
+                        "description": "The `id` of the `User` to retrieve",
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "An array of UserSkills ids",
+                        "schema": {
+                            "items": {
+                                "type": "string"
+                            },
+                            "type": "array"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "tags": [
+                    "User",
+                    "Skill"
+                ]
+            }
+        },
+        "/User/{id}/skills/{skill_id}": {
+            "get": {
+                "description": "Check if `Skill`is associated with a `User`.\n",
+                "operationId": "getIsSkillOnUser",
+                "parameters": [
+                    {
+                        "description": "The `id` of the `User` to retrieve",
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "description": "The `id` of the `Skill` to retrieve",
+                        "in": "path",
+                        "name": "skill_id",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "An array of UserSkills ids",
+                        "schema": {
+                            "items": {
+                                "type": "string"
+                            },
+                            "type": "array"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "tags": [
+                    "User",
+                    "Skill"
+                ]
+            }
+        },
+        "/User/{id}/state": {
+            "get": {
+                "description": "Retrieve state associated with a `User`.\n",
+                "operationId": "getStateById",
+                "parameters": [
+                    {
+                        "description": "The `id` of the `User` to retrieve",
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The state",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "tags": [
+                    "User"
+                ]
+            }
+        },
+        "/User/{id}/state/{state}": {
+            "get": {
+                "description": "Check if state is on `User`.\n",
+                "operationId": "isUserState",
+                "parameters": [
+                    {
+                        "description": "The `id` of the `User` to retrieve",
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "description": "The state",
+                        "in": "path",
+                        "name": "state",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The boolean",
+                        "schema": {
+                            "type": "boolean"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "tags": [
+                    "User"
+                ]
+            }
+        },
+        "/User/{id}/uni/{university_id}": {
+            "get": {
+                "description": "Is 'University' associated with a `User`?\n",
+                "operationId": "isUniversityOnUser",
+                "parameters": [
+                    {
+                        "description": "The `id` of the `User` to retrieve",
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "description": "The `university_id` of the `University` to retrieve",
+                        "in": "path",
+                        "name": "university_id",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The `University` associated with the `User`",
+                        "schema": {
+                            "type": "boolean"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "tags": [
+                    "User",
+                    "University"
+                ]
+            }
+        },
+        "/UserSkill": {},
+        "/UserSkill/{id}": {
+            "get": {
+                "description": "Retrieves `UserSkill` object by **id**.\n",
+                "operationId": "getUserSkillById",
+                "parameters": [
+                    {
+                        "description": "The `UserSkill` id",
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The `UserSkill`",
+                        "schema": {
+                            "$ref": "#/definitions/UserSkill"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "tags": [
+                    "Skill",
+                    "UserSkill",
+                    "User"
+                ]
+            }
+        },
+        "/UserSkill/{id}/created": {
+            "get": {
+                "description": "Gets `UserSkill` created date\n",
+                "operationId": "getUserSkillCreatedDateById",
+                "parameters": [
+                    {
+                        "description": "The `UserSkill` id",
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The `UserSkill` create date",
+                        "schema": {
+                            "format": "date-time",
+                            "type": "string"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "tags": [
+                    "Skill",
+                    "UserSkill"
+                ]
+            }
+        },
+        "/UserSkill/{id}/endorsement": {
+            "get": {
+                "consumes": [
+                    "application/json"
+                ],
+                "description": "Gets `User` ndorsements in `UserSkill` .\n",
+                "operationId": "getUserSkillEndorsementById",
+                "parameters": [
+                    {
+                        "description": "The `UserSkill` id",
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The `UserSkill`",
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/UserSkill"
+                            },
+                            "type": "array"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "tags": [
+                    "Skill",
+                    "UserSkill",
+                    "User"
+                ]
+            }
+        },
+        "/UserSkill/{id}/endorsement/{user_id}": {},
+        "/UserSkill/{id}/skill": {
+            "get": {
+                "description": "Gets the `Skill`\n",
+                "operationId": "getUSerSkillSkillById",
+                "parameters": [
+                    {
+                        "description": "The `Skill` id",
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The `Skill`",
+                        "schema": {
+                            "$ref": "#/definitions/Skill"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "tags": [
+                    "Skill",
+                    "UserSkill",
+                    "User"
+                ]
+            }
+        },
+        "/UserSkill/{id}/skill/{skill_id}": {},
+        "/UserSkill/{id}/updated": {
+            "get": {
+                "description": "Gets `UserSkill` updated date\n",
+                "operationId": "getUserSkillUpdatedDateById",
+                "parameters": [
+                    {
+                        "description": "The `UserSkill` id",
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The `UserSkill` update date",
+                        "schema": {
+                            "format": "date-time",
+                            "type": "string"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "tags": [
+                    "Skill",
+                    "UserSkill"
+                ]
+            }
+        },
+        "/UserSkill/{id}/user": {
+            "get": {
+                "description": "Gets the `user`\n",
+                "operationId": "getUserSkillUserById",
+                "parameters": [
+                    {
+                        "description": "The `Skill` id",
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The `Skill`",
+                        "schema": {
+                            "$ref": "#/definitions/Skill"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "tags": [
+                    "Skill",
+                    "UserSkill",
+                    "User"
+                ]
+            }
+        },
+        "/UserSkill/{id}/user/{user_id}": {}
+    },
+    "definitions": {
+        "Error": {
+            "properties": {
+                "code": {
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "fields": {
+                    "type": "string"
+                },
+                "message": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "Grant": {
+            "properties": {
+                "created_date": {
+                    "description": "datetime stamp of `Grant`creation",
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "grant_amount": {
+                    "description": "Amount of grant",
+                    "format": "double",
+                    "type": "number"
+                },
+                "grant_description": {
+                    "description": "The `Grant`description",
+                    "type": "string"
+                },
+                "grant_id": {
+                    "description": "id of grant",
+                    "type": "string"
+                },
+                "grant_keywords": {
+                    "description": "The `Grant`keywords",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "grant_type": {
+                    "description": "The `Grant` type",
+                    "type": "string"
+                },
+                "grant_url": {
+                    "description": "URL of grants",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "updated_date": {
+                    "description": "datetime stamp of `Grant`update",
+                    "format": "date-time",
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "Grants": {
+            "properties": {
+                "count": {
+                    "description": "Total number of items available.",
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "history": {
+                    "items": {
+                        "$ref": "#/definitions/Grant"
+                    },
+                    "type": "array"
+                },
+                "limit": {
+                    "description": "Number of items to retrieve (100 max).",
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "offset": {
+                    "description": "Position in pagination.",
+                    "format": "int32",
+                    "type": "integer"
+                }
+            },
+            "type": "object"
+        },
+        "Post": {
+            "properties": {
+                "created_date": {
+                    "description": "datetime stamp of `Post`creation",
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "is_post_private": {
+                    "description": "is `Post`private?",
+                    "type": "boolean"
+                },
+                "post_author": {
+                    "$ref": "#/definitions/User",
+                    "description": "author of post"
+                },
+                "post_author_id": {
+                    "description": "id of author of post",
+                    "type": "string"
+                },
+                "post_id": {
+                    "description": "id of post",
+                    "type": "string"
+                },
+                "post_keywords": {
+                    "description": "keywords for post",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "post_tags": {
+                    "description": "tagged users",
+                    "items": {
+                        "$ref": "#/definitions/User"
+                    },
+                    "type": "array"
+                },
+                "post_tags_id": {
+                    "description": "tagged `User`ids",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "post_text": {
+                    "description": "text of post",
+                    "type": "string"
+                },
+                "post_title": {
+                    "description": "title of post",
+                    "type": "string"
+                },
+                "updated_date": {
+                    "description": "datetime stamp of `Post`update",
+                    "format": "date-time",
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "Posts": {
+            "properties": {
+                "count": {
+                    "description": "Total number of items available.",
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "history": {
+                    "items": {
+                        "$ref": "#/definitions/Post"
+                    },
+                    "type": "array"
+                },
+                "limit": {
+                    "description": "Number of items to retrieve (100 max).",
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "offset": {
+                    "description": "Position in pagination.",
+                    "format": "int32",
+                    "type": "integer"
+                }
+            },
+            "type": "object"
+        },
+        "Project": {
+            "properties": {
+                "created_date": {
+                    "description": "datetime stamp of `Project`creation",
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "grant_facilitator": {
+                    "description": "Name of individual fascilitating `Grant` funding",
+                    "type": "string"
+                },
+                "grant_ids": {
+                    "description": "Array of `Grant` IDs associated with the `Project`",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "is_project_private": {
+                    "description": "is `Project`private?",
+                    "type": "boolean"
+                },
+                "posts": {
+                    "description": "posts related to project",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "project_collaborators_id": {
+                    "description": "array of `Project`collaborator ids",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "project_creator_id": {
+                    "description": "array of `Project`creator ids",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "project_description": {
+                    "description": "Description of project",
+                    "type": "string"
+                },
+                "project_file": {
+                    "description": "Paths to files for `Grant`",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "project_id": {
+                    "description": "Unique identifier representing a specific project",
+                    "type": "string"
+                },
+                "project_keywords": {
+                    "description": "array of `Project`keywords",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "project_name": {
+                    "description": "Project's name",
+                    "type": "string"
+                },
+                "project_urls": {
+                    "description": "array of `Project`URLs",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "reviews": {
+                    "description": "reviews",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "university_id": {
+                    "description": "ID of `University`hosting research",
+                    "type": "string"
+                },
+                "updated_date": {
+                    "description": "datetime stamp of `Project`update",
+                    "format": "date-time",
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "Projects": {
+            "properties": {
+                "count": {
+                    "description": "Total number of items available.",
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "history": {
+                    "items": {
+                        "$ref": "#/definitions/Project"
+                    },
+                    "type": "array"
+                },
+                "limit": {
+                    "description": "Number of items to retrieve (100 max).",
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "offset": {
+                    "description": "Position in pagination.",
+                    "format": "int32",
+                    "type": "integer"
+                }
+            },
+            "type": "object"
+        },
+        "Review": {
+            "properties": {
+                "created_date": {
+                    "description": "datetime stamp of `Review`creation",
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "rating": {
+                    "description": "rating, must be 1-5",
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "review_body": {
+                    "description": "text body of review",
+                    "type": "string"
+                },
+                "review_id": {
+                    "description": "id of review",
+                    "type": "string"
+                },
+                "reviewer": {
+                    "$ref": "#/definitions/User",
+                    "description": "reviewer user"
+                },
+                "reviewer_id": {
+                    "description": "reviewer `User`id",
+                    "type": "string"
+                },
+                "updated_date": {
+                    "description": "datetime stamp of `Review`update",
+                    "format": "date-time",
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "Reviews": {
+            "properties": {
+                "count": {
+                    "description": "Total number of items available.",
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "history": {
+                    "items": {
+                        "$ref": "#/definitions/Review"
+                    },
+                    "type": "array"
+                },
+                "limit": {
+                    "description": "Number of items to retrieve (100 max).",
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "offset": {
+                    "description": "Position in pagination.",
+                    "format": "int32",
+                    "type": "integer"
+                }
+            },
+            "type": "object"
+        },
+        "Skill": {
+            "properties": {
+                "created_date": {
+                    "description": "datetime stamp of `Skill`creation",
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "description": {
+                    "description": "Description of `Skill`",
+                    "type": "string"
+                },
+                "review_id": {
+                    "description": "id of skill",
+                    "type": "string"
+                },
+                "updated_date": {
+                    "description": "datetime stamp of `Skill`update",
+                    "format": "date-time",
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "Skills": {
+            "properties": {
+                "count": {
+                    "description": "Total number of items available.",
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "history": {
+                    "items": {
+                        "$ref": "#/definitions/Skill"
+                    },
+                    "type": "array"
+                },
+                "limit": {
+                    "description": "Number of items to retrieve (100 max).",
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "offset": {
+                    "description": "Position in pagination.",
+                    "format": "int32",
+                    "type": "integer"
+                }
+            },
+            "type": "object"
+        },
+        "Universities": {
+            "properties": {
+                "count": {
+                    "description": "Total number of items available.",
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "history": {
+                    "items": {
+                        "$ref": "#/definitions/University"
+                    },
+                    "type": "array"
+                },
+                "limit": {
+                    "description": "Number of items to retrieve (100 max).",
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "offset": {
+                    "description": "Position in pagination.",
+                    "format": "int32",
+                    "type": "integer"
+                }
+            },
+            "type": "object"
+        },
+        "University": {
+            "properties": {
+                "city": {
+                    "description": "City of `University` location",
+                    "type": "string"
+                },
+                "created_date": {
+                    "description": "datetime stamp of `University` creation",
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "geolocation": {
+                    "description": "Tuple representing latitude/longitude of user",
+                    "items": {
+                        "format": "double",
+                        "type": "number"
+                    },
+                    "type": "array"
+                },
+                "profile_images": {
+                    "description": "Array of file system paths to profile images",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "project_ids": {
+                    "description": "ids of `Project`s based at this `University`",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "state": {
+                    "description": "State of `University` location",
+                    "type": "string"
+                },
+                "uni_id": {
+                    "description": "id of `University`",
+                    "type": "string"
+                },
+                "university_name": {
+                    "description": "text body of `University`",
+                    "type": "string"
+                },
+                "updated_date": {
+                    "description": "datetime stamp of `University` update",
+                    "format": "date-time",
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "User": {
+            "properties": {
+                "city": {
+                    "description": "City of `User`location",
+                    "type": "string"
+                },
+                "created_date": {
+                    "description": "datetime stamp of `User`creation",
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "first_name": {
+                    "description": "User's first name.",
+                    "type": "string"
+                },
+                "geolocation": {
+                    "description": "Tuple representing latitude/longitude of user",
+                    "items": {
+                        "format": "double",
+                        "type": "number"
+                    },
+                    "type": "array"
+                },
+                "is_collaborator": {
+                    "description": "Is `User`a `Project`collaborator?",
+                    "type": "boolean"
+                },
+                "is_creator": {
+                    "description": "Is `User`a `Project`creator?",
+                    "type": "boolean"
+                },
+                "is_user_private": {
+                    "description": "is `User`profile public or private?",
+                    "type": "boolean"
+                },
+                "keywords": {
+                    "description": "array of keywords associated with the user",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "last_name": {
+                    "description": "User's last name",
+                    "type": "string"
+                },
+                "profile_images": {
+                    "description": "Array of file system paths to profile images",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "project_ids": {
+                    "description": "array of `User`projects",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "recent_collaborators_id": {
+                    "description": "array of user_ids of recent collaborators",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "review_ids": {
+                    "description": "array of `Review`ids",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "state": {
+                    "description": "State of `User`location",
+                    "type": "string"
+                },
+                "university_ids": {
+                    "description": "array of universities the `User`is associated with",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "updated_date": {
+                    "description": "datetime stamp of `User`update",
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "user_id": {
+                    "description": "Unique identifier representing a specific user",
+                    "type": "string"
+                },
+                "user_skill_ids": {
+                    "description": "array of `UserSkill`ids",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                }
+            },
+            "type": "object"
+        },
+        "UserSkill": {
+            "properties": {
+                "created_date": {
+                    "description": "datetime stamp of `Endorsement` creation",
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "endorsements": {
+                    "description": "Array of ids of `User` who give `Endorsement` to `User`for skill",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "review_id": {
+                    "description": "id of `Endorsement`",
+                    "type": "string"
+                },
+                "skill_id": {
+                    "description": "id of `Skill` that `User`is claiming",
+                    "type": "string"
+                },
+                "updated_date": {
+                    "description": "datetime stamp of `Endorsement` update",
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "user_id": {
+                    "description": "Id of `User` who added this skill",
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "UserSkills": {
+            "properties": {
+                "count": {
+                    "description": "Total number of items available.",
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "history": {
+                    "items": {
+                        "$ref": "#/definitions/UserSkill"
+                    },
+                    "type": "array"
+                },
+                "limit": {
+                    "description": "Number of items to retrieve (100 max).",
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "offset": {
+                    "description": "Position in pagination.",
+                    "format": "int32",
+                    "type": "integer"
+                }
+            },
+            "type": "object"
+        },
+        "Users": {
+            "properties": {
+                "count": {
+                    "description": "Total number of items available.",
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "history": {
+                    "items": {
+                        "$ref": "#/definitions/User"
+                    },
+                    "type": "array"
+                },
+                "limit": {
+                    "description": "Number of items to retrieve (100 max).",
+                    "format": "int32",
+                    "type": "integer"
+                },
+                "offset": {
+                    "description": "Position in pagination.",
+                    "format": "int32",
+                    "type": "integer"
+                }
+            },
+            "type": "object"
+        }
+    }
+}

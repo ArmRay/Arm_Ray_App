@@ -1,0 +1,3292 @@
+---
+swagger: "2.0"
+info:
+  description: "Definition of ArmRay backend search API"
+  version: "0.0.1"
+  title: "ArmRay API"
+host: "ec2-52-36-38-196.us-west-2.compute.amazonaws.com:1150"
+basePath: "/armray/api/0.1/rest/search"
+schemes:
+- "http"
+consumes:
+- "application/json"
+produces:
+- "application/json"
+paths:
+  /Grants:
+    get:
+      tags:
+      - "Grant"
+      description: "Gets `Grant` objects.\nRequired query param of **size** determines\n\
+        max number of results per page, and **page** determines\nwhich page in the\
+        \ pagination we are. Remaining params optional.\n"
+      operationId: "getGrants"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "size"
+        in: "formData"
+        description: "Max size of array to return"
+        required: true
+        type: "number"
+        format: "int32"
+      - name: "page"
+        in: "formData"
+        description: "Location in pagination"
+        required: true
+        type: "number"
+        format: "int32"
+      - name: "grant_id"
+        in: "formData"
+        description: "Unique identifier representing a specific `Grant`"
+        required: false
+        type: "string"
+      - name: "created_date"
+        in: "formData"
+        description: "datetime stamp of `Grant` creation"
+        required: false
+        type: "string"
+        format: "date-time"
+      - name: "updated_date"
+        in: "formData"
+        description: "datetime stamp of `Grant` update"
+        required: false
+        type: "string"
+        format: "date-time"
+      - name: "grant_url"
+        in: "formData"
+        description: "array of URLs in `Grant`"
+        required: false
+        type: "array"
+        items:
+          type: "string"
+        collectionFormat: "multi"
+      - name: "grant_description"
+        in: "formData"
+        description: "array of keywords for `Grant`"
+        required: false
+        type: "string"
+      - name: "grant_amount"
+        in: "formData"
+        description: "Amount of `Grant`"
+        required: false
+        type: "string"
+      - name: "min_amount"
+        in: "formData"
+        description: "Minimum `Grant` amount to search"
+        required: false
+        type: "string"
+      - name: "max_amount"
+        in: "formData"
+        description: "Maximum `Grant` amount to search"
+        required: false
+        type: "string"
+      responses:
+        200:
+          description: "An array of `Grant` objects"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Grant"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Grant"
+  /Grants/amount:
+    get:
+      tags:
+      - "Grant"
+      description: "Retrieve `Grant` objects based on amount\n"
+      operationId: "getGrantsByAmount"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "minimum"
+        in: "formData"
+        description: "minimum `Grant`amount"
+        required: true
+        type: "number"
+        format: "float"
+      - name: "maximum"
+        in: "formData"
+        description: "maximum `Grant`amount"
+        required: true
+        type: "number"
+        format: "float"
+      responses:
+        200:
+          description: "Array of `Grant` objects"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Grant"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Grant"
+  /Grants/amount/max/{amount}:
+    get:
+      tags:
+      - "Grant"
+      description: "Retrieve `Grant` objects based on amount\n"
+      operationId: "getGrantsByMaxAmount"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "amount"
+        in: "path"
+        description: "maxiumum `Grant`amount"
+        required: true
+        type: "number"
+        format: "float"
+      responses:
+        200:
+          description: "Array of `Grant` objects"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Grant"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Grant"
+  /Grants/amount/min/{amount}:
+    get:
+      tags:
+      - "Grant"
+      description: "Retrieve `Grant` objects based on amount\n"
+      operationId: "getGrantsByMinAmount"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "amount"
+        in: "path"
+        description: "minimum `Grant`amount"
+        required: true
+        type: "number"
+        format: "float"
+      responses:
+        200:
+          description: "Array of `Grant` objects"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Grant"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Grant"
+  /Grants/amount/min/{min}/max/{max}:
+    get:
+      tags:
+      - "Grant"
+      description: "Retrieve `Grant` objects based on amount\n"
+      operationId: "getGrantsByAmountRange"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "min"
+        in: "path"
+        description: "maxiumum `Grant`amount"
+        required: true
+        type: "number"
+        format: "float"
+      - name: "max"
+        in: "path"
+        description: "maxiumum `Grant`amount"
+        required: true
+        type: "number"
+        format: "float"
+      responses:
+        200:
+          description: "Array of `Grant` objects"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Grant"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Grant"
+  /Grants/created_date:
+    get:
+      tags:
+      - "Grant"
+      description: "Retrieve `Grant` objects created on or later than given date\n"
+      operationId: "getGrantsByCreatedDateForm"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "created_date"
+        in: "formData"
+        description: "date of creation"
+        required: true
+        type: "string"
+        format: "date-time"
+      responses:
+        200:
+          description: "Array of `Grant` objects"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Grant"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Grant"
+  /Grants/created_date/{created_date}:
+    get:
+      tags:
+      - "Grant"
+      description: "Retrieve `Grant` objects created on or later than given date\n"
+      operationId: "getGrantsByCreatedDate"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "created_date"
+        in: "path"
+        description: "date of creation"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "Array of `Grant` objects"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Grant"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Grant"
+  /Grants/keys:
+    get:
+      tags:
+      - "Grant"
+      description: "Retrieve `Grant` objects by a set of keywords\n"
+      operationId: "getGrantsByKeywords"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "keywords"
+        in: "formData"
+        description: "Keywords when searching for user"
+        required: true
+        type: "array"
+        items:
+          type: "string"
+        collectionFormat: "csv"
+      responses:
+        200:
+          description: "An array of `Grant` objects"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Grant"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Grant"
+  /Grants/keys/{keyword}:
+    get:
+      tags:
+      - "Grant"
+      description: "Retrieve `Project` objects by a particular keyword\n"
+      operationId: "getGrantsByKeyword"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "keyword"
+        in: "path"
+        description: "keyword to search for"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "Array of `Grant` objects"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Grant"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Grant"
+  /Grants/modified_date:
+    get:
+      tags:
+      - "Grant"
+      description: "Retrieve `Grant` objects modified on or later than given date\n"
+      operationId: "getGrantsByModifiedDateForm"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "modified_date"
+        in: "formData"
+        description: "date of modification"
+        required: true
+        type: "string"
+        format: "date-time"
+      responses:
+        200:
+          description: "Array of `Grant` objects"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Grant"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Grant"
+  /Grants/modified_date/{modified_date}:
+    get:
+      tags:
+      - "Grant"
+      description: "Retrieve `Grant` objects created on or later than given date\n"
+      operationId: "getGrantsByModifiedDate"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "modified_date"
+        in: "path"
+        description: "date of creation"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "Array of `Grant` objects"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Grant"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Grant"
+  /Grants/type:
+    get:
+      tags:
+      - "Grant"
+      description: "Retrieve `Grant` objects based on type\n"
+      operationId: "getGrantsByTypeForm"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "type"
+        in: "formData"
+        description: "The `Grant`type"
+        required: true
+        type: "number"
+        format: "float"
+      responses:
+        200:
+          description: "Array of `Grant` objects"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Grant"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Grant"
+  /Grants/type/{type}:
+    get:
+      tags:
+      - "Grant"
+      description: "Retrieve `Grant` objects based on type\n"
+      operationId: "getGrantsByType"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "type"
+        in: "path"
+        description: "The `Grant`type"
+        required: true
+        type: "number"
+        format: "float"
+      responses:
+        200:
+          description: "Array of `Grant` objects"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Grant"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Grant"
+  /Posts:
+    get:
+      tags:
+      - "Post"
+      description: "Gets `Post` objects.\nRequired query param of **size** determines\n\
+        max number of results per page, and **page** determines\nwhich page in the\
+        \ pagination we are. Remaining params optional.\n"
+      operationId: "getPosts"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "size"
+        in: "formData"
+        description: "Max size of array to return"
+        required: true
+        type: "number"
+        format: "int32"
+      - name: "page"
+        in: "formData"
+        description: "Location in pagination"
+        required: true
+        type: "number"
+        format: "int32"
+      - name: "post_id"
+        in: "formData"
+        description: "Unique identifier representing a specific `Post`"
+        required: false
+        type: "string"
+      - name: "created_date"
+        in: "formData"
+        description: "datetime stamp of `Post` creation"
+        required: false
+        type: "string"
+        format: "date-time"
+      - name: "updated_date"
+        in: "formData"
+        description: "datetime stamp of `Post` update"
+        required: false
+        type: "string"
+        format: "date-time"
+      - name: "post_tags_id"
+        in: "formData"
+        description: "array of `User`s tagged in `Post`"
+        required: false
+        type: "array"
+        items:
+          type: "string"
+        collectionFormat: "multi"
+      - name: "post_keywords"
+        in: "formData"
+        description: "array of keywords for `Post`"
+        required: false
+        type: "array"
+        items:
+          type: "string"
+        collectionFormat: "multi"
+      - name: "post_title"
+        in: "formData"
+        description: "ID of `User` author of post"
+        required: false
+        type: "string"
+      - name: "post_text"
+        in: "formData"
+        description: "ID of `User` author of `Post`"
+        required: false
+        type: "string"
+      - name: "post_creator_id"
+        in: "formData"
+        description: "ID of `User` author of `Post`"
+        required: false
+        type: "string"
+      - name: "is_post_private"
+        in: "formData"
+        description: "is `Post` private?"
+        required: false
+        type: "boolean"
+      responses:
+        200:
+          description: "An array of posts"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Post"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Post"
+  /Posts/author/{user_id}:
+    get:
+      tags:
+      - "Post"
+      - "User"
+      description: "Retrieve `Post` objects with a particular `User` as author\n"
+      operationId: "getPostsByAuthorId"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "user_id"
+        in: "path"
+        description: "ID of 'User' to fetch"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "An array of posts"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Post"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Post"
+  /Posts/created_date:
+    get:
+      tags:
+      - "Post"
+      description: "Retrieve `Post` objects created on or later than given date\n"
+      operationId: "getPostsByCreatedDateForm"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "created_date"
+        in: "formData"
+        description: "date of creation"
+        required: true
+        type: "string"
+        format: "date-time"
+      responses:
+        200:
+          description: "posts response"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Post"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Post"
+  /Posts/created_date/{created_date}:
+    get:
+      tags:
+      - "Post"
+      description: "Retrieve `Post` objects created on or later than given date\n"
+      operationId: "getPostsByCreatedDate"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "created_date"
+        in: "path"
+        description: "date of creation"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "posts response"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Post"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Post"
+  /Posts/keys:
+    get:
+      tags:
+      - "Post"
+      description: "Retrieve `Project` objects by a set of keywords\n"
+      operationId: "getPostsByKeywords"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "keywords"
+        in: "formData"
+        description: "Keywords when searching for user"
+        required: true
+        type: "array"
+        items:
+          type: "string"
+        collectionFormat: "csv"
+      responses:
+        200:
+          description: "An array of posts"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Post"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Post"
+  /Posts/keys/{keyword}:
+    get:
+      tags:
+      - "Post"
+      description: "Retrieve `Project` objects by a particular keyword\n"
+      operationId: "getPostsByKeyword"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "keyword"
+        in: "path"
+        description: "keyword to search for"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "posts response"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Post"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Post"
+  /Posts/modified_date:
+    get:
+      tags:
+      - "Post"
+      description: "Retrieve `Post` objects modified on or later than given date\n"
+      operationId: "getPostsByModifiedDateForm"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "modified_date"
+        in: "formData"
+        description: "date of modification"
+        required: true
+        type: "string"
+        format: "date-time"
+      responses:
+        200:
+          description: "posts response"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Post"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Post"
+  /Posts/modified_date/{modified_date}:
+    get:
+      tags:
+      - "Post"
+      description: "Retrieve `Post` objects created on or later than given date\n"
+      operationId: "getPostsByModifiedDate"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "modified_date"
+        in: "path"
+        description: "date of creation"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "posts response"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Post"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Post"
+  /Projects:
+    get:
+      tags:
+      - "Project"
+      description: "Gets `Project` objects.\nRequired query param of **size** determines\n\
+        max number of results per page, and **page** determines\nwhich page in the\
+        \ pagination we are. Remaining params optional.\n"
+      operationId: "getProjects"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "size"
+        in: "formData"
+        description: "Max size of array to return"
+        required: true
+        type: "number"
+        format: "int32"
+      - name: "page"
+        in: "formData"
+        description: "Location in pagination"
+        required: true
+        type: "number"
+        format: "int32"
+      - name: "project_id"
+        in: "formData"
+        description: "Unique identifier representing a specific project"
+        required: false
+        type: "string"
+      - name: "created_date"
+        in: "formData"
+        description: "datetime stamp of `Project`creation"
+        required: false
+        type: "string"
+        format: "date-time"
+      - name: "updated_date"
+        in: "formData"
+        description: "datetime stamp of `Project`update"
+        required: false
+        type: "string"
+        format: "date-time"
+      - name: "project_name"
+        in: "formData"
+        description: "Project's name"
+        required: false
+        type: "string"
+      - name: "project_main_grant_type"
+        in: "formData"
+        description: "Project's `Grant`type"
+        required: false
+        type: "string"
+      - name: "project_description"
+        in: "formData"
+        description: "Description of project"
+        required: false
+        type: "string"
+      - name: "project_creator_id"
+        in: "formData"
+        description: "array of `Project`creator ids"
+        required: false
+        type: "array"
+        items:
+          type: "string"
+        collectionFormat: "multi"
+      - name: "project_collaborators_id"
+        in: "formData"
+        description: "array of `Project`collaborator ids"
+        required: false
+        type: "array"
+        items:
+          type: "string"
+        collectionFormat: "multi"
+      - name: "project_keywords"
+        in: "formData"
+        description: "array of `Project`keywords"
+        required: false
+        type: "array"
+        items:
+          type: "string"
+        collectionFormat: "multi"
+      - name: "project_urls"
+        in: "formData"
+        description: "array of `Project`URLs"
+        required: false
+        type: "array"
+        items:
+          type: "string"
+        collectionFormat: "multi"
+      - name: "grant_id"
+        in: "formData"
+        description: "The `Grant`ID"
+        required: false
+        type: "string"
+      - name: "university_id"
+        in: "formData"
+        description: "ID of `University`hosting research"
+        required: false
+        type: "string"
+      - name: "grant_facilitator"
+        in: "formData"
+        description: "Name of individual fascilitating `Grant`funding"
+        required: false
+        type: "string"
+      - name: "project_file"
+        in: "formData"
+        description: "files for grant"
+        required: false
+        type: "array"
+        items:
+          type: "string"
+        collectionFormat: "multi"
+      - name: "reviews"
+        in: "formData"
+        description: "reviews"
+        required: false
+        type: "array"
+        items:
+          type: "string"
+        collectionFormat: "multi"
+      - name: "posts"
+        in: "formData"
+        description: "posts related to project"
+        required: false
+        type: "array"
+        items:
+          type: "string"
+        collectionFormat: "multi"
+      - name: "is_project_private"
+        in: "formData"
+        description: "is `Project`private?"
+        required: false
+        type: "boolean"
+      responses:
+        200:
+          description: "An array of projects"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Project"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Project"
+  /Projects/collaborator/{user_id}:
+    get:
+      tags:
+      - "Project"
+      - "User"
+      description: "Retrieve `Project` objects by a particular collaborator `User`\n"
+      operationId: "getProjectsByCollaboratorId"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "user_id"
+        in: "path"
+        description: "ID of 'User' to fetch"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "projects response"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Project"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Project"
+  /Projects/created_date:
+    get:
+      tags:
+      - "Project"
+      description: "Retrieve `Project` objects created on or later than given date\n"
+      operationId: "getProjectsByCreatedDateForm"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "created_date"
+        in: "formData"
+        description: "date of creation"
+        required: true
+        type: "string"
+        format: "date-time-time"
+      responses:
+        200:
+          description: "projects response"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Project"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Project"
+  /Projects/created_date/{created_date}:
+    get:
+      tags:
+      - "Project"
+      description: "Retrieve `Project` objects created on or later than given date\n"
+      operationId: "getProjectsByCreatedDate"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "created_date"
+        in: "path"
+        description: "date of creation"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "projects response"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Project"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Project"
+  /Projects/creator/{user_id}:
+    get:
+      tags:
+      - "Project"
+      - "User"
+      description: "Retrieve `Project` objects by a particular creator `User`\n"
+      operationId: "getProjectsByCreatorId"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "user_id"
+        in: "path"
+        description: "ID of 'User' to fetch"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "projects response"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Project"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Project"
+  /Projects/grant/{grant_id}:
+    get:
+      tags:
+      - "Project"
+      - "Grant"
+      description: "Retrieve `Project` objects associated with a particular `Grant`\n"
+      operationId: "getProjectsByGrantId"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "grant_id"
+        in: "path"
+        description: "ID of 'User' to fetch"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "projects response"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Project"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Project"
+  /Projects/modified_date:
+    get:
+      tags:
+      - "Project"
+      description: "Retrieve `Project` objects modified on or later than given date\n"
+      operationId: "getProjectsByModifiedDateForm"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "modified_date"
+        in: "formData"
+        description: "date modified"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "projects response"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Project"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Project"
+  /Projects/modified_date/{modified_date}:
+    get:
+      tags:
+      - "Project"
+      description: "Retrieve `Project` objects modified on or later than given date\n"
+      operationId: "getProjectsByModifiedDate"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "modified_date"
+        in: "path"
+        description: "date modified"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "projects response"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Project"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Project"
+  /Projects/uni/{university_id}:
+    get:
+      tags:
+      - "Project"
+      - "University"
+      description: "Retrieve `Project` objects at a particular `University`\n"
+      operationId: "getProjectsByUniversityId"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "university_id"
+        in: "path"
+        description: "ID of 'User' to fetch"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "users response"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/User"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Project"
+  /Reviews:
+    get:
+      tags:
+      - "Review"
+      description: "Gets `Review` objects.\nRequired query param of **size** determines\n\
+        max number of results per page, and **page** determines\nwhich page in the\
+        \ pagination we are. Remaining params optional.\n"
+      operationId: "getReviewss"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "size"
+        in: "formData"
+        description: "Max size of array to return"
+        required: true
+        type: "number"
+        format: "int32"
+      - name: "page"
+        in: "formData"
+        description: "Location in pagination"
+        required: true
+        type: "number"
+        format: "int32"
+      - name: "review_id"
+        in: "formData"
+        description: "Unique identifier representing a specific `Review`"
+        required: false
+        type: "string"
+      - name: "created_date"
+        in: "formData"
+        description: "datetime stamp of `Review` creation"
+        required: false
+        type: "string"
+        format: "date-time"
+      - name: "updated_date"
+        in: "formData"
+        description: "datetime stamp of `Review` update"
+        required: false
+        type: "string"
+        format: "date-time"
+      - name: "reviewer_id"
+        in: "formData"
+        description: "id of `User` reviewer"
+        required: false
+        type: "string"
+      - name: "review_body"
+        in: "formData"
+        description: "body of `Review`"
+        required: false
+        type: "string"
+      - name: "rating"
+        in: "formData"
+        description: "Integer rating of `Review`(1-5)"
+        required: false
+        type: "number"
+        format: "int32"
+      responses:
+        200:
+          description: "An `Review` object"
+          schema:
+            $ref: "#/definitions/Review"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Review"
+  /Reviews/created_date:
+    get:
+      tags:
+      - "Review"
+      description: "Retrieve `Review` objects created on or later than given date\n"
+      operationId: "getReviewsByCreatedDateForm"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "created_date"
+        in: "formData"
+        description: "date of creation"
+        required: true
+        type: "string"
+        format: "date-time"
+      responses:
+        200:
+          description: "Array of `Reviews` objects"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Review"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Review"
+  /Reviews/created_date/{created_date}:
+    get:
+      tags:
+      - "Review"
+      description: "Retrieve `Reviews` objects created on or later than given date\n"
+      operationId: "getReviewsByCreatedDate"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "created_date"
+        in: "path"
+        description: "date of creation"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "Array of `Review` objects"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Review"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Review"
+  /Reviews/modified_date:
+    get:
+      tags:
+      - "Review"
+      description: "Retrieve `Review` objects modified on or later than given date\n"
+      operationId: "getReviewssByModifiedDateForm"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "modified_date"
+        in: "formData"
+        description: "date of modification"
+        required: true
+        type: "string"
+        format: "date-time"
+      responses:
+        200:
+          description: "Array of `Review` objects"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Review"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Review"
+  /Reviews/modified_date/{modified_date}:
+    get:
+      tags:
+      - "Review"
+      description: "Retrieve `Review` objects created on or later than given date\n"
+      operationId: "getReviewsByModifiedDate"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "modified_date"
+        in: "path"
+        description: "date of creation"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "Array of `Reviews` objects"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Review"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Review"
+  /Reviews/rating:
+    get:
+      tags:
+      - "Review"
+      description: "Retrieve `Review` objects with a rating in the given range\n"
+      operationId: "getReviewsByRating"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "min"
+        in: "formData"
+        description: "Minimum rating (>= 1)"
+        required: true
+        type: "number"
+        format: "int32"
+      - name: "max"
+        in: "formData"
+        description: "Maximum rating (<= 5)"
+        required: true
+        type: "number"
+        format: "int32"
+      responses:
+        200:
+          description: "Array of `Reviews` objects"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Review"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Review"
+  /Reviews/rating/min/{rating}:
+    get:
+      tags:
+      - "Review"
+      description: "Retrieve `Review` objects with a rating greater than or equal\
+        \ to **rating**\n"
+      operationId: "getReviewsByMinRating"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "rating"
+        in: "path"
+        description: "Minimum rating (1 <= rating <= 5)"
+        required: true
+        type: "number"
+        format: "int32"
+      responses:
+        200:
+          description: "Array of `Reviews` objects"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Review"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Review"
+  /Reviews/reviewer/{user_id}:
+    get:
+      tags:
+      - "Review"
+      - "User"
+      description: "Retrieve `Review` objects with specified reviewer\n"
+      operationId: "getReviewsByReviewer"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "user_id"
+        in: "path"
+        description: "id of `User` reviewer"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "Array of `Reviews` objects"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Review"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Review"
+  /Skills:
+    get:
+      tags:
+      - "Skill"
+      description: "Gets `Skill` objects.\nRequired query param of **size** determines\n\
+        max number of results per page, and **page** determines\nwhich page in the\
+        \ pagination we are. Remaining params optional.\n"
+      operationId: "getSkills"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "size"
+        in: "formData"
+        description: "Max size of array to return"
+        required: true
+        type: "number"
+        format: "int32"
+      - name: "page"
+        in: "formData"
+        description: "Location in pagination"
+        required: true
+        type: "number"
+        format: "int32"
+      - name: "skill_id"
+        in: "formData"
+        description: "Unique identifier representing a specific `Skill`"
+        required: false
+        type: "string"
+      - name: "created_date"
+        in: "formData"
+        description: "datetime stamp of `Skill` creation"
+        required: false
+        type: "string"
+        format: "date-time"
+      - name: "updated_date"
+        in: "formData"
+        description: "datetime stamp of `Skill` update"
+        required: false
+        type: "string"
+        format: "date-time"
+      - name: "description"
+        in: "formData"
+        description: "description of `Skill`"
+        required: false
+        type: "string"
+      responses:
+        200:
+          description: "An array of `Skill` objects"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Skill"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Skill"
+  /Skills/created_date:
+    get:
+      tags:
+      - "Skill"
+      description: "Retrieve `Skill` objects created on or later than given date\n"
+      operationId: "getSkillsByCreatedDateForm"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "created_date"
+        in: "formData"
+        description: "date of creation"
+        required: true
+        type: "string"
+        format: "date-time"
+      responses:
+        200:
+          description: "Array of `Skill` objects"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Skill"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Skill"
+  /Skills/created_date/{created_date}:
+    get:
+      tags:
+      - "Skill"
+      description: "Retrieve `Skill` objects created on or later than given date\n"
+      operationId: "getSkillsByCreatedDate"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "created_date"
+        in: "path"
+        description: "date of creation"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "Array of `Skill` objects"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Skill"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Skill"
+  /Skills/description:
+    get:
+      tags:
+      - "Skill"
+      description: "Retrieve `Skill` objects with specified description\n"
+      operationId: "getSkillsByDescription"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "description"
+        in: "formData"
+        description: "text of description"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "Array of `Skill` objects"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Skill"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Skill"
+  /Skills/description/{description}:
+    get:
+      tags:
+      - "Skill"
+      description: "Retrieve if `Skill` object has specified description\n"
+      operationId: "getIsDescriptionOnSkills"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "description"
+        in: "path"
+        description: "text of description"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The boolean"
+          schema:
+            type: "boolean"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Skill"
+  /Skills/modified_date:
+    get:
+      tags:
+      - "Skill"
+      description: "Retrieve `Skill` objects modified on or later than given date\n"
+      operationId: "getSkillsByModifiedDateForm"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "modified_date"
+        in: "formData"
+        description: "date of modification"
+        required: true
+        type: "string"
+        format: "date-time"
+      responses:
+        200:
+          description: "Array of `Skill` objects"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Skill"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Skill"
+  /Skills/modified_date/{modified_date}:
+    get:
+      tags:
+      - "Skill"
+      description: "Retrieve `Review` objects created on or later than given date\n"
+      operationId: "getSkillsByModifiedDate"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "modified_date"
+        in: "path"
+        description: "date of creation"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "Array of `Skill` objects"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Skill"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Skill"
+  /Universities:
+    get:
+      tags:
+      - "University"
+      description: "Gets `University` objects.\nRequired query param of **size** determines\n\
+        max number of results per page, and **page** determines\nwhich page in the\
+        \ pagination we are. Remaining params optional.\n"
+      operationId: "getUniversities"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "size"
+        in: "formData"
+        description: "Max size of array to return"
+        required: true
+        type: "number"
+        format: "int32"
+      - name: "page"
+        in: "formData"
+        description: "Location in pagination"
+        required: true
+        type: "number"
+        format: "int32"
+      - name: "university_id"
+        in: "formData"
+        description: "Unique identifier representing a specific `University`"
+        required: false
+        type: "string"
+      - name: "name"
+        in: "formData"
+        description: "Name of a `University`"
+        required: false
+        type: "string"
+      - name: "city"
+        in: "formData"
+        description: "City of `University`"
+        required: false
+        type: "string"
+      - name: "state"
+        in: "formData"
+        description: "City of `University`"
+        required: false
+        type: "string"
+      - name: "created_date"
+        in: "formData"
+        description: "datetime stamp of `University` creation"
+        required: false
+        type: "string"
+        format: "date-time"
+      - name: "updated_date"
+        in: "formData"
+        description: "datetime stamp of `University` update"
+        required: false
+        type: "string"
+        format: "date-time"
+      - name: "project_ids"
+        in: "formData"
+        description: "id of `Project` objects at this university"
+        required: false
+        type: "array"
+        items:
+          type: "string"
+        collectionFormat: "multi"
+      responses:
+        200:
+          description: "An array of `University` objects"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/University"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "University"
+  /Universities/city:
+    get:
+      tags:
+      - "University"
+      description: "Retrieve `University` objects with specified city\n"
+      operationId: "getUniversitiesByCityForm"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "city"
+        in: "formData"
+        description: "City of `University` to search for"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "Array of `University` objects"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/University"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "University"
+  /Universities/city/{city}:
+    get:
+      tags:
+      - "University"
+      description: "Retrieve `University` objects with specified city\n"
+      operationId: "getUniversitiesByCity"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "city"
+        in: "path"
+        description: "City of `University` to search for"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "Array of `University` objects"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/University"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "University"
+  /Universities/created_date:
+    get:
+      tags:
+      - "University"
+      description: "Retrieve `University` objects created on or later than given date\n"
+      operationId: "getUniversitiesByCreatedDateForm"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "created_date"
+        in: "formData"
+        description: "date of creation"
+        required: true
+        type: "string"
+        format: "date-time"
+      responses:
+        200:
+          description: "Array of `University` objects"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/University"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "University"
+  /Universities/created_date/{created_date}:
+    get:
+      tags:
+      - "University"
+      description: "Retrieve `University` objects created on or later than given date\n"
+      operationId: "getUniversitiesByCreatedDate"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "created_date"
+        in: "path"
+        description: "date of creation"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "Array of `University` objects"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/University"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "University"
+  /Universities/geolocation:
+    get:
+      tags:
+      - "University"
+      description: "Retrieve `University` objects with specified geolocation; radius\
+        \ is optional, defaults to 25 miles\n"
+      operationId: "getUniversitiesByGeolocationForm"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "lat"
+        in: "formData"
+        description: "State of `University` to search for"
+        required: true
+        type: "number"
+        format: "float"
+      - name: "long"
+        in: "formData"
+        description: "State of `University` to search for"
+        required: true
+        type: "number"
+        format: "float"
+      - name: "radius"
+        in: "formData"
+        description: "Radius from specified lat and long to search, defaults to 25\
+          \ miles if not specified"
+        required: false
+        type: "number"
+        format: "float"
+      responses:
+        200:
+          description: "Array of `University` objects"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/University"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "University"
+  /Universities/geolocation/{lat}/{long}:
+    get:
+      tags:
+      - "University"
+      description: "Retrieve `University` objects with specified geolocation; radius\
+        \ is optional, defaults to 25 miles\n"
+      operationId: "getUniversitiesByGeolocationFormAndPath"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "lat"
+        in: "path"
+        description: "State of `University` to search for"
+        required: true
+        type: "number"
+        format: "float"
+      - name: "long"
+        in: "path"
+        description: "State of `University` to search for"
+        required: true
+        type: "number"
+        format: "float"
+      - name: "radius"
+        in: "formData"
+        description: "Radius from specified lat and long to search, defaults to 25\
+          \ miles if not specified"
+        required: false
+        type: "number"
+        format: "float"
+      responses:
+        200:
+          description: "Array of `University` objects"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/University"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "University"
+  /Universities/geolocation/{lat}/{long}/{radius}:
+    get:
+      tags:
+      - "University"
+      description: "Retrieve `University` objects with specified geolocation and radius\n"
+      operationId: "getUniversitiesByGeolocationPath"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "lat"
+        in: "path"
+        description: "State of `University` to search for"
+        required: true
+        type: "number"
+        format: "float"
+      - name: "long"
+        in: "path"
+        description: "State of `University` to search for"
+        required: true
+        type: "number"
+        format: "float"
+      - name: "radius"
+        in: "path"
+        description: "Radius from specified lat and long to search, defaults to 25\
+          \ miles if not specified"
+        required: true
+        type: "number"
+        format: "float"
+      responses:
+        200:
+          description: "Array of `University` objects"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/University"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "University"
+  /Universities/modified_date:
+    get:
+      tags:
+      - "University"
+      description: "Retrieve `University` objects modified on or later than given\
+        \ date\n"
+      operationId: "getUniversitiesByModifiedDateForm"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "modified_date"
+        in: "formData"
+        description: "date of modification"
+        required: true
+        type: "string"
+        format: "date-time"
+      responses:
+        200:
+          description: "Array of `University` objects"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/University"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "University"
+  /Universities/modified_date/{modified_date}:
+    get:
+      tags:
+      - "University"
+      description: "Retrieve `University` objects created on or later than given date\n"
+      operationId: "getUniversitiesByModifiedDate"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "modified_date"
+        in: "path"
+        description: "date of creation"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "Array of `University` objects"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/University"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "University"
+  /Universities/name:
+    get:
+      tags:
+      - "University"
+      description: "Retrieve `University` objects with specified name\n"
+      operationId: "getUniversitiesByNameForm"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "name"
+        in: "formData"
+        description: "Name of `University` to search for"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "Array of `University` objects"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/University"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "University"
+  /Universities/name/{name}:
+    get:
+      tags:
+      - "University"
+      description: "Retrieve `University` objects with specified name\n"
+      operationId: "getUniversitiesByName"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "name"
+        in: "path"
+        description: "Name of `University` to search for"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "Array of `University` objects"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/University"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "University"
+  /Universities/projects:
+    get:
+      tags:
+      - "University"
+      - "Project"
+      description: "Retrieve `University` objects with specified projects\n"
+      operationId: "getUniversitiesByProjectsForm"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "projects"
+        in: "formData"
+        description: "Array of `Project` id items to search for"
+        required: true
+        type: "array"
+        items:
+          type: "string"
+        collectionFormat: "multi"
+      responses:
+        200:
+          description: "Array of `University` objects"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/University"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "University"
+  /Universities/projects/{project_id}:
+    get:
+      tags:
+      - "University"
+      - "Project"
+      description: "Retrieve `University` objects with specified `Project`id\n"
+      operationId: "getUniversitiesByProject"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "project_id"
+        in: "path"
+        description: "ID of `Project` to search for"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "Array of `University` objects"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/University"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "University"
+  /Universities/state:
+    get:
+      tags:
+      - "University"
+      description: "Retrieve `University` objects with specified state\n"
+      operationId: "getUniversitiesByStateForm"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "state"
+        in: "formData"
+        description: "State of `University` to search for"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "Array of `University` objects"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/University"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "University"
+  /Universities/state/{state}:
+    get:
+      tags:
+      - "University"
+      description: "Retrieve `University` objects with specified state\n"
+      operationId: "getUniversitiesByState"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "state"
+        in: "path"
+        description: "State of `University` to search for"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "Array of `University` objects"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/University"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "University"
+  /UserSkills:
+    get:
+      tags:
+      - "Skill"
+      - "UserSkill"
+      - "User"
+      description: "Gets `UserSkill` objects.\nRequired query param of **size** determines\n\
+        max number of results per page, and **page** determines\nwhich page in the\
+        \ pagination we are. Remaining params optional.\n"
+      operationId: "getUserSkills"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "size"
+        in: "formData"
+        description: "Max size of array to return"
+        required: true
+        type: "number"
+        format: "int32"
+      - name: "page"
+        in: "formData"
+        description: "Location in pagination"
+        required: true
+        type: "number"
+        format: "int32"
+      - name: "userskill_id"
+        in: "formData"
+        description: "Unique identifier representing a specific `UserSkill`"
+        required: false
+        type: "string"
+      - name: "user_id"
+        in: "formData"
+        description: "Unique identifier representing a specific `User` that owns a\
+          \ skill"
+        required: false
+        type: "string"
+      - name: "skill_id"
+        in: "formData"
+        description: "Unique identifier representing a specific `Skill` that a `UserSkill`\
+          \ represents"
+        required: false
+        type: "string"
+      - name: "created_date"
+        in: "formData"
+        description: "datetime stamp of `Skill` creation"
+        required: false
+        type: "string"
+        format: "date-time"
+      - name: "updated_date"
+        in: "formData"
+        description: "datetime stamp of `Skill` update"
+        required: false
+        type: "string"
+        format: "date-time"
+      - name: "endorsement_ids"
+        in: "formData"
+        description: "id of `User` endorser"
+        required: false
+        type: "array"
+        items:
+          type: "string"
+        collectionFormat: "multi"
+      responses:
+        200:
+          description: "An array of `UserSkill` objects"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/UserSkill"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Skill"
+  /UserSkills/created_date:
+    get:
+      tags:
+      - "UserSkill"
+      - "Skill"
+      - "User"
+      description: "Retrieve `UserSkill` objects created on or later than given date\n"
+      operationId: "getUserSkillsByCreatedDateForm"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "created_date"
+        in: "formData"
+        description: "date of creation"
+        required: true
+        type: "string"
+        format: "date-time"
+      responses:
+        200:
+          description: "Array of `UserSkill` objects"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/UserSkill"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "UserSkill"
+  /UserSkills/created_date/{created_date}:
+    get:
+      tags:
+      - "Skill"
+      - "UserSkill"
+      - "User"
+      description: "Retrieve `UserSkill` objects created on or later than given date\n"
+      operationId: "getUserSkillsByCreatedDate"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "created_date"
+        in: "path"
+        description: "date of creation"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "Array of `UserSkill` objects"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/UserSkill"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Skill"
+  /UserSkills/description/endorsements:
+    get:
+      tags:
+      - "Skill"
+      - "UserSkill"
+      - "User"
+      description: "Retrieve `UserSkill` objects endorsed by a specific set of `User`\
+        \ obejects\n"
+      operationId: "getUserSkillsbyEndorsementIds"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "user_id"
+        in: "formData"
+        description: "ids of `User` objects"
+        required: true
+        type: "array"
+        items:
+          type: "string"
+        collectionFormat: "multi"
+      responses:
+        200:
+          description: "Array of `UserSkill` objects"
+          schema:
+            $ref: "#/definitions/UserSkill"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Skill"
+  /UserSkills/description/endorsements/{user_id}:
+    get:
+      tags:
+      - "Skill"
+      - "UserSkill"
+      - "User"
+      description: "Retrieve `UserSkill` objects endorsed by a specific `User`\n"
+      operationId: "getUserSkillsbyEndorsementId"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "user_id"
+        in: "path"
+        description: "id of `User`"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "Array of `UserSkill` objects"
+          schema:
+            $ref: "#/definitions/UserSkill"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Skill"
+  /UserSkills/description/skill:
+    get:
+      tags:
+      - "Skill"
+      - "UserSkill"
+      description: "Retrieve `UserSkill` objects with a specific set of `Skill` ids\n"
+      operationId: "getUserSkillsbySkillIds"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "skill_ids"
+        in: "formData"
+        description: "id of `Skill` objects"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "Array of `UserSkill` objects"
+          schema:
+            $ref: "#/definitions/UserSkill"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Skill"
+  /UserSkills/description/skill/{skill_id}:
+    get:
+      tags:
+      - "Skill"
+      - "UserSkill"
+      description: "Retrieve `UserSkill` objects with a specific `Skill` id\n"
+      operationId: "getUserSkillsbySkillId"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "skill_id"
+        in: "path"
+        description: "id of `Skill`"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "Array of `UserSkill` objects"
+          schema:
+            $ref: "#/definitions/UserSkill"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Skill"
+  /UserSkills/modified_date:
+    get:
+      tags:
+      - "Skill"
+      - "UserSkill"
+      - "User"
+      description: "Retrieve `UserSkill` objects modified on or later than given date\n"
+      operationId: "getUserSkillsByModifiedDateForm"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "modified_date"
+        in: "formData"
+        description: "date of modification"
+        required: true
+        type: "string"
+        format: "date-time"
+      responses:
+        200:
+          description: "Array of `UserSkill` objects"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/UserSkill"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Skill"
+  /UserSkills/modified_date/{modified_date}:
+    get:
+      tags:
+      - "Skill"
+      - "UserSkill"
+      - "User"
+      description: "Retrieve `UserSkill` objects created on or later than given date\n"
+      operationId: "getUserSkillsByModifiedDate"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "modified_date"
+        in: "path"
+        description: "date of creation"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "Array of `UserSkill` objects"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/UserSkill"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Skill"
+  /UserSkills/user/{user_id}:
+    get:
+      tags:
+      - "UserSkill"
+      - "Skill"
+      - "User"
+      description: "Retrieve `UserSkill` objects with specified description\n"
+      operationId: "getUserSkillByUser"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "user_id"
+        in: "path"
+        description: "Id of `User` to get `UserSkill` objects for"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "Array of `UserSkill` objects"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/UserSkill"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "UserSkill"
+  /Users:
+    get:
+      tags:
+      - "User"
+      description: "Gets `User` objects.\nRequired query param of **size** determines\n\
+        max number of results per page, and **page** determines\nwhich page in the\
+        \ pagination we are. Remaining params optional.\n"
+      operationId: "getUsers"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "size"
+        in: "formData"
+        description: "Max size of array to return"
+        required: true
+        type: "number"
+        format: "int32"
+      - name: "page"
+        in: "formData"
+        description: "Location in pagination"
+        required: true
+        type: "number"
+        format: "int32"
+      - name: "first_name"
+        in: "formData"
+        description: "first name of user"
+        required: false
+        type: "string"
+      - name: "last_name"
+        in: "formData"
+        description: "last name of user"
+        required: false
+        type: "string"
+      - name: "is_collaborator"
+        in: "formData"
+        description: "is `User`a collaborator?"
+        required: false
+        type: "boolean"
+      - name: "is_creator"
+        in: "formData"
+        description: "is `User`a creator?"
+        required: false
+        type: "boolean"
+      - name: "city"
+        in: "formData"
+        description: "city location of user"
+        required: false
+        type: "string"
+      - name: "state"
+        in: "formData"
+        description: "state location of user"
+        required: false
+        type: "string"
+      - name: "university_ids"
+        in: "formData"
+        description: "universities a `User`is associated with"
+        required: false
+        type: "array"
+        items:
+          type: "string"
+        collectionFormat: "csv"
+      - name: "project_id"
+        in: "formData"
+        description: "project_id the `User`is associated with"
+        required: false
+        type: "string"
+      - name: "created_date"
+        in: "formData"
+        description: "date the `User`was created"
+        required: false
+        type: "string"
+      - name: "modified_date"
+        in: "formData"
+        description: "date the `User`was modified"
+        required: false
+        type: "string"
+      - name: "keywords"
+        in: "formData"
+        description: "keyword"
+        required: false
+        type: "array"
+        items:
+          type: "string"
+        collectionFormat: "csv"
+      - name: "skills"
+        in: "formData"
+        description: "skills to search for"
+        required: false
+        type: "array"
+        items:
+          type: "string"
+        collectionFormat: "csv"
+      responses:
+        200:
+          description: "An array of users"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/User"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "User"
+  /Users/created:
+    get:
+      tags:
+      - "User"
+      description: "Retrieve `User` objects created on or after the given date2\n"
+      operationId: "getUsersByCreatedDateForm"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "created_date"
+        in: "formData"
+        description: "Date that `User` object was created"
+        required: true
+        type: "string"
+        format: "date-time"
+      responses:
+        200:
+          description: "users response"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/User"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "User"
+  /Users/created/{created_date}:
+    get:
+      tags:
+      - "User"
+      description: "Retrieve `User` objects created on or after the given date\n"
+      operationId: "getUsersByCreatedDate"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "created_date"
+        in: "path"
+        description: "Date that `User` object was created"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "users response"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/User"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "User"
+  /Users/keys:
+    get:
+      tags:
+      - "User"
+      description: "Retrieve `User` objects based on keywords\n"
+      operationId: "getUsersByKeywords"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "keywords"
+        in: "formData"
+        description: "Keywords when searching for user"
+        required: true
+        type: "array"
+        items:
+          type: "string"
+        collectionFormat: "csv"
+      responses:
+        200:
+          description: "users response"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/User"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "User"
+  /Users/modified/{modified_date}:
+    get:
+      tags:
+      - "User"
+      description: "Retrieve `User` objects created on or after the given date\n"
+      operationId: "getUsersByModifiedDate"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "modified_date"
+        in: "path"
+        description: "Date that `User` object was modified"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "users response"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/User"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "User"
+  /Users/modified_date:
+    get:
+      tags:
+      - "User"
+      description: "Retrieve `User` objects created on or after the given date\n"
+      operationId: "getUsersByModifiedDateForm"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "modified_date"
+        in: "formData"
+        description: "Date that `User` object was modified"
+        required: true
+        type: "string"
+        format: "date-time"
+      responses:
+        200:
+          description: "users response"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/User"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "User"
+  /Users/projects/{project_id}:
+    get:
+      tags:
+      - "User"
+      - "Project"
+      description: "Retrieve `User` objects on a particular `Project`\n"
+      operationId: "getUsersByProjectId"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "project_id"
+        in: "path"
+        description: "ID of 'Project' to fetch"
+        required: true
+        type: "string"
+      - name: "max"
+        in: "formData"
+        description: "max num of 'User' to fetch"
+        required: true
+        type: "number"
+        format: "int32"
+      - name: "page"
+        in: "formData"
+        description: "page in pagination"
+        required: true
+        type: "number"
+        format: "int32"
+      responses:
+        200:
+          description: "users response"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/User"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "User"
+  /Users/skills:
+    get:
+      tags:
+      - "User"
+      description: "Retrieve `User` objects based on skills\n"
+      operationId: "getUsersBySkills"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "skills"
+        in: "formData"
+        description: "Skills when searching for user"
+        required: true
+        type: "array"
+        items:
+          type: "string"
+        collectionFormat: "csv"
+      responses:
+        200:
+          description: "users response"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/User"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "User"
+  /Users/uni/{university_id}:
+    get:
+      tags:
+      - "User"
+      - "University"
+      description: "Retrieve `User` objects at a particular `University`\n"
+      operationId: "getUsersByUniversityId"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "university_id"
+        in: "path"
+        description: "ID of 'User' to fetch"
+        required: true
+        type: "string"
+      - name: "max"
+        in: "formData"
+        description: "max num of 'User' to fetch"
+        required: true
+        type: "number"
+        format: "int32"
+      - name: "page"
+        in: "formData"
+        description: "page in pagination"
+        required: true
+        type: "number"
+        format: "int32"
+      responses:
+        200:
+          description: "users response"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/User"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "User"
+definitions:
+  User:
+    type: "object"
+    properties:
+      user_id:
+        type: "string"
+        description: "Unique identifier representing a specific user"
+      first_name:
+        type: "string"
+        description: "User's first name."
+      last_name:
+        type: "string"
+        description: "User's last name"
+      is_creator:
+        type: "boolean"
+        description: "Is `User`a `Project`creator?"
+      is_collaborator:
+        type: "boolean"
+        description: "Is `User`a `Project`collaborator?"
+      profile_images:
+        type: "array"
+        description: "Array of file system paths to profile images"
+        items:
+          type: "string"
+      created_date:
+        type: "string"
+        format: "date-time"
+        description: "datetime stamp of `User`creation"
+      updated_date:
+        type: "string"
+        format: "date-time"
+        description: "datetime stamp of `User`update"
+      geolocation:
+        type: "array"
+        description: "Tuple representing latitude/longitude of user"
+        items:
+          type: "number"
+          format: "double"
+      city:
+        type: "string"
+        description: "City of `User`location"
+      state:
+        type: "string"
+        description: "State of `User`location"
+      recent_collaborators_id:
+        type: "array"
+        description: "array of user_ids of recent collaborators"
+        items:
+          type: "string"
+      university_ids:
+        type: "array"
+        description: "array of universities the `User`is associated with"
+        items:
+          type: "string"
+      project_ids:
+        type: "array"
+        description: "array of `User`projects"
+        items:
+          type: "string"
+      keywords:
+        type: "array"
+        description: "array of keywords associated with the user"
+        items:
+          type: "string"
+      review_ids:
+        type: "array"
+        description: "array of `Review`ids"
+        items:
+          type: "string"
+      user_skill_ids:
+        type: "array"
+        description: "array of `UserSkill`ids"
+        items:
+          type: "string"
+      is_user_private:
+        type: "boolean"
+        description: "is `User`profile public or private?"
+  Users:
+    type: "object"
+    properties:
+      offset:
+        type: "integer"
+        format: "int32"
+        description: "Position in pagination."
+      limit:
+        type: "integer"
+        format: "int32"
+        description: "Number of items to retrieve (100 max)."
+      count:
+        type: "integer"
+        format: "int32"
+        description: "Total number of items available."
+      history:
+        type: "array"
+        items:
+          $ref: "#/definitions/User"
+  Project:
+    type: "object"
+    properties:
+      project_id:
+        type: "string"
+        description: "Unique identifier representing a specific project"
+      created_date:
+        type: "string"
+        format: "date-time"
+        description: "datetime stamp of `Project`creation"
+      updated_date:
+        type: "string"
+        format: "date-time"
+        description: "datetime stamp of `Project`update"
+      project_name:
+        type: "string"
+        description: "Project's name"
+      project_description:
+        type: "string"
+        description: "Description of project"
+      project_creator_id:
+        type: "array"
+        description: "array of `Project`creator ids"
+        items:
+          type: "string"
+      project_collaborators_id:
+        type: "array"
+        description: "array of `Project`collaborator ids"
+        items:
+          type: "string"
+      project_keywords:
+        type: "array"
+        description: "array of `Project`keywords"
+        items:
+          type: "string"
+      project_urls:
+        type: "array"
+        description: "array of `Project`URLs"
+        items:
+          type: "string"
+      grant_ids:
+        type: "array"
+        description: "Array of `Grant` IDs associated with the `Project`"
+        items:
+          type: "string"
+      university_id:
+        type: "string"
+        description: "ID of `University`hosting research"
+      grant_facilitator:
+        type: "string"
+        description: "Name of individual fascilitating `Grant` funding"
+      project_file:
+        type: "array"
+        description: "Paths to files for `Grant`"
+        items:
+          type: "string"
+      reviews:
+        type: "array"
+        description: "reviews"
+        items:
+          type: "string"
+      posts:
+        type: "array"
+        description: "posts related to project"
+        items:
+          type: "string"
+      is_project_private:
+        type: "boolean"
+        description: "is `Project`private?"
+  Projects:
+    type: "object"
+    properties:
+      offset:
+        type: "integer"
+        format: "int32"
+        description: "Position in pagination."
+      limit:
+        type: "integer"
+        format: "int32"
+        description: "Number of items to retrieve (100 max)."
+      count:
+        type: "integer"
+        format: "int32"
+        description: "Total number of items available."
+      history:
+        type: "array"
+        items:
+          $ref: "#/definitions/Project"
+  Post:
+    type: "object"
+    properties:
+      post_id:
+        type: "string"
+        description: "id of post"
+      created_date:
+        type: "string"
+        format: "date-time"
+        description: "datetime stamp of `Post`creation"
+      updated_date:
+        type: "string"
+        format: "date-time"
+        description: "datetime stamp of `Post`update"
+      post_title:
+        type: "string"
+        description: "title of post"
+      post_text:
+        type: "string"
+        description: "text of post"
+      post_keywords:
+        type: "array"
+        description: "keywords for post"
+        items:
+          type: "string"
+      post_author:
+        description: "author of post"
+        $ref: "#/definitions/User"
+      post_author_id:
+        type: "string"
+        description: "id of author of post"
+      post_tags:
+        type: "array"
+        description: "tagged users"
+        items:
+          $ref: "#/definitions/User"
+      post_tags_id:
+        type: "array"
+        description: "tagged `User`ids"
+        items:
+          type: "string"
+      is_post_private:
+        type: "boolean"
+        description: "is `Post`private?"
+  Posts:
+    type: "object"
+    properties:
+      offset:
+        type: "integer"
+        format: "int32"
+        description: "Position in pagination."
+      limit:
+        type: "integer"
+        format: "int32"
+        description: "Number of items to retrieve (100 max)."
+      count:
+        type: "integer"
+        format: "int32"
+        description: "Total number of items available."
+      history:
+        type: "array"
+        items:
+          $ref: "#/definitions/Post"
+  Grant:
+    type: "object"
+    properties:
+      grant_id:
+        type: "string"
+        description: "id of grant"
+      created_date:
+        type: "string"
+        format: "date-time"
+        description: "datetime stamp of `Grant`creation"
+      updated_date:
+        type: "string"
+        format: "date-time"
+        description: "datetime stamp of `Grant`update"
+      grant_url:
+        type: "array"
+        description: "URL of grants"
+        items:
+          type: "string"
+      grant_keywords:
+        type: "array"
+        description: "The `Grant`keywords"
+        items:
+          type: "string"
+      grant_description:
+        type: "string"
+        description: "The `Grant`description"
+      grant_type:
+        type: "string"
+        description: "The `Grant` type"
+      grant_amount:
+        type: "number"
+        format: "double"
+        description: "Amount of grant"
+  Grants:
+    type: "object"
+    properties:
+      offset:
+        type: "integer"
+        format: "int32"
+        description: "Position in pagination."
+      limit:
+        type: "integer"
+        format: "int32"
+        description: "Number of items to retrieve (100 max)."
+      count:
+        type: "integer"
+        format: "int32"
+        description: "Total number of items available."
+      history:
+        type: "array"
+        items:
+          $ref: "#/definitions/Grant"
+  Review:
+    type: "object"
+    properties:
+      review_id:
+        type: "string"
+        description: "id of review"
+      created_date:
+        type: "string"
+        format: "date-time"
+        description: "datetime stamp of `Review`creation"
+      updated_date:
+        type: "string"
+        format: "date-time"
+        description: "datetime stamp of `Review`update"
+      review_body:
+        type: "string"
+        description: "text body of review"
+      reviewer:
+        description: "reviewer user"
+        $ref: "#/definitions/User"
+      reviewer_id:
+        type: "string"
+        description: "reviewer `User`id"
+      rating:
+        type: "integer"
+        format: "int32"
+        description: "rating, must be 1-5"
+  Reviews:
+    type: "object"
+    properties:
+      offset:
+        type: "integer"
+        format: "int32"
+        description: "Position in pagination."
+      limit:
+        type: "integer"
+        format: "int32"
+        description: "Number of items to retrieve (100 max)."
+      count:
+        type: "integer"
+        format: "int32"
+        description: "Total number of items available."
+      history:
+        type: "array"
+        items:
+          $ref: "#/definitions/Review"
+  Skill:
+    type: "object"
+    properties:
+      review_id:
+        type: "string"
+        description: "id of skill"
+      created_date:
+        type: "string"
+        format: "date-time"
+        description: "datetime stamp of `Skill`creation"
+      updated_date:
+        type: "string"
+        format: "date-time"
+        description: "datetime stamp of `Skill`update"
+      description:
+        type: "string"
+        description: "Description of `Skill`"
+  Skills:
+    type: "object"
+    properties:
+      offset:
+        type: "integer"
+        format: "int32"
+        description: "Position in pagination."
+      limit:
+        type: "integer"
+        format: "int32"
+        description: "Number of items to retrieve (100 max)."
+      count:
+        type: "integer"
+        format: "int32"
+        description: "Total number of items available."
+      history:
+        type: "array"
+        items:
+          $ref: "#/definitions/Skill"
+  UserSkill:
+    type: "object"
+    properties:
+      review_id:
+        type: "string"
+        description: "id of `Endorsement`"
+      created_date:
+        type: "string"
+        format: "date-time"
+        description: "datetime stamp of `Endorsement` creation"
+      updated_date:
+        type: "string"
+        format: "date-time"
+        description: "datetime stamp of `Endorsement` update"
+      user_id:
+        type: "string"
+        description: "Id of `User` who added this skill"
+      endorsements:
+        type: "array"
+        description: "Array of ids of `User` who give `Endorsement` to `User`for skill"
+        items:
+          type: "string"
+      skill_id:
+        type: "string"
+        description: "id of `Skill` that `User`is claiming"
+  UserSkills:
+    type: "object"
+    properties:
+      offset:
+        type: "integer"
+        format: "int32"
+        description: "Position in pagination."
+      limit:
+        type: "integer"
+        format: "int32"
+        description: "Number of items to retrieve (100 max)."
+      count:
+        type: "integer"
+        format: "int32"
+        description: "Total number of items available."
+      history:
+        type: "array"
+        items:
+          $ref: "#/definitions/UserSkill"
+  University:
+    type: "object"
+    properties:
+      uni_id:
+        type: "string"
+        description: "id of `University`"
+      created_date:
+        type: "string"
+        format: "date-time"
+        description: "datetime stamp of `University` creation"
+      updated_date:
+        type: "string"
+        format: "date-time"
+        description: "datetime stamp of `University` update"
+      university_name:
+        type: "string"
+        description: "text body of `University`"
+      profile_images:
+        type: "array"
+        description: "Array of file system paths to profile images"
+        items:
+          type: "string"
+      geolocation:
+        type: "array"
+        description: "Tuple representing latitude/longitude of user"
+        items:
+          type: "number"
+          format: "double"
+      city:
+        type: "string"
+        description: "City of `University` location"
+      state:
+        type: "string"
+        description: "State of `University` location"
+      project_ids:
+        type: "array"
+        description: "ids of `Project`s based at this `University`"
+        items:
+          type: "string"
+  Universities:
+    type: "object"
+    properties:
+      offset:
+        type: "integer"
+        format: "int32"
+        description: "Position in pagination."
+      limit:
+        type: "integer"
+        format: "int32"
+        description: "Number of items to retrieve (100 max)."
+      count:
+        type: "integer"
+        format: "int32"
+        description: "Total number of items available."
+      history:
+        type: "array"
+        items:
+          $ref: "#/definitions/University"
+  Error:
+    type: "object"
+    properties:
+      code:
+        type: "integer"
+        format: "int32"
+      message:
+        type: "string"
+      fields:
+        type: "string"

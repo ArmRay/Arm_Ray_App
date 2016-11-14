@@ -1,0 +1,3101 @@
+---
+swagger: "2.0"
+info:
+  description: "Definition of ArmRay backend API for data retrieval operations"
+  version: "0.0.1"
+  title: "ArmRay API"
+host: "ec2-52-36-38-196.us-west-2.compute.amazonaws.com:1151"
+basePath: "/armray/api/0.1/rest/retrieve"
+schemes:
+- "http"
+consumes:
+- "application/json"
+produces:
+- "application/json"
+paths:
+  /Grant: {}
+  /Grant/{id}:
+    get:
+      tags:
+      - "Grant"
+      description: "Retrieves `Grant` objects by **id**.\n"
+      operationId: "getGrantById"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `Grant` name"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The `Grant`"
+          schema:
+            $ref: "#/definitions/Grant"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Grant"
+  /Grant/{id}/amount:
+    get:
+      tags:
+      - "Grant"
+      description: "Retrieves `Grant` amount\n"
+      operationId: "getGrantAmount"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `Grant` name"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The `Grant` amount"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Grant"
+  /Grant/{id}/amount/{amount}:
+    get:
+      tags:
+      - "Grant"
+      description: "Retrieves if `Grant` amount is equal to param\n"
+      operationId: "isGrantAmount"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `Grant` name"
+        required: true
+        type: "string"
+      - name: "amount"
+        in: "path"
+        description: "The `Grant` amount"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The `Grant` amount"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Grant"
+  /Grant/{id}/created:
+    get:
+      tags:
+      - "Grant"
+      description: "Retrieves `Grant` object created date\n"
+      operationId: "getGrantCreatedDate"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `Grant` name"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The `Grant` creation date"
+          schema:
+            type: "string"
+            format: "date-time"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Grant"
+  /Grant/{id}/description:
+    get:
+      tags:
+      - "Grant"
+      description: "Retrieves `Grant` description\n"
+      operationId: "getGrantDescription"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `Grant` name"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The `Grant` id"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Grant"
+  /Grant/{id}/keys:
+    get:
+      tags:
+      - "Grant"
+      description: "Retrieves `Grant` keywords\n"
+      operationId: "getGrantKeywords"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `Grant` keywords"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The `Grant` keywords"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Grant"
+  /Grant/{id}/keys/{keyword}:
+    get:
+      tags:
+      - "Grant"
+      description: "Retrieves if `Grant` amount is equal to param\n"
+      operationId: "isGrantHaveKeyword"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `Grant` name"
+        required: true
+        type: "string"
+      - name: "keyword"
+        in: "path"
+        description: "The `Grant` keyword"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The `Grant` id"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Grant"
+  /Grant/{id}/modified:
+    get:
+      tags:
+      - "Grant"
+      description: "Retrieves `Grant` objects modified date\n"
+      operationId: "getGrantModifiedDate"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `Grant` name"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The `Grant` modified date"
+          schema:
+            type: "string"
+            format: "date-time"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Grant"
+  /Grant/{id}/type:
+    get:
+      tags:
+      - "Grant"
+      description: "Retrieves `Grant` amount\n"
+      operationId: "getGrantType"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `Grant` id"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The `Grant` type"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Grant"
+  /Grant/{id}/type/{type}:
+    get:
+      tags:
+      - "Grant"
+      description: "Retrieves if `Grant` amount is equal to param\n"
+      operationId: "isGrantType"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `Grant` name"
+        required: true
+        type: "string"
+      - name: "type"
+        in: "path"
+        description: "The `Grant` type"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The boolean"
+          schema:
+            type: "boolean"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Grant"
+  /Grant/{id}/url:
+    get:
+      tags:
+      - "Grant"
+      description: "Retrieves `Grant` url\n"
+      operationId: "getGrantUrl"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `Grant` name"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The `Grant` url array"
+          schema:
+            type: "array"
+            items:
+              type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Grant"
+  /Post: {}
+  /Post/{id}:
+    get:
+      tags:
+      - "Post"
+      description: "Retrieves `Post` objects by **id**.\n"
+      operationId: "getPostById"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `Post` name"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The `Post`"
+          schema:
+            $ref: "#/definitions/Post"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Post"
+  /Post/{id}/author:
+    get:
+      tags:
+      - "Post"
+      - "User"
+      description: "Retrieves `Post` author\n"
+      operationId: "getPostAuthorById"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `Post` id"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The author"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Post"
+  /Post/{id}/keys:
+    get:
+      tags:
+      - "Post"
+      description: "Retrieves `Post` keywords\n"
+      operationId: "getPostKeywordsById"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `Post` id"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The keywords"
+          schema:
+            type: "array"
+            items:
+              type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Post"
+  /Post/{id}/keys/{keyword}:
+    get:
+      tags:
+      - "Post"
+      description: "Retrieves whether keyword is on past\n"
+      operationId: "isKeywordOnPost"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `Post` id"
+        required: true
+        type: "string"
+      - name: "keyword"
+        in: "path"
+        description: "the keyword"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "Boolean of whether the `User`is taged"
+          schema:
+            type: "boolean"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Post"
+  /Post/{id}/private:
+    get:
+      tags:
+      - "Post"
+      description: "Retrieves whether `Post` is private\n"
+      operationId: "isPostPrivateById"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `Post` id"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The boolean"
+          schema:
+            type: "boolean"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Post"
+  /Post/{id}/tags:
+    get:
+      tags:
+      - "Post"
+      description: "Retrieves `Post` tags\n"
+      operationId: "getPostTagsById"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `Post` name"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The ids of the tagged `User` ids"
+          schema:
+            type: "array"
+            items:
+              type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Post"
+  /Post/{id}/tags/{user_id}:
+    get:
+      tags:
+      - "Post"
+      - "User"
+      description: "Retrieves whether `User`is tagged on past\n"
+      operationId: "getIsUserTagOnProject"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `Post` id"
+        required: true
+        type: "string"
+      - name: "user_id"
+        in: "path"
+        description: "user_id to check for"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "Boolean of whether the `User`is taged"
+          schema:
+            type: "boolean"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Post"
+  /Post/{id}/text:
+    get:
+      tags:
+      - "Post"
+      description: "Retrieves `Post` text\n"
+      operationId: "getPostTextById"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `Post` id"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The text"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Post"
+  /Post/{id}/title:
+    get:
+      tags:
+      - "Post"
+      description: "Retrieves `Post` title\n"
+      operationId: "getPostTitleById"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `Post` id"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The title"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Post"
+  /Project: {}
+  /Project/{id}:
+    get:
+      tags:
+      - "Project"
+      description: "Retrieve a 'Project' by their id.\n"
+      operationId: "getProjectById"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "the `id` of the `Project` to delete"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The `id` of the deleted `Project`"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Project"
+  /Project/{id}/collaborators:
+    get:
+      tags:
+      - "Project"
+      - "User"
+      description: "Get collaborators of a `Project`.\n"
+      operationId: "getAllProjectCollaborators"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `id` of the `Project` to retrieve"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The `collaborators` associated with the `Project`"
+          schema:
+            type: "array"
+            items:
+              type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Project"
+  /Project/{id}/collaborators/{user_id}:
+    get:
+      tags:
+      - "Project"
+      - "User"
+      description: "Check if `User` is collaborator on `Project', return if true\n"
+      operationId: "isUserCollaboratorOnProject"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `id` of the `User` to retrieve"
+        required: true
+        type: "string"
+      - name: "user_id"
+        in: "path"
+        description: "The `User`id"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The user"
+          schema:
+            $ref: "#/definitions/User"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Project"
+  /Project/{id}/creators:
+    get:
+      tags:
+      - "Project"
+      - "User"
+      description: "Get creators of a `Project`.\n"
+      operationId: "getAllProjectCreators"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `id` of the `Project` to retrieve"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The `creators` associated with the `Project`"
+          schema:
+            type: "array"
+            items:
+              type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Project"
+  /Project/{id}/creators/{user_id}:
+    get:
+      tags:
+      - "Project"
+      - "User"
+      description: "Check if `User` is creator on `Project', return `User`if true.\n"
+      operationId: "isUserCreatorOnProject"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `id` of the `User` to retrieve"
+        required: true
+        type: "string"
+      - name: "user_id"
+        in: "path"
+        description: "The `User`id"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The boolean"
+          schema:
+            type: "boolean"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Project"
+  /Project/{id}/description:
+    get:
+      tags:
+      - "Project"
+      description: "Retrieve project_description associated with a `Project`.\n"
+      operationId: "getProjectDescriptionById"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `id` of the `Project` to retrieve"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The project_description"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Project"
+  /Project/{id}/description/{project_description}:
+    get:
+      tags:
+      - "Project"
+      description: "Check if `Project`descript of `Project` is some value\n"
+      operationId: "isProjectDescriptionOnProject"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `id` of the `Project` to retrieve"
+        required: true
+        type: "string"
+      - name: "project_description"
+        in: "path"
+        description: "The `project_description` of the `Project`"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The post"
+          schema:
+            type: "boolean"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Project"
+  /Project/{id}/files:
+    get:
+      tags:
+      - "Project"
+      description: "Get files of a `Project`.\n"
+      operationId: "getAllProjectFiles"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `id` of the `Project` to retrieve"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The `files` associated with the `Project`"
+          schema:
+            type: "array"
+            items:
+              type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Project"
+  /Project/{id}/grant:
+    get:
+      tags:
+      - "Project"
+      - "Grant"
+      description: "Retrieve `Grant`associated with a `Project`.\n"
+      operationId: "getProjectGrantById"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `id` of the `Project` to retrieve"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The grant"
+          schema:
+            $ref: "#/definitions/Grant"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Project"
+  /Project/{id}/grant/{grant_id}:
+    get:
+      tags:
+      - "Project"
+      - "Grant"
+      description: "Check if `Grant` is on `Project`\n"
+      operationId: "isGrantOnProject"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `id` of the `Project` to retrieve"
+        required: true
+        type: "string"
+      - name: "grant_id"
+        in: "path"
+        description: "The `grant_id` of the `Project`"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The post"
+          schema:
+            type: "boolean"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Project"
+  /Project/{id}/keys:
+    get:
+      tags:
+      - "Project"
+      description: "Get keywords of a `Project`.\n"
+      operationId: "getAllProjectKeywords"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `id` of the `Project` to retrieve"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The `keywords` associated with the `Project`"
+          schema:
+            type: "array"
+            items:
+              type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Project"
+  /Project/{id}/keys/{keyword}:
+    get:
+      tags:
+      - "Project"
+      description: "Check if keyword is on `Project'.\n"
+      operationId: "isKeywordOnProject"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `id` of the `User` to retrieve"
+        required: true
+        type: "string"
+      - name: "keyword"
+        in: "path"
+        description: "The keyword"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The boolean"
+          schema:
+            type: "boolean"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Project"
+  /Project/{id}/name/{project_name}:
+    get:
+      tags:
+      - "Project"
+      description: "Check if `Project`name of `Project` is some value\n"
+      operationId: "isNameOnProject"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `id` of the `Project` to retrieve"
+        required: true
+        type: "string"
+      - name: "project_name"
+        in: "path"
+        description: "The `project_name` of the `Project`"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The post"
+          schema:
+            type: "boolean"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Project"
+  /Project/{id}/posts:
+    get:
+      tags:
+      - "Project"
+      - "Post"
+      description: "Get posts of a `Project`.\n"
+      operationId: "getAllProjectPosts"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `id` of the `Project` to retrieve"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The `reviews` associated with the `Project`"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Post"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Project"
+  /Project/{id}/posts/{post_id}:
+    get:
+      tags:
+      - "Project"
+      - "Post"
+      description: "Check if `Post` is on a `Project`\n"
+      operationId: "isPostOnProject"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `id` of the `Project` to retrieve"
+        required: true
+        type: "string"
+      - name: "post_id"
+        in: "path"
+        description: "The `id` of the post"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The post"
+          schema:
+            type: "boolean"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Project"
+  /Project/{id}/private:
+    get:
+      tags:
+      - "Project"
+      description: "Retrieve is_private from a  `Project`.\n"
+      operationId: "isProjectPrivate"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `id` of the `Project` to retrieve"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The boolean"
+          schema:
+            type: "boolean"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Project"
+  /Project/{id}/project_name:
+    get:
+      tags:
+      - "Project"
+      description: "Retrieve project_name associated with a `Project`.\n"
+      operationId: "getProjectNameById"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `id` of the `Project` to retrieve"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The project_name"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Project"
+  /Project/{id}/reviews:
+    get:
+      tags:
+      - "Project"
+      - "Review"
+      description: "Get reviews of a `Project`.\n"
+      operationId: "getAllProjectReviews"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `id` of the `Project` to retrieve"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The `reviews` associated with the `Project`"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Review"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Project"
+  /Project/{id}/reviews/{review_id}:
+    get:
+      tags:
+      - "Project"
+      - "Review"
+      description: "Check if `Review` of a `Project` if it is on project\n"
+      operationId: "isReviewOnOProject"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `id` of the `Project` to retrieve"
+        required: true
+        type: "string"
+      - name: "review_id"
+        in: "path"
+        description: "The `id` of the review"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The boolean"
+          schema:
+            type: "boolean"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Project"
+  /Project/{id}/uni:
+    get:
+      tags:
+      - "Project"
+      - "University"
+      description: "Retrieve universities associated with a `Project`.\n"
+      operationId: "getUniversitiesById"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `id` of the `Project` to retrieve"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The grant"
+          schema:
+            $ref: "#/definitions/University"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Project"
+  /Project/{id}/uni/{university_id}:
+    get:
+      tags:
+      - "Project"
+      - "University"
+      description: "Check if `Project`descript of `Project` is some value\n"
+      operationId: "isUniversityOnProject"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `id` of the `Project` to retrieve"
+        required: true
+        type: "string"
+      - name: "university_id"
+        in: "path"
+        description: "The id of the `University`"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The post"
+          schema:
+            type: "boolean"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Project"
+  /Project/{id}/urls:
+    get:
+      tags:
+      - "Project"
+      description: "Get urls of a `Project`.\n"
+      operationId: "getAllProjectUrls"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `id` of the `Project` to retrieve"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The `urls` associated with the `Project`"
+          schema:
+            type: "array"
+            items:
+              type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Project"
+  /Review/{id}:
+    get:
+      tags:
+      - "Review"
+      description: "Retrieves `Review` objects by **id**.\n"
+      operationId: "getReviewById"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `Review` name"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The `Review`"
+          schema:
+            $ref: "#/definitions/Review"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Review"
+  /Review/{id}/body:
+    get:
+      tags:
+      - "Review"
+      description: "Sets body of review\n"
+      operationId: "getReviewBodyById"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `Review` id"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The `Review` body"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Review"
+  /Review/{id}/created:
+    get:
+      tags:
+      - "Review"
+      description: "Gets `Review`created date\n"
+      operationId: "getReviewCreatedDateById"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `Review` id"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The `Review` create date"
+          schema:
+            type: "string"
+            format: "date-time"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Review"
+  /Review/{id}/rating:
+    get:
+      tags:
+      - "Review"
+      description: "Gets rating of review\n"
+      operationId: "getReviewRatingById"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `Review` id"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The `Review` rating"
+          schema:
+            type: "number"
+            format: "int32"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Review"
+  /Review/{id}/rating/{rating}:
+    get:
+      tags:
+      - "Review"
+      description: "Is rating equal to what we pass in\n"
+      operationId: "isReviewRating"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `Review` id"
+        required: true
+        type: "string"
+      - name: "rating"
+        in: "path"
+        description: "The `Review` rating"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The boolean"
+          schema:
+            type: "boolean"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Review"
+  /Review/{id}/reviewer:
+    get:
+      tags:
+      - "Review"
+      - "User"
+      description: "Gets reviewer of review\n"
+      operationId: "getReviewReviewerById"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `Review` id"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The `Review` reviewer `User`id"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Review"
+  /Review/{id}/reviewer/{user_id}:
+    get:
+      tags:
+      - "Review"
+      - "User"
+      description: "Is `User`the reviewer?\n"
+      operationId: "isUserReviewReviewer"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `Review` id"
+        required: true
+        type: "string"
+      - name: "user_id"
+        in: "path"
+        description: "The `Review` id"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The boolean"
+          schema:
+            type: "boolean"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Review"
+  /Review/{id}/updated:
+    get:
+      tags:
+      - "Review"
+      description: "Gets `Review`updated date\n"
+      operationId: "getReviewUpdatedDateById"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `Review` id"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The `Review` update date"
+          schema:
+            type: "string"
+            format: "date-time"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Review"
+  /Review/{id}/url:
+    get:
+      tags:
+      - "Review"
+      description: "Gets url of review\n"
+      operationId: "getReviewUrlById"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `Review` id"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The `Review` url"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Review"
+  /Skill: {}
+  /Skill/{id}:
+    get:
+      tags:
+      - "Skill"
+      description: "Retrieves `Skill` objects by **id**.\n"
+      operationId: "getSkillById"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `Skill` id"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The `Skill`"
+          schema:
+            $ref: "#/definitions/Skill"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Skill"
+  /Skill/{id}/created:
+    get:
+      tags:
+      - "Skill"
+      description: "Gets `Skill` created date\n"
+      operationId: "getSkillCreatedDateById"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `Skill` id"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The `Skill` create date"
+          schema:
+            type: "string"
+            format: "date-time"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Skill"
+  /Skill/{id}/description:
+    get:
+      tags:
+      - "Skill"
+      description: "Gets description of `Skill`\n"
+      operationId: "getSkillBodyById"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `Skill` id"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The `Skill` body"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Skill"
+  /Skill/{id}/description/{description}:
+    get:
+      tags:
+      - "Skill"
+      description: "Gets if description of `Skill` is on `Skill`\n"
+      operationId: "getIsSkillBodyById"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `Skill` id"
+        required: true
+        type: "string"
+      - name: "description"
+        in: "path"
+        description: "The `Skill` description"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The boolean"
+          schema:
+            type: "boolean"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Skill"
+  /Skill/{id}/updated:
+    get:
+      tags:
+      - "Skill"
+      description: "Gets `Skill` updated date\n"
+      operationId: "getSkillUpdatedDateById"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `Skill` id"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The `Skill` update date"
+          schema:
+            type: "string"
+            format: "date-time"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Skill"
+  /University: {}
+  /University/{id}:
+    get:
+      tags:
+      - "University"
+      description: "Retrieves `University` object by **id**.\n"
+      operationId: "getUniversityById"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `UserSkill` id"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The `University`"
+          schema:
+            $ref: "#/definitions/University"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "University"
+  /University/{id}/city:
+    get:
+      tags:
+      - "University"
+      description: "Gets the `University` city\n"
+      operationId: "getUniversityCityById"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `University` id"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The `University` city"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "University"
+  /University/{id}/city/{city}:
+    get:
+      tags:
+      - "University"
+      description: "Gets if the `University` city matches the parameter\n"
+      operationId: "isUniversityCityById"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `University` id"
+        required: true
+        type: "string"
+      - name: "city"
+        in: "path"
+        description: "The `University` city"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The boolean"
+          schema:
+            type: "boolean"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "University"
+  /University/{id}/geolocation:
+    get:
+      tags:
+      - "University"
+      description: "Gets the `University` geolocation\n"
+      operationId: "getUniversityGeolocationById"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `University` id"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The `University` geolocation as a tuple"
+          schema:
+            type: "array"
+            items:
+              type: "number"
+              format: "float"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "University"
+  /University/{id}/geolocation/{lat}/{long}:
+    get:
+      tags:
+      - "University"
+      description: "Gets if the `University` geolocation the parameters\n"
+      operationId: "isUniversityGeolocationById"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `University` id"
+        required: true
+        type: "string"
+      - name: "lat"
+        in: "path"
+        description: "The `University` latitude"
+        required: true
+        type: "number"
+        format: "float"
+      - name: "long"
+        in: "path"
+        description: "The `University` longitude"
+        required: true
+        type: "number"
+        format: "float"
+      responses:
+        200:
+          description: "The boolean"
+          schema:
+            type: "boolean"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "University"
+  /University/{id}/images:
+    get:
+      tags:
+      - "University"
+      description: "Gets the `University` images\n"
+      operationId: "getUniversityimagesById"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `University` id"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The `University` image paths"
+          schema:
+            type: "array"
+            items:
+              type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "University"
+  /University/{id}/name:
+    get:
+      tags:
+      - "University"
+      description: "Gets the `University` name\n"
+      operationId: "getUniversityNameById"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `University` id"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The `University` name"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "University"
+  /University/{id}/name/{name}:
+    get:
+      tags:
+      - "University"
+      description: "Gets if the `University` name matches the parameter\n"
+      operationId: "isUniversityNameById"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `University` id"
+        required: true
+        type: "string"
+      - name: "name"
+        in: "path"
+        description: "The `University` name"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The boolean"
+          schema:
+            type: "boolean"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "University"
+  /University/{id}/projects:
+    get:
+      tags:
+      - "University"
+      - "Project"
+      description: "Gets the `University` projects\n"
+      operationId: "getUniversityProjectsById"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `University` id"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The `University` state"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "University"
+  /University/{id}/projects/{project_id}:
+    get:
+      tags:
+      - "University"
+      - "Project"
+      description: "Gets if the `University` has the `Project`\n"
+      operationId: "isUniversityProjectsById"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `University` id"
+        required: true
+        type: "string"
+      - name: "project_id"
+        in: "path"
+        description: "The `Project` id"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The boolean"
+          schema:
+            type: "boolean"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "University"
+  /University/{id}/state:
+    get:
+      tags:
+      - "University"
+      description: "Gets the `University` state\n"
+      operationId: "getUniversityStateById"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `University` id"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The `University` state"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "University"
+  /University/{id}/state/{state}:
+    get:
+      tags:
+      - "University"
+      description: "Gets if the `University` state matches the parameter\n"
+      operationId: "isUniversityStateById"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `University` id"
+        required: true
+        type: "string"
+      - name: "state"
+        in: "path"
+        description: "The `University` state"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The boolean"
+          schema:
+            type: "boolean"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "University"
+  /User: {}
+  /User/{id}:
+    get:
+      tags:
+      - "User"
+      description: "Retrieve a 'User' by their id.\n"
+      operationId: "getUserById"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "the `id` of the `User` to delete"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The `id` of the deleted `User`"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "User"
+  /User/{id}/city:
+    get:
+      tags:
+      - "User"
+      description: "Retrieve city associated with a `User`.\n"
+      operationId: "getCityNameById"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `id` of the `User` to retrieve"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The city"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "User"
+  /User/{id}/city/{city}:
+    get:
+      tags:
+      - "User"
+      description: "Check if city is on `User`.\n"
+      operationId: "isUserCity"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `id` of the `User` to retrieve"
+        required: true
+        type: "string"
+      - name: "city"
+        in: "path"
+        description: "The city"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The boolean"
+          schema:
+            type: "boolean"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "User"
+  /User/{id}/collaborator:
+    get:
+      tags:
+      - "User"
+      description: "Retrieve if `User` is a collaborator.\n"
+      operationId: "isCollaboratorById"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `id` of the `User` to retrieve"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "An array of keywords"
+          schema:
+            type: "boolean"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "User"
+  /User/{id}/created:
+    get:
+      tags:
+      - "User"
+      description: "Retrieve creation date of a `User`.\n"
+      operationId: "getCreatedDateById"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `id` of the `User` to retrieve"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The date"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "User"
+  /User/{id}/creator:
+    get:
+      tags:
+      - "User"
+      description: "Retrieve if `User` is a creator.\n"
+      operationId: "isCreatorById"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `id` of the `User` to retrieve"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "An array of keywords"
+          schema:
+            type: "boolean"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "User"
+  /User/{id}/first_name:
+    get:
+      tags:
+      - "User"
+      description: "Retrieve first name associated with a `User`.\n"
+      operationId: "getFirstNameById"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `id` of the `User` to retrieve"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "An array of keywords"
+          schema:
+            type: "array"
+            items:
+              type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "User"
+  /User/{id}/first_name/{first_name}:
+    get:
+      tags:
+      - "User"
+      description: "Check if first name is on `User`\n"
+      operationId: "isUserFirstName"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `id` of the `User` to retrieve"
+        required: true
+        type: "string"
+      - name: "first_name"
+        in: "path"
+        description: "The keywords"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The boolean"
+          schema:
+            type: "boolean"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "User"
+  /User/{id}/images:
+    get:
+      tags:
+      - "User"
+      - "TODO-create-images-object"
+      description: "Retrieve all images associated with a `User`.\n"
+      operationId: "getAllUserImages"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `id` of the `User` to retrieve"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The image url associated with the `User`"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "User"
+  /User/{id}/keys:
+    get:
+      tags:
+      - "User"
+      description: "Retrieve all keywords associated with a `User`.\n"
+      operationId: "getAllUserKeywords"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `id` of the `User` to retrieve"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "An array of keywords"
+          schema:
+            type: "array"
+            items:
+              type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "User"
+  /User/{id}/keys/{keyword}:
+    get:
+      tags:
+      - "User"
+      description: "Check if a keyword is on a `User`.\n"
+      operationId: "isUserHaveKeyword"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `id` of the `User` to retrieve"
+        required: true
+        type: "string"
+      - name: "keyword"
+        in: "path"
+        description: "The keyword"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The boolean"
+          schema:
+            type: "boolean"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "User"
+  /User/{id}/last_name:
+    get:
+      tags:
+      - "User"
+      description: "Retrieve first name associated with a `User`.\n"
+      operationId: "getLastNameById"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `id` of the `User` to retrieve"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "An array of keywords"
+          schema:
+            type: "array"
+            items:
+              type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "User"
+  /User/{id}/last_name/{last_name}:
+    get:
+      tags:
+      - "User"
+      description: "Check if last name is on `User`.\n"
+      operationId: "isUserLastName"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `id` of the `User` to retrieve"
+        required: true
+        type: "string"
+      - name: "last_name"
+        in: "path"
+        description: "The keywords"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The boolean"
+          schema:
+            type: "boolean"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "User"
+  /User/{id}/modified:
+    get:
+      tags:
+      - "User"
+      description: "Retrieve modified date of a `User`.\n"
+      operationId: "getModifiedDateById"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `id` of the `User` to retrieve"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The date"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "User"
+  /User/{id}/project:
+    get:
+      tags:
+      - "User"
+      - "Project"
+      description: "Retrieve all 'Project' associated with a `User`.\n"
+      operationId: "getAllUserProjectById"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `id` of the `User` to retrieve"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The `Project` associated with the `User`"
+          schema:
+            $ref: "#/definitions/Project"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "User"
+  /User/{id}/project/{project_id}:
+    get:
+      tags:
+      - "User"
+      - "Project"
+      description: "Is 'Project' associated with a `User`?\n"
+      operationId: "isUserOnProjectById"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `id` of the `User` to retrieve"
+        required: true
+        type: "string"
+      - name: "project_id"
+        in: "path"
+        description: "The `project_id` of the `Project` to retrieve"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The boolean"
+          schema:
+            type: "boolean"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "User"
+  /User/{id}/review:
+    get:
+      tags:
+      - "User"
+      - "Review"
+      description: "Retrieve all 'Review' associated with a `User`.\n"
+      operationId: "getAllUserReviewById"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `id` of the `User` to retrieve"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "An array of reviews"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Review"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "User"
+  /User/{id}/review/{review_id}:
+    get:
+      tags:
+      - "User"
+      - "Review"
+      description: "Is a 'Review' associated with a `User`??\n"
+      operationId: "isReviewOnUserById"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `id` of the `User` to retrieve"
+        required: true
+        type: "string"
+      - name: "review_id"
+        in: "path"
+        description: "The `review_id` of the `Project` to retrieve"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The boolean"
+          schema:
+            type: "boolean"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "User"
+  /User/{id}/skills:
+    get:
+      tags:
+      - "User"
+      - "Skill"
+      description: "Retrieve all skills associated with a `User`.\n"
+      operationId: "getAllUserSkills"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `id` of the `User` to retrieve"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "An array of UserSkills ids"
+          schema:
+            type: "array"
+            items:
+              type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "User"
+  /User/{id}/skills/{skill_id}:
+    get:
+      tags:
+      - "User"
+      - "Skill"
+      description: "Check if `Skill`is associated with a `User`.\n"
+      operationId: "getIsSkillOnUser"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `id` of the `User` to retrieve"
+        required: true
+        type: "string"
+      - name: "skill_id"
+        in: "path"
+        description: "The `id` of the `Skill` to retrieve"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "An array of UserSkills ids"
+          schema:
+            type: "array"
+            items:
+              type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "User"
+  /User/{id}/state:
+    get:
+      tags:
+      - "User"
+      description: "Retrieve state associated with a `User`.\n"
+      operationId: "getStateById"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `id` of the `User` to retrieve"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The state"
+          schema:
+            type: "string"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "User"
+  /User/{id}/state/{state}:
+    get:
+      tags:
+      - "User"
+      description: "Check if state is on `User`.\n"
+      operationId: "isUserState"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `id` of the `User` to retrieve"
+        required: true
+        type: "string"
+      - name: "state"
+        in: "path"
+        description: "The state"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The boolean"
+          schema:
+            type: "boolean"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "User"
+  /User/{id}/uni/{university_id}:
+    get:
+      tags:
+      - "User"
+      - "University"
+      description: "Is 'University' associated with a `User`?\n"
+      operationId: "isUniversityOnUser"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `id` of the `User` to retrieve"
+        required: true
+        type: "string"
+      - name: "university_id"
+        in: "path"
+        description: "The `university_id` of the `University` to retrieve"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The `University` associated with the `User`"
+          schema:
+            type: "boolean"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "User"
+  /UserSkill: {}
+  /UserSkill/{id}:
+    get:
+      tags:
+      - "Skill"
+      - "UserSkill"
+      - "User"
+      description: "Retrieves `UserSkill` object by **id**.\n"
+      operationId: "getUserSkillById"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `UserSkill` id"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The `UserSkill`"
+          schema:
+            $ref: "#/definitions/UserSkill"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Skill"
+  /UserSkill/{id}/created:
+    get:
+      tags:
+      - "Skill"
+      - "UserSkill"
+      description: "Gets `UserSkill` created date\n"
+      operationId: "getUserSkillCreatedDateById"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `UserSkill` id"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The `UserSkill` create date"
+          schema:
+            type: "string"
+            format: "date-time"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Skill"
+  /UserSkill/{id}/endorsement:
+    get:
+      tags:
+      - "Skill"
+      - "UserSkill"
+      - "User"
+      description: "Gets `User` ndorsements in `UserSkill` .\n"
+      operationId: "getUserSkillEndorsementById"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `UserSkill` id"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The `UserSkill`"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/UserSkill"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Skill"
+  /UserSkill/{id}/endorsement/{user_id}: {}
+  /UserSkill/{id}/skill:
+    get:
+      tags:
+      - "Skill"
+      - "UserSkill"
+      - "User"
+      description: "Gets the `Skill`\n"
+      operationId: "getUSerSkillSkillById"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `Skill` id"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The `Skill`"
+          schema:
+            $ref: "#/definitions/Skill"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Skill"
+  /UserSkill/{id}/skill/{skill_id}: {}
+  /UserSkill/{id}/updated:
+    get:
+      tags:
+      - "Skill"
+      - "UserSkill"
+      description: "Gets `UserSkill` updated date\n"
+      operationId: "getUserSkillUpdatedDateById"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `UserSkill` id"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The `UserSkill` update date"
+          schema:
+            type: "string"
+            format: "date-time"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Skill"
+  /UserSkill/{id}/user:
+    get:
+      tags:
+      - "Skill"
+      - "UserSkill"
+      - "User"
+      description: "Gets the `user`\n"
+      operationId: "getUserSkillUserById"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The `Skill` id"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "The `Skill`"
+          schema:
+            $ref: "#/definitions/Skill"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "Skill"
+  /UserSkill/{id}/user/{user_id}: {}
+definitions:
+  Error:
+    type: "object"
+    properties:
+      code:
+        type: "integer"
+        format: "int32"
+      fields:
+        type: "string"
+      message:
+        type: "string"
+  Grant:
+    type: "object"
+    properties:
+      created_date:
+        type: "string"
+        format: "date-time"
+        description: "datetime stamp of `Grant`creation"
+      grant_amount:
+        type: "number"
+        format: "double"
+        description: "Amount of grant"
+      grant_description:
+        type: "string"
+        description: "The `Grant`description"
+      grant_id:
+        type: "string"
+        description: "id of grant"
+      grant_keywords:
+        type: "array"
+        description: "The `Grant`keywords"
+        items:
+          type: "string"
+      grant_type:
+        type: "string"
+        description: "The `Grant` type"
+      grant_url:
+        type: "array"
+        description: "URL of grants"
+        items:
+          type: "string"
+      updated_date:
+        type: "string"
+        format: "date-time"
+        description: "datetime stamp of `Grant`update"
+  Grants:
+    type: "object"
+    properties:
+      count:
+        type: "integer"
+        format: "int32"
+        description: "Total number of items available."
+      history:
+        type: "array"
+        items:
+          $ref: "#/definitions/Grant"
+      limit:
+        type: "integer"
+        format: "int32"
+        description: "Number of items to retrieve (100 max)."
+      offset:
+        type: "integer"
+        format: "int32"
+        description: "Position in pagination."
+  Post:
+    type: "object"
+    properties:
+      created_date:
+        type: "string"
+        format: "date-time"
+        description: "datetime stamp of `Post`creation"
+      is_post_private:
+        type: "boolean"
+        description: "is `Post`private?"
+      post_author:
+        description: "author of post"
+        $ref: "#/definitions/User"
+      post_author_id:
+        type: "string"
+        description: "id of author of post"
+      post_id:
+        type: "string"
+        description: "id of post"
+      post_keywords:
+        type: "array"
+        description: "keywords for post"
+        items:
+          type: "string"
+      post_tags:
+        type: "array"
+        description: "tagged users"
+        items:
+          $ref: "#/definitions/User"
+      post_tags_id:
+        type: "array"
+        description: "tagged `User`ids"
+        items:
+          type: "string"
+      post_text:
+        type: "string"
+        description: "text of post"
+      post_title:
+        type: "string"
+        description: "title of post"
+      updated_date:
+        type: "string"
+        format: "date-time"
+        description: "datetime stamp of `Post`update"
+  Posts:
+    type: "object"
+    properties:
+      count:
+        type: "integer"
+        format: "int32"
+        description: "Total number of items available."
+      history:
+        type: "array"
+        items:
+          $ref: "#/definitions/Post"
+      limit:
+        type: "integer"
+        format: "int32"
+        description: "Number of items to retrieve (100 max)."
+      offset:
+        type: "integer"
+        format: "int32"
+        description: "Position in pagination."
+  Project:
+    type: "object"
+    properties:
+      created_date:
+        type: "string"
+        format: "date-time"
+        description: "datetime stamp of `Project`creation"
+      grant_facilitator:
+        type: "string"
+        description: "Name of individual fascilitating `Grant` funding"
+      grant_ids:
+        type: "array"
+        description: "Array of `Grant` IDs associated with the `Project`"
+        items:
+          type: "string"
+      is_project_private:
+        type: "boolean"
+        description: "is `Project`private?"
+      posts:
+        type: "array"
+        description: "posts related to project"
+        items:
+          type: "string"
+      project_collaborators_id:
+        type: "array"
+        description: "array of `Project`collaborator ids"
+        items:
+          type: "string"
+      project_creator_id:
+        type: "array"
+        description: "array of `Project`creator ids"
+        items:
+          type: "string"
+      project_description:
+        type: "string"
+        description: "Description of project"
+      project_file:
+        type: "array"
+        description: "Paths to files for `Grant`"
+        items:
+          type: "string"
+      project_id:
+        type: "string"
+        description: "Unique identifier representing a specific project"
+      project_keywords:
+        type: "array"
+        description: "array of `Project`keywords"
+        items:
+          type: "string"
+      project_name:
+        type: "string"
+        description: "Project's name"
+      project_urls:
+        type: "array"
+        description: "array of `Project`URLs"
+        items:
+          type: "string"
+      reviews:
+        type: "array"
+        description: "reviews"
+        items:
+          type: "string"
+      university_id:
+        type: "string"
+        description: "ID of `University`hosting research"
+      updated_date:
+        type: "string"
+        format: "date-time"
+        description: "datetime stamp of `Project`update"
+  Projects:
+    type: "object"
+    properties:
+      count:
+        type: "integer"
+        format: "int32"
+        description: "Total number of items available."
+      history:
+        type: "array"
+        items:
+          $ref: "#/definitions/Project"
+      limit:
+        type: "integer"
+        format: "int32"
+        description: "Number of items to retrieve (100 max)."
+      offset:
+        type: "integer"
+        format: "int32"
+        description: "Position in pagination."
+  Review:
+    type: "object"
+    properties:
+      created_date:
+        type: "string"
+        format: "date-time"
+        description: "datetime stamp of `Review`creation"
+      rating:
+        type: "integer"
+        format: "int32"
+        description: "rating, must be 1-5"
+      review_body:
+        type: "string"
+        description: "text body of review"
+      review_id:
+        type: "string"
+        description: "id of review"
+      reviewer:
+        description: "reviewer user"
+        $ref: "#/definitions/User"
+      reviewer_id:
+        type: "string"
+        description: "reviewer `User`id"
+      updated_date:
+        type: "string"
+        format: "date-time"
+        description: "datetime stamp of `Review`update"
+  Reviews:
+    type: "object"
+    properties:
+      count:
+        type: "integer"
+        format: "int32"
+        description: "Total number of items available."
+      history:
+        type: "array"
+        items:
+          $ref: "#/definitions/Review"
+      limit:
+        type: "integer"
+        format: "int32"
+        description: "Number of items to retrieve (100 max)."
+      offset:
+        type: "integer"
+        format: "int32"
+        description: "Position in pagination."
+  Skill:
+    type: "object"
+    properties:
+      created_date:
+        type: "string"
+        format: "date-time"
+        description: "datetime stamp of `Skill`creation"
+      description:
+        type: "string"
+        description: "Description of `Skill`"
+      review_id:
+        type: "string"
+        description: "id of skill"
+      updated_date:
+        type: "string"
+        format: "date-time"
+        description: "datetime stamp of `Skill`update"
+  Skills:
+    type: "object"
+    properties:
+      count:
+        type: "integer"
+        format: "int32"
+        description: "Total number of items available."
+      history:
+        type: "array"
+        items:
+          $ref: "#/definitions/Skill"
+      limit:
+        type: "integer"
+        format: "int32"
+        description: "Number of items to retrieve (100 max)."
+      offset:
+        type: "integer"
+        format: "int32"
+        description: "Position in pagination."
+  Universities:
+    type: "object"
+    properties:
+      count:
+        type: "integer"
+        format: "int32"
+        description: "Total number of items available."
+      history:
+        type: "array"
+        items:
+          $ref: "#/definitions/University"
+      limit:
+        type: "integer"
+        format: "int32"
+        description: "Number of items to retrieve (100 max)."
+      offset:
+        type: "integer"
+        format: "int32"
+        description: "Position in pagination."
+  University:
+    type: "object"
+    properties:
+      city:
+        type: "string"
+        description: "City of `University` location"
+      created_date:
+        type: "string"
+        format: "date-time"
+        description: "datetime stamp of `University` creation"
+      geolocation:
+        type: "array"
+        description: "Tuple representing latitude/longitude of user"
+        items:
+          type: "number"
+          format: "double"
+      profile_images:
+        type: "array"
+        description: "Array of file system paths to profile images"
+        items:
+          type: "string"
+      project_ids:
+        type: "array"
+        description: "ids of `Project`s based at this `University`"
+        items:
+          type: "string"
+      state:
+        type: "string"
+        description: "State of `University` location"
+      uni_id:
+        type: "string"
+        description: "id of `University`"
+      university_name:
+        type: "string"
+        description: "text body of `University`"
+      updated_date:
+        type: "string"
+        format: "date-time"
+        description: "datetime stamp of `University` update"
+  User:
+    type: "object"
+    properties:
+      city:
+        type: "string"
+        description: "City of `User`location"
+      created_date:
+        type: "string"
+        format: "date-time"
+        description: "datetime stamp of `User`creation"
+      first_name:
+        type: "string"
+        description: "User's first name."
+      geolocation:
+        type: "array"
+        description: "Tuple representing latitude/longitude of user"
+        items:
+          type: "number"
+          format: "double"
+      is_collaborator:
+        type: "boolean"
+        description: "Is `User`a `Project`collaborator?"
+      is_creator:
+        type: "boolean"
+        description: "Is `User`a `Project`creator?"
+      is_user_private:
+        type: "boolean"
+        description: "is `User`profile public or private?"
+      keywords:
+        type: "array"
+        description: "array of keywords associated with the user"
+        items:
+          type: "string"
+      last_name:
+        type: "string"
+        description: "User's last name"
+      profile_images:
+        type: "array"
+        description: "Array of file system paths to profile images"
+        items:
+          type: "string"
+      project_ids:
+        type: "array"
+        description: "array of `User`projects"
+        items:
+          type: "string"
+      recent_collaborators_id:
+        type: "array"
+        description: "array of user_ids of recent collaborators"
+        items:
+          type: "string"
+      review_ids:
+        type: "array"
+        description: "array of `Review`ids"
+        items:
+          type: "string"
+      state:
+        type: "string"
+        description: "State of `User`location"
+      university_ids:
+        type: "array"
+        description: "array of universities the `User`is associated with"
+        items:
+          type: "string"
+      updated_date:
+        type: "string"
+        format: "date-time"
+        description: "datetime stamp of `User`update"
+      user_id:
+        type: "string"
+        description: "Unique identifier representing a specific user"
+      user_skill_ids:
+        type: "array"
+        description: "array of `UserSkill`ids"
+        items:
+          type: "string"
+  UserSkill:
+    type: "object"
+    properties:
+      created_date:
+        type: "string"
+        format: "date-time"
+        description: "datetime stamp of `Endorsement` creation"
+      endorsements:
+        type: "array"
+        description: "Array of ids of `User` who give `Endorsement` to `User`for skill"
+        items:
+          type: "string"
+      review_id:
+        type: "string"
+        description: "id of `Endorsement`"
+      skill_id:
+        type: "string"
+        description: "id of `Skill` that `User`is claiming"
+      updated_date:
+        type: "string"
+        format: "date-time"
+        description: "datetime stamp of `Endorsement` update"
+      user_id:
+        type: "string"
+        description: "Id of `User` who added this skill"
+  UserSkills:
+    type: "object"
+    properties:
+      count:
+        type: "integer"
+        format: "int32"
+        description: "Total number of items available."
+      history:
+        type: "array"
+        items:
+          $ref: "#/definitions/UserSkill"
+      limit:
+        type: "integer"
+        format: "int32"
+        description: "Number of items to retrieve (100 max)."
+      offset:
+        type: "integer"
+        format: "int32"
+        description: "Position in pagination."
+  Users:
+    type: "object"
+    properties:
+      count:
+        type: "integer"
+        format: "int32"
+        description: "Total number of items available."
+      history:
+        type: "array"
+        items:
+          $ref: "#/definitions/User"
+      limit:
+        type: "integer"
+        format: "int32"
+        description: "Number of items to retrieve (100 max)."
+      offset:
+        type: "integer"
+        format: "int32"
+        description: "Position in pagination."
