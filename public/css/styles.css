@@ -1,0 +1,116 @@
+.loginrectangle 
+{
+    width: 516px;
+    height: 370px;
+    border-radius: 5px;
+    background-color: #f5f7fa;
+    box-shadow: 0 3px 8px 0 rgba(60, 59, 60, 0.24), 0 3px 6px 0 rgba(60, 59, 60, 0.19);
+    border: solid 1px #e6e9ed;
+    position: absolute;
+    top:50%;
+    left:50%;
+    margin-top: -185px;
+    margin-left: -258px;
+}
+
+.inputlabel {
+  width: 276px;
+  height: 14px;
+  font-family: Roboto;
+  font-size: 12px;
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+  text-align: left;
+  margin-top: 17.7px;
+  margin-left: 120.3px;
+}
+
+.logintextbox {
+  width: 275.2px;
+  height: 42px;
+  margin-top: 6.3px;
+  margin-left: 120.3px;
+  margin-right: 120.5px;
+  background-color : #ffffff !important;
+}
+
+input[type="text"] {
+  background-color : #ffffff !important;
+}
+
+input[type="password"] {
+  background-color : #ffffff !important;
+}
+
+
+.login .btn-primary {
+  cursor:pointer;
+  margin-left: 270px;
+  margin-bottom: 36px;
+  margin-top: 29.7px;
+}
+.login .btn-primary p {
+  padding-top: 9px;
+}
+
+.login .btn-primary:hover
+{
+    background-color: #335f99;
+}
+
+
+.nav-brand {
+  width:30px;
+  height:30px;
+  margin-top:16px;
+  margin-left:32px;
+}
+
+nav{
+  position:fixed;
+  height:59px;
+}
+
+
+
+.float-left{
+  float:left;
+}
+
+.float-right{
+  float:right;
+}
+
+.navbar-search{
+  margin-top:12px;
+  margin-left:24px;
+  font-family: Roboto;
+  font-size: 13.3px;
+  font-style: italic;
+  color: #aab2bd;
+  padding-left:12px;
+}
+
+.navbar-right-icons{
+  margin-left:868px;
+  padding:19px;
+}
+
+.loginlogo
+{
+  width: 72px;
+  height: 72px;
+  margin-top: 24px;
+  margin-left: 222px;
+}
+
+.logintextbox {
+  background:none !important;
+  padding-left:13px;
+}
+
+.inputlabel {
+  color: #a6a8ab;
+}
+

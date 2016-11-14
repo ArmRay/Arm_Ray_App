@@ -16,7 +16,7 @@ module.exports = function (grunt) {
     buildcontrol: 'grunt-build-control'
   });
 
-  // Time how long tasks take. Can help when optimizing build times
+  // Time how long tasks take. Can help  when optimizing build times
   require('time-grunt')(grunt);
 
   // Define the configuration for all the tasks
@@ -81,6 +81,29 @@ module.exports = function (grunt) {
       }
     },
 
+    concat: {
+      options: {
+        separator: ';'
+      },
+      dist: {
+        // the files to concatenate
+        src: ['public/sourcejavascript/*.js', 'public/sourcejavascript/**/*.js', '!public/sourcejavascript/server.js'],
+        // the location of the resulting JS file
+        dest: 'public/sourcejavascript/<%= pkg.name %>.js'
+      }
+    },
+
+    uglify: {
+      options: {
+        banner: '/*! <%= pkg.name %> <%= grunt.template.today("dd-mm-yyyy") %> */\n'
+      },
+      dist: {
+        files: {
+          'public/javascript/<%= pkg.name %>.min.js': ['<%= concat.dist.dest %>']
+        }
+      }
+    },
+
     // Make sure code styles are up to par and there are no obvious mistakes
     jshint: {
       options: {
@@ -114,6 +137,8 @@ module.exports = function (grunt) {
           dot: true,
           src: [
             '.tmp',
+            'public/javascript/*',
+            'public/sourcejavascript/arm-ray.js',
             '<%= yeoman.dist %>/*',
             '!<%= yeoman.dist %>/.git*',
             '!<%= yeoman.dist %>/.openshift',
@@ -136,9 +161,9 @@ module.exports = function (grunt) {
     // Use nodemon to run server in debug mode with an initial breakpoint
     nodemon: {
       debug: {
-        script: 'server/app.js',
+        script: 'public/sourcejavascript/server.js',
         options: {
-          nodeArgs: ['--debug-brk'],
+          /*nodeArgs: ['--debug-brk'],*/
           env: {
             PORT: process.env.PORT || 9000
           },
@@ -150,7 +175,7 @@ module.exports = function (grunt) {
             // opens browser on initial server start
             nodemon.on('config:update', function () {
               setTimeout(function () {
-                require('open')('http://localhost:8080/debug?port=5858');
+                require('open')('http://localhost:8080');
               }, 500);
             });
           }
@@ -322,8 +347,10 @@ module.exports = function (grunt) {
   ]);
 
   grunt.registerTask('default', [
-    'newer:jshint',
-    'test',
-    'build'
+    /*'newer:jshint',*/
+    'build',
+    'concat',
+    'uglify',
+    'nodemon'
   ]);
 };
