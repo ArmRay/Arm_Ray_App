@@ -1,5 +1,16 @@
 import express from 'express';
 import User from '../services/User';
+import bcrypt from 'bcrypt';
+import passport from 'passport';
+import jwt from 'jsonwebtoken';
+import expressJwt from 'express-jwt';
+
+const LocalStrategy= require('passport-local').Strategy;
+
+
+
+let secret = 'SomeArmraySecretHere';
+
 
 const router = express.Router();
 
@@ -12,6 +23,13 @@ const router = express.Router();
  */
 router.post('/', (req, res, next) => {
   const options = {
+    username:req.body.username,
+    password:req.body.password,
+    first_name:req.body.first_name,
+    last_name:req.body.last_name,
+    city:req.body.city,
+    state:req.body.state,
+    keywords:req.body.keywords
   };
 
   User.createUser(options, (err, data) => {
@@ -23,6 +41,24 @@ router.post('/', (req, res, next) => {
     res.status(200).send(data);
   });
 });
+
+
+/**
+ * Checks credentials and logs in, if accurate
+ * The middleware does all the heavy lifting
+ */
+
+ // Example Post
+ // let user = {
+ //  username,
+ //  password
+ // }
+
+router.post('/login', localauth, (req, res, next) => {
+  res.status(200).json(req.user);
+  console.log(req.user);
+});
+
 
 /**
  * Updates a &#x60;User&#x60; object. All fields other than &#x60;id&#x60; 
@@ -1211,5 +1247,65 @@ router.get('/:id/modified', (req, res, next) => {
     res.status(200).send(data);
   });
 });
+
+
+
+
+
+// Local auth that implements json web tokens
+
+function localauth(req, res, next) {
+  passport.authenticate('local', function(err, user, info) {
+    if (err) { 
+        return next(err) 
+    }
+    //user has authenticated correctly thus we create a JWT token 
+    var token = jwt.sign({user: user}, SECRET);
+    console.log("passport intercept user",user);
+    res.json({ token : token });
+  })(req, res, next);
+}
+
+//Local pasport strategy
+passport.use(new LocalStrategy(
+    function(username, password, done) {
+        console.log("Attempting local strategy...");
+        User.getUserByUsername(username, function(err, user) {
+            if (err) throw err;
+            console.log("No err...");
+            if (!user) {
+                console.log("No user matches parameters...");
+                return done(null, false, {
+                    message: 'User is not recognized'
+                });
+            }
+            console.log("comparing passwords");
+            User.comparePassword(password, user.password, function(err, isMatch) {
+                if (err) throw err;
+                if (isMatch) {
+                    console.log("LOGGED IN");
+                    return done(null, user);
+                } else {
+                    console.log("Invalid password...");
+                    return done(null, false, {
+                        message: 'Invalid password'
+                    });
+                }
+            }); 
+        });
+}));
+
+
+passport.serializeUser(function(user, done) {
+    done(null, user.id);
+});
+
+passport.deserializeUser(function(id, done) {
+    User.getUserById(id, function(err, user) {
+        done(err, user);
+    });
+});
+
+
 
 module.exports = router;

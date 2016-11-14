@@ -31,6 +31,8 @@ app.use('/armray/api/0.1/rest/UserSkill', require('./routes/UserSkill'));
 app.use('/armray/api/0.1/rest/Universities', require('./routes/Universities'));
 app.use('/armray/api/0.1/rest/University', require('./routes/University'));
 
+
+
 // catch 404
 app.use((req, res, next) => {
   log.error(`Error 404 on ${req.url}.`);

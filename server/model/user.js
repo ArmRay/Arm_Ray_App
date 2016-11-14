@@ -6,8 +6,8 @@ var bcrypt = require('bcrypt');
 
 
 var userSchema = new mongoose.Schema({
-
-    user_id: String,
+    username: {type:String, required:true},
+    password: {type:String, required:true},
     first_name: String,
     last_name: String,
     is_creator: Boolean,
@@ -24,11 +24,37 @@ var userSchema = new mongoose.Schema({
     project_ids: [],
     keywords: [],
     review_ids: [],
-    is_user_private: Boolean
-
+    is_user_private: {type:Boolean, default:true}
 });
 
 
 
 
-mongoose.model('User', userSchema);
+let User = module.exports = mongoose.model('User', userSchema);
+
+
+
+//Find User by Username
+module.exports.getUserByUsername = function(username, callback){
+    console.log("Username:" + username);
+    var query = {username: username};
+    User.findOne(query, callback);
+}
+//Find User  Id
+module.exports.getUserById = function(id, callback){
+    User.findById(id, callback);
+}
+
+//Compare user password with password given.
+module.exports.comparePassword = function(candidate, hash, callback){
+    bcrypt.compare(candidate, hash, function(err, isMatch){
+        if(err) throw err;
+        callback(null, isMatch);
+    });
+}
+
+
+
+
+
+

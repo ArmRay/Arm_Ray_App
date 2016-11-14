@@ -12,20 +12,65 @@ const UserSkill = models.userkSkill;
 
 /**
  * @param {Object} options
+ * @param {Object} options.username
+ * @param {Object} options.password
  * @param {String} options.first_name first name of &#x60;User&#x60;
  * @param {String} options.last_name last name of &#x60;User&#x60;
- * @param {Boolean} options.is_collaborator is &#x60;User&#x60; a collaborator?
- * @param {Boolean} options.is_creator is &#x60;User&#x60; a creator?
  * @param {String} options.city city location of &#x60;User&#x60;
  * @param {String} options.state state location of &#x60;User&#x60;
- * @param {Array} options.university_ids The &#x60;University&#x60;a &#x60;User&#x60; is associated with
- * @param {String} options.project_id project_id the &#x60;User&#x60; is associated with
- * @param {Array} options.keywords keyword
  * @param {Function} callback
  */
 export function createUser (options, callback) {
+
   // Implement you business logic here...
+    User.find({'username':options.username},function(err,user){
+    if(err){
+      console.log(err);
+      return false; // If there is an error, return false
+    }
+
+    if(user) return false; // If user exists via that username, return false
+
+    if(!user){
+
+      let user = new User{} //Create new User
+      user.username = options.username;
+      user.password = options.password;
+      user.first_name = options.first_name;
+      user.last_name = options.last_name;
+      user.city = options.city;
+      user.state = options.state;
+
+
+      bcrypt.genSalt(10, function(err, salt) {
+        console.log("inside of bcrypt 1 in service route");
+        if(err){
+            console.log('err 1 bcrypt',err); //handle error
+        }
+        bcrypt.hash(user.password, salt, function(err, hash) {
+            if(err){
+                console.log("error 2",err); //handle error
+            }
+            user.password = hash;
+
+            user.save(function(err){
+                if(err){
+                    console.log(err);
+                }
+                return user;
+            })
+        });
+    });
+
+    }
+  })
+
+  
+
+
+
 }
+
 
 /**
  * @param {Object} options
