@@ -604,7 +604,7 @@ export function isGrantAmount (options, callback) {
         res.status(200).json(grant.grant_amount == options.req.body.amount);
       })
   }
-}
+
 
 /**
  * @param {Object} options
