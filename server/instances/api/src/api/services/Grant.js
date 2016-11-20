@@ -277,7 +277,7 @@ export function setGrantKeywords (options, callback) {
 
         grant.grant_keywords = [];
 
-        for(var i = 0, i<options.req.body.grant_keywords.length; i++){
+        for(var i = 0; i<options.req.body.grant_keywords.length; i++){
           grant.grant_keywords.push(options.req.body.grant_keywords[i]);
         }
 
@@ -306,7 +306,7 @@ export function addGrantKeywords (options, callback) {
         console.error(err);
       }
 
-      for(var i = 0, i<options.req.body.grant_keywords.length; i++){
+      for(var i = 0; i<options.req.body.grant_keywords.length; i++){
         grant.grant_keywords.push(options.req.body.grant_keywords[i]);
       }
 
@@ -551,7 +551,7 @@ export function addGrantUrl (options, callback) {
         console.error(err);
       }
 
-      for(var i = 0, i<options.req.body.grant_url.length; i++){
+      for(var i = 0; i<options.req.body.grant_url.length; i++){
           grant.grant_url.push(options.req.body.grant_url[i]);
       }
 
