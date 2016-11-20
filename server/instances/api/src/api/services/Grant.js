@@ -631,6 +631,7 @@ export function getGrantDescription (options, callback) {
         console.error(err);
       }
       res.status(200).json(grant.grant_description);
+    }
 }
 
 /**
