@@ -114,3 +114,14 @@ nav{
   color: #a6a8ab;
 }
 
+/*Landing page styles*/
+
+.landing-top-bar {
+  width:100%;
+  height:48px;
+}
+
+.landing-top-icon {
+  margin-left:15%;
+}
+
