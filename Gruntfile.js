@@ -34,13 +34,13 @@ module.exports = function (grunt) {
       },
       dev: {
         options: {
-          script: 'server/app.js',
+          script: 'public/app.js',
           debug: true
         }
       },
       prod: {
         options: {
-          script: 'server/app.js'
+          script: 'public/app.js'
         }
       }
     },

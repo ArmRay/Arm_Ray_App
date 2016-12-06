@@ -18,34 +18,43 @@
             $urlRouterProvider.otherwise("/");
             
             $locationProvider.html5Mode({
-                 enabled: true,
-                 requireBase: false
+                 enabled: true
             });
             
             $stateProvider
               .state('login', {
-                  url: "/",
+                  url: "/login",
                   templateUrl: "/views/login.html",
                   controller:"LoginCtrl"   
               }, function(){
                 console.log("Inside of login route");
               })
-
-              .state('dashboard', {
+              .state('index', {
+                  url: "/",
+                  templateUrl: "/views/landing.html",
+                  controller:"LandingCtrl"   
+              }, function(){
+                console.log("Inside of landing page");
+              })
+              .state('app',{
+                  url:"/app",
+                  templateUrl:"/views/app.html",
+              })
+              .state('app.dashboard', {
                   url: "/dashboard",
                   templateUrl: "/views/dashboard.html",
                   controller:"DashboardCtrl"   
               })
-              .state('dashboard.rightProjects',{
-                 templateUrl:"/views/right_project_nav.html",
-                 controller:"rightProjectCtrl"
-              })
-              .state('project', {
+              // .state('app.dashboard.rightProjects',{
+              //    templateUrl:"/views/right_project_nav.html",
+              //    controller:"rightProjectCtrl"
+              // })
+              .state('app.project', {
                   url: "/project",
                   templateUrl: "/views/project.html",
                   controller:"ProjectCtrl"   
               })
-              .state('profile', {
+              .state('app.profile', {
                   url: "/profile",
                   templateUrl: "/views/profile.html",
                   controller:"ProfileCtrl"   
@@ -67,6 +76,17 @@
 })();;(function () {
     'use strict';
 
+    angular.module('app').controller('LandingCtrl', ['$scope', function ($scope) {
+        console.log("LandingCtrl functional!");
+
+
+
+
+
+    }]);
+})();;(function () {
+    'use strict';
+
     angular.module('app').controller('LoginCtrl', ['$scope','LoginFactory' ,function ($scope,LoginFactory) {
         console.log("LoginCtrl functional!");
 
@@ -78,6 +98,7 @@
         		username:$scope.username,
         		password:$scope.password
         	}
+        	
         	console.log(user.username,user.password);
         	//login service sends the user object with username and password
         	// it expects a full user object back, and injects it into the next view

@@ -39,6 +39,22 @@ process.on('uncaughtException', function (err) {
   console.log('Caught exception: ' + err);
 });
 
+var allowCrossDomain = function(req, res, next) {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
+    // intercept OPTIONS method
+    if ('OPTIONS' == req.method) {
+      res.send(200);
+    }
+    else {
+      next();
+    }
+};
+
+app.use(allowCrossDomain);
+
+
 // APP USE STATEMENTS
 app.use((0, _expressValidator2.default)({
   errorFormatter: function errorFormatter(param, msg, value) {
@@ -72,7 +88,7 @@ app.use('/views', _express2.default.static(__dirname + '/../views/templates'));
 app.use('/directives', _express2.default.static(__dirname + '/directives'));
 // BASE ROUTE
 
-app.all('/', function (req, res) {
+app.all('/*', function (req, res) {
   res.sendFile('./index.html', { "root": "public/views/" });
 })
 
