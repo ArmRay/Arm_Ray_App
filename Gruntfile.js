@@ -87,7 +87,7 @@ module.exports = function (grunt) {
       },
       dist: {
         // the files to concatenate
-        src: ['public/sourcejavascript/*.js', 'public/sourcejavascript/**/*.js', '!public/sourcejavascript/server.js'],
+        src: ['public/sourcejavascript/*.js', 'public/sourcejavascript/**/*.js', '!public/sourcejavascript/server.js','!public/sourcejavascript/db.js'],
         // the location of the resulting JS file
         dest: 'public/sourcejavascript/<%= pkg.name %>.js'
       }
@@ -161,7 +161,7 @@ module.exports = function (grunt) {
     // Use nodemon to run server in debug mode with an initial breakpoint
     nodemon: {
       debug: {
-        script: 'public/sourcejavascript/server.js',
+        script: 'public/tempServer/server.js',
         options: {
           /*nodeArgs: ['--debug-brk'],*/
           env: {
