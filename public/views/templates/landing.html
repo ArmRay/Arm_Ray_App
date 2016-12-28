@@ -5,16 +5,16 @@
 <div class="landing-jumbotron">
 	<div style="width:550px;vertical-align:middle;" class="jumbotron-hero-text">
 		<h1>Focus on your research, not team building</h1>
-		<h4>ArmRay is a network that helps you build a team with the right mix of skills and values in minutes rather than days.
+		<h4>ArmRay is a network that helps you build a team with the right mix of skills and values in days or weeks rather than months.
 		</h4>
 	</div>
 	<div class="jumbo-form">
-		<input type="text" placeholder="Pick a username">
-		<input type="email" placeholder="Enter an email">
-		<input type="password" placeholder="Enter a password">	
-		<a href="#" class="jumbo-form-btn">
+		<input type="text" placeholder="Pick a username" ng-model="usernameTop" required>
+		<input type="email" placeholder="Enter an email" ng-model="emailTop" required>
+		<input type="password" placeholder="Enter a password" ng-model="passwordTop" required>	
+		<a on-click="submitForm(usernameTop,emailTop,passwordTop)" class="jumbo-form-btn">
 			<button>Sign up for ArmRay</button>
-		</a>	
+		</a>
 	</div>
 </div>
 
@@ -43,7 +43,7 @@
 		<img src="http://placehold.it/468x266">
 	</div>
 	<div class="right-aside-text">
-		<h2>Build your team in minutes, not weeks</h2>
+		<h2>Build your team in days, not months</h2>
 		<p>ArmRay makes building a team simple. Search by a field of study, name, or any other criteria. Then add them to the project with the click of a button.  </p>
 	</div>	
 	</div>
@@ -70,10 +70,10 @@
 
 <div class="landing-page-footer">
 	<div class="landing-footer-form">
-		<input type="text" placeholder="Pick a username">
-		<input type="email" placeholder="Enter an email">
-		<input type="password" placeholder="Enter a password">	
-		<a href="#" class="jumbo-form-btn">
+		<input type="text" placeholder="Pick a username" ng-model="usernameBottom" required>
+		<input type="email" placeholder="Enter an email" ng-model="emailBottom" required>
+		<input type="password" placeholder="Enter a password" ng-model="passwordBottom" required>
+		<a on-click="submitForm(usernameBottom,emailBottom,passwordBottom)" class="jumbo-form-btn">
 			<button>Sign up for ArmRay</button>
 		</a>	
 	</div>

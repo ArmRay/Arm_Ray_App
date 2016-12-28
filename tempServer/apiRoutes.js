@@ -4,29 +4,7 @@ const router =express.Router();
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const User = require('./userModel');
-
-
-User.find({'username':'sysadmin'}, function(err,user){
-	console.log('inside of user find');
-	if(err){
-		console.log(err);
-	}
-	if(!user){
-		let newuser = new User();
-		user.username = 'sysadmin';
-		user.password = 'welcome1';
-		user.email = 'daniel.ashcraft@ofashandfire.com';
-		newuser.save(function(err,user){
-			if(err){
-				console.log(err);
-			}
-			console.log('saved sysadmin user!');
-		})
-	}
-	if(user){
-		console.log('sysadmin exists');
-	}
-})
+const bcrypt = require('bcryptjs');
 
 
 router.get('/',function(req,res){
@@ -43,6 +21,37 @@ router.get('/',function(req,res){
 });
 
 router.post('/', function(req,res){
+	if(req.body){
+		let username = req.body.username;
+		let email = req.body.email;
+		let password = req.body.password;
+
+		let newuser = new User();
+		newuser.username = username;
+		newuser.email = email;
+		newuser.password = password;
+
+
+		bcrypt.genSalt(10, function(err, salt) {
+        console.log("inside of bcrypt 1  on model");
+        if(err){
+            console.log('err 1 bcrypt',err); //handle error
+        }
+        bcrypt.hash(newUser.password, salt, function(err, hash) {
+            if(err){
+                console.log("error 2",err); //handle error
+            }
+            newUser.password = hash;
+
+            newUser.save(function(err){
+                if(err){
+                    console.log(err);
+                }
+                res.status(200).json(newUser);
+            })
+        });
+    });
+	}
 
 
 
