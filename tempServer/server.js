@@ -82,26 +82,32 @@ app.use(_bodyParser2.default.urlencoded({ extended:true }));
 app.use(_bodyParser2.default.json());
 
 //Generic JS route, i.e. for route and etc
-app.use('/js', _express2.default.static('../public/javascript'));
+app.use('/js', intercept,_express2.default.static(__dirname+'/../public/javascript'));
 // End of Generic JS route
-app.use('/branding', _express2.default.static('../public/assets/images'));
-app.use('/css', _express2.default.static('../public/css'));
-app.use('/controllers', _express2.default.static('../public/contrsollers'));
-app.use('/factories', _express2.default.static('../public/factories'));
-app.use('/services', _express2.default.static('../public/services'));
-app.use('/views', _express2.default.static('../public/views/templates'));
-app.use('/directives', _express2.default.static('../public/directives'));
+app.use('/branding', _express2.default.static(__dirname+'/../public/assets/images'));
+app.use('/css', _express2.default.static(__dirname+'/../public/css'));
+app.use('/controllers', _express2.default.static(__dirname+'/../public/contrsollers'));
+app.use('/factories', _express2.default.static(__dirname+'/../public/factories'));
+app.use('/services', _express2.default.static(__dirname+'/../public/services'));
+app.use('/views', _express2.default.static(__dirname+'/../public/views/templates'));
+app.use('/directives', _express2.default.static(__dirname+'/../public/directives'));
+
+function intercept(req,res,next){
+  console.log('this route is being requested');
+  next();
+};
 
 app.use('/api',api);
 // BASE ROUTE
 
-app.all('/*', function (req, res) {
-  res.sendFile('./index.html', { "root": "../public/views/" });
+app.get('/',function (req, res) {
+  console.log('main file is being requested');
+  res.sendFile(_path.join(__dirname, '../public/views/index.html'));
 })
 
 // START THE SERVER
 // =============================================================================
-
+  
 var port = process.env.PORT || 8080;
 app.listen(port);
 

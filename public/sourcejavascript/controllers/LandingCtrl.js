@@ -6,6 +6,12 @@
 
 
 
+        function submitForm(username,email,password){
+        	
+
+        }
+
+
 
 
     }]);

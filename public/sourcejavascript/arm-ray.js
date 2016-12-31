@@ -81,6 +81,12 @@
 
 
 
+        function submitForm(username,email,password){
+        	
+
+        }
+
+
 
 
     }]);
@@ -120,7 +126,11 @@
 
         
     }]);
-})();;(function () {
+})();
+
+
+
+;(function () {
     'use strict';
 
     angular.module('app').controller('MainCtrl', ['$scope', function ($scope) {

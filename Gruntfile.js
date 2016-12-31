@@ -161,11 +161,11 @@ module.exports = function (grunt) {
     // Use nodemon to run server in debug mode with an initial breakpoint
     nodemon: {
       debug: {
-        script: 'public/tempServer/server.js',
+        script: 'tempServer/server.js',
         options: {
           /*nodeArgs: ['--debug-brk'],*/
           env: {
-            PORT: process.env.PORT || 9000
+            PORT: process.env.PORT || 8080
           },
           callback: function (nodemon) {
             nodemon.on('log', function (event) {
