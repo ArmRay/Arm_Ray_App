@@ -9,20 +9,22 @@ const nodemailer = require('nodemailer');
 const wellknown = require('nodemailer-wellknown');
 const config = require('./config');
 
-let godaddy = wellknown('Godaddy');
+let Outlook365 = wellknown('Outlook365');
 
 router.get('/',function(req,res){
+	console.log('outlook 365 settings',Outlook365);
 
 	let transporter = nodemailer.createTransport({
-     service: 'Godaddy', // <- resolved as 'Postmark' from the wellknown info
-     auth: {
-     	user: config.emailusername,
-     	pass: config.emailpassword
-     }
+    host: 'smtp.office365.com',
+    port: '587',
+    auth: { user: config.emailusername,
+     	pass: config.emailpassword },
+    secureConnection: false,
+    tls: { ciphers: 'SSLv3' }
 	});
-
+	console.log('transport settings',transporter);
 	let mailOptions = {
-	    from: '"ArmRay Registration ?" <donotreply@armray.com>', // sender address
+	    from: '"ArmRay Registration ?" <danielashcraft@armray.com>', // sender address
 	    to: 'daniel.ashcraft@ofashandfire.com', // list of receivers
 	    subject: 'Hello ✔', // Subject line
 	    text: 'Hello world ?', // plaintext body
@@ -31,7 +33,7 @@ router.get('/',function(req,res){
 
 	transporter.sendMail(mailOptions, function(error, info){
     	if(error){
-        	console.log(error);
+        	console.log('sendmail error',error);
     	}
     	console.log('info',info);
     	console.log('Message sent: ' + info.response);
