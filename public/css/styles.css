@@ -118,7 +118,6 @@ nav{
 
 .landing-top-bar {
   height:48px;
-  padding-left:15%;
   font-family: Roboto;
   font-size: 24px;
   font-weight: 500;
@@ -223,7 +222,7 @@ nav{
 }
 
 .jumbo-form-btn button{
-  width: 407px;
+  width: 386px;
   height: 48px;
   padding:0px;
   border:none;
@@ -260,7 +259,6 @@ hr {
 .landing-module .hero-text h1{
   padding-top:20px;
   font-family: Roboto;
-  height: 48px;
   font-size: 32px;
   font-weight: 300;
   font-style: normal;
@@ -297,7 +295,6 @@ hr {
 
 .landing-module .left-aside-text{
   float:left;
-  width:40%;
   margin-top:7%;
 }
 
@@ -333,7 +330,6 @@ hr {
 
 .landing-module .right-aside-text{
   float:right;
-  width:40%;
   margin-top:7%;
 }
 
@@ -369,7 +365,6 @@ hr {
 
 .landing-footer-form {
   margin:0 auto;
-  width:50%;
   padding-top:10%;
   padding-bottom:10%;
 }
@@ -388,4 +383,13 @@ hr {
   padding-left:18px; 
 }
 
+
+@media (max-width:1000px){
+  .landing-module .right-aside-text{
+    margin-top:0% !important;
+  } 
+  .landing-module .left-aside-text{
+    margin-top:0% !important;
+  } 
+}
 

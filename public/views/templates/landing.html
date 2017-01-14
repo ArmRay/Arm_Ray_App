@@ -1,83 +1,117 @@
-<div class="landing-top-bar">
-	<img class="landing-top-icon" height="30px" width="30px" src="/branding/arm-ray-logo.png" alt="">
-	<p style="color:#656d78;margin-top:5px;float:left;margin-bottom:16px;padding-left:7px;">ArmRay</p>
-</div>
-<div class="landing-jumbotron">
-	<div style="width:550px;vertical-align:middle;" class="jumbotron-hero-text">
-		<h1>Focus on your research, not team building</h1>
-		<h4>ArmRay is a network that helps you build a team with the right mix of skills and values in days or weeks rather than months.
-		</h4>
-	</div>
-	<div class="jumbo-form">
-		<input type="text" placeholder="Pick a username" ng-model="usernameTop" required>
-		<input type="email" placeholder="Enter an email" ng-model="emailTop" required>
-		<input type="password" placeholder="Enter a password" ng-model="passwordTop" required>	
-		<a on-click="submitForm(usernameTop,emailTop,passwordTop)" class="jumbo-form-btn">
-			<button>Sign up for ArmRay</button>
-		</a>
-	</div>
-</div>
-
-<div class="landing-module">
-	<div class="hero-text">
-		<h1>Be Productive On Day One</h1>
-	</div>
-	<div class="hero-sub-text">
-		<p>ArmRay gives you all you need to build successful teams right out of the box. Create a project and start adding collaborators.</p>
-	</div>
-
-</div>
-<hr>
-<div class="landing-module">
-	<div class="aside-container">
-		<div class="left-aside-text">
-			<h2>Create a project in seconds</h2>
-			<p>With the click of a button, you can have your project up and running. After you’ve filled in a few simple variables it’s time to build your team. </p>
-		</div>	
-		<div class="left-aside-img">
-			<img src="http://placehold.it/468x266">
+<div class="container">
+	<div class="row">
+		<div class="landing-top-bar">
+			<img class="landing-top-icon" height="30px" width="30px" src="/branding/arm-ray-logo.png" alt="">
+			<p style="color:#656d78;margin-top:5px;float:left;margin-bottom:10px;padding-left:7px;">ArmRay</p>
 		</div>
 	</div>
-	<div class="aside-container">
-	<div class="right-aside-img">
-		<img src="http://placehold.it/468x266">
+</div>
+<div class="u-full-width">
+	<div class="landing-jumbotron">
+		<div class="container">
+			<div class="row">
+				<div class="one-half column jumbotron-hero-text">
+					<h1>Focus on your research, not team building</h1>
+					<h4>ArmRay is a network that helps you to start build a team with the right mix of skills and values in minutes rather than days. 
+					</h4>
+				</div>
+				<div class="one-half column jumbo-form">
+					
+						<input ng-change="checkemail(emailTop)" type="email" placeholder="Enter Your Email" ng-model="emailTop" name="emailTop" required>
+						<input type="text" placeholder="First Name" ng-model="firstnameTop" required>
+						<input type="text" placeholder="Last Name" ng-model="lastnameTop" required>
+						<a ng-click="submitForm(emailTop,firstnameTop,lastnameTop)" class="jumbo-form-btn">
+							<button>Sign up for ArmRay</button>
+						</a>
+				</div>
+			</div>
+		</div>
 	</div>
-	<div class="right-aside-text">
-		<h2>Build your team in days, not months</h2>
-		<p>ArmRay makes building a team simple. Search by a field of study, name, or any other criteria. Then add them to the project with the click of a button.  </p>
-	</div>	
-	</div>
-	<div class="aside-container">
-	<div class="left-aside-text">
-		<h2>Take control of your team</h2>
-		<p>Every project is private by default. This puts you in control of who does what on your team. You set the level of involvement for all of your collaborators. </p>
-	</div>	
-	<div class="left-aside-img">
-		<img src="http://placehold.it/468x266">
-	</div>
+</div>
+<div class="container">
+	<div class="row">
+		<div class="landing-module">
+			<div class="hero-text">
+				<h1>Be Productive On Day One</h1>
+			</div>
+			<div class="hero-sub-text">
+				<p>ArmRay gives you all you need to build successful teams right out of the box. Create a project and start adding collaborators.</p>
+			</div>
+		</div>
 	</div>
 </div>
 <hr>
-<div class="landing-module">
-	<div class="hero-text">
-		<h1>And We’re Just Getting Started</h1>
-	</div>
-	<div class="hero-sub-text">
-		<p>ArmRay is just getting off the ground. We’ve got a lot more tricks up our sleeves. Sign up for early access so that we hear your voice during our development!</p>
-	</div>	
 
+<div class="landing-module">
+	<div class="container">
+		<div class="row">
+			<div class="aside-container">
+				<div class="one-half column left-aside-text">
+					<h2>Create a project in seconds</h2>
+					<p>With the click of a button, you can have your project up and running. After you’ve filled in a few simple variables it’s time to build your team.  </p>
+				</div>	
+				<div class="one-half column left-aside-img">
+					<img class="u-max-full-width" src="http://placehold.it/468x266">
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="container">
+		<div class="row">
+			<div class="aside-container">
+				<div class="one-half column right-aside-img">
+					<img class="u-max-full-width" src="http://placehold.it/468x266">
+				</div>
+				<div class="one-half column right-aside-text">
+					<h2>Build your team in minutes, not weeks</h2>
+					<p>ArmRay makes building a team simple. Search by a discipline or skill. Then add them to the project with the click of a button. It couldn’t be easier. </p>
+				</div>	
+			</div>
+		</div>
+	</div>
+	<div class="container">
+		<div class="row">
+			<div class="aside-container">
+				<div class="one-half column left-aside-text">
+					<h2>Take control of your team</h2>
+					<p>Every project is private by default. This puts you in control of who does what on your team. You set the level of involvement for all of your collaborators. </p>
+				</div>	
+				<div class="one-half column left-aside-img">
+					<img class="u-max-full-width" src="http://placehold.it/468x266">
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<hr>
+<div class="u-full-width">
+	<div class="container">
+		<div class="landing-module">
+			<div class="section-heading hero-text">
+				<h1>And We’re Just Getting Started</h1>
+			</div>
+			<div class="section-description hero-sub-text">
+				<p>ArmRay is just getting off the ground. We’ve got a lot more tricks up our sleeves. Sign up for early access so that we hear your voice during our development!</p>
+			</div>	
+		</div>
+	</div>
 </div>
 
 <div class="landing-page-footer">
-	<div class="landing-footer-form">
-		<input type="text" placeholder="Pick a username" ng-model="usernameBottom" required>
-		<input type="email" placeholder="Enter an email" ng-model="emailBottom" required>
-		<input type="password" placeholder="Enter a password" ng-model="passwordBottom" required>
-		<a on-click="submitForm(usernameBottom,emailBottom,passwordBottom)" class="jumbo-form-btn">
-			<button>Sign up for ArmRay</button>
-		</a>	
+	<div class="u-full-width">
+		<div class="container">
+			<div class="landing-footer-form">
+					<input ng-change="checkemail(emailBottom)" type="email" placeholder="Enter Your Email" ng-model="emailBottom" required>
+					<input type="text" placeholder="First Name" ng-model="firstnameBottom" required>
+					<input type="text" placeholder="Last Name" ng-model="lastnameBottom" required>
+					<a ng-click="submitForm(emailBottom,firstnameBottom,lastnameBottom)" class="jumbo-form-btn">
+						<button>Sign up for ArmRay</button>
+					</a>
+			</div>
+		</div>
 	</div>
 </div>
+
 
 
 

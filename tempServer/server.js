@@ -82,7 +82,7 @@ app.use(_bodyParser2.default.urlencoded({ extended:true }));
 app.use(_bodyParser2.default.json());
 
 //Generic JS route, i.e. for route and etc
-app.use('/js', intercept,_express2.default.static(__dirname+'/../public/javascript'));
+app.use('/js',_express2.default.static(__dirname+'/../public/javascript'));
 // End of Generic JS route
 app.use('/branding', _express2.default.static(__dirname+'/../public/assets/images'));
 app.use('/css', _express2.default.static(__dirname+'/../public/css'));
@@ -90,7 +90,7 @@ app.use('/controllers', _express2.default.static(__dirname+'/../public/contrsoll
 app.use('/factories', _express2.default.static(__dirname+'/../public/factories'));
 app.use('/services', _express2.default.static(__dirname+'/../public/services'));
 app.use('/views', _express2.default.static(__dirname+'/../public/views/templates'));
-app.use('/directives', _express2.default.static(__dirname+'/../public/directives'));
+app.use('/directives', intercept, _express2.default.static(__dirname+'/../public'));
 
 function intercept(req,res,next){
   console.log('this route is being requested');

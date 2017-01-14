@@ -4,9 +4,25 @@
 	//Declare module dependencies.
 	angular.module('app', [
 		'ui.router',
-		'ngResource'
+		'ngAria',
+		'ngAnimate',
+		'ngResource',
+		'toastr'
+	]).config(['toastrConfig',function(toastrConfig){
 
-	]);
+		angular.extend(toastrConfig, {
+		    autoDismiss: true,
+		    containerId: 'toast-container',
+		    maxOpened: 1,    
+		    newestOnTop: true,
+		    positionClass: 'toast-top-center',
+		    preventDuplicates: false,
+		    preventOpenDuplicates: false,
+		    target: 'body'
+	  	});
+	}]);
+ 
+	
 })();;
 (function () {
     'use strict';
@@ -76,12 +92,53 @@
 })();;(function () {
     'use strict';
 
-    angular.module('app').controller('LandingCtrl', ['$scope', function ($scope) {
+    angular.module('app').controller('LandingCtrl', ['$scope','toastr','$http', function ($scope,toastr,$http) {
         console.log("LandingCtrl functional!");
 
 
 
-        function submitForm(username,email,password){
+        $scope.submitForm = function(email,firstname,lastname){
+        	console.log('this has been clicked');
+        	if(typeof email != 'undefined' && typeof firstname != 'undefined' && typeof lastname != 'undefined'){
+        		var user = {
+        			firstname: firstname,
+        			lastname: lastname,
+        			email:email
+        		}
+        		console.log('Win!')
+        		$http.post('/api/register',user).then(function(data){
+ 				if(data.message= 'Success'){
+ 					console.log('this user was saved succesfully');
+ 					$scope.firstnameTop = '';
+ 					$scope.lastnameTop = '';
+ 					$scope.emailTop = '';
+ 					$scope.firstnameBottom = '';
+ 					$scope.lastnameBottom = '';
+ 					$scope.emailTop = '';
+ 				}
+ 				else{
+ 					console.log('this user was not saved!');
+ 				}
+
+ 				if(data.error){
+ 					toastr.danger('Something went wrong, try again later :(','Whoops!');
+ 				}
+ 				
+
+        	})
+
+        	console.log('user',user)
+        		
+        	}
+        	else if(typeof email == 'undefined'){
+        		console.log('email was undefined');
+        		toastr.warning('Your Email was not valid','Invalid!')
+        	}
+        	else{
+        		console.log('something else was undefined')
+        		toastr.warning('You must submit a first and last name','Invalid!')
+        	}
+
         	
 
         }
