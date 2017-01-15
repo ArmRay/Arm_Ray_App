@@ -114,7 +114,7 @@ let checkEmail = function(req,res){
 
 router.get('/', base);
 router.post('/register', register);
-ruter.post('/checkusername/:email', checkEmail);
+router.post('/checkusername/:email', checkEmail);
 
 
 

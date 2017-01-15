@@ -4,34 +4,48 @@
     angular.module('app').controller('LandingCtrl', ['$scope','toastr','$http', function ($scope,toastr,$http) {
         console.log("LandingCtrl functional!");
 
+        function dangertrigger(){
+            toastr.warning('Email has already been registered','Issue!');
+        }
+        var doesemailexist =true;
 
-        $scope.checkemail= function(x){
-                let checkemail= x;
-                let checkurl = '/api/checkusername/'+checkemail;
-                console.log(checkemail);
+        function checkit(x){
+            var check= x;
+                var checkurl = '/api/checkusername/'+check;
+                console.log(check);
                 console.log(checkurl);
                 $http.post(checkurl).then(function(res){
                         if(res.data.exists){
-                            toastr.danger('Email has already been registered','Issue!');
+                            console.log('exists exists');
+                            dangertrigger();
+                            doesemailexist = false;
+                        }else{
+                            doesemailexist = true;
                         }
-                    },function(){
+                    },function(){   
                     console.log('there was a checkusername get error');
                 })
         }
+
+        $scope.checkemail= function(x){
+            checkit(x);
+        };
         
 
         $scope.submitForm = function(email,firstname,lastname){
         	console.log('this has been clicked');
-        	if(typeof email != 'undefined' && typeof firstname != 'undefined' && typeof lastname != 'undefined'){
+        	if(typeof email != 'undefined' && doesemailexist && typeof firstname != 'undefined' && typeof lastname != 'undefined'){
         		var user = {
         			firstname: firstname,
         			lastname: lastname,
         			email:email
         		}
         		console.log('Win!')
+
         		$http.post('/api/register',user).then(function(data){
  				if(data.message= 'Success'){
  					console.log('this user was saved succesfully');
+                    toastr.success('Thank you for registering!');
  					$scope.firstnameTop = '';
  					$scope.lastnameTop = '';
  					$scope.emailTop = '';
