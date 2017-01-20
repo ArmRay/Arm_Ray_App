@@ -77,7 +77,7 @@
     "node": ">=0.10.0"
   },
   "scripts": {
-    "start": "grunt",
+    "start": "node ./tempServer/server.js",
     "test": "grunt test",
     "build": "babel public/sourcejavascript -d public/javascript"
   },

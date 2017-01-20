@@ -1,0 +1,1528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Plato - api/src/api/routes/Project.js</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+  <link href="../../assets/css/vendor/morris.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/bootstrap.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/font-awesome.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/codemirror.css" rel="stylesheet">
+  <link href="../../assets/css/plato.css" rel="stylesheet">
+  <link href="../../assets/css/plato-file.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="navbar navbar-fixed-top">
+  <div class="container">
+    <a class="navbar-brand" href="http://github.com/es-analysis/plato">Plato on Github</a>
+    <ul class="nav navbar-nav">
+      <li>
+        <a href="../../index.html">Report Home</a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="jumbotron">
+  <div class="container">
+    <h1>api/src/api/routes/Project.js</h1>
+  </div>
+</div>
+
+<div class="container aggregate-stats">
+  <div class="row">
+    <div class="col-md-6">
+      <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"  data-container="body"></i></a></h2>
+      <p class="stat">72.08</p>
+    </div>
+    <div class="col-md-6">
+      <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h2>
+      <p class="stat">1411</p>
+    </div>
+  </div>
+  <div class="row historical">
+    <div class="col-md-6">
+      <p id="chart_historical_maint" class="chart"></p>
+    </div>
+    <div class="col-md-6">
+      <p id="chart_historical_sloc" class="chart"></p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty" data-container="body"></i></a></h2>
+      <p class="stat">102.81</p>
+    </div>
+    <div class="col-md-6">
+      <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs" data-container="body"></i></a></h2>
+      <p class="stat">10.64</p>
+    </div>
+  </div>
+</div>
+
+<div class="container charts">
+  <div class="row">
+    <h2 class="header">Function weight</h2>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <h3 class="chart-header">By Complexity <a href="http://en.wikipedia.org/wiki/Cyclomatic_complexity"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="This metric counts the number of distinct paths through a block of code. Lower values are better." data-original-title="Cyclomatic Complexity" data-container="body"></i></a></h3>
+      <div id="fn-by-complexity" class="stat"></div>
+    </div>
+    <div class="col-md-6">
+      <h3 class="chart-header">By SLOC  <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h3>
+      <div id="fn-by-sloc" class="stat"></div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <textarea id="file-source" class="col-md-12">import express from &#039;express&#039;;
+import Project from &#039;../services/Project&#039;;
+
+const router = express.Router();
+
+/**
+ * Creates &amp;#x60;Project&amp;#x60; objects. **project_name**, 
+ * **project_description**,
+ * 
+ * **project_creator_id**, and **is_project_private** are 
+ * required,
+ * 
+ * all others optional.
+ * 
+ */
+router.post(&#039;/&#039;, (req, res, next) =&gt; {
+  const options = {
+  };
+
+  Project.createProject(options, (err, data) =&gt; {
+    if (err) {
+      const err_response = { status: 500, message: &#039;Unexpected error&#039; };
+      return res.status(500).send(err_response);
+    }
+
+    res.status(200).send(data);
+  });
+});
+
+/**
+ * Updates a &amp;#x60;Project&amp;#x60; object. All fields other than &amp;#x60;id&amp;#x60; 
+ * optional.
+ * 
+ */
+router.put(&#039;/:id&#039;, (req, res, next) =&gt; {
+  const options = {
+    id: req.params.id,
+  };
+
+  Project.updateProject(options, (err, data) =&gt; {
+    if (err) {
+      const err_response = { status: 500, message: &#039;Unexpected error&#039; };
+      return res.status(500).send(err_response);
+    }
+
+    res.status(200).send(data);
+  });
+});
+
+/**
+ * Delete a &amp;#x27;Project&amp;#x27; by their id.
+ * 
+ */
+router.delete(&#039;/:id&#039;, (req, res, next) =&gt; {
+  const options = {
+    id: req.params.id
+  };
+
+  Project.deleteProjectById(options, (err, data) =&gt; {
+    if (err) {
+      const err_response = { status: 500, message: &#039;Unexpected error&#039; };
+      return res.status(500).send(err_response);
+    }
+
+    res.status(200).send(data);
+  });
+});
+
+/**
+ * Retrieve a &amp;#x27;Project&amp;#x27; by their id.
+ * 
+ */
+router.get(&#039;/:id&#039;, (req, res, next) =&gt; {
+  const options = {
+    id: req.params.id
+  };
+
+  Project.getProjectById(options, (err, data) =&gt; {
+    if (err) {
+      const err_response = { status: 500, message: &#039;Unexpected error&#039; };
+      return res.status(500).send(err_response);
+    }
+
+    res.status(200).send(data);
+  });
+});
+
+/**
+ * Get creators of a &amp;#x60;Project&amp;#x60;.
+ * 
+ */
+router.get(&#039;/:id/creators&#039;, (req, res, next) =&gt; {
+  const options = {
+    id: req.params.id
+  };
+
+  Project.getAllProjectCreators(options, (err, data) =&gt; {
+    if (err) {
+      const err_response = { status: 500, message: &#039;Unexpected error&#039; };
+      return res.status(500).send(err_response);
+    }
+
+    res.status(200).send(data);
+  });
+});
+
+/**
+ * Set creators of a &amp;#x60;Project&amp;#x60;.
+ * 
+ */
+router.post(&#039;/:id/creators&#039;, (req, res, next) =&gt; {
+  const options = {
+    id: req.params.id,
+  };
+
+  Project.setAllProjectCreators(options, (err, data) =&gt; {
+    if (err) {
+      const err_response = { status: 500, message: &#039;Unexpected error&#039; };
+      return res.status(500).send(err_response);
+    }
+
+    res.status(200).send(data);
+  });
+});
+
+/**
+ * Add to creators of a &amp;#x60;Project&amp;#x60;.
+ * 
+ */
+router.put(&#039;/:id/creators&#039;, (req, res, next) =&gt; {
+  const options = {
+    id: req.params.id,
+  };
+
+  Project.addProjectCreators(options, (err, data) =&gt; {
+    if (err) {
+      const err_response = { status: 500, message: &#039;Unexpected error&#039; };
+      return res.status(500).send(err_response);
+    }
+
+    res.status(200).send(data);
+  });
+});
+
+/**
+ * Remove all &amp;#x27;project_creators&amp;#x27; from a &amp;#x60;Project&amp;#x60;.
+ * 
+ */
+router.delete(&#039;/:id/creators&#039;, (req, res, next) =&gt; {
+  const options = {
+    id: req.params.id
+  };
+
+  Project.deleteProjectCreators(options, (err, data) =&gt; {
+    if (err) {
+      const err_response = { status: 500, message: &#039;Unexpected error&#039; };
+      return res.status(500).send(err_response);
+    }
+
+    res.status(200).send(data);
+  });
+});
+
+/**
+ * Check if &amp;#x60;User&amp;#x60; is creator on &amp;#x60;Project&amp;#x27;, return &amp;#x60;User&amp;#x60;if 
+ * true.
+ * 
+ */
+router.get(&#039;/:id/creators/{user_id}&#039;, (req, res, next) =&gt; {
+  const options = {
+    id: req.params.id,
+    user_id: req.params.user_id
+  };
+
+  Project.isUserCreatorOnProject(options, (err, data) =&gt; {
+    if (err) {
+      const err_response = { status: 500, message: &#039;Unexpected error&#039; };
+      return res.status(500).send(err_response);
+    }
+
+    res.status(200).send(data);
+  });
+});
+
+/**
+ * Set creator of a &amp;#x60;Project&amp;#x60;.
+ * 
+ */
+router.post(&#039;/:id/creators/{user_id}&#039;, (req, res, next) =&gt; {
+  const options = {
+    id: req.params.id,
+    user_id: req.params.user_id
+  };
+
+  Project.setProjectCreator(options, (err, data) =&gt; {
+    if (err) {
+      const err_response = { status: 500, message: &#039;Unexpected error&#039; };
+      return res.status(500).send(err_response);
+    }
+
+    res.status(200).send(data);
+  });
+});
+
+/**
+ * Add to creators of a &amp;#x60;Project&amp;#x60;.
+ * 
+ */
+router.put(&#039;/:id/creators/{user_id}&#039;, (req, res, next) =&gt; {
+  const options = {
+    id: req.params.id,
+    user_id: req.params.user_id
+  };
+
+  Project.addProjectCreator(options, (err, data) =&gt; {
+    if (err) {
+      const err_response = { status: 500, message: &#039;Unexpected error&#039; };
+      return res.status(500).send(err_response);
+    }
+
+    res.status(200).send(data);
+  });
+});
+
+/**
+ * Remove a &amp;#x27;project_creator&amp;#x27; from a &amp;#x60;Project&amp;#x60;.
+ * 
+ */
+router.delete(&#039;/:id/creators/{user_id}&#039;, (req, res, next) =&gt; {
+  const options = {
+    id: req.params.id,
+    user_id: req.params.user_id
+  };
+
+  Project.deleteProjectCreator(options, (err, data) =&gt; {
+    if (err) {
+      const err_response = { status: 500, message: &#039;Unexpected error&#039; };
+      return res.status(500).send(err_response);
+    }
+
+    res.status(200).send(data);
+  });
+});
+
+/**
+ * Get collaborators of a &amp;#x60;Project&amp;#x60;.
+ * 
+ */
+router.get(&#039;/:id/collaborators&#039;, (req, res, next) =&gt; {
+  const options = {
+    id: req.params.id
+  };
+
+  Project.getAllProjectCollaborators(options, (err, data) =&gt; {
+    if (err) {
+      const err_response = { status: 500, message: &#039;Unexpected error&#039; };
+      return res.status(500).send(err_response);
+    }
+
+    res.status(200).send(data);
+  });
+});
+
+/**
+ * Set creators of a &amp;#x60;Project&amp;#x60;.
+ * 
+ */
+router.post(&#039;/:id/collaborators&#039;, (req, res, next) =&gt; {
+  const options = {
+    id: req.params.id,
+  };
+
+  Project.setAllProjectCollaborators(options, (err, data) =&gt; {
+    if (err) {
+      const err_response = { status: 500, message: &#039;Unexpected error&#039; };
+      return res.status(500).send(err_response);
+    }
+
+    res.status(200).send(data);
+  });
+});
+
+/**
+ * Add to collaborators of a &amp;#x60;Project&amp;#x60;.
+ * 
+ */
+router.put(&#039;/:id/collaborators&#039;, (req, res, next) =&gt; {
+  const options = {
+    id: req.params.id,
+  };
+
+  Project.addProjectCollaborators(options, (err, data) =&gt; {
+    if (err) {
+      const err_response = { status: 500, message: &#039;Unexpected error&#039; };
+      return res.status(500).send(err_response);
+    }
+
+    res.status(200).send(data);
+  });
+});
+
+/**
+ * Remove all &amp;#x27;project_collaborators&amp;#x27; from a &amp;#x60;Project&amp;#x60;.
+ * 
+ */
+router.delete(&#039;/:id/collaborators&#039;, (req, res, next) =&gt; {
+  const options = {
+    id: req.params.id
+  };
+
+  Project.deleteProjectCollaborators(options, (err, data) =&gt; {
+    if (err) {
+      const err_response = { status: 500, message: &#039;Unexpected error&#039; };
+      return res.status(500).send(err_response);
+    }
+
+    res.status(200).send(data);
+  });
+});
+
+/**
+ * Check if &amp;#x60;User&amp;#x60; is collaborator on &amp;#x60;Project&amp;#x27;, return if true
+ * 
+ */
+router.get(&#039;/:id/collaborators/{user_id}&#039;, (req, res, next) =&gt; {
+  const options = {
+    id: req.params.id,
+    user_id: req.params.user_id
+  };
+
+  Project.isUserCollaboratorOnProject(options, (err, data) =&gt; {
+    if (err) {
+      const err_response = { status: 500, message: &#039;Unexpected error&#039; };
+      return res.status(500).send(err_response);
+    }
+
+    res.status(200).send(data);
+  });
+});
+
+/**
+ * Set collaborators of a &amp;#x60;Project&amp;#x60;.
+ * 
+ */
+router.post(&#039;/:id/collaborators/{user_id}&#039;, (req, res, next) =&gt; {
+  const options = {
+    id: req.params.id,
+    user_id: req.params.user_id
+  };
+
+  Project.setProjectCollaborators(options, (err, data) =&gt; {
+    if (err) {
+      const err_response = { status: 500, message: &#039;Unexpected error&#039; };
+      return res.status(500).send(err_response);
+    }
+
+    res.status(200).send(data);
+  });
+});
+
+/**
+ * Add to collaborator of a &amp;#x60;Project&amp;#x60;.
+ * 
+ */
+router.put(&#039;/:id/collaborators/{user_id}&#039;, (req, res, next) =&gt; {
+  const options = {
+    id: req.params.id,
+    user_id: req.params.user_id
+  };
+
+  Project.addProjectCollaborator(options, (err, data) =&gt; {
+    if (err) {
+      const err_response = { status: 500, message: &#039;Unexpected error&#039; };
+      return res.status(500).send(err_response);
+    }
+
+    res.status(200).send(data);
+  });
+});
+
+/**
+ * Remove a &amp;#x27;project_collaborator&amp;#x27; from a &amp;#x60;Project&amp;#x60;.
+ * 
+ */
+router.delete(&#039;/:id/collaborators/{user_id}&#039;, (req, res, next) =&gt; {
+  const options = {
+    id: req.params.id,
+    user_id: req.params.user_id
+  };
+
+  Project.deleteProjectCollaborator(options, (err, data) =&gt; {
+    if (err) {
+      const err_response = { status: 500, message: &#039;Unexpected error&#039; };
+      return res.status(500).send(err_response);
+    }
+
+    res.status(200).send(data);
+  });
+});
+
+/**
+ * Get urls of a &amp;#x60;Project&amp;#x60;.
+ * 
+ */
+router.get(&#039;/:id/urls&#039;, (req, res, next) =&gt; {
+  const options = {
+    id: req.params.id
+  };
+
+  Project.getAllProjectUrls(options, (err, data) =&gt; {
+    if (err) {
+      const err_response = { status: 500, message: &#039;Unexpected error&#039; };
+      return res.status(500).send(err_response);
+    }
+
+    res.status(200).send(data);
+  });
+});
+
+/**
+ * Set urls of a &amp;#x60;Project&amp;#x60;.
+ * 
+ */
+router.post(&#039;/:id/urls&#039;, (req, res, next) =&gt; {
+  const options = {
+    id: req.params.id,
+  };
+
+  Project.setAllProjectUrls(options, (err, data) =&gt; {
+    if (err) {
+      const err_response = { status: 500, message: &#039;Unexpected error&#039; };
+      return res.status(500).send(err_response);
+    }
+
+    res.status(200).send(data);
+  });
+});
+
+/**
+ * Add to urls of a &amp;#x60;Project&amp;#x60;.
+ * 
+ */
+router.put(&#039;/:id/urls&#039;, (req, res, next) =&gt; {
+  const options = {
+    id: req.params.id,
+  };
+
+  Project.addProjectUrls(options, (err, data) =&gt; {
+    if (err) {
+      const err_response = { status: 500, message: &#039;Unexpected error&#039; };
+      return res.status(500).send(err_response);
+    }
+
+    res.status(200).send(data);
+  });
+});
+
+/**
+ * Remove all &amp;#x27;urls&amp;#x27; from a &amp;#x60;Project&amp;#x60;.
+ * 
+ */
+router.delete(&#039;/:id/urls&#039;, (req, res, next) =&gt; {
+  const options = {
+    id: req.params.id
+  };
+
+  Project.deleteProjectUrls(options, (err, data) =&gt; {
+    if (err) {
+      const err_response = { status: 500, message: &#039;Unexpected error&#039; };
+      return res.status(500).send(err_response);
+    }
+
+    res.status(200).send(data);
+  });
+});
+
+/**
+ * Get keywords of a &amp;#x60;Project&amp;#x60;.
+ * 
+ */
+router.get(&#039;/:id/keys&#039;, (req, res, next) =&gt; {
+  const options = {
+    id: req.params.id
+  };
+
+  Project.getAllProjectKeywords(options, (err, data) =&gt; {
+    if (err) {
+      const err_response = { status: 500, message: &#039;Unexpected error&#039; };
+      return res.status(500).send(err_response);
+    }
+
+    res.status(200).send(data);
+  });
+});
+
+/**
+ * Set keywords of a &amp;#x60;Project&amp;#x60;.
+ * 
+ */
+router.post(&#039;/:id/keys&#039;, (req, res, next) =&gt; {
+  const options = {
+    id: req.params.id,
+  };
+
+  Project.setAllProjectKeywords(options, (err, data) =&gt; {
+    if (err) {
+      const err_response = { status: 500, message: &#039;Unexpected error&#039; };
+      return res.status(500).send(err_response);
+    }
+
+    res.status(200).send(data);
+  });
+});
+
+/**
+ * Add to keywords of a &amp;#x60;Project&amp;#x60;.
+ * 
+ */
+router.put(&#039;/:id/keys&#039;, (req, res, next) =&gt; {
+  const options = {
+    id: req.params.id,
+  };
+
+  Project.addProjectKeywords(options, (err, data) =&gt; {
+    if (err) {
+      const err_response = { status: 500, message: &#039;Unexpected error&#039; };
+      return res.status(500).send(err_response);
+    }
+
+    res.status(200).send(data);
+  });
+});
+
+/**
+ * Remove all &amp;#x27;keywords&amp;#x27; from a &amp;#x60;Project&amp;#x60;.
+ * 
+ */
+router.delete(&#039;/:id/keys&#039;, (req, res, next) =&gt; {
+  const options = {
+    id: req.params.id
+  };
+
+  Project.deleteProjectKeywords(options, (err, data) =&gt; {
+    if (err) {
+      const err_response = { status: 500, message: &#039;Unexpected error&#039; };
+      return res.status(500).send(err_response);
+    }
+
+    res.status(200).send(data);
+  });
+});
+
+/**
+ * Check if keyword is on &amp;#x60;Project&amp;#x27;.
+ * 
+ */
+router.get(&#039;/:id/keys/{keyword}&#039;, (req, res, next) =&gt; {
+  const options = {
+    id: req.params.id,
+    keyword: req.params.keyword
+  };
+
+  Project.isKeywordOnProject(options, (err, data) =&gt; {
+    if (err) {
+      const err_response = { status: 500, message: &#039;Unexpected error&#039; };
+      return res.status(500).send(err_response);
+    }
+
+    res.status(200).send(data);
+  });
+});
+
+/**
+ * Set keyword of a &amp;#x60;Project&amp;#x60;.
+ * 
+ */
+router.post(&#039;/:id/keys/{keyword}&#039;, (req, res, next) =&gt; {
+  const options = {
+    id: req.params.id,
+    keyword: req.params.keyword
+  };
+
+  Project.setProjectKeyword(options, (err, data) =&gt; {
+    if (err) {
+      const err_response = { status: 500, message: &#039;Unexpected error&#039; };
+      return res.status(500).send(err_response);
+    }
+
+    res.status(200).send(data);
+  });
+});
+
+/**
+ * Add to keyword of a &amp;#x60;Project&amp;#x60;.
+ * 
+ */
+router.put(&#039;/:id/keys/{keyword}&#039;, (req, res, next) =&gt; {
+  const options = {
+    id: req.params.id,
+    keyword: req.params.keyword
+  };
+
+  Project.addProjectKeyword(options, (err, data) =&gt; {
+    if (err) {
+      const err_response = { status: 500, message: &#039;Unexpected error&#039; };
+      return res.status(500).send(err_response);
+    }
+
+    res.status(200).send(data);
+  });
+});
+
+/**
+ * Remove a &amp;#x27;keyword&amp;#x27; from a &amp;#x60;Project&amp;#x60;.
+ * 
+ */
+router.delete(&#039;/:id/keys/{keyword}&#039;, (req, res, next) =&gt; {
+  const options = {
+    id: req.params.id,
+    keyword: req.params.keyword
+  };
+
+  Project.deleteProjectKeyword(options, (err, data) =&gt; {
+    if (err) {
+      const err_response = { status: 500, message: &#039;Unexpected error&#039; };
+      return res.status(500).send(err_response);
+    }
+
+    res.status(200).send(data);
+  });
+});
+
+/**
+ * Get files of a &amp;#x60;Project&amp;#x60;.
+ * 
+ */
+router.get(&#039;/:id/files&#039;, (req, res, next) =&gt; {
+  const options = {
+    id: req.params.id
+  };
+
+  Project.getAllProjectFiles(options, (err, data) =&gt; {
+    if (err) {
+      const err_response = { status: 500, message: &#039;Unexpected error&#039; };
+      return res.status(500).send(err_response);
+    }
+
+    res.status(200).send(data);
+  });
+});
+
+/**
+ * Set files of a &amp;#x60;Project&amp;#x60;.
+ * 
+ */
+router.post(&#039;/:id/files&#039;, (req, res, next) =&gt; {
+  const options = {
+    id: req.params.id,
+  };
+
+  Project.setAllProjectFiles(options, (err, data) =&gt; {
+    if (err) {
+      const err_response = { status: 500, message: &#039;Unexpected error&#039; };
+      return res.status(500).send(err_response);
+    }
+
+    res.status(200).send(data);
+  });
+});
+
+/**
+ * Add to files of a &amp;#x60;Project&amp;#x60;.
+ * 
+ */
+router.put(&#039;/:id/files&#039;, (req, res, next) =&gt; {
+  const options = {
+    id: req.params.id,
+  };
+
+  Project.addProjectFiles(options, (err, data) =&gt; {
+    if (err) {
+      const err_response = { status: 500, message: &#039;Unexpected error&#039; };
+      return res.status(500).send(err_response);
+    }
+
+    res.status(200).send(data);
+  });
+});
+
+/**
+ * Remove all &amp;#x27;files&amp;#x27; from a &amp;#x60;Project&amp;#x60;.
+ * 
+ */
+router.delete(&#039;/:id/files&#039;, (req, res, next) =&gt; {
+  const options = {
+    id: req.params.id
+  };
+
+  Project.deleteProjectFiles(options, (err, data) =&gt; {
+    if (err) {
+      const err_response = { status: 500, message: &#039;Unexpected error&#039; };
+      return res.status(500).send(err_response);
+    }
+
+    res.status(200).send(data);
+  });
+});
+
+/**
+ * Get reviews of a &amp;#x60;Project&amp;#x60;.
+ * 
+ */
+router.get(&#039;/:id/reviews&#039;, (req, res, next) =&gt; {
+  const options = {
+    id: req.params.id
+  };
+
+  Project.getAllProjectReviews(options, (err, data) =&gt; {
+    if (err) {
+      const err_response = { status: 500, message: &#039;Unexpected error&#039; };
+      return res.status(500).send(err_response);
+    }
+
+    res.status(200).send(data);
+  });
+});
+
+/**
+ * Set reviews of a &amp;#x60;Project&amp;#x60;.
+ * 
+ */
+router.post(&#039;/:id/reviews&#039;, (req, res, next) =&gt; {
+  const options = {
+    id: req.params.id,
+  };
+
+  Project.setAllProjectReviews(options, (err, data) =&gt; {
+    if (err) {
+      const err_response = { status: 500, message: &#039;Unexpected error&#039; };
+      return res.status(500).send(err_response);
+    }
+
+    res.status(200).send(data);
+  });
+});
+
+/**
+ * Add to reviews of a &amp;#x60;Project&amp;#x60;.
+ * 
+ */
+router.put(&#039;/:id/reviews&#039;, (req, res, next) =&gt; {
+  const options = {
+    id: req.params.id,
+  };
+
+  Project.addProjectReviews(options, (err, data) =&gt; {
+    if (err) {
+      const err_response = { status: 500, message: &#039;Unexpected error&#039; };
+      return res.status(500).send(err_response);
+    }
+
+    res.status(200).send(data);
+  });
+});
+
+/**
+ * Remove all &amp;#x27;reviews&amp;#x27; from a &amp;#x60;Project&amp;#x60;.
+ * 
+ */
+router.delete(&#039;/:id/reviews&#039;, (req, res, next) =&gt; {
+  const options = {
+    id: req.params.id
+  };
+
+  Project.deleteProjectReviews(options, (err, data) =&gt; {
+    if (err) {
+      const err_response = { status: 500, message: &#039;Unexpected error&#039; };
+      return res.status(500).send(err_response);
+    }
+
+    res.status(200).send(data);
+  });
+});
+
+/**
+ * Check if &amp;#x60;Review&amp;#x60; of a &amp;#x60;Project&amp;#x60; if it is on project
+ * 
+ */
+router.get(&#039;/:id/reviews/{review_id}&#039;, (req, res, next) =&gt; {
+  const options = {
+    id: req.params.id,
+    review_id: req.params.review_id
+  };
+
+  Project.isReviewOnOProject(options, (err, data) =&gt; {
+    if (err) {
+      const err_response = { status: 500, message: &#039;Unexpected error&#039; };
+      return res.status(500).send(err_response);
+    }
+
+    res.status(200).send(data);
+  });
+});
+
+/**
+ * Add &amp;#x60;Review&amp;#x60;to a &amp;#x60;Project&amp;#x60;.
+ * 
+ */
+router.put(&#039;/:id/reviews/{review_id}&#039;, (req, res, next) =&gt; {
+  const options = {
+    id: req.params.id,
+    review_id: req.params.review_id
+  };
+
+  Project.addProjectReview(options, (err, data) =&gt; {
+    if (err) {
+      const err_response = { status: 500, message: &#039;Unexpected error&#039; };
+      return res.status(500).send(err_response);
+    }
+
+    res.status(200).send(data);
+  });
+});
+
+/**
+ * Remove a &amp;#x27;review&amp;#x27; from a &amp;#x60;Project&amp;#x60;.
+ * 
+ */
+router.delete(&#039;/:id/reviews/{review_id}&#039;, (req, res, next) =&gt; {
+  const options = {
+    id: req.params.id,
+    review_id: req.params.review_id
+  };
+
+  Project.deleteProjectReview(options, (err, data) =&gt; {
+    if (err) {
+      const err_response = { status: 500, message: &#039;Unexpected error&#039; };
+      return res.status(500).send(err_response);
+    }
+
+    res.status(200).send(data);
+  });
+});
+
+/**
+ * Get posts of a &amp;#x60;Project&amp;#x60;.
+ * 
+ */
+router.get(&#039;/:id/posts&#039;, (req, res, next) =&gt; {
+  const options = {
+    id: req.params.id
+  };
+
+  Project.getAllProjectPosts(options, (err, data) =&gt; {
+    if (err) {
+      const err_response = { status: 500, message: &#039;Unexpected error&#039; };
+      return res.status(500).send(err_response);
+    }
+
+    res.status(200).send(data);
+  });
+});
+
+/**
+ * Set posts of a &amp;#x60;Project&amp;#x60;.
+ * 
+ */
+router.post(&#039;/:id/posts&#039;, (req, res, next) =&gt; {
+  const options = {
+    id: req.params.id,
+  };
+
+  Project.setAllProjectPosts(options, (err, data) =&gt; {
+    if (err) {
+      const err_response = { status: 500, message: &#039;Unexpected error&#039; };
+      return res.status(500).send(err_response);
+    }
+
+    res.status(200).send(data);
+  });
+});
+
+/**
+ * Add to posts of a &amp;#x60;Project&amp;#x60;.
+ * 
+ */
+router.put(&#039;/:id/posts&#039;, (req, res, next) =&gt; {
+  const options = {
+    id: req.params.id,
+  };
+
+  Project.addProjectPosts(options, (err, data) =&gt; {
+    if (err) {
+      const err_response = { status: 500, message: &#039;Unexpected error&#039; };
+      return res.status(500).send(err_response);
+    }
+
+    res.status(200).send(data);
+  });
+});
+
+/**
+ * Remove all &amp;#x27;posts&amp;#x27; from a &amp;#x60;Project&amp;#x60;.
+ * 
+ */
+router.delete(&#039;/:id/posts&#039;, (req, res, next) =&gt; {
+  const options = {
+    id: req.params.id
+  };
+
+  Project.deleteProjectPosts(options, (err, data) =&gt; {
+    if (err) {
+      const err_response = { status: 500, message: &#039;Unexpected error&#039; };
+      return res.status(500).send(err_response);
+    }
+
+    res.status(200).send(data);
+  });
+});
+
+/**
+ * Check if &amp;#x60;Post&amp;#x60; is on a &amp;#x60;Project&amp;#x60;
+ * 
+ */
+router.get(&#039;/:id/posts/{post_id}&#039;, (req, res, next) =&gt; {
+  const options = {
+    id: req.params.id,
+    post_id: req.params.post_id
+  };
+
+  Project.isPostOnProject(options, (err, data) =&gt; {
+    if (err) {
+      const err_response = { status: 500, message: &#039;Unexpected error&#039; };
+      return res.status(500).send(err_response);
+    }
+
+    res.status(200).send(data);
+  });
+});
+
+/**
+ * Add &amp;#x60;Post&amp;#x60;to a &amp;#x60;Project&amp;#x60;.
+ * 
+ */
+router.put(&#039;/:id/posts/{post_id}&#039;, (req, res, next) =&gt; {
+  const options = {
+    id: req.params.id,
+    post_id: req.params.post_id
+  };
+
+  Project.addProjectPost(options, (err, data) =&gt; {
+    if (err) {
+      const err_response = { status: 500, message: &#039;Unexpected error&#039; };
+      return res.status(500).send(err_response);
+    }
+
+    res.status(200).send(data);
+  });
+});
+
+/**
+ * Remove a &amp;#x27;post&amp;#x27; from a &amp;#x60;Project&amp;#x60;.
+ * 
+ */
+router.delete(&#039;/:id/posts/{post_id}&#039;, (req, res, next) =&gt; {
+  const options = {
+    id: req.params.id,
+    post_id: req.params.post_id
+  };
+
+  Project.deleteProjectPost(options, (err, data) =&gt; {
+    if (err) {
+      const err_response = { status: 500, message: &#039;Unexpected error&#039; };
+      return res.status(500).send(err_response);
+    }
+
+    res.status(200).send(data);
+  });
+});
+
+/**
+ * Retrieve project_name associated with a &amp;#x60;Project&amp;#x60;.
+ * 
+ */
+router.get(&#039;/:id/project_name&#039;, (req, res, next) =&gt; {
+  const options = {
+    id: req.params.id
+  };
+
+  Project.getProjectNameById(options, (err, data) =&gt; {
+    if (err) {
+      const err_response = { status: 500, message: &#039;Unexpected error&#039; };
+      return res.status(500).send(err_response);
+    }
+
+    res.status(200).send(data);
+  });
+});
+
+/**
+ * Delete project_name from a project
+ * 
+ */
+router.delete(&#039;/:id/project_name&#039;, (req, res, next) =&gt; {
+  const options = {
+    id: req.params.id
+  };
+
+  Project.deleteUserProjectName(options, (err, data) =&gt; {
+    if (err) {
+      const err_response = { status: 500, message: &#039;Unexpected error&#039; };
+      return res.status(500).send(err_response);
+    }
+
+    res.status(200).send(data);
+  });
+});
+
+/**
+ * Check if &amp;#x60;Project&amp;#x60;name of &amp;#x60;Project&amp;#x60; is some value
+ * 
+ */
+router.get(&#039;/:id/name/{project_name}&#039;, (req, res, next) =&gt; {
+  const options = {
+    id: req.params.id,
+    project_name: req.params.project_name
+  };
+
+  Project.isNameOnProject(options, (err, data) =&gt; {
+    if (err) {
+      const err_response = { status: 500, message: &#039;Unexpected error&#039; };
+      return res.status(500).send(err_response);
+    }
+
+    res.status(200).send(data);
+  });
+});
+
+/**
+ * Add project_name to a &amp;#x60;Project&amp;#x60;.
+ * 
+ */
+router.post(&#039;/:id/name/{project_name}&#039;, (req, res, next) =&gt; {
+  const options = {
+    id: req.params.id,
+    project_name: req.params.project_name
+  };
+
+  Project.addProjectName(options, (err, data) =&gt; {
+    if (err) {
+      const err_response = { status: 500, message: &#039;Unexpected error&#039; };
+      return res.status(500).send(err_response);
+    }
+
+    res.status(200).send(data);
+  });
+});
+
+/**
+ * Modify project_name of a &amp;#x60;Project&amp;#x60;.
+ * 
+ */
+router.put(&#039;/:id/name/{project_name}&#039;, (req, res, next) =&gt; {
+  const options = {
+    id: req.params.id,
+    project_name: req.params.project_name
+  };
+
+  Project.modifyProjectName(options, (err, data) =&gt; {
+    if (err) {
+      const err_response = { status: 500, message: &#039;Unexpected error&#039; };
+      return res.status(500).send(err_response);
+    }
+
+    res.status(200).send(data);
+  });
+});
+
+/**
+ * Retrieve project_description associated with a &amp;#x60;Project&amp;#x60;.
+ * 
+ */
+router.get(&#039;/:id/description&#039;, (req, res, next) =&gt; {
+  const options = {
+    id: req.params.id
+  };
+
+  Project.getProjectDescriptionById(options, (err, data) =&gt; {
+    if (err) {
+      const err_response = { status: 500, message: &#039;Unexpected error&#039; };
+      return res.status(500).send(err_response);
+    }
+
+    res.status(200).send(data);
+  });
+});
+
+/**
+ * Delete project_description from a project
+ * 
+ */
+router.delete(&#039;/:id/description&#039;, (req, res, next) =&gt; {
+  const options = {
+    id: req.params.id
+  };
+
+  Project.deleteProjectDescription(options, (err, data) =&gt; {
+    if (err) {
+      const err_response = { status: 500, message: &#039;Unexpected error&#039; };
+      return res.status(500).send(err_response);
+    }
+
+    res.status(200).send(data);
+  });
+});
+
+/**
+ * Check if &amp;#x60;Project&amp;#x60;descript of &amp;#x60;Project&amp;#x60; is some value
+ * 
+ */
+router.get(&#039;/:id/description/{project_description}&#039;, (req, res, next) =&gt; {
+  const options = {
+    id: req.params.id,
+    project_description: req.params.project_description
+  };
+
+  Project.isProjectDescriptionOnProject(options, (err, data) =&gt; {
+    if (err) {
+      const err_response = { status: 500, message: &#039;Unexpected error&#039; };
+      return res.status(500).send(err_response);
+    }
+
+    res.status(200).send(data);
+  });
+});
+
+/**
+ * Add project_description to a &amp;#x60;Project&amp;#x60;.
+ * 
+ */
+router.post(&#039;/:id/description/{project_description}&#039;, (req, res, next) =&gt; {
+  const options = {
+    id: req.params.id,
+    project_description: req.params.project_description
+  };
+
+  Project.setProjectDescription(options, (err, data) =&gt; {
+    if (err) {
+      const err_response = { status: 500, message: &#039;Unexpected error&#039; };
+      return res.status(500).send(err_response);
+    }
+
+    res.status(200).send(data);
+  });
+});
+
+/**
+ * Modify project_description of a &amp;#x60;Project&amp;#x60;.
+ * 
+ */
+router.put(&#039;/:id/description/{project_description}&#039;, (req, res, next) =&gt; {
+  const options = {
+    id: req.params.id,
+    project_description: req.params.project_description
+  };
+
+  Project.modifyProjectDescription(options, (err, data) =&gt; {
+    if (err) {
+      const err_response = { status: 500, message: &#039;Unexpected error&#039; };
+      return res.status(500).send(err_response);
+    }
+
+    res.status(200).send(data);
+  });
+});
+
+/**
+ * Retrieve &amp;#x60;Grant&amp;#x60;associated with a &amp;#x60;Project&amp;#x60;.
+ * 
+ */
+router.get(&#039;/:id/grant&#039;, (req, res, next) =&gt; {
+  const options = {
+    id: req.params.id
+  };
+
+  Project.getProjectGrantById(options, (err, data) =&gt; {
+    if (err) {
+      const err_response = { status: 500, message: &#039;Unexpected error&#039; };
+      return res.status(500).send(err_response);
+    }
+
+    res.status(200).send(data);
+  });
+});
+
+/**
+ * Delete &amp;#x60;Grant&amp;#x60;from a project
+ * 
+ */
+router.delete(&#039;/:id/grant&#039;, (req, res, next) =&gt; {
+  const options = {
+    id: req.params.id
+  };
+
+  Project.deleteProjectGrant(options, (err, data) =&gt; {
+    if (err) {
+      const err_response = { status: 500, message: &#039;Unexpected error&#039; };
+      return res.status(500).send(err_response);
+    }
+
+    res.status(200).send(data);
+  });
+});
+
+/**
+ * Check if &amp;#x60;Grant&amp;#x60; is on &amp;#x60;Project&amp;#x60;
+ * 
+ */
+router.get(&#039;/:id/grant/{grant_id}&#039;, (req, res, next) =&gt; {
+  const options = {
+    id: req.params.id,
+    grant_id: req.params.grant_id
+  };
+
+  Project.isGrantOnProject(options, (err, data) =&gt; {
+    if (err) {
+      const err_response = { status: 500, message: &#039;Unexpected error&#039; };
+      return res.status(500).send(err_response);
+    }
+
+    res.status(200).send(data);
+  });
+});
+
+/**
+ * Add &amp;#x60;Grant&amp;#x60;to a &amp;#x60;Project&amp;#x60;.
+ * 
+ */
+router.post(&#039;/:id/grant/{grant_id}&#039;, (req, res, next) =&gt; {
+  const options = {
+    id: req.params.id,
+    grant_id: req.params.grant_id
+  };
+
+  Project.setProjectGrant(options, (err, data) =&gt; {
+    if (err) {
+      const err_response = { status: 500, message: &#039;Unexpected error&#039; };
+      return res.status(500).send(err_response);
+    }
+
+    res.status(200).send(data);
+  });
+});
+
+/**
+ * Modify &amp;#x60;Grant&amp;#x60;of a &amp;#x60;Project&amp;#x60;.
+ * 
+ */
+router.put(&#039;/:id/grant/{grant_id}&#039;, (req, res, next) =&gt; {
+  const options = {
+    id: req.params.id,
+    grant_id: req.params.grant_id
+  };
+
+  Project.modifyProjectGrant(options, (err, data) =&gt; {
+    if (err) {
+      const err_response = { status: 500, message: &#039;Unexpected error&#039; };
+      return res.status(500).send(err_response);
+    }
+
+    res.status(200).send(data);
+  });
+});
+
+/**
+ * Retrieve universities associated with a &amp;#x60;Project&amp;#x60;.
+ * 
+ */
+router.get(&#039;/:id/uni&#039;, (req, res, next) =&gt; {
+  const options = {
+    id: req.params.id
+  };
+
+  Project.getUniversitiesById(options, (err, data) =&gt; {
+    if (err) {
+      const err_response = { status: 500, message: &#039;Unexpected error&#039; };
+      return res.status(500).send(err_response);
+    }
+
+    res.status(200).send(data);
+  });
+});
+
+/**
+ * Delete all universities from a project
+ * 
+ */
+router.delete(&#039;/:id/uni&#039;, (req, res, next) =&gt; {
+  const options = {
+    id: req.params.id
+  };
+
+  Project.deleteProjecUniversities(options, (err, data) =&gt; {
+    if (err) {
+      const err_response = { status: 500, message: &#039;Unexpected error&#039; };
+      return res.status(500).send(err_response);
+    }
+
+    res.status(200).send(data);
+  });
+});
+
+/**
+ * Check if &amp;#x60;Project&amp;#x60;descript of &amp;#x60;Project&amp;#x60; is some value
+ * 
+ */
+router.get(&#039;/:id/uni/{university_id}&#039;, (req, res, next) =&gt; {
+  const options = {
+    id: req.params.id,
+    university_id: req.params.university_id
+  };
+
+  Project.isUniversityOnProject(options, (err, data) =&gt; {
+    if (err) {
+      const err_response = { status: 500, message: &#039;Unexpected error&#039; };
+      return res.status(500).send(err_response);
+    }
+
+    res.status(200).send(data);
+  });
+});
+
+/**
+ * Set university_id to a &amp;#x60;Project&amp;#x60;.
+ * 
+ */
+router.post(&#039;/:id/uni/{university_id}&#039;, (req, res, next) =&gt; {
+  const options = {
+    id: req.params.id,
+    university_id: req.params.university_id
+  };
+
+  Project.setProjectUniversity(options, (err, data) =&gt; {
+    if (err) {
+      const err_response = { status: 500, message: &#039;Unexpected error&#039; };
+      return res.status(500).send(err_response);
+    }
+
+    res.status(200).send(data);
+  });
+});
+
+/**
+ * Modify university_id of a &amp;#x60;Project&amp;#x60;.
+ * 
+ */
+router.put(&#039;/:id/uni/{university_id}&#039;, (req, res, next) =&gt; {
+  const options = {
+    id: req.params.id,
+    university_id: req.params.university_id
+  };
+
+  Project.modifyProjectUniversity(options, (err, data) =&gt; {
+    if (err) {
+      const err_response = { status: 500, message: &#039;Unexpected error&#039; };
+      return res.status(500).send(err_response);
+    }
+
+    res.status(200).send(data);
+  });
+});
+
+/**
+ * Retrieve is_private from a  &amp;#x60;Project&amp;#x60;.
+ * 
+ */
+router.get(&#039;/:id/private&#039;, (req, res, next) =&gt; {
+  const options = {
+    id: req.params.id
+  };
+
+  Project.isProjectPrivate(options, (err, data) =&gt; {
+    if (err) {
+      const err_response = { status: 500, message: &#039;Unexpected error&#039; };
+      return res.status(500).send(err_response);
+    }
+
+    res.status(200).send(data);
+  });
+});
+
+/**
+ * Set is_private from a  &amp;#x60;Project&amp;#x60;.
+ * 
+ */
+router.put(&#039;/:id/private&#039;, (req, res, next) =&gt; {
+  const options = {
+    id: req.params.id,
+  };
+
+  Project.setIsProjectPrivate(options, (err, data) =&gt; {
+    if (err) {
+      const err_response = { status: 500, message: &#039;Unexpected error&#039; };
+      return res.status(500).send(err_response);
+    }
+
+    res.status(200).send(data);
+  });
+});
+
+module.exports = router;</textarea>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <p>.</p>
+  </div>
+</footer>
+
+<script type="text/html" id="complexity-popover-template">
+  <div class="complexity-notice">
+    Complexity : {{ cyclomatic }} <br>
+    Length : {{ halstead.length }} <br>
+    Difficulty : {{ halstead.difficulty.toFixed(2) }} <br>
+    Est # bugs : {{ halstead.bugs.toFixed(2) }}<br>
+  </div>
+</script>
+
+<script type="text/javascript" src="../../assets/scripts/bundles/core-bundle.js"></script>
+<script type="text/javascript" src="../../assets/scripts/bundles/codemirror.js"></script>
+<script type="text/javascript" src="../../assets/scripts/codemirror.markpopovertext.js"></script>
+<script type="text/javascript" src="report.js"></script>
+<script type="text/javascript" src="report.history.js"></script>
+<script type="text/javascript" src="../../assets/scripts/plato-file.js"></script>
+</body>
+</html>

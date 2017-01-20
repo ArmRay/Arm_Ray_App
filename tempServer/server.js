@@ -108,7 +108,7 @@ app.get('/',function (req, res) {
 // START THE SERVER
 // =============================================================================
   
-var port = process.env.PORT || 8080;
+var port = process.env.PORT || 3000;
 app.listen(port);
 
 console.log('Server running on port ' + port);

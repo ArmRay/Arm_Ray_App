@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Plato - modify/src/api/routes/Grant.js</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+  <link href="../../assets/css/vendor/morris.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/bootstrap.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/font-awesome.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/codemirror.css" rel="stylesheet">
+  <link href="../../assets/css/plato.css" rel="stylesheet">
+  <link href="../../assets/css/plato-file.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="navbar navbar-fixed-top">
+  <div class="container">
+    <a class="navbar-brand" href="http://github.com/es-analysis/plato">Plato on Github</a>
+    <ul class="nav navbar-nav">
+      <li>
+        <a href="../../index.html">Report Home</a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="jumbotron">
+  <div class="container">
+    <h1>modify/src/api/routes/Grant.js</h1>
+  </div>
+</div>
+
+<div class="container aggregate-stats">
+  <div class="row">
+    <div class="col-md-6">
+      <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"  data-container="body"></i></a></h2>
+      <p class="stat">71.14</p>
+    </div>
+    <div class="col-md-6">
+      <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h2>
+      <p class="stat">514</p>
+    </div>
+  </div>
+  <div class="row historical">
+    <div class="col-md-6">
+      <p id="chart_historical_maint" class="chart"></p>
+    </div>
+    <div class="col-md-6">
+      <p id="chart_historical_sloc" class="chart"></p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty" data-container="body"></i></a></h2>
+      <p class="stat">75.97</p>
+    </div>
+    <div class="col-md-6">
+      <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs" data-container="body"></i></a></h2>
+      <p class="stat">3.35</p>
+    </div>
+  </div>
+</div>
+
+<div class="container charts">
+  <div class="row">
+    <h2 class="header">Function weight</h2>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <h3 class="chart-header">By Complexity <a href="http://en.wikipedia.org/wiki/Cyclomatic_complexity"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="This metric counts the number of distinct paths through a block of code. Lower values are better." data-original-title="Cyclomatic Complexity" data-container="body"></i></a></h3>
+      <div id="fn-by-complexity" class="stat"></div>
+    </div>
+    <div class="col-md-6">
+      <h3 class="chart-header">By SLOC  <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h3>
+      <div id="fn-by-sloc" class="stat"></div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <textarea id="file-source" class="col-md-12">import express from &#039;express&#039;;
+import Grant from &#039;../services/Grant&#039;;
+
+const router = express.Router();
+
+/**
+ * Creates &amp;#x60;Grant&amp;#x60; objects. All fields required.
+ * 
+ */
+router.post(&#039;/&#039;, (req, res, next) =&gt; {
+  const options = {
+    req : req
+  };
+
+  Grant.createGrant(options, (err, data) =&gt; {
+    if (err) {
+      const err_response = { status: 500, message: &#039;Unexpected error&#039; };
+      return res.status(500).send(err_response);
+    }
+
+    res.status(200).send(data);
+  });
+});
+
+/**
+ * Deletes &amp;#x60;Grant&amp;#x60; objects by **id**.
+ * 
+ */
+router.delete(&#039;/:id&#039;, (req, res, next) =&gt; {
+  const options = {
+    id: req.params.id,
+    req : req
+  };
+
+  Grant.deleteGrantById(options, (err, data) =&gt; {
+    if (err) {
+      const err_response = { status: 500, message: &#039;Unexpected error&#039; };
+      return res.status(500).send(err_response);
+    }
+
+    res.status(200).send(data);
+  });
+});
+
+/**
+ * Updates &amp;#x60;Grant&amp;#x60; objects. **id** is required,
+ * 
+ * all others optional.
+ * 
+ */
+router.put(&#039;/:id&#039;, (req, res, next) =&gt; {
+  const options = {
+    id: req.params.id,
+    req : req
+  };
+
+  Grant.updateGrantById(options, (err, data) =&gt; {
+    if (err) {
+      const err_response = { status: 500, message: &#039;Unexpected error&#039; };
+      return res.status(500).send(err_response);
+    }
+
+    res.status(200).send(data);
+  });
+});
+
+/**
+ * Clear &amp;#x60;Grant&amp;#x60; amount
+ * 
+ */
+router.delete(&#039;/:id/amount&#039;, (req, res, next) =&gt; {
+  const options = {
+    id: req.params.id,
+    req : req
+  };
+
+  Grant.clearGrantAmount(options, (err, data) =&gt; {
+    if (err) {
+      const err_response = { status: 500, message: &#039;Unexpected error&#039; };
+      return res.status(500).send(err_response);
+    }
+
+    res.status(200).send(data);
+  });
+});
+
+/**
+ * Set &amp;#x60;Grant&amp;#x60; amount
+ * 
+ */
+router.post(&#039;/:id/amount&#039;, (req, res, next) =&gt; {
+  const options = {
+    id: req.params.id,
+    req : req
+  };
+
+  Grant.setGrantAmount(options, (err, data) =&gt; {
+    if (err) {
+      const err_response = { status: 500, message: &#039;Unexpected error&#039; };
+      return res.status(500).send(err_response);
+    }
+
+    res.status(200).send(data);
+  });
+});
+
+/**
+ * Modify &amp;#x60;Grant&amp;#x60; amount
+ * 
+ */
+router.put(&#039;/:id/amount&#039;, (req, res, next) =&gt; {
+  const options = {
+    id: req.params.id,
+    req : req
+  };
+
+  Grant.modifyGrantAmount(options, (err, data) =&gt; {
+    if (err) {
+      const err_response = { status: 500, message: &#039;Unexpected error&#039; };
+      return res.status(500).send(err_response);
+    }
+
+    res.status(200).send(data);
+  });
+});
+
+/**
+ * Set &amp;#x60;Grant&amp;#x60; amount
+ * 
+ */
+router.post(&#039;/:id/amount/{amount}&#039;, (req, res, next) =&gt; {
+  const options = {
+    id: req.params.id,
+    amount: req.params.amount,
+    req : req
+  };
+
+  Grant.setGrantAmountPath(options, (err, data) =&gt; {
+    if (err) {
+      const err_response = { status: 500, message: &#039;Unexpected error&#039; };
+      return res.status(500).send(err_response);
+    }
+
+    res.status(200).send(data);
+  });
+});
+
+/**
+ * Modify &amp;#x60;Grant&amp;#x60; amount
+ * 
+ */
+router.put(&#039;/:id/amount/{amount}&#039;, (req, res, next) =&gt; {
+  const options = {
+    id: req.params.id,
+    amount: req.params.amount,
+    req : req
+  };
+
+  Grant.modifyGrantAmountPath(options, (err, data) =&gt; {
+    if (err) {
+      const err_response = { status: 500, message: &#039;Unexpected error&#039; };
+      return res.status(500).send(err_response);
+    }
+
+    res.status(200).send(data);
+  });
+});
+
+/**
+ * Clear &amp;#x60;Grant&amp;#x60; description
+ * 
+ */
+router.delete(&#039;/:id/description&#039;, (req, res, next) =&gt; {
+  const options = {
+    id: req.params.id,
+    req : req
+  };
+
+  Grant.clearGrantDescription(options, (err, data) =&gt; {
+    if (err) {
+      const err_response = { status: 500, message: &#039;Unexpected error&#039; };
+      return res.status(500).send(err_response);
+    }
+
+    res.status(200).send(data);
+  });
+});
+
+/**
+ * Set &amp;#x60;Grant&amp;#x60; description
+ * 
+ */
+router.post(&#039;/:id/description&#039;, (req, res, next) =&gt; {
+  const options = {
+    id: req.params.id,
+    req : req
+  };
+
+  Grant.setGrantDescription(options, (err, data) =&gt; {
+    if (err) {
+      const err_response = { status: 500, message: &#039;Unexpected error&#039; };
+      return res.status(500).send(err_response);
+    }
+
+    res.status(200).send(data);
+  });
+});
+
+/**
+ * Modify &amp;#x60;Grant&amp;#x60; description
+ * 
+ */
+router.put(&#039;/:id/description&#039;, (req, res, next) =&gt; {
+  const options = {
+    id: req.params.id,
+    req : req
+  };
+
+  Grant.modifyGrantDescription(options, (err, data) =&gt; {
+    if (err) {
+      const err_response = { status: 500, message: &#039;Unexpected error&#039; };
+      return res.status(500).send(err_response);
+    }
+
+    res.status(200).send(data);
+  });
+});
+
+/**
+ * Clear &amp;#x60;Grant&amp;#x60; keywords
+ * 
+ */
+router.delete(&#039;/:id/keys&#039;, (req, res, next) =&gt; {
+  const options = {
+    id: req.params.id,
+    req : req
+  };
+
+  Grant.clearGrantKeywords(options, (err, data) =&gt; {
+    if (err) {
+      const err_response = { status: 500, message: &#039;Unexpected error&#039; };
+      return res.status(500).send(err_response);
+    }
+
+    res.status(200).send(data);
+  });
+});
+
+/**
+ * Set &amp;#x60;Grant&amp;#x60; keywords
+ * 
+ */
+router.post(&#039;/:id/keys&#039;, (req, res, next) =&gt; {
+  const options = {
+    id: req.params.id,
+    req : req
+  };
+
+  Grant.setGrantKeywords(options, (err, data) =&gt; {
+    if (err) {
+      const err_response = { status: 500, message: &#039;Unexpected error&#039; };
+      return res.status(500).send(err_response);
+    }
+
+    res.status(200).send(data);
+  });
+});
+
+/**
+ * Modify &amp;#x60;Grant&amp;#x60; keywords
+ * 
+ */
+router.put(&#039;/:id/keys&#039;, (req, res, next) =&gt; {
+  const options = {
+    id: req.params.id,
+    req : req
+  };
+
+  Grant.addGrantKeywords(options, (err, data) =&gt; {
+    if (err) {
+      const err_response = { status: 500, message: &#039;Unexpected error&#039; };
+      return res.status(500).send(err_response);
+    }
+
+    res.status(200).send(data);
+  });
+});
+
+/**
+ * Set &amp;#x60;Grant&amp;#x60; keyword
+ * 
+ */
+router.delete(&#039;/:id/keys/{keyword}&#039;, (req, res, next) =&gt; {
+  const options = {
+    id: req.params.id,
+    keyword: req.params.keyword,
+    req : req
+  };
+
+  Grant.deleteGrantKeyword(options, (err, data) =&gt; {
+    if (err) {
+      const err_response = { status: 500, message: &#039;Unexpected error&#039; };
+      return res.status(500).send(err_response);
+    }
+
+    res.status(200).send(data);
+  });
+});
+
+/**
+ * Set &amp;#x60;Grant&amp;#x60; keyword
+ * 
+ */
+router.post(&#039;/:id/keys/{keyword}&#039;, (req, res, next) =&gt; {
+  const options = {
+    id: req.params.id,
+    keyword: req.params.keyword,
+    req : req
+  };
+
+  Grant.setGrantKeywordPath(options, (err, data) =&gt; {
+    if (err) {
+      const err_response = { status: 500, message: &#039;Unexpected error&#039; };
+      return res.status(500).send(err_response);
+    }
+
+    res.status(200).send(data);
+  });
+});
+
+/**
+ * Add &amp;#x60;Grant&amp;#x60; keyword
+ * 
+ */
+router.put(&#039;/:id/keys/{keyword}&#039;, (req, res, next) =&gt; {
+  const options = {
+    id: req.params.id,
+    keyword: req.params.keyword,
+    req : req
+  };
+
+  Grant.addGrantKeyword(options, (err, data) =&gt; {
+    if (err) {
+      const err_response = { status: 500, message: &#039;Unexpected error&#039; };
+      return res.status(500).send(err_response);
+    }
+
+    res.status(200).send(data);
+  });
+});
+
+/**
+ * Clear &amp;#x60;Grant&amp;#x60; type
+ * 
+ */
+router.delete(&#039;/:id/type&#039;, (req, res, next) =&gt; {
+  const options = {
+    id: req.params.id,
+    req : req
+  };
+
+  Grant.clearGrantType(options, (err, data) =&gt; {
+    if (err) {
+      const err_response = { status: 500, message: &#039;Unexpected error&#039; };
+      return res.status(500).send(err_response);
+    }
+
+    res.status(200).send(data);
+  });
+});
+
+/**
+ * Set &amp;#x60;Grant&amp;#x60; amount
+ * 
+ */
+router.post(&#039;/:id/type&#039;, (req, res, next) =&gt; {
+  const options = {
+    id: req.params.id,
+    req : req
+  };
+
+  Grant.setGrantType(options, (err, data) =&gt; {
+    if (err) {
+      const err_response = { status: 500, message: &#039;Unexpected error&#039; };
+      return res.status(500).send(err_response);
+    }
+
+    res.status(200).send(data);
+  });
+});
+
+/**
+ * Modify &amp;#x60;Grant&amp;#x60; amount
+ * 
+ */
+router.put(&#039;/:id/type&#039;, (req, res, next) =&gt; {
+  const options = {
+    id: req.params.id,
+    req : req
+  };
+
+  Grant.modifyGrantType(options, (err, data) =&gt; {
+    if (err) {
+      const err_response = { status: 500, message: &#039;Unexpected error&#039; };
+      return res.status(500).send(err_response);
+    }
+
+    res.status(200).send(data);
+  });
+});
+
+/**
+ * Set &amp;#x60;Grant&amp;#x60; type
+ * 
+ */
+router.post(&#039;/:id/type/{type}&#039;, (req, res, next) =&gt; {
+  const options = {
+    id: req.params.id,
+    type: req.params.type,
+    req : req
+  };
+
+  Grant.setGrantTypePath(options, (err, data) =&gt; {
+    if (err) {
+      const err_response = { status: 500, message: &#039;Unexpected error&#039; };
+      return res.status(500).send(err_response);
+    }
+
+    res.status(200).send(data);
+  });
+});
+
+/**
+ * Modify &amp;#x60;Grant&amp;#x60; amount
+ * 
+ */
+router.put(&#039;/:id/type/{type}&#039;, (req, res, next) =&gt; {
+  const options = {
+    id: req.params.id,
+    type: req.params.type,
+    req : req
+  };
+
+  Grant.modifyGrantTypePath(options, (err, data) =&gt; {
+    if (err) {
+      const err_response = { status: 500, message: &#039;Unexpected error&#039; };
+      return res.status(500).send(err_response);
+    }
+
+    res.status(200).send(data);
+  });
+});
+
+/**
+ * Clear &amp;#x60;Grant&amp;#x60; url array
+ * 
+ */
+router.delete(&#039;/:id/url&#039;, (req, res, next) =&gt; {
+  const options = {
+    id: req.params.id,
+    req : req
+  };
+
+  Grant.clearGrantUrls(options, (err, data) =&gt; {
+    if (err) {
+      const err_response = { status: 500, message: &#039;Unexpected error&#039; };
+      return res.status(500).send(err_response);
+    }
+
+    res.status(200).send(data);
+  });
+});
+
+/**
+ * Replace &amp;#x60;Grant&amp;#x60; url array
+ * 
+ */
+router.post(&#039;/:id/url&#039;, (req, res, next) =&gt; {
+  const options = {
+    id: req.params.id,
+    req : req
+  };
+
+  Grant.setGrantUrls(options, (err, data) =&gt; {
+    if (err) {
+      const err_response = { status: 500, message: &#039;Unexpected error&#039; };
+      return res.status(500).send(err_response);
+    }
+
+    res.status(200).send(data);
+  });
+});
+
+/**
+ * Add &amp;#x60;Grant&amp;#x60; url
+ * 
+ */
+router.put(&#039;/:id/url&#039;, (req, res, next) =&gt; {
+  const options = {
+    id: req.params.id,
+    req : req
+  };
+
+  Grant.addGrantUrl(options, (err, data) =&gt; {
+    if (err) {
+      const err_response = { status: 500, message: &#039;Unexpected error&#039; };
+      return res.status(500).send(err_response);
+    }
+
+    res.status(200).send(data);
+  });
+});
+
+module.exports = router;</textarea>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <p>.</p>
+  </div>
+</footer>
+
+<script type="text/html" id="complexity-popover-template">
+  <div class="complexity-notice">
+    Complexity : {{ cyclomatic }} <br>
+    Length : {{ halstead.length }} <br>
+    Difficulty : {{ halstead.difficulty.toFixed(2) }} <br>
+    Est # bugs : {{ halstead.bugs.toFixed(2) }}<br>
+  </div>
+</script>
+
+<script type="text/javascript" src="../../assets/scripts/bundles/core-bundle.js"></script>
+<script type="text/javascript" src="../../assets/scripts/bundles/codemirror.js"></script>
+<script type="text/javascript" src="../../assets/scripts/codemirror.markpopovertext.js"></script>
+<script type="text/javascript" src="report.js"></script>
+<script type="text/javascript" src="report.history.js"></script>
+<script type="text/javascript" src="../../assets/scripts/plato-file.js"></script>
+</body>
+</html>

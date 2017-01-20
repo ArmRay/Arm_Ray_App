@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Plato - server.js</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+  <link href="../../assets/css/vendor/morris.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/bootstrap.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/font-awesome.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/codemirror.css" rel="stylesheet">
+  <link href="../../assets/css/plato.css" rel="stylesheet">
+  <link href="../../assets/css/plato-file.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="navbar navbar-fixed-top">
+  <div class="container">
+    <a class="navbar-brand" href="http://github.com/es-analysis/plato">Plato on Github</a>
+    <ul class="nav navbar-nav">
+      <li>
+        <a href="../../index.html">Report Home</a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="jumbotron">
+  <div class="container">
+    <h1>server.js</h1>
+  </div>
+</div>
+
+<div class="container aggregate-stats">
+  <div class="row">
+    <div class="col-md-6">
+      <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"  data-container="body"></i></a></h2>
+      <p class="stat">75.62</p>
+    </div>
+    <div class="col-md-6">
+      <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h2>
+      <p class="stat">114</p>
+    </div>
+  </div>
+  <div class="row historical">
+    <div class="col-md-6">
+      <p id="chart_historical_maint" class="chart"></p>
+    </div>
+    <div class="col-md-6">
+      <p id="chart_historical_sloc" class="chart"></p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty" data-container="body"></i></a></h2>
+      <p class="stat">21.45</p>
+    </div>
+    <div class="col-md-6">
+      <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs" data-container="body"></i></a></h2>
+      <p class="stat">1.06</p>
+    </div>
+  </div>
+</div>
+
+<div class="container charts">
+  <div class="row">
+    <h2 class="header">Function weight</h2>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <h3 class="chart-header">By Complexity <a href="http://en.wikipedia.org/wiki/Cyclomatic_complexity"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="This metric counts the number of distinct paths through a block of code. Lower values are better." data-original-title="Cyclomatic Complexity" data-container="body"></i></a></h3>
+      <div id="fn-by-complexity" class="stat"></div>
+    </div>
+    <div class="col-md-6">
+      <h3 class="chart-header">By SLOC  <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h3>
+      <div id="fn-by-sloc" class="stat"></div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <textarea id="file-source" class="col-md-12">&#039;use strict&#039;;
+
+var _express = require(&#039;express&#039;);
+
+var _express2 = _interopRequireDefault(_express);
+
+var _expressValidator = require(&#039;express-validator&#039;);
+
+var _expressValidator2 = _interopRequireDefault(_expressValidator);
+
+var _bodyParser = require(&#039;body-parser&#039;);
+
+var _bodyParser2 = _interopRequireDefault(_bodyParser);
+
+var _expressSession = require(&#039;express-session&#039;);
+
+var _expressSession2 = _interopRequireDefault(_expressSession);
+
+var _path = require(&#039;path&#039;);
+
+var _path2 = _interopRequireDefault(_path);
+
+var _connectTimeout = require(&#039;connect-timeout&#039;);
+
+var _connectTimeout2 = _interopRequireDefault(_connectTimeout);
+
+var db = require(&#039;./db&#039;);
+
+var api = require(&#039;./apiRoutes&#039;);
+
+function _interopRequireDefault(obj) { return obj &amp;&amp; obj.__esModule ? obj : { default: obj }; }
+
+//IMPORT STATEMENTS
+var app = (0, _express2.default)();
+
+app.use((0, _connectTimeout2.default)(120000));
+app.use(haltOnTimedout);
+function haltOnTimedout(req, res, next) {
+  if (!req.timedout) next();
+}
+
+process.on(&#039;uncaughtException&#039;, function (err) {
+  console.log(&#039;Caught exception: &#039; + err);
+});
+
+var allowCrossDomain = function(req, res, next) {
+    res.header(&#039;Access-Control-Allow-Origin&#039;, &#039;*&#039;);
+    res.header(&#039;Access-Control-Allow-Methods&#039;, &#039;GET,PUT,POST,DELETE,OPTIONS&#039;);
+    res.header(&#039;Access-Control-Allow-Headers&#039;, &#039;Content-Type, Authorization, Content-Length, X-Requested-With&#039;);
+    // intercept OPTIONS method
+    if (&#039;OPTIONS&#039; == req.method) {
+      res.send(200);
+    }
+    else {
+      next();
+    }
+};
+
+app.use(allowCrossDomain);
+
+
+
+// APP USE STATEMENTS
+app.use((0, _expressValidator2.default)({
+  errorFormatter: function errorFormatter(param, msg, value) {
+    var namespace = param.split(&#039;.&#039;),
+        root = namespace.shift(),
+        formParam = root;
+
+    while (namespace.length) {
+      formParam += &#039;[&#039; + namespace.shift() + &#039;]&#039;;
+    }
+    return {  
+      param: formParam,
+      msg: msg,
+      value: value
+    };
+  }
+}));
+
+app.use(_bodyParser2.default.urlencoded({ extended:true }));
+app.use(_bodyParser2.default.json());
+
+//Generic JS route, i.e. for route and etc
+app.use(&#039;/js&#039;,_express2.default.static(__dirname+&#039;/../public/javascript&#039;));
+// End of Generic JS route
+app.use(&#039;/branding&#039;, _express2.default.static(__dirname+&#039;/../public/assets/images&#039;));
+app.use(&#039;/css&#039;, _express2.default.static(__dirname+&#039;/../public/css&#039;));
+app.use(&#039;/controllers&#039;, _express2.default.static(__dirname+&#039;/../public/contrsollers&#039;));
+app.use(&#039;/factories&#039;, _express2.default.static(__dirname+&#039;/../public/factories&#039;));
+app.use(&#039;/services&#039;, _express2.default.static(__dirname+&#039;/../public/services&#039;));
+app.use(&#039;/views&#039;, _express2.default.static(__dirname+&#039;/../public/views/templates&#039;));
+app.use(&#039;/directives&#039;, intercept, _express2.default.static(__dirname+&#039;/../public&#039;));
+
+function intercept(req,res,next){
+  console.log(&#039;this route is being requested&#039;);
+  next();
+};
+
+app.use(&#039;/api&#039;,api);
+// BASE ROUTE
+
+app.get(&#039;/&#039;,function (req, res) {
+  console.log(&#039;main file is being requested&#039;);
+  res.sendFile(_path.join(__dirname, &#039;../public/views/index.html&#039;));
+})
+
+// START THE SERVER
+// =============================================================================
+  
+var port = process.env.PORT || 3000;
+app.listen(port);
+
+console.log(&#039;Server running on port &#039; + port);</textarea>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <p>.</p>
+  </div>
+</footer>
+
+<script type="text/html" id="complexity-popover-template">
+  <div class="complexity-notice">
+    Complexity : {{ cyclomatic }} <br>
+    Length : {{ halstead.length }} <br>
+    Difficulty : {{ halstead.difficulty.toFixed(2) }} <br>
+    Est # bugs : {{ halstead.bugs.toFixed(2) }}<br>
+  </div>
+</script>
+
+<script type="text/javascript" src="../../assets/scripts/bundles/core-bundle.js"></script>
+<script type="text/javascript" src="../../assets/scripts/bundles/codemirror.js"></script>
+<script type="text/javascript" src="../../assets/scripts/codemirror.markpopovertext.js"></script>
+<script type="text/javascript" src="report.js"></script>
+<script type="text/javascript" src="report.history.js"></script>
+<script type="text/javascript" src="../../assets/scripts/plato-file.js"></script>
+</body>
+</html>

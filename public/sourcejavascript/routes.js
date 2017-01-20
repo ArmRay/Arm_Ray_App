@@ -17,15 +17,11 @@
                   url: "/login",
                   templateUrl: "/views/login.html",
                   controller:"LoginCtrl"   
-              }, function(){
-                console.log("Inside of login route");
               })
               .state('index', {
                   url: "/",
                   templateUrl: "/views/landing.html",
                   controller:"LandingCtrl"   
-              }, function(){
-                console.log("Inside of landing page");
               })
               .state('app',{
                   url:"/app",

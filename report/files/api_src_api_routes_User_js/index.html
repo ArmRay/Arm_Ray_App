@@ -1,0 +1,1428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Plato - api/src/api/routes/User.js</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+  <link href="../../assets/css/vendor/morris.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/bootstrap.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/font-awesome.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/codemirror.css" rel="stylesheet">
+  <link href="../../assets/css/plato.css" rel="stylesheet">
+  <link href="../../assets/css/plato-file.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="navbar navbar-fixed-top">
+  <div class="container">
+    <a class="navbar-brand" href="http://github.com/es-analysis/plato">Plato on Github</a>
+    <ul class="nav navbar-nav">
+      <li>
+        <a href="../../index.html">Report Home</a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="jumbotron">
+  <div class="container">
+    <h1>api/src/api/routes/User.js</h1>
+  </div>
+</div>
+
+<div class="container aggregate-stats">
+  <div class="row">
+    <div class="col-md-6">
+      <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"  data-container="body"></i></a></h2>
+      <p class="stat">72.09</p>
+    </div>
+    <div class="col-md-6">
+      <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h2>
+      <p class="stat">1311</p>
+    </div>
+  </div>
+  <div class="row historical">
+    <div class="col-md-6">
+      <p id="chart_historical_maint" class="chart"></p>
+    </div>
+    <div class="col-md-6">
+      <p id="chart_historical_sloc" class="chart"></p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty" data-container="body"></i></a></h2>
+      <p class="stat">119.63</p>
+    </div>
+    <div class="col-md-6">
+      <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs" data-container="body"></i></a></h2>
+      <p class="stat">10.48</p>
+    </div>
+  </div>
+</div>
+
+<div class="container charts">
+  <div class="row">
+    <h2 class="header">Function weight</h2>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <h3 class="chart-header">By Complexity <a href="http://en.wikipedia.org/wiki/Cyclomatic_complexity"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="This metric counts the number of distinct paths through a block of code. Lower values are better." data-original-title="Cyclomatic Complexity" data-container="body"></i></a></h3>
+      <div id="fn-by-complexity" class="stat"></div>
+    </div>
+    <div class="col-md-6">
+      <h3 class="chart-header">By SLOC  <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h3>
+      <div id="fn-by-sloc" class="stat"></div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <textarea id="file-source" class="col-md-12">import express from &#039;express&#039;;
+import User from &#039;../services/User&#039;;
+import bcrypt from &#039;bcrypt&#039;;
+import passport from &#039;passport&#039;;
+import jwt from &#039;jsonwebtoken&#039;;
+import expressJwt from &#039;express-jwt&#039;;
+
+const LocalStrategy= require(&#039;passport-local&#039;).Strategy;
+
+
+
+let secret = &#039;SomeArmraySecretHere&#039;;
+
+
+const router = express.Router();
+
+/**
+ * Creates &amp;#x60;User&amp;#x60; objects. &amp;#x60;University&amp;#x60; and &amp;#x60;Project&amp;#x60; are 
+ * optional (user may not yet have affiliations)
+ * 
+ * &amp;#x60;Keywords&amp;#x60; also optional. All other fields required.
+ * 
+ */
+router.post(&#039;/&#039;, (req, res, next) =&gt; {
+  const options = {
+    username:req.body.username,
+    password:req.body.password,
+    first_name:req.body.first_name,
+    last_name:req.body.last_name,
+    city:req.body.city,
+    state:req.body.state,
+    keywords:req.body.keywords
+  };
+
+  User.createUser(options, (err, data) =&gt; {
+    if (err) {
+      const err_response = { status: 500, message: &#039;Unexpected error&#039; };
+      return res.status(500).send(err_response);
+    }
+
+    res.status(200).send(data);
+  });
+});
+
+
+/**
+ * Checks credentials and logs in, if accurate
+ * The middleware does all the heavy lifting
+ */
+
+ // Example Post
+ // let user = {
+ //  username,
+ //  password
+ // }
+
+router.post(&#039;/login&#039;, localauth, (req, res, next) =&gt; {
+  res.status(200).json(req.user);
+  console.log(req.user);
+});
+
+
+/**
+ * Updates a &amp;#x60;User&amp;#x60; object. All fields other than &amp;#x60;id&amp;#x60; 
+ * optional.
+ * 
+ */
+router.put(&#039;/:id&#039;, (req, res, next) =&gt; {
+  const options = {
+    id: req.params.id,
+  };
+
+  User.updateUser(options, (err, data) =&gt; {
+    if (err) {
+      const err_response = { status: 500, message: &#039;Unexpected error&#039; };
+      return res.status(500).send(err_response);
+    }
+
+    res.status(200).send(data);
+  });
+});
+
+/**
+ * Delete a &amp;#x27;User&amp;#x27; by their id.
+ * 
+ */
+router.delete(&#039;/:id&#039;, (req, res, next) =&gt; {
+  const options = {
+    id: req.params.id
+  };
+
+  User.deleteUserById(options, (err, data) =&gt; {
+    if (err) {
+      const err_response = { status: 500, message: &#039;Unexpected error&#039; };
+      return res.status(500).send(err_response);
+    }
+
+    res.status(200).send(data);
+  });
+});
+
+/**
+ * Retrieve a &amp;#x27;User&amp;#x27; by their id.
+ * 
+ */
+router.get(&#039;/:id&#039;, (req, res, next) =&gt; {
+  const options = {
+    id: req.params.id
+  };
+
+  User.getUserById(options, (err, data) =&gt; {
+    if (err) {
+      const err_response = { status: 500, message: &#039;Unexpected error&#039; };
+      return res.status(500).send(err_response);
+    }
+
+    res.status(200).send(data);
+  });
+});
+
+/**
+ * Is &amp;#x27;University&amp;#x27; associated with a &amp;#x60;User&amp;#x60;?
+ * 
+ */
+router.get(&#039;/:id/uni/{university_id}&#039;, (req, res, next) =&gt; {
+  const options = {
+    id: req.params.id,
+    university_id: req.params.university_id
+  };
+
+  User.isUniversityOnUser(options, (err, data) =&gt; {
+    if (err) {
+      const err_response = { status: 500, message: &#039;Unexpected error&#039; };
+      return res.status(500).send(err_response);
+    }
+
+    res.status(200).send(data);
+  });
+});
+
+/**
+ * Add a &amp;#x27;University&amp;#x27; to a &amp;#x60;User&amp;#x60;.
+ * 
+ */
+router.post(&#039;/:id/uni/{university_id}&#039;, (req, res, next) =&gt; {
+  const options = {
+    id: req.params.id,
+    university_id: req.params.university_id
+  };
+
+  User.settUserUniversityById(options, (err, data) =&gt; {
+    if (err) {
+      const err_response = { status: 500, message: &#039;Unexpected error&#039; };
+      return res.status(500).send(err_response);
+    }
+
+    res.status(200).send(data);
+  });
+});
+
+/**
+ * Remove a &amp;#x27;University&amp;#x27; fromo a &amp;#x60;User&amp;#x60;.
+ * 
+ */
+router.delete(&#039;/:id/uni/{university_id}&#039;, (req, res, next) =&gt; {
+  const options = {
+    id: req.params.id,
+    university_id: req.params.university_id
+  };
+
+  User.deleteUserUniversityById(options, (err, data) =&gt; {
+    if (err) {
+      const err_response = { status: 500, message: &#039;Unexpected error&#039; };
+      return res.status(500).send(err_response);
+    }
+
+    res.status(200).send(data);
+  });
+});
+
+/**
+ * Retrieve all &amp;#x27;Project&amp;#x27; associated with a &amp;#x60;User&amp;#x60;.
+ * 
+ */
+router.get(&#039;/:id/project&#039;, (req, res, next) =&gt; {
+  const options = {
+    id: req.params.id
+  };
+
+  User.getAllUserProjectById(options, (err, data) =&gt; {
+    if (err) {
+      const err_response = { status: 500, message: &#039;Unexpected error&#039; };
+      return res.status(500).send(err_response);
+    }
+
+    res.status(200).send(data);
+  });
+});
+
+/**
+ * Remove all &amp;#x27;Project&amp;#x27; ojects from a &amp;#x60;User&amp;#x60;.
+ * 
+ */
+router.delete(&#039;/:id/project&#039;, (req, res, next) =&gt; {
+  const options = {
+    id: req.params.id
+  };
+
+  User.deleteAllUserProjectById(options, (err, data) =&gt; {
+    if (err) {
+      const err_response = { status: 500, message: &#039;Unexpected error&#039; };
+      return res.status(500).send(err_response);
+    }
+
+    res.status(200).send(data);
+  });
+});
+
+/**
+ * Is &amp;#x27;Project&amp;#x27; associated with a &amp;#x60;User&amp;#x60;?
+ * 
+ */
+router.get(&#039;/:id/project/{project_id}&#039;, (req, res, next) =&gt; {
+  const options = {
+    id: req.params.id,
+    project_id: req.params.project_id
+  };
+
+  User.isUserOnProjectById(options, (err, data) =&gt; {
+    if (err) {
+      const err_response = { status: 500, message: &#039;Unexpected error&#039; };
+      return res.status(500).send(err_response);
+    }
+
+    res.status(200).send(data);
+  });
+});
+
+/**
+ * Add a &amp;#x27;Project&amp;#x27; to a &amp;#x60;User&amp;#x60;.
+ * 
+ */
+router.post(&#039;/:id/project/{project_id}&#039;, (req, res, next) =&gt; {
+  const options = {
+    id: req.params.id,
+    project_id: req.params.project_id
+  };
+
+  User.settUserProjectById(options, (err, data) =&gt; {
+    if (err) {
+      const err_response = { status: 500, message: &#039;Unexpected error&#039; };
+      return res.status(500).send(err_response);
+    }
+
+    res.status(200).send(data);
+  });
+});
+
+/**
+ * Remove a &amp;#x27;Project&amp;#x27; from a &amp;#x60;User&amp;#x60;.
+ * 
+ */
+router.delete(&#039;/:id/project/{project_id}&#039;, (req, res, next) =&gt; {
+  const options = {
+    id: req.params.id,
+    project_id: req.params.project_id
+  };
+
+  User.deleteUserProjectById(options, (err, data) =&gt; {
+    if (err) {
+      const err_response = { status: 500, message: &#039;Unexpected error&#039; };
+      return res.status(500).send(err_response);
+    }
+
+    res.status(200).send(data);
+  });
+});
+
+/**
+ * Retrieve all &amp;#x27;Review&amp;#x27; associated with a &amp;#x60;User&amp;#x60;.
+ * 
+ */
+router.get(&#039;/:id/review&#039;, (req, res, next) =&gt; {
+  const options = {
+    id: req.params.id
+  };
+
+  User.getAllUserReviewById(options, (err, data) =&gt; {
+    if (err) {
+      const err_response = { status: 500, message: &#039;Unexpected error&#039; };
+      return res.status(500).send(err_response);
+    }
+
+    res.status(200).send(data);
+  });
+});
+
+/**
+ * Remove all &amp;#x27;Review&amp;#x27; ojects from a &amp;#x60;User&amp;#x60;.
+ * 
+ */
+router.delete(&#039;/:id/review&#039;, (req, res, next) =&gt; {
+  const options = {
+    id: req.params.id
+  };
+
+  User.deleteAllUserReviewById(options, (err, data) =&gt; {
+    if (err) {
+      const err_response = { status: 500, message: &#039;Unexpected error&#039; };
+      return res.status(500).send(err_response);
+    }
+
+    res.status(200).send(data);
+  });
+});
+
+/**
+ * Is a &amp;#x27;Review&amp;#x27; associated with a &amp;#x60;User&amp;#x60;??
+ * 
+ */
+router.get(&#039;/:id/review/{review_id}&#039;, (req, res, next) =&gt; {
+  const options = {
+    id: req.params.id,
+    review_id: req.params.review_id
+  };
+
+  User.isReviewOnUserById(options, (err, data) =&gt; {
+    if (err) {
+      const err_response = { status: 500, message: &#039;Unexpected error&#039; };
+      return res.status(500).send(err_response);
+    }
+
+    res.status(200).send(data);
+  });
+});
+
+/**
+ * Add a &amp;#x27;Review&amp;#x27; to a &amp;#x60;User&amp;#x60;.
+ * 
+ */
+router.post(&#039;/:id/review/{review_id}&#039;, (req, res, next) =&gt; {
+  const options = {
+    id: req.params.id,
+    review_id: req.params.review_id
+  };
+
+  User.setUserReviewById(options, (err, data) =&gt; {
+    if (err) {
+      const err_response = { status: 500, message: &#039;Unexpected error&#039; };
+      return res.status(500).send(err_response);
+    }
+
+    res.status(200).send(data);
+  });
+});
+
+/**
+ * Remove a &amp;#x27;Review&amp;#x27; from a &amp;#x60;User&amp;#x60;.
+ * 
+ */
+router.delete(&#039;/:id/review/{review_id}&#039;, (req, res, next) =&gt; {
+  const options = {
+    id: req.params.id,
+    review_id: req.params.review_id
+  };
+
+  User.deleteUserReviewById(options, (err, data) =&gt; {
+    if (err) {
+      const err_response = { status: 500, message: &#039;Unexpected error&#039; };
+      return res.status(500).send(err_response);
+    }
+
+    res.status(200).send(data);
+  });
+});
+
+/**
+ * Retrieve all images associated with a &amp;#x60;User&amp;#x60;.
+ * 
+ */
+router.get(&#039;/:id/images&#039;, (req, res, next) =&gt; {
+  const options = {
+    id: req.params.id
+  };
+
+  User.getAllUserImages(options, (err, data) =&gt; {
+    if (err) {
+      const err_response = { status: 500, message: &#039;Unexpected error&#039; };
+      return res.status(500).send(err_response);
+    }
+
+    res.status(200).send(data);
+  });
+});
+
+/**
+ * Add images to a &amp;#x60;User&amp;#x60;.
+ * 
+ */
+router.post(&#039;/:id/images&#039;, (req, res, next) =&gt; {
+  const options = {
+    id: req.params.id,
+  };
+
+  User.setUserImages(options, (err, data) =&gt; {
+    if (err) {
+      const err_response = { status: 500, message: &#039;Unexpected error&#039; };
+      return res.status(500).send(err_response);
+    }
+
+    res.status(200).send(data);
+  });
+});
+
+/**
+ * Remove an image, or multiple images, from a &amp;#x60;User&amp;#x60;.
+ * 
+ */
+router.delete(&#039;/:id/images&#039;, (req, res, next) =&gt; {
+  const options = {
+    id: req.params.id,
+  };
+
+  User.deleteImagesFromUserById(options, (err, data) =&gt; {
+    if (err) {
+      const err_response = { status: 500, message: &#039;Unexpected error&#039; };
+      return res.status(500).send(err_response);
+    }
+
+    res.status(200).send(data);
+  });
+});
+
+/**
+ * Retrieve all keywords associated with a &amp;#x60;User&amp;#x60;.
+ * 
+ */
+router.get(&#039;/:id/keys&#039;, (req, res, next) =&gt; {
+  const options = {
+    id: req.params.id
+  };
+
+  User.getAllUserKeywords(options, (err, data) =&gt; {
+    if (err) {
+      const err_response = { status: 500, message: &#039;Unexpected error&#039; };
+      return res.status(500).send(err_response);
+    }
+
+    res.status(200).send(data);
+  });
+});
+
+/**
+ * Add keywords to a &amp;#x60;User&amp;#x60;.
+ * 
+ */
+router.post(&#039;/:id/keys&#039;, (req, res, next) =&gt; {
+  const options = {
+    id: req.params.id,
+  };
+
+  User.setUserKeywords(options, (err, data) =&gt; {
+    if (err) {
+      const err_response = { status: 500, message: &#039;Unexpected error&#039; };
+      return res.status(500).send(err_response);
+    }
+
+    res.status(200).send(data);
+  });
+});
+
+/**
+ * Delete keywords from a user
+ * 
+ */
+router.delete(&#039;/:id/keys&#039;, (req, res, next) =&gt; {
+  const options = {
+    id: req.params.id
+  };
+
+  User.deleteKeywordsFromUserById(options, (err, data) =&gt; {
+    if (err) {
+      const err_response = { status: 500, message: &#039;Unexpected error&#039; };
+      return res.status(500).send(err_response);
+    }
+
+    res.status(200).send(data);
+  });
+});
+
+/**
+ * Check if a keyword is on a &amp;#x60;User&amp;#x60;.
+ * 
+ */
+router.get(&#039;/:id/keys/{keyword}&#039;, (req, res, next) =&gt; {
+  const options = {
+    id: req.params.id,
+    keyword: req.params.keyword
+  };
+
+  User.isUserHaveKeyword(options, (err, data) =&gt; {
+    if (err) {
+      const err_response = { status: 500, message: &#039;Unexpected error&#039; };
+      return res.status(500).send(err_response);
+    }
+
+    res.status(200).send(data);
+  });
+});
+
+/**
+ * Add a keyword to a &amp;#x60;User&amp;#x60;.
+ * 
+ */
+router.post(&#039;/:id/keys/{keyword}&#039;, (req, res, next) =&gt; {
+  const options = {
+    id: req.params.id,
+    keyword: req.params.keyword
+  };
+
+  User.setUserKeyword(options, (err, data) =&gt; {
+    if (err) {
+      const err_response = { status: 500, message: &#039;Unexpected error&#039; };
+      return res.status(500).send(err_response);
+    }
+
+    res.status(200).send(data);
+  });
+});
+
+/**
+ * Delete keyword from a user
+ * 
+ */
+router.delete(&#039;/:id/keys/{keyword}&#039;, (req, res, next) =&gt; {
+  const options = {
+    id: req.params.id,
+    keyword: req.params.keyword
+  };
+
+  User.deleteKeywordFromUserById(options, (err, data) =&gt; {
+    if (err) {
+      const err_response = { status: 500, message: &#039;Unexpected error&#039; };
+      return res.status(500).send(err_response);
+    }
+
+    res.status(200).send(data);
+  });
+});
+
+/**
+ * Check if &amp;#x60;Skill&amp;#x60;is associated with a &amp;#x60;User&amp;#x60;.
+ * 
+ */
+router.get(&#039;/:id/skills/{skill_id}&#039;, (req, res, next) =&gt; {
+  const options = {
+    id: req.params.id,
+    skill_id: req.params.skill_id
+  };
+
+  User.getIsSkillOnUser(options, (err, data) =&gt; {
+    if (err) {
+      const err_response = { status: 500, message: &#039;Unexpected error&#039; };
+      return res.status(500).send(err_response);
+    }
+
+    res.status(200).send(data);
+  });
+});
+
+/**
+ * Set &amp;#x60;Skill&amp;#x60;on a &amp;#x60;User&amp;#x60;.
+ * 
+ */
+router.post(&#039;/:id/skills/{skill_id}&#039;, (req, res, next) =&gt; {
+  const options = {
+    id: req.params.id,
+    skill_id: req.params.skill_id
+  };
+
+  User.setUserSkill(options, (err, data) =&gt; {
+    if (err) {
+      const err_response = { status: 500, message: &#039;Unexpected error&#039; };
+      return res.status(500).send(err_response);
+    }
+
+    res.status(200).send(data);
+  });
+});
+
+/**
+ * Add &amp;#x60;Skill&amp;#x60;to a &amp;#x60;User&amp;#x60;.
+ * 
+ */
+router.put(&#039;/:id/skills/{skill_id}&#039;, (req, res, next) =&gt; {
+  const options = {
+    id: req.params.id,
+    skill_id: req.params.skill_id
+  };
+
+  User.addUserSkill(options, (err, data) =&gt; {
+    if (err) {
+      const err_response = { status: 500, message: &#039;Unexpected error&#039; };
+      return res.status(500).send(err_response);
+    }
+
+    res.status(200).send(data);
+  });
+});
+
+/**
+ * Delete &amp;#x60;Skill&amp;#x60;from a user
+ * 
+ */
+router.delete(&#039;/:id/skills/{skill_id}&#039;, (req, res, next) =&gt; {
+  const options = {
+    id: req.params.id,
+    skill_id: req.params.skill_id
+  };
+
+  User.deleteSkillFromUserById(options, (err, data) =&gt; {
+    if (err) {
+      const err_response = { status: 500, message: &#039;Unexpected error&#039; };
+      return res.status(500).send(err_response);
+    }
+
+    res.status(200).send(data);
+  });
+});
+
+/**
+ * Retrieve all skills associated with a &amp;#x60;User&amp;#x60;.
+ * 
+ */
+router.get(&#039;/:id/skills&#039;, (req, res, next) =&gt; {
+  const options = {
+    id: req.params.id
+  };
+
+  User.getAllUserSkills(options, (err, data) =&gt; {
+    if (err) {
+      const err_response = { status: 500, message: &#039;Unexpected error&#039; };
+      return res.status(500).send(err_response);
+    }
+
+    res.status(200).send(data);
+  });
+});
+
+/**
+ * Set skills on a &amp;#x60;User&amp;#x60;.
+ * 
+ */
+router.post(&#039;/:id/skills&#039;, (req, res, next) =&gt; {
+  const options = {
+    id: req.params.id,
+  };
+
+  User.setUserSkills(options, (err, data) =&gt; {
+    if (err) {
+      const err_response = { status: 500, message: &#039;Unexpected error&#039; };
+      return res.status(500).send(err_response);
+    }
+
+    res.status(200).send(data);
+  });
+});
+
+/**
+ * Add skills to a &amp;#x60;User&amp;#x60;.
+ * 
+ */
+router.put(&#039;/:id/skills&#039;, (req, res, next) =&gt; {
+  const options = {
+    id: req.params.id,
+  };
+
+  User.addUserSkills(options, (err, data) =&gt; {
+    if (err) {
+      const err_response = { status: 500, message: &#039;Unexpected error&#039; };
+      return res.status(500).send(err_response);
+    }
+
+    res.status(200).send(data);
+  });
+});
+
+/**
+ * Delete skills from a user
+ * 
+ */
+router.delete(&#039;/:id/skills&#039;, (req, res, next) =&gt; {
+  const options = {
+    id: req.params.id
+  };
+
+  User.deleteSkillsFromUserById(options, (err, data) =&gt; {
+    if (err) {
+      const err_response = { status: 500, message: &#039;Unexpected error&#039; };
+      return res.status(500).send(err_response);
+    }
+
+    res.status(200).send(data);
+  });
+});
+
+/**
+ * Retrieve first name associated with a &amp;#x60;User&amp;#x60;.
+ * 
+ */
+router.get(&#039;/:id/first_name&#039;, (req, res, next) =&gt; {
+  const options = {
+    id: req.params.id
+  };
+
+  User.getFirstNameById(options, (err, data) =&gt; {
+    if (err) {
+      const err_response = { status: 500, message: &#039;Unexpected error&#039; };
+      return res.status(500).send(err_response);
+    }
+
+    res.status(200).send(data);
+  });
+});
+
+/**
+ * Delete first_name from a user
+ * 
+ */
+router.delete(&#039;/:id/first_name&#039;, (req, res, next) =&gt; {
+  const options = {
+    id: req.params.id
+  };
+
+  User.deleteUserFirstName(options, (err, data) =&gt; {
+    if (err) {
+      const err_response = { status: 500, message: &#039;Unexpected error&#039; };
+      return res.status(500).send(err_response);
+    }
+
+    res.status(200).send(data);
+  });
+});
+
+/**
+ * Check if first name is on &amp;#x60;User&amp;#x60;
+ * 
+ */
+router.get(&#039;/:id/first_name/{first_name}&#039;, (req, res, next) =&gt; {
+  const options = {
+    id: req.params.id,
+    first_name: req.params.first_name
+  };
+
+  User.isUserFirstName(options, (err, data) =&gt; {
+    if (err) {
+      const err_response = { status: 500, message: &#039;Unexpected error&#039; };
+      return res.status(500).send(err_response);
+    }
+
+    res.status(200).send(data);
+  });
+});
+
+/**
+ * Add first name to a &amp;#x60;User&amp;#x60;.
+ * 
+ */
+router.post(&#039;/:id/first_name/{first_name}&#039;, (req, res, next) =&gt; {
+  const options = {
+    id: req.params.id,
+    first_name: req.params.first_name
+  };
+
+  User.addUserFirstName(options, (err, data) =&gt; {
+    if (err) {
+      const err_response = { status: 500, message: &#039;Unexpected error&#039; };
+      return res.status(500).send(err_response);
+    }
+
+    res.status(200).send(data);
+  });
+});
+
+/**
+ * Modify first name of a &amp;#x60;User&amp;#x60;.
+ * 
+ */
+router.put(&#039;/:id/first_name/{first_name}&#039;, (req, res, next) =&gt; {
+  const options = {
+    id: req.params.id,
+    first_name: req.params.first_name
+  };
+
+  User.modifyUserFirstName(options, (err, data) =&gt; {
+    if (err) {
+      const err_response = { status: 500, message: &#039;Unexpected error&#039; };
+      return res.status(500).send(err_response);
+    }
+
+    res.status(200).send(data);
+  });
+});
+
+/**
+ * Retrieve first name associated with a &amp;#x60;User&amp;#x60;.
+ * 
+ */
+router.get(&#039;/:id/last_name&#039;, (req, res, next) =&gt; {
+  const options = {
+    id: req.params.id
+  };
+
+  User.getLastNameById(options, (err, data) =&gt; {
+    if (err) {
+      const err_response = { status: 500, message: &#039;Unexpected error&#039; };
+      return res.status(500).send(err_response);
+    }
+
+    res.status(200).send(data);
+  });
+});
+
+/**
+ * Delete last_name from a user
+ * 
+ */
+router.delete(&#039;/:id/last_name&#039;, (req, res, next) =&gt; {
+  const options = {
+    id: req.params.id
+  };
+
+  User.deleteUserLastName(options, (err, data) =&gt; {
+    if (err) {
+      const err_response = { status: 500, message: &#039;Unexpected error&#039; };
+      return res.status(500).send(err_response);
+    }
+
+    res.status(200).send(data);
+  });
+});
+
+/**
+ * Check if last name is on &amp;#x60;User&amp;#x60;.
+ * 
+ */
+router.get(&#039;/:id/last_name/{last_name}&#039;, (req, res, next) =&gt; {
+  const options = {
+    id: req.params.id,
+    last_name: req.params.last_name
+  };
+
+  User.isUserLastName(options, (err, data) =&gt; {
+    if (err) {
+      const err_response = { status: 500, message: &#039;Unexpected error&#039; };
+      return res.status(500).send(err_response);
+    }
+
+    res.status(200).send(data);
+  });
+});
+
+/**
+ * Add last name to a &amp;#x60;User&amp;#x60;.
+ * 
+ */
+router.post(&#039;/:id/last_name/{last_name}&#039;, (req, res, next) =&gt; {
+  const options = {
+    id: req.params.id,
+    last_name: req.params.last_name
+  };
+
+  User.addUserLastName(options, (err, data) =&gt; {
+    if (err) {
+      const err_response = { status: 500, message: &#039;Unexpected error&#039; };
+      return res.status(500).send(err_response);
+    }
+
+    res.status(200).send(data);
+  });
+});
+
+/**
+ * Modify last name of a &amp;#x60;User&amp;#x60;.
+ * 
+ */
+router.put(&#039;/:id/last_name/{last_name}&#039;, (req, res, next) =&gt; {
+  const options = {
+    id: req.params.id,
+    last_name: req.params.last_name
+  };
+
+  User.modifyUserLastName(options, (err, data) =&gt; {
+    if (err) {
+      const err_response = { status: 500, message: &#039;Unexpected error&#039; };
+      return res.status(500).send(err_response);
+    }
+
+    res.status(200).send(data);
+  });
+});
+
+/**
+ * Retrieve if &amp;#x60;User&amp;#x60; is a collaborator.
+ * 
+ */
+router.get(&#039;/:id/collaborator&#039;, (req, res, next) =&gt; {
+  const options = {
+    id: req.params.id
+  };
+
+  User.isCollaboratorById(options, (err, data) =&gt; {
+    if (err) {
+      const err_response = { status: 500, message: &#039;Unexpected error&#039; };
+      return res.status(500).send(err_response);
+    }
+
+    res.status(200).send(data);
+  });
+});
+
+/**
+ * set if &amp;#x60;User&amp;#x60; is a collaborator.
+ * 
+ */
+router.post(&#039;/:id/collaborator&#039;, (req, res, next) =&gt; {
+  const options = {
+    id: req.params.id,
+  };
+
+  User.setIsUserCollaboratorById(options, (err, data) =&gt; {
+    if (err) {
+      const err_response = { status: 500, message: &#039;Unexpected error&#039; };
+      return res.status(500).send(err_response);
+    }
+
+    res.status(200).send(data);
+  });
+});
+
+/**
+ * set if &amp;#x60;User&amp;#x60; is a collaborator.
+ * 
+ */
+router.put(&#039;/:id/collaborator&#039;, (req, res, next) =&gt; {
+  const options = {
+    id: req.params.id,
+  };
+
+  User.setIsUserCollaboratorByIdPut(options, (err, data) =&gt; {
+    if (err) {
+      const err_response = { status: 500, message: &#039;Unexpected error&#039; };
+      return res.status(500).send(err_response);
+    }
+
+    res.status(200).send(data);
+  });
+});
+
+/**
+ * Retrieve if &amp;#x60;User&amp;#x60; is a creator.
+ * 
+ */
+router.get(&#039;/:id/creator&#039;, (req, res, next) =&gt; {
+  const options = {
+    id: req.params.id
+  };
+
+  User.isCreatorById(options, (err, data) =&gt; {
+    if (err) {
+      const err_response = { status: 500, message: &#039;Unexpected error&#039; };
+      return res.status(500).send(err_response);
+    }
+
+    res.status(200).send(data);
+  });
+});
+
+/**
+ * set if &amp;#x60;User&amp;#x60; is a creator.
+ * 
+ */
+router.post(&#039;/:id/creator&#039;, (req, res, next) =&gt; {
+  const options = {
+    id: req.params.id,
+  };
+
+  User.setIsUserCreatorById(options, (err, data) =&gt; {
+    if (err) {
+      const err_response = { status: 500, message: &#039;Unexpected error&#039; };
+      return res.status(500).send(err_response);
+    }
+
+    res.status(200).send(data);
+  });
+});
+
+/**
+ * set if &amp;#x60;User&amp;#x60; is a creator.
+ * 
+ */
+router.put(&#039;/:id/creator&#039;, (req, res, next) =&gt; {
+  const options = {
+    id: req.params.id,
+  };
+
+  User.setIsUserCreatorByIdPut(options, (err, data) =&gt; {
+    if (err) {
+      const err_response = { status: 500, message: &#039;Unexpected error&#039; };
+      return res.status(500).send(err_response);
+    }
+
+    res.status(200).send(data);
+  });
+});
+
+/**
+ * Retrieve city associated with a &amp;#x60;User&amp;#x60;.
+ * 
+ */
+router.get(&#039;/:id/city&#039;, (req, res, next) =&gt; {
+  const options = {
+    id: req.params.id
+  };
+
+  User.getCityNameById(options, (err, data) =&gt; {
+    if (err) {
+      const err_response = { status: 500, message: &#039;Unexpected error&#039; };
+      return res.status(500).send(err_response);
+    }
+
+    res.status(200).send(data);
+  });
+});
+
+/**
+ * Delete city from a user
+ * 
+ */
+router.delete(&#039;/:id/city&#039;, (req, res, next) =&gt; {
+  const options = {
+    id: req.params.id
+  };
+
+  User.deleteUserCity(options, (err, data) =&gt; {
+    if (err) {
+      const err_response = { status: 500, message: &#039;Unexpected error&#039; };
+      return res.status(500).send(err_response);
+    }
+
+    res.status(200).send(data);
+  });
+});
+
+/**
+ * Check if city is on &amp;#x60;User&amp;#x60;.
+ * 
+ */
+router.get(&#039;/:id/city/{city}&#039;, (req, res, next) =&gt; {
+  const options = {
+    id: req.params.id,
+    city: req.params.city
+  };
+
+  User.isUserCity(options, (err, data) =&gt; {
+    if (err) {
+      const err_response = { status: 500, message: &#039;Unexpected error&#039; };
+      return res.status(500).send(err_response);
+    }
+
+    res.status(200).send(data);
+  });
+});
+
+/**
+ * Add city to a &amp;#x60;User&amp;#x60;.
+ * 
+ */
+router.post(&#039;/:id/city/{city}&#039;, (req, res, next) =&gt; {
+  const options = {
+    id: req.params.id,
+    city: req.params.city
+  };
+
+  User.addUserCity(options, (err, data) =&gt; {
+    if (err) {
+      const err_response = { status: 500, message: &#039;Unexpected error&#039; };
+      return res.status(500).send(err_response);
+    }
+
+    res.status(200).send(data);
+  });
+});
+
+/**
+ * Modify city of a &amp;#x60;User&amp;#x60;.
+ * 
+ */
+router.put(&#039;/:id/city/{city}&#039;, (req, res, next) =&gt; {
+  const options = {
+    id: req.params.id,
+    city: req.params.city
+  };
+
+  User.modifyUserCity(options, (err, data) =&gt; {
+    if (err) {
+      const err_response = { status: 500, message: &#039;Unexpected error&#039; };
+      return res.status(500).send(err_response);
+    }
+
+    res.status(200).send(data);
+  });
+});
+
+/**
+ * Retrieve state associated with a &amp;#x60;User&amp;#x60;.
+ * 
+ */
+router.get(&#039;/:id/state&#039;, (req, res, next) =&gt; {
+  const options = {
+    id: req.params.id
+  };
+
+  User.getStateById(options, (err, data) =&gt; {
+    if (err) {
+      const err_response = { status: 500, message: &#039;Unexpected error&#039; };
+      return res.status(500).send(err_response);
+    }
+
+    res.status(200).send(data);
+  });
+});
+
+/**
+ * Delete state from a user
+ * 
+ */
+router.delete(&#039;/:id/state&#039;, (req, res, next) =&gt; {
+  const options = {
+    id: req.params.id
+  };
+
+  User.deleteUserState(options, (err, data) =&gt; {
+    if (err) {
+      const err_response = { status: 500, message: &#039;Unexpected error&#039; };
+      return res.status(500).send(err_response);
+    }
+
+    res.status(200).send(data);
+  });
+});
+
+/**
+ * Check if state is on &amp;#x60;User&amp;#x60;.
+ * 
+ */
+router.get(&#039;/:id/state/{state}&#039;, (req, res, next) =&gt; {
+  const options = {
+    id: req.params.id,
+    state: req.params.state
+  };
+
+  User.isUserState(options, (err, data) =&gt; {
+    if (err) {
+      const err_response = { status: 500, message: &#039;Unexpected error&#039; };
+      return res.status(500).send(err_response);
+    }
+
+    res.status(200).send(data);
+  });
+});
+
+/**
+ * Add state to a &amp;#x60;User&amp;#x60;.
+ * 
+ */
+router.post(&#039;/:id/state/{state}&#039;, (req, res, next) =&gt; {
+  const options = {
+    id: req.params.id,
+    state: req.params.state
+  };
+
+  User.addUserState(options, (err, data) =&gt; {
+    if (err) {
+      const err_response = { status: 500, message: &#039;Unexpected error&#039; };
+      return res.status(500).send(err_response);
+    }
+
+    res.status(200).send(data);
+  });
+});
+
+/**
+ * Modify state of a &amp;#x60;User&amp;#x60;.
+ * 
+ */
+router.put(&#039;/:id/state/{state}&#039;, (req, res, next) =&gt; {
+  const options = {
+    id: req.params.id,
+    state: req.params.state
+  };
+
+  User.modifyUserState(options, (err, data) =&gt; {
+    if (err) {
+      const err_response = { status: 500, message: &#039;Unexpected error&#039; };
+      return res.status(500).send(err_response);
+    }
+
+    res.status(200).send(data);
+  });
+});
+
+/**
+ * Retrieve creation date of a &amp;#x60;User&amp;#x60;.
+ * 
+ */
+router.get(&#039;/:id/created&#039;, (req, res, next) =&gt; {
+  const options = {
+    id: req.params.id
+  };
+
+  User.getCreatedDateById(options, (err, data) =&gt; {
+    if (err) {
+      const err_response = { status: 500, message: &#039;Unexpected error&#039; };
+      return res.status(500).send(err_response);
+    }
+
+    res.status(200).send(data);
+  });
+});
+
+/**
+ * Retrieve modified date of a &amp;#x60;User&amp;#x60;.
+ * 
+ */
+router.get(&#039;/:id/modified&#039;, (req, res, next) =&gt; {
+  const options = {
+    id: req.params.id
+  };
+
+  User.getModifiedDateById(options, (err, data) =&gt; {
+    if (err) {
+      const err_response = { status: 500, message: &#039;Unexpected error&#039; };
+      return res.status(500).send(err_response);
+    }
+
+    res.status(200).send(data);
+  });
+});
+
+
+
+
+
+// Local auth that implements json web tokens
+
+function localauth(req, res, next) {
+  passport.authenticate(&#039;local&#039;, function(err, user, info) {
+    if (err) { 
+        return next(err) 
+    }
+    //user has authenticated correctly thus we create a JWT token 
+    var token = jwt.sign({user: user}, SECRET);
+    console.log(&quot;passport intercept user&quot;,user);
+    res.json({ token : token });
+  })(req, res, next);
+}
+
+//Local pasport strategy
+passport.use(new LocalStrategy(
+    function(username, password, done) {
+        console.log(&quot;Attempting local strategy...&quot;);
+        User.getUserByUsername(username, function(err, user) {
+            if (err) throw err;
+            console.log(&quot;No err...&quot;);
+            if (!user) {
+                console.log(&quot;No user matches parameters...&quot;);
+                return done(null, false, {
+                    message: &#039;User is not recognized&#039;
+                });
+            }
+            console.log(&quot;comparing passwords&quot;);
+            User.comparePassword(password, user.password, function(err, isMatch) {
+                if (err) throw err;
+                if (isMatch) {
+                    console.log(&quot;LOGGED IN&quot;);
+                    return done(null, user);
+                } else {
+                    console.log(&quot;Invalid password...&quot;);
+                    return done(null, false, {
+                        message: &#039;Invalid password&#039;
+                    });
+                }
+            }); 
+        });
+}));
+
+
+passport.serializeUser(function(user, done) {
+    done(null, user.id);
+});
+
+passport.deserializeUser(function(id, done) {
+    User.getUserById(id, function(err, user) {
+        done(err, user);
+    });
+});
+
+
+
+module.exports = router;</textarea>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <p>.</p>
+  </div>
+</footer>
+
+<script type="text/html" id="complexity-popover-template">
+  <div class="complexity-notice">
+    Complexity : {{ cyclomatic }} <br>
+    Length : {{ halstead.length }} <br>
+    Difficulty : {{ halstead.difficulty.toFixed(2) }} <br>
+    Est # bugs : {{ halstead.bugs.toFixed(2) }}<br>
+  </div>
+</script>
+
+<script type="text/javascript" src="../../assets/scripts/bundles/core-bundle.js"></script>
+<script type="text/javascript" src="../../assets/scripts/bundles/codemirror.js"></script>
+<script type="text/javascript" src="../../assets/scripts/codemirror.markpopovertext.js"></script>
+<script type="text/javascript" src="report.js"></script>
+<script type="text/javascript" src="report.history.js"></script>
+<script type="text/javascript" src="../../assets/scripts/plato-file.js"></script>
+</body>
+</html>
