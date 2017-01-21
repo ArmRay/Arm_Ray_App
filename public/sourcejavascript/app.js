@@ -7,6 +7,7 @@
 		'ngAria',
 		'ngAnimate',
 		'ngResource',
+		'angularSpinner',
 		'toastr'
 	]).config(['toastrConfig',function(toastrConfig){
 

@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    angular.module('app').controller('LandingCtrl', ['$scope','toastr','$http', function ($scope,toastr,$http) {
+    angular.module('app').controller('LandingCtrl', ['$scope','toastr','$http','usSpinnerService', function ($scope,toastr,$http,usSpinnerService) {
         console.log('Are you looking at my console logs? For shame ;)');
         function dangertrigger(){
             toastr.warning('Email has already been registered','Issue!');
@@ -15,6 +15,7 @@
                 $http.post(checkurl).then(function(res){
                         if(res.data.exists){
                             console.log('exists exists');
+
                             dangertrigger();
                             doesemailexist = false;
                         }else{
@@ -31,6 +32,7 @@
         
 
         $scope.submitForm = function(email,firstname,lastname){
+            usSpinnerService.spin('submit');
 
         	if(typeof email != 'undefined' && doesemailexist && typeof firstname != 'undefined' && typeof lastname != 'undefined'){
         		var user = {
@@ -41,6 +43,7 @@
 
 
         		$http.post('/api/register',user).then(function(data){
+                    usSpinnerService.stop('submit');
  				if(data.message= 'Success'){
 
                     toastr.success('Thank you for registering!');
@@ -66,11 +69,11 @@
         		
         	}
         	else if(typeof email == 'undefined'){
-
+                usSpinnerService.stop('submit');
         		toastr.warning('Your Email was not valid','Invalid!')
         	}
         	else{
-
+                usSpinnerService.stop('submit');
         		toastr.warning('You must submit a first and last name','Invalid!')
         	}
 

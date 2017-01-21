@@ -219,6 +219,8 @@ nav{
 
 .jumbo-form-btn button:hover{
   cursor:pointer;
+  box-shadow:2px 3px 0px 2px rgba(0,0,0,0.2);
+  background-color:#2d9a7f;
 }
 
 .jumbo-form-btn button{
@@ -234,6 +236,7 @@ nav{
   font-family: Roboto;
   font-size: 18px;
   font-weight: 900;
+  transition:all 0.3s ease-in-out;
 }
 
 .landing-module{
